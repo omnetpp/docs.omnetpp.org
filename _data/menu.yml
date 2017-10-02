@@ -2,27 +2,17 @@
   submenu:
     - page: cloud/index.md
     - page: cloud/step0_1.md
-      substep: true
     - page: cloud/step0_2.md
-      substep: true
     - page: cloud/step0_3.md
-      substep: true
     - page: cloud/step0_4.md
-      substep: true
     - page: cloud/step0_5.md
-      substep: true
 
     - page: cloud/step1_0.md
     - page: cloud/step1.md
-      substep: true
     - page: cloud/step2.md
-      substep: true
     - page: cloud/step3.md
-      substep: true
     - page: cloud/step4.md
-      substep: true
     - page: cloud/step5.md
-      substep: true
 
     - page: cloud/step6.md
     - page: cloud/step7.md
