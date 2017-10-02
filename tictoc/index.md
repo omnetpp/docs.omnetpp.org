@@ -43,15 +43,15 @@ Here are the steps you take to implement your first simulation from scratch.
 
 Start the OMNeT++ IDE by typing `omnetpp` in your terminal. (We assume
 that you already have a working OMNeT++ installation. If not, please install the latest
-version, consulting the <i>Installation Guide</i> as needed.)
-Once in the IDE, choose <i>New -> OMNeT++ Project</i> from the menu.
+version, consulting the *Installation Guide* as needed.)
+Once in the IDE, choose *New -> OMNeT++ Project* from the menu.
 
 <img src="images/newproject.png">
 
 A wizard dialog will appear. Enter `tictoc` as project name,
-choose <i>Empty project</i> when asked about the initial content of the project,
-then click <i>Finish</i>. An empty project will be created, as you can see
-in the <i>Project Explorer</i>.
+choose *Empty project* when asked about the initial content of the project,
+then click *Finish*. An empty project will be created, as you can see
+in the *Project Explorer*.
 (Note: Some OMNeT++ versions will generate a `package.ned` file into the project.
 We don't need it now: delete the file by selecting it and hitting Delete.)
 
@@ -77,10 +77,10 @@ NED, C++ and ini files in it with your favorite text editor.
 OMNeT++ uses NED files to define components and to assemble them into larger units
 like networks. We start implementing our model by adding a NED file.
 To add the file to the project, right-click the project directory in the
-<i>Project Explorer</i> panel on the left, and choose <i>New -> Network Description File (NED)</i>
+*Project Explorer* panel on the left, and choose *New -> Network Description File (NED)*
 from the menu. Enter `%tictoc1.ned` when prompted for the file name.
 
-Once created, the file can be edited in the <i>Editor area</i> of the OMNeT++ IDE.
+Once created, the file can be edited in the *Editor area* of the OMNeT++ IDE.
 The OMNeT++ IDE's NED editor has two modes, *Design* and *Source*; one can switch
 between them using the tabs at the bottom of the editor. In *Design* mode,
 the topology can be edited graphically, using the mouse and the palette on the right.
@@ -120,8 +120,8 @@ There will be a 100ms propagation delay both ways.
 ### 1.4 Adding the C++ files
 
 We now need to implement the functionality of the Txc1 simple module in C++.
-Create a file named `txc1.cc` by choosing <i>New -> Source File</i> from the
-project's context menu (or <i>File -> New -> File</i> from the IDE's main menu),
+Create a file named `txc1.cc` by choosing *New -> Source File* from the
+project's context menu (or *File -> New -> File* from the IDE's main menu),
 and enter the following content:
 
 @dontinclude txc1.cc
@@ -134,9 +134,9 @@ class needs to subclass from OMNeT++'s cSimpleModule class, and needs to be
 registered in OMNeT++ with the Define_Module() macro.
 
 @note It is a common mistake to forget the Define_Module() line. If it is missing,
-you'll get an error message similar to this one: <i>"Error: Class 'Txc1' not found -- perhaps
+you'll get an error message similar to this one: *"Error: Class 'Txc1' not found -- perhaps
 its code was not linked in, or the class wasn't registered with Register_Class(), or in
-the case of modules and channels, with Define_Module()/Define_Channel()"</i>.
+the case of modules and channels, with Define_Module()/Define_Channel()"*.
 
 We redefine two methods from cSimpleModule: initialize()
 and handleMessage(). They are invoked from the simulation kernel:
@@ -168,8 +168,8 @@ To be able to run the simulation, we need to create an %omnetpp.ini file.
 (as NED files may contain several networks), you can pass parameters
 to the model, explicitly specify seeds for the random number generators, etc.
 
-Create an %omnetpp.ini file using the <i>File -> New -> Initialization file (INI)</i>
-menu item. The new file will open in an <i>Inifile Editor</i>.
+Create an %omnetpp.ini file using the *File -> New -> Initialization file (INI)*
+menu item. The new file will open in an *Inifile Editor*.
 As the NED Editor, the Inifile Editor also has two modes, *Form* and *Source*,
 which edit the same content. The former is more suitable for configuring the
 simulation kernel, and the latter for entering module parameters.
@@ -198,20 +198,20 @@ Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
 ### 2.1 Launching the simulation program
 
 Once you complete the above steps, you can launch the simulation by selecting
-%omnetpp.ini (in either the editor area or the <i>Project Explorer</i>),
+%omnetpp.ini (in either the editor area or the *Project Explorer*),
 and pressing the *Run* button.
 
 <img src="images/run.png">
 
 The IDE will build your project automatically. If there are compilation errors,
 you need to rectify those until you get an error-free compilation and linking.
-You can manually trigger a build by hitting choosing <i>Project -> Build All</i>
-from the menu, or hitting <i>Ctrl+B</i>.
+You can manually trigger a build by hitting choosing *Project -> Build All*
+from the menu, or hitting *Ctrl+B*.
 
 @note If you want to build the simulation executable on the command-line,
-create a <i>Makefile</i> using the `<b>opp_makemake</b>`
-command, then enter `<b>make</b>` to build the project. It will produce
-an executable that can be run by entering `<b>./tictoc</b>`.
+create a *Makefile* using the `opp_makemake`
+command, then enter `make` to build the project. It will produce
+an executable that can be run by entering `./tictoc`.
 
 
 ### 2.2 Running the simulation
@@ -245,12 +245,11 @@ F7 (express mode) completely turns off tracing features for maximum speed.
 Note the event/sec and simsec/sec gauges on the status bar of the
 main window (only visible when the simulation is running in fast or express mode).
 
-<i>Exercise: Explore the GUI by running the simulation several times. Try
-<i>Run</i>, <i>Run Until</i>, <i>Rebuild Network</i>, and other functions.
-</i>
+Exercise: Explore the GUI by running the simulation several times. Try
+*Run*, *Run Until*, *Rebuild Network*, and other functions.
 
 You can exit the simulation program by clicking its Close icon or
-choosing <i>File -> Exit</i>.
+choosing *File -> Exit*.
 
 
 ### 2.3 Debugging
@@ -292,14 +291,14 @@ you'll get an error message like this:
 
 <img src="images/error.png" width="450px">
 
-Now, run the simulation in *Debug* mode. Due to a <i>debug-on-errors</i> option
+Now, run the simulation in *Debug* mode. Due to a *debug-on-errors* option
 being enabled by default, the simulation program will stop in the debugger.
 You can locate the error by examining the stack trace (the list of nested
 function calls) in the *Debug* view:
 
 <img src="images/stacktrace.png" width="600px">
 
-You can see that it was OMNeT++'s *breakIntoDebuggerIfRequested*() method that
+You can see that it was OMNeT++'s `breakIntoDebuggerIfRequested()` method that
 activated the debugger. From then on, you need to search for a function that
 looks familiar, i.e. for one that is part of the model. In our case, that is
 the "Txc1::handleMessage() at txc1.cc:54" line. Selecting that line will
@@ -339,14 +338,14 @@ execution, and let you examine variables, execute the code line-by-line,
 or resume execution (until the next breakpint).
 
 A breakpoint can be placed at a specific line in the source code by double-clicking
-on the left gutter in the editor, or choosing <i>Toggle Breakpoint</i> from
+on the left gutter in the editor, or choosing *Toggle Breakpoint* from
 the context menu. The list of active (and inactive) breakpoints can be examined
 in the *Breakpoints* view.
 
-<i>Exercise: Experiment with breakpoints! Place a breakpoint at the beginning of
+Exercise: Experiment with breakpoints! Place a breakpoint at the beginning of
 the `handleMessage()` method function, and run the simulation. Use appropriate
 buttons on the toolbar to single-step, continue execution until next time the
-breakpoint is hit, and so on.</i>
+breakpoint is hit, and so on.
 
 <b>"Debug next event"</b>
 
@@ -356,11 +355,11 @@ it often occurs that an error only surfaces at, say, the 357th event in that mod
 so ideally that's when you'd want to start debugging. It is not very convenient
 to have to hit *Resume* 356 times just to get to the place of the error.
 A possible solution is to add a *condition* or an *ignore*-count to the
-breakpoint (see <i>Breakpoint Properties</i> in its context menu). However,
+breakpoint (see *Breakpoint Properties* in its context menu). However,
 there is a potentially more convenient solution.
 
-In *Qtenv*, use <i>Run Until</i> to get to the event to be debugged. Then,
-choose <i>Simulation -> Debug Next Event</i> from the menu. This will trigger
+In *Qtenv*, use *Run Until* to get to the event to be debugged. Then,
+choose *Simulation -> Debug Next Event* from the menu. This will trigger
 a breakpoint in the debugger at the beginning of `handleMessage()` of the
 next event, and you can start debugging that event.
 
@@ -372,11 +371,11 @@ Let us return to launching simulations once more.
 
 When you launch the simulation program with the *Run* or *Debug*
 buttons on the IDE toolbar, settings associated with the launch
-are saved in a <i>launch configuration</i>. Launch configurations
-can be viewed in the <i>Run/Debug Configurations</i> dialog which
+are saved in a *launch configuration*. Launch configurations
+can be viewed in the *Run/Debug Configurations* dialog which
 can be opened e.g. by clicking the little *down* arrow next to the
 *Run* (*Debug*) toolbar button to open a menu, and choosing
-<i>Run (Debug) Configurations...</i> in it. In the same menu, you can also
+*Run (Debug) Configurations...* in it. In the same menu, you can also
 click the name of a launch configuration (e.g. *tictoc*) while
 holding down the Ctrl key to open the dialog with the corresponding
 configuration.
@@ -389,13 +388,13 @@ The dialog allows you activate various settings for the launch.
 ### 2.5 Visualizing on a Sequence Chart
 
 The OMNeT++ simulation kernel can record the message exchanges during the
-simulation into an <i>event log file</i>. To enable recording the event log,
-check the <i>Record eventlog</i> checkbox in the launch configuration dialog.
-Alternatively, you can specify <i>record-eventlog = true</i> in omnetpp.ini,
+simulation into an *event log file*. To enable recording the event log,
+check the *Record eventlog* checkbox in the launch configuration dialog.
+Alternatively, you can specify *record-eventlog = true* in omnetpp.ini,
 or even, use the *Record* button in the Qtenv graphical runtime environment
 after launching,
 
-The log file can be analyzed later with the <i>Sequence Chart</i> tool in the IDE.
+The log file can be analyzed later with the *Sequence Chart* tool in the IDE.
 The `results` directory in the project folder contains the `.elog` file.
 Double-clicking on it in the OMNeT++ IDE opens the Sequence Chart tool,
 and the event log tab at the bottom of the window.
@@ -456,7 +455,7 @@ will appear in the log window:
 <img src="images/step2b.png">
 
 You can also open separate output windows for *tic* and *toc* by right-clicking
-on their icons and choosing <i>Component log</i> from the menu. This feature
+on their icons and choosing *Component log* from the menu. This feature
 will be useful when you have a large model ("fast scrolling logs syndrome")
 and you're interested only in the log messages of specific module.
 
@@ -706,8 +705,7 @@ From the syntax you have probably guessed that OMNeT++ supports
 more than one RNGs. That's right, however, all models in this tutorial
 use RNG 0.
 
-<i>Exercise: Try other distributions as well.
-</i>
+Exercise: Try other distributions as well.
 
 Sources: @ref tictoc8.ned, @ref txc7.cc, @ref omnetpp.ini
 
@@ -833,13 +831,13 @@ When the message arrives at tic[3], its handleMessage() will delete the message.
 
 See the full code in @ref txc10.cc.
 
-<i>Exercise: you'll notice that this simple "routing" is not very efficient:
+Exercise: you'll notice that this simple "routing" is not very efficient:
 often the packet keeps bouncing between two nodes for a while before it is sent
 to a different direction. This can be improved somewhat if nodes don't send
-the packet back to the sender. Implement this. Hints: cMessage::getArrivalGate(),
-cGate::getIndex(). Note that if the message didn't arrive via a gate but was
-a self-message, then getArrivalGate() returns NULL.
-</i>
+the packet back to the sender. Implement this. Hints: `cMessage::getArrivalGate()`,
+`cGate::getIndex()`. Note that if the message didn't arrive via a gate but was
+a self-message, then `getArrivalGate()` returns `NULL`.
+
 
 Sources: @ref tictoc10.ned, @ref txc10.cc, @ref omnetpp.ini
 
@@ -862,7 +860,7 @@ by adding a `types` section. This type definition is only visible inside the
 network. It is called as a local or inner type. You can use simple modules as inner types
 too, if you wish.
 
-@note We have created the channel by specializing the built-in DelayChannel.
+@note We have created the channel by specializing the built-in `DelayChannel`.
 (built-in channels can be found inside the `ned` package. Thats why we used
 the full type name `ned.DelayChannel`) after the `extends` keyword.
 
@@ -954,7 +952,7 @@ Then, handleMessage() begins like this:
 In the argument to handleMessage(), we get the message as a cMessage * pointer.
 However, we can only access its fields defined in TicTocMsg13 if we cast
 msg to TicTocMsg13 *. Plain C-style cast (<code>(TicTocMsg13 *)msg</code>)
-is not safe because if the message is <i>not</i> a TicTocMsg13 after all
+is not safe because if the message is *not* a TicTocMsg13 after all
 the program will just crash, causing an error which is difficult to explore.
 
 C++ offers a solution which is called dynamic_cast. Here we use check_and_cast<>()
@@ -988,13 +986,12 @@ on the Contents page.
 
 Sources: @ref tictoc13.ned, @ref tictoc13.msg, @ref txc13.cc, @ref omnetpp.ini
 
-<i>Exercise: In this model, there is only one message underway at any
+Exercise: In this model, there is only one message underway at any
 given moment: nodes only generate a message when another message arrives
 at them. We did it this way to make it easier to follow the simulation.
 Change the module class so that instead, it generates messages periodically.
 The interval between messages should be a module parameter, returning
 exponentially distributed random numbers.
-</i>
 
 
 ## Part 5 - Adding statistics collection
@@ -1059,13 +1056,13 @@ to the class.
 @until protected:
 
 When a message arrives at the destination node, we update the statistics.
-The following code has been added to handleMessage():
+The following code has been added to `handleMessage()`:
 
 @skip ::handleMessage
 @skipline hopCountVector.record
 @skipline hopCountStats.collect
 
-hopCountVector.record() call writes the data into `Tictoc15-#0.vec`.
+The `hopCountVector.record()` call writes the data into `Tictoc15-#0.vec`.
 With a large simulation model or long execution time, the `Tictoc15-#0.vec` file
 may grow very large. To handle this situation, you can specifically
 disable/enable vector in omnetpp.ini, and you can also specify
@@ -1076,9 +1073,9 @@ When you begin a new simulation, the existing `Tictoc15-#0.vec/sca`
 files get deleted.
 
 Scalar data (collected by the histogram object in this simulation)
-have to be recorded manually, in the finish() function.
-finish() gets invoked on successful completion of the simulation,
-i.e. not when it's stopped with an error. The recordScalar() calls
+have to be recorded manually, in the `finish()` function.
+`finish()` is invoked on successful completion of the simulation,
+i.e. not when it's stopped with an error. The `recordScalar()` calls
 in the code below write into the `Tictoc15-#0.sca` file.
 
 @skip ::finish
@@ -1087,8 +1084,8 @@ in the code below write into the `Tictoc15-#0.sca` file.
 The files are stored in the `results/` subdirectory.
 
 You can also view the data during simulation. To do that, right click on a module, and
-choose `Open Details`. In the module inspector's Contents page you'll find the hopCountStats
-and hopCountVector objects. To open their inspectors, right click on `cLongHistogram hopCountStats` or
+choose *Open Details*. In the module inspector's *Contents* page you'll find the `hopCountStats`
+and `hopCountVector` objects. To open their inspectors, right click on `cLongHistogram hopCountStats` or
 `cOutVector HopCount`, and click `Open Graphical View`.
 
 <img src="images/open_details.png">
@@ -1106,9 +1103,9 @@ data to be displayed. After a while you'll get something like this:
 
 When you think enough data has been collected, you can stop the simulation
 and then we'll analyse the result files (`Tictoc15-#0.vec` and
-`Tictoc15-#0.sca`) off-line. You'll need to choose Simulate|Call finish()
+`Tictoc15-#0.sca`) off-line. You'll need to choose Simulate|Call `finish()`
 from the menu (or click the corresponding toolbar button) before exiting --
-this will cause the finish() functions to run and data to be written into
+this will cause the `finish()` functions to run and data to be written into
 `Tictoc15-#0.sca`.
 
 Sources: @ref tictoc15.ned, @ref tictoc15.msg, @ref txc15.cc, @ref omnetpp.ini
@@ -1167,18 +1164,18 @@ gates, and also the signals and statistics it provides.
 @until display
 
 Now we can define also a statistic that should be collected by default. Our previous example
-has collected statistics (max,min,mean,count etc) about the hop count of the
+has collected statistics (max, min, mean, count, etc.) about the hop count of the
 arriving messages, so let's collect the same data here, too.
 
 The `source` key specifies the signal we want our statistic to attach to.
 The `record` key can be used to tell what should be done with the received
 data. In our case we sepcify that each value must be saved in a vector file (vector)
 and also we need to calculate min,max,mean,count etc. (stats). (NOTE: `stats` is
-just a shorthand for min, max, mean, sum, count etc.) With this step we have finished
+just a shorthand for min, max, mean, sum, count, etc.) With this step we have finished
 our model.
 
-Now we have just realized that we would like to see a histogram of the hopCount on the
-tic[1] module. On the other hand we are short on disk storage and we are not interested
+Now we have just realized that we would like to see a histogram of the `hopCount` on the
+`tic[1]` module. On the other hand we are short on disk storage and we are not interested
 having the vector data for the first three module `tic` 0,1,2. No problem. We can add our
 histogram and remove the unneeded vector recording without even touching the C++ or NED
 files. Just open the INI file and modify the statistic recording:
@@ -1287,9 +1284,9 @@ The chart looks like the following:
 
 If we apply a `mean` operation we can see how the `hopCount` in the different
 nodes converge to an average.
-Right-click the chart, and select <i>Apply -> Mean</i>.
+Right-click the chart, and select *Apply -> Mean*.
 Again, right-click on the chart background, and select *Properties*.
-In the *Lines* tab, set <i>Line type</i> to Linear, and <i>Symbol Type</i> to None.
+In the *Lines* tab, set *Line type* to Linear, and *Symbol Type* to None.
 The mean is displayed on the following chart. The lines are easier to see this way because they are thinner.
 
 <img src="images/mean3.png">
@@ -1341,7 +1338,7 @@ to the network in the previous step.
 Now, we must specify that the variable number of nodes should be connected into the dumbbell shape.
 First, the two nodes on one side is connected to the third one. Then the the last two nodes on the other side is
 connected to the third last. The nodes in the center of the dumbbell can be connected with a for loop.
-Starting from the third, each <i>i</i>th node is connected to the <i>i+1</i>th.
+Starting from the third, each *i*th node is connected to the *i+1*th.
 
 @dontinclude tictoc18.ned
 @skipline connections
@@ -1377,11 +1374,11 @@ to the expected values.
 
 ### 7.4 Running the parameter study
 
-Now, we can run the simulations. In the dropdown menu of the *Run* icon, select <i>Run Configurations</i>.
+Now, we can run the simulations. In the dropdown menu of the *Run* icon, select *Run Configurations*.
 
 <img src="images/runconfig.png">
 
-In the <i>Run Configurations</i> dialog, select the config name, make sure *Cmdenv* is selected as the user interface.
+In the *Run Configurations* dialog, select the config name, make sure *Cmdenv* is selected as the user interface.
 
 <img src="images/runconfig2.png">
 
@@ -1449,8 +1446,8 @@ as *N* increases, and the network gets larger.
 
 You have successfully completed this tutorial! You have gained a good overview
 and the basic skills to work with OMNeT++, from writing simulations to analyzing
-results. To go to the next level, we recommend you to read the <i>Simulation Manual</i>
-and skim through the <i>User Guide</i>.
+results. To go to the next level, we recommend you to read the *Simulation Manual*
+and skim through the *User Guide*.
 
 Comments and suggestions regarding this tutorial will be very much appreciated.
 
