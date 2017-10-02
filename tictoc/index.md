@@ -8,7 +8,7 @@ with an example simulation model, showing you along the way some
 of the commonly used @opp features.
 
 The tutorial is based on the Tictoc example simulation, which you
-can find in the <tt>samples/tictoc</tt> directory of your
+can find in the `samples/tictoc` directory of your
 @opp installation, so you can try out immediately how
 the examples work. However, you'll find the tutorial much more useful
 if you actually carry out the steps described here.
@@ -46,7 +46,7 @@ NEXT: @ref part1
 For a start, let us begin with a "network" that consists of two nodes.
 The nodes will do something simple: one of the nodes will create a packet,
 and the two nodes will keep passing the same packet back and forth.
-We'll call the nodes <tt>tic</tt> and <tt>toc</tt>. Later we'll gradually
+We'll call the nodes `tic` and `toc`. Later we'll gradually
 improve this model, introducing @opp features at each step.
 
 Here are the steps you take to implement your first simulation from scratch.
@@ -54,23 +54,23 @@ Here are the steps you take to implement your first simulation from scratch.
 
 ### 1.2 Setting up the project
 
-Start the @opp IDE by typing <tt>omnetpp</tt> in your terminal. (We assume
+Start the @opp IDE by typing `omnetpp` in your terminal. (We assume
 that you already have a working @opp installation. If not, please install the latest
 version, consulting the <i>Installation Guide</i> as needed.)
 Once in the IDE, choose <i>New -> @opp Project</i> from the menu.
 
 <img src="images/newproject.png">
 
-A wizard dialog will appear. Enter <tt>tictoc</tt> as project name,
+A wizard dialog will appear. Enter `tictoc` as project name,
 choose <i>Empty project</i> when asked about the initial content of the project,
 then click <i>Finish</i>. An empty project will be created, as you can see
 in the <i>Project Explorer</i>.
-(Note: Some @opp versions will generate a <tt>package.ned</tt> file into the project.
+(Note: Some @opp versions will generate a `package.ned` file into the project.
 We don't need it now: delete the file by selecting it and hitting Delete.)
 
 The project will hold all files that belong to our simulation. In our example,
 the project consists of a single directory. For larger simulations, the project's
-contents are usually sorted into <tt>src/</tt> and <tt>simulations/</tt> folders,
+contents are usually sorted into `src/` and `simulations/` folders,
 and possibly subfolders underneath them.
 
 @note Using the IDE is entirely optional. Almost all functionality of @opp
@@ -91,7 +91,7 @@ NED, C++ and ini files in it with your favorite text editor.
 like networks. We start implementing our model by adding a NED file.
 To add the file to the project, right-click the project directory in the
 <i>Project Explorer</i> panel on the left, and choose <i>New -> Network Description File (NED)</i>
-from the menu. Enter <tt>%tictoc1.ned</tt> when prompted for the file name.
+from the menu. Enter `%tictoc1.ned` when prompted for the file name.
 
 Once created, the file can be edited in the <i>Editor area</i> of the @opp IDE.
 The @opp IDE's NED editor has two modes, \e Design and \e Source; one can switch
@@ -156,7 +156,7 @@ and handleMessage(). They are invoked from the simulation kernel:
 the first one only once, and the second one whenever a message arrives at the module.
 
 In initialize() we create a message object (cMessage), and send it out
-on gate <tt>out</tt>. Since this gate is connected to the other module's
+on gate `out`. Since this gate is connected to the other module's
 input gate, the simulation kernel will deliver this message to the other module
 in the argument to handleMessage() -- after a 100ms propagation delay
 assigned to the link in the NED file. The other module just sends it back
@@ -230,9 +230,9 @@ You can manually trigger a build by hitting choosing <i>Project -> Build All</i>
 from the menu, or hitting <i>Ctrl+B</i>.
 
 @note If you want to build the simulation executable on the command-line,
-create a <i>Makefile</i> using the <tt><b>opp_makemake</b></tt>
-command, then enter <tt><b>make</b></tt> to build the project. It will produce
-an executable that can be run by entering <tt><b>./tictoc</b></tt>.
+create a <i>Makefile</i> using the `<b>opp_makemake</b>`
+command, then enter `<b>make</b>` to build the project. It will produce
+an executable that can be run by entering `<b>./tictoc</b>`.
 
 
 ### 2.2 Running the simulation
@@ -417,7 +417,7 @@ or even, use the \e Record button in the Qtenv graphical runtime environment
 after launching,
 
 The log file can be analyzed later with the <i>Sequence Chart</i> tool in the IDE.
-The <tt>results</tt> directory in the project folder contains the <tt>.elog</tt> file.
+The `results` directory in the project folder contains the `.elog` file.
 Double-clicking on it in the @opp IDE opens the Sequence Chart tool,
 and the event log tab at the bottom of the window.
 
@@ -450,9 +450,9 @@ Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
 ### 3.1 Adding icons
 
 Here we make the model look a bit prettier in the GUI. We assign
-the "block/routing" icon (the file <tt>images/block/routing.png</tt>), and paint it cyan for <tt>tic</tt>
-and yellow for <tt>toc</tt>. This is achieved by adding display strings to the
-NED file. The <tt>i=</tt> tag in the display string specifies the icon.
+the "block/routing" icon (the file `images/block/routing.png`), and paint it cyan for `tic`
+and yellow for `toc`. This is achieved by adding display strings to the
+NED file. The `i=` tag in the display string specifies the icon.
 
 @dontinclude tictoc2.ned
 @skip Here we make
@@ -517,8 +517,8 @@ Note the
 line in the source: this makes it possible to see the counter value
 in the graphical runtime environment.
 
-If you click on <tt>tic</tt>'s icon, the inspector window in the bottom left corner of the main window will display
-details about <tt>tic</tt>. Make sure that Children Mode is selected from the toolbar at the top.
+If you click on `tic`'s icon, the inspector window in the bottom left corner of the main window will display
+details about `tic`. Make sure that Children Mode is selected from the toolbar at the top.
 The inspector now displays the counter variable.
 
 <img src="images/inspector.png">
@@ -534,7 +534,7 @@ Sources: @ref tictoc3.ned, @ref txc3.cc, @ref omnetpp.ini
 In this step you'll learn how to add input parameters to the simulation:
 we'll turn the "magic number" 10 into a parameter and add a boolean parameter
 to decide whether the module should send out the first message in its
-initialization code (whether this is a <tt>tic</tt> or a <tt>toc</tt> module).
+initialization code (whether this is a `tic` or a `toc` module).
 
 Module parameters have to be declared in the NED file. The data type can
 be numeric, string, bool, or xml (the latter is for easy access to
@@ -557,7 +557,7 @@ We can use the second parameter to decide whether to send initial message:
 
 Now, we can assign the parameters in the NED file or from omnetpp.ini.
 Assignments in the NED file take precedence. You can define default
-values for parameters if you use the <tt>default(...)</tt> syntax
+values for parameters if you use the `default(...)` syntax
 in the NED file. In this case you can either set the value of the
 parameter in omnetpp.ini or use the default value provided by the NED file.
 
@@ -608,11 +608,11 @@ Sources: @ref tictoc4.ned, @ref txc4.cc, @ref omnetpp.ini
 
 ### 3.5 Using NED inheritance
 
-If we take a closer look at the NED file we will realize that <tt>tic</tt>
-and <tt>toc</tt> differs only in their parameter values and their display string.
+If we take a closer look at the NED file we will realize that `tic`
+and `toc` differs only in their parameter values and their display string.
 We can create a new simple module type by inheriting from an other one and specifying
 or overriding some of its parameters. In our case we will derive two simple
-module types (<tt>Tic</tt> and <tt>Toc</tt>). Later we can use these types when defining
+module types (`Tic` and `Toc`). Later we can use these types when defining
 the submodules in the network.
 
 Deriving from an existing simple module is easy. Here is the base module:
@@ -628,12 +628,12 @@ display properties.
 @skip simple Tic5
 @until }
 
-The <tt>Toc</tt> module looks similar, but with different parameter values.
+The `Toc` module looks similar, but with different parameter values.
 @dontinclude tictoc5.ned
 @skip simple Toc5
 @until }
 
-@note The C++ implementation is inherited from the base simple module (<tt>Txc5</tt>).
+@note The C++ implementation is inherited from the base simple module (`Txc5`).
 
 Once we created the new simple modules, we can use them as submodule types in our network:
 
@@ -648,14 +648,14 @@ redundant definitions and parameter settings.
 
 ### 3.6 Modeling processing delay
 
-In the previous models, <tt>tic</tt> and <tt>toc</tt> immediately sent back the
-received message. Here we'll add some timing: <tt>tic</tt> and <tt>toc</tt> will hold the
+In the previous models, `tic` and `toc` immediately sent back the
+received message. Here we'll add some timing: `tic` and `toc` will hold the
 message for 1 simulated second before sending it back. In @opp
 such timing is achieved by the module sending a message to itself.
 Such messages are called self-messages (but only because of the way they
 are used, otherwise they are ordinary message objects).
 
-We added two cMessage * variables, <tt>event</tt> and <tt>tictocMsg</tt>
+We added two cMessage * variables, `event` and `tictocMsg`
 to the class, to remember the message we use for timing and message whose
 processing delay we are simulating.
 
@@ -699,7 +699,7 @@ Sources: @ref tictoc6.ned, @ref txc6.cc, @ref omnetpp.ini
 In this step we'll introduce random numbers. We change the delay from 1s
 to a random value which can be set from the NED file or from omnetpp.ini.
 Module parameters are able to return random variables; however, to make
-use of this feature we have to read the parameter in <tt>handleMessage()</tt>
+use of this feature we have to read the parameter in `handleMessage()`
 every time we use it.
 
 @dontinclude txc7.cc
@@ -745,25 +745,25 @@ Sources: @ref tictoc8.ned, @ref txc7.cc, @ref omnetpp.ini
 
 In order to get one step closer to modelling networking protocols,
 let us transform our model into a stop-and-wait simulation.
-This time we'll have separate classes for <tt>tic</tt> and <tt>toc</tt>. The basic
-scenario is similar to the previous ones: <tt>tic</tt> and <tt>toc</tt> will be tossing a
-message to one another. However, <tt>toc</tt> will "lose" the message with some
-nonzero probability, and in that case <tt>tic</tt> will have to resend it.
+This time we'll have separate classes for `tic` and `toc`. The basic
+scenario is similar to the previous ones: `tic` and `toc` will be tossing a
+message to one another. However, `toc` will "lose" the message with some
+nonzero probability, and in that case `tic` will have to resend it.
 
-Here's <tt>toc</tt>'s code:
+Here's `toc`'s code:
 
 @dontinclude txc8.cc
 @skip Toc8::handleMessage(
 @until else
 
-Thanks to the bubble() call in the code, <tt>toc</tt>'ll display a callout whenever
+Thanks to the bubble() call in the code, `toc`'ll display a callout whenever
 it drops the message.
 
 <img src="images/step8.png">
 
-So, <tt>tic</tt> will start a timer whenever it sends the message. When
+So, `tic` will start a timer whenever it sends the message. When
 the timer expires, we'll assume the message was lost and send another
-one. If <tt>toc</tt>'s reply arrives, the timer has to be cancelled.
+one. If `toc`'s reply arrives, the timer has to be cancelled.
 The timer will be (what else?) a self-message.
 
 @dontinclude txc8.cc
@@ -794,7 +794,7 @@ Keeping a pointer to the sent message - so we can send it again - might seem eas
 but when the message is destroyed at the other node the pointer becomes invalid.
 
 What we do here is keep the original packet and send only copies of it.
-We delete the original when <tt>toc</tt>'s acknowledgement arrives.
+We delete the original when `toc`'s acknowledgement arrives.
 To make it easier to visually verify the model, we'll include a message
 sequence number in the message names.
 
@@ -828,7 +828,7 @@ Sources: @ref tictoc9.ned, @ref txc9.cc, @ref omnetpp.ini
 
 ### 4.1 More than two nodes
 
-Now we'll make a big step: create several <tt>tic</tt> modules and connect
+Now we'll make a big step: create several `tic` modules and connect
 them into a network. For now, we'll keep it simple what they do:
 one of the nodes generates a message, and the others keep tossing
 it around in random directions until it arrives at
@@ -886,7 +886,7 @@ Sources: @ref tictoc10.ned, @ref txc10.cc, @ref omnetpp.ini
 
 Our new network definition is getting quite complex and long, especially
 the connections section. Let's try to simplify it. The first thing we
-notice is that the connections always use the same <tt>delay</tt> parameter.
+notice is that the connections always use the same `delay` parameter.
 It is possible to create types for the connections (they are called channels)
 similarly to simple modules. We should create a channel type which specifies the
 delay parameter and we will use that type for all connections in the network.
@@ -896,15 +896,15 @@ delay parameter and we will use that type for all connections in the network.
 @until submodules
 
 As you have noticed we have defined the new channel type inside the network definition
-by adding a <tt>types</tt> section. This type definition is only visible inside the
+by adding a `types` section. This type definition is only visible inside the
 network. It is called as a local or inner type. You can use simple modules as inner types
 too, if you wish.
 
 @note We have created the channel by specializing the built-in DelayChannel.
-(built-in channels can be found inside the <tt>ned</tt> package. Thats why we used
-the full type name <tt>ned.DelayChannel</tt>) after the <tt>extends</tt> keyword.
+(built-in channels can be found inside the `ned` package. Thats why we used
+the full type name `ned.DelayChannel`) after the `extends` keyword.
 
-Now let's check how the <tt>connections</tt> section changed.
+Now let's check how the `connections` section changed.
 
 @dontinclude tictoc11.ned
 @skip connections
@@ -918,18 +918,18 @@ Sources: @ref tictoc11.ned, @ref txc11.cc, @ref omnetpp.ini
 
 ### 4.3 Using two-way connections
 
-If we check the <tt>connections</tt> section a little more, we will realize that
+If we check the `connections` section a little more, we will realize that
 each node pair is connected with two connections. One for each direction.
 @opp 4 supports two way connections, so let's use them.
 
-First of all, we have to define two-way (or so called <tt>inout</tt>) gates instead of the
-separate <tt>input</tt> and <tt>output</tt> gates we used previously.
+First of all, we have to define two-way (or so called `inout`) gates instead of the
+separate `input` and `output` gates we used previously.
 
 @dontinclude tictoc12.ned
 @skip simple
 @until }
 
-The new <tt>connections</tt> section would look like this:
+The new `connections` section would look like this:
 
 @dontinclude tictoc12.ned
 @skip connections:
@@ -1003,9 +1003,9 @@ following:
 <img src="images/step13e.png">
 
 In the next line, we check if the destination address is the same as the
-node's address. The <tt>getIndex()</tt> member function returns the index
+node's address. The `getIndex()` member function returns the index
 of the module in the submodule vector (remember, in the NED file we
-declarared it as <tt>tic: Txc13[6]</tt>, so our nodes have addresses 0..5).
+declarared it as `tic: Txc13[6]`, so our nodes have addresses 0..5).
 
 To make the model execute longer, after a message arrives to its destination
 the destination node will generate another message with a random destination
@@ -1069,7 +1069,7 @@ you can quickly get an overview about the state of various nodes in the
 model.
 
 It can be also arranged that this info appears above the module
-icons. The <tt>t=</tt> display string tag specifies the text;
+icons. The `t=` display string tag specifies the text;
 we only need to modify the displays string during runtime.
 The following code does the job:
 
@@ -1098,7 +1098,7 @@ write them into a file at the end of the simulation. Then we'll use
 tools from the @opp IDE to analyse the output files.
 
 For that, we add an output vector object (which will record the data into
-<tt>Tictoc15-#0.vec</tt>) and a histogram object (which also calculates mean, etc)
+`Tictoc15-#0.vec`) and a histogram object (which also calculates mean, etc)
 to the class.
 
 @dontinclude txc15.cc
@@ -1112,31 +1112,31 @@ The following code has been added to handleMessage():
 @skipline hopCountVector.record
 @skipline hopCountStats.collect
 
-hopCountVector.record() call writes the data into <tt>Tictoc15-#0.vec</tt>.
-With a large simulation model or long execution time, the <tt>Tictoc15-#0.vec</tt> file
+hopCountVector.record() call writes the data into `Tictoc15-#0.vec`.
+With a large simulation model or long execution time, the `Tictoc15-#0.vec` file
 may grow very large. To handle this situation, you can specifically
 disable/enable vector in omnetpp.ini, and you can also specify
 a simulation time interval in which you're interested
 (data recorded outside this interval will be discarded.)
 
-When you begin a new simulation, the existing <tt>Tictoc15-#0.vec/sca</tt>
+When you begin a new simulation, the existing `Tictoc15-#0.vec/sca`
 files get deleted.
 
 Scalar data (collected by the histogram object in this simulation)
 have to be recorded manually, in the finish() function.
 finish() gets invoked on successful completion of the simulation,
 i.e. not when it's stopped with an error. The recordScalar() calls
-in the code below write into the <tt>Tictoc15-#0.sca</tt> file.
+in the code below write into the `Tictoc15-#0.sca` file.
 
 @skip ::finish
 @until }
 
-The files are stored in the <tt>results/</tt> subdirectory.
+The files are stored in the `results/` subdirectory.
 
 You can also view the data during simulation. To do that, right click on a module, and
-choose <tt>Open Details</tt>. In the module inspector's Contents page you'll find the hopCountStats
-and hopCountVector objects. To open their inspectors, right click on <tt>cLongHistogram hopCountStats</tt> or
-<tt>cOutVector HopCount</tt>, and click <tt>Open Graphical View</tt>.
+choose `Open Details`. In the module inspector's Contents page you'll find the hopCountStats
+and hopCountVector objects. To open their inspectors, right click on `cLongHistogram hopCountStats` or
+`cOutVector HopCount`, and click `Open Graphical View`.
 
 <img src="images/open_details.png">
 
@@ -1152,11 +1152,11 @@ data to be displayed. After a while you'll get something like this:
 <img src="images/step15b.png">
 
 When you think enough data has been collected, you can stop the simulation
-and then we'll analyse the result files (<tt>Tictoc15-#0.vec</tt> and
-<tt>Tictoc15-#0.sca</tt>) off-line. You'll need to choose Simulate|Call finish()
+and then we'll analyse the result files (`Tictoc15-#0.vec` and
+`Tictoc15-#0.sca`) off-line. You'll need to choose Simulate|Call finish()
 from the menu (or click the corresponding toolbar button) before exiting --
 this will cause the finish() functions to run and data to be written into
-<tt>Tictoc15-#0.sca</tt>.
+`Tictoc15-#0.sca`.
 
 Sources: @ref tictoc15.ned, @ref tictoc15.msg, @ref txc15.cc, @ref omnetpp.ini
 
@@ -1178,12 +1178,12 @@ even looking into the C++ code.
 
 We will re-write the statistic collection introduced in the last step to
 use signals. First of all, we can safely remove all statistic related variables
-from our module. There is no need for the <tt>cOutVector</tt> and
-<tt>cLongHistogram</tt> classes either. We will need only a single signal
-that carries the <tt>hopCount</tt> of the message at the time of message
+from our module. There is no need for the `cOutVector` and
+`cLongHistogram` classes either. We will need only a single signal
+that carries the `hopCount` of the message at the time of message
 arrival at the destination.
 
-First we need to define our signal. The <tt>arrivalSignal</tt> is just an
+First we need to define our signal. The `arrivalSignal` is just an
 identifier that can be used later to easily refer to our signal.
 
 @dontinclude txc16.cc
@@ -1191,7 +1191,7 @@ identifier that can be used later to easily refer to our signal.
 @until protected:
 
 We must register all signals before using them. The best place to do this
-is the <tt>initialize()</tt> method of the module.
+is the `initialize()` method of the module.
 
 @skipline ::initialize()
 @until getIndex()
@@ -1201,7 +1201,7 @@ Now we can emit our signal, when the message has arrived to the destination node
 @skipline ::handleMessage(
 @until EV <<
 
-As we do not have to save or store anything manually, the <tt>finish()</tt> method
+As we do not have to save or store anything manually, the `finish()` method
 can be deleted. We no longer need it.
 
 The last step is that we have to define the emitted signal also in the NED file.
@@ -1217,16 +1217,16 @@ Now we can define also a statistic that should be collected by default. Our prev
 has collected statistics (max,min,mean,count etc) about the hop count of the
 arriving messages, so let's collect the same data here, too.
 
-The <tt>source</tt> key specifies the signal we want our statistic to attach to.
-The <tt>record</tt> key can be used to tell what should be done with the received
+The `source` key specifies the signal we want our statistic to attach to.
+The `record` key can be used to tell what should be done with the received
 data. In our case we sepcify that each value must be saved in a vector file (vector)
-and also we need to calculate min,max,mean,count etc. (stats). (NOTE: <tt>stats</tt> is
+and also we need to calculate min,max,mean,count etc. (stats). (NOTE: `stats` is
 just a shorthand for min, max, mean, sum, count etc.) With this step we have finished
 our model.
 
 Now we have just realized that we would like to see a histogram of the hopCount on the
 tic[1] module. On the other hand we are short on disk storage and we are not interested
-having the vector data for the first three module <tt>tic</tt> 0,1,2. No problem. We can add our
+having the vector data for the first three module `tic` 0,1,2. No problem. We can add our
 histogram and remove the unneeded vector recording without even touching the C++ or NED
 files. Just open the INI file and modify the statistic recording:
 
@@ -1246,30 +1246,30 @@ Sources: @ref tictoc16.ned, @ref tictoc16.msg, @ref txc16.cc, @ref omnetpp.ini
 These figures can be static, or change dinamically according to what happens in the simulation.
 In this case, we will display a static descriptive text, and a dynamic text showing the hop count of the last message that arrived at its destination.
 
-We create figures in @ref tictoc17.ned, with the <tt>\@figure</tt> property.
+We create figures in @ref tictoc17.ned, with the `\@figure` property.
 
 @dontinclude tictoc17.ned
 @skipline Tictoc17
 @until hopCount
 
-This creates two text figures named <tt>description</tt> and <tt>lasthopcount</tt>, and sets their positions on the canvas (we place them in the top right corner).
-The <tt>font</tt> attribute sets the figure text's font. It has three parameters: <tt>typeface, size, style</tt>. Any one of them
+This creates two text figures named `description` and `lasthopcount`, and sets their positions on the canvas (we place them in the top right corner).
+The `font` attribute sets the figure text's font. It has three parameters: `typeface, size, style`. Any one of them
 can be omitted to leave the parameter at default. Here we set the description figure's font to bold.
 
-By default the text in <tt>lasthopcount</tt> is static, but we'll
-change it when a message arrives. This is done in @ref txc17.cc, in the <tt>handleMessage()</tt> function.
+By default the text in `lasthopcount` is static, but we'll
+change it when a message arrives. This is done in @ref txc17.cc, in the `handleMessage()` function.
 
 @dontinclude txc17.cc
 @skipline hasGUI
 @until setText
 
-The figure is represented by the <tt>cTextFigure</tt> C++ class. There are several figure types,
-all of them are subclassed from the <a href="file:///home/user/omnetpp-git-tictoc/doc/api/classomnetpp_1_1cFigure.html"><tt>cFigure</tt></a> base class.
-We insert the code responsible for updating the figure text after we retreive the <tt>hopcount</tt> variable.
+The figure is represented by the `cTextFigure` C++ class. There are several figure types,
+all of them are subclassed from the <a href="file:///home/user/omnetpp-git-tictoc/doc/api/classomnetpp_1_1cFigure.html">`cFigure`</a> base class.
+We insert the code responsible for updating the figure text after we retreive the `hopcount` variable.
 
-We want to draw the figures on the network's canvas. The <tt>getParentModule()</tt> function returns the parent of the node, ie. the network.
-Then the <tt>getCanvas()</tt> function returns the network's canvas, and <tt>getFigure()</tt> gets the figure by name.
-Then, we update the figure's text with the <tt>setText()</tt> function.
+We want to draw the figures on the network's canvas. The `getParentModule()` function returns the parent of the node, ie. the network.
+Then the `getCanvas()` function returns the network's canvas, and `getFigure()` gets the figure by name.
+Then, we update the figure's text with the `setText()` function.
 
 @note For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the @opp manual
 
@@ -1306,10 +1306,10 @@ The @opp IDE can help you to analyze your results. It supports filtering,
 processing and displaying vector and scalar data, and can display histograms, too.
 The following diagrams have been created with the Result Analysis tool of the IDE.
 
-The <tt>results</tt> directory in the project folder contains .vec and .sca files, which are the files that store the results in vector and scalar form, respectively.
+The `results` directory in the project folder contains .vec and .sca files, which are the files that store the results in vector and scalar form, respectively.
 Vectors record data values as a function of time, while scalars typically record aggregate values at the end of the simulation.
 To open the Result Analysis tool, double click on either the .vec or the .sca files in the @opp IDE. Both files will be loaded by the Result Analysis tool.
-You can find the <tt>Browse Data</tt> tab at the bottom of the Result Analysis tool panel. Here you can browse results by type by switching the various tabs
+You can find the `Browse Data` tab at the bottom of the Result Analysis tool panel. Here you can browse results by type by switching the various tabs
 at the top of the tool panel, ie. Scalars, Vectors, or Histograms. By default, all results of a result type are displayed. You can filter them by the module filter
 to view all or some of the individual modules, or the statistic name filter to display different types of statistics, ie. mean, max, min, standard deviation, etc.
 You can select some or all of the individual results by highlighting them. If you select multiple results, they will be plotted on one chart. Right click and select Plot to display the figures.
@@ -1317,9 +1317,9 @@ You can select some or all of the individual results by highlighting them. If yo
 <img src="images/statistics.png">
 
 @note For further information about the charting and processing capabilities,
-please refer to the <a href="../UserGuide.pdf" target="_blank"><b>@opp Users Guide</b></a> (you can find it in the <tt>doc</tt> directory of the @opp installation).
+please refer to the <a href="../UserGuide.pdf" target="_blank"><b>@opp Users Guide</b></a> (you can find it in the `doc` directory of the @opp installation).
 
-Our last model records the <tt>hopCount</tt> of a message each time the message
+Our last model records the `hopCount` of a message each time the message
 reaches its destination.
 To plot these vectors for all nodes, select the 6 nodes in the browse data tab.
 Right click and select Plot.
@@ -1329,11 +1329,11 @@ Right click and select Plot.
 We can change various options about how the data on the chart is displayed.
 Right click on the chart background, and select Properties.
 This opens the Edit LineChart window.
-In the Lines tab, set <tt>Line type</tt> to Dots, and <tt>Symbol Type</tt> to Dot.
+In the Lines tab, set `Line type` to Dots, and `Symbol Type` to Dot.
 
 <img src="images/editlinechart2.png" width="850px">
 
-To add a legend to the chart, select <tt>Display legend</tt> on the Legend tab.
+To add a legend to the chart, select `Display legend` on the Legend tab.
 
 <img src="images/displaylegend.png">
 
@@ -1341,7 +1341,7 @@ The chart looks like the following:
 
 <img src="images/hopcountchart.png">
 
-If we apply a <tt>mean</tt> operation we can see how the <tt>hopCount</tt> in the different
+If we apply a `mean` operation we can see how the `hopCount` in the different
 nodes converge to an average.
 Right-click the chart, and select <i>Apply -> Mean</i>.
 Again, right-click on the chart background, and select \e Properties.
@@ -1353,13 +1353,13 @@ The mean is displayed on the following chart. The lines are easier to see this w
 Scalar data can be plotted on bar charts.
 The next chart displays the mean and the maximum of the \c hopCount of the messages
 for each destination node, based on the scalar data recorded at the end of the simulation.
-In the Browse data tab, select Scalars. Now select <tt>hop count:max</tt> and <tt>hop count:mean</tt>
+In the Browse data tab, select Scalars. Now select `hop count:max` and `hop count:mean`
 for all 6 nodes.
 
 
 <img src="images/scalars.png">
 
-To create a histogram that shows <tt>hopCount</tt>'s distribution, select Histograms
+To create a histogram that shows `hopCount`'s distribution, select Histograms
 on the Browse data tab. Select all nodes, and right click | Plot.
 
 <img src="images/histogram.png">
@@ -1389,13 +1389,13 @@ hop count depends on the number of nodes.
 ### 7.2 Making the network topology parametric
 
 To parameterize the network, the number of nodes is given as a NED parameter,
-<tt>numCentralNodes</tt>. This parameter specifies how many nodes are in the central
+`numCentralNodes`. This parameter specifies how many nodes are in the central
 section of the network, but doesn't cover the two nodes at each side.
 
 <img src="images/numberofnodes.png">
 
-The total number of nodes including the four nodes on the sides is <tt>numCentralNodes+4</tt>.
-The default of the <tt>numCentralNodes</tt> parameter is 2, this corresponds
+The total number of nodes including the four nodes on the sides is `numCentralNodes+4`.
+The default of the `numCentralNodes` parameter is 2, this corresponds
 to the network in the previous step.
 
 @dontinclude tictoc18.ned
@@ -1411,11 +1411,11 @@ Starting from the third, each <i>i</i>th node is connected to the <i>i+1</i>th.
 @skipline connections
 @until numCentralNodes+3
 
-Here is how the network looks like with <tt>numCentralNodes = 4</tt>:
+Here is how the network looks like with `numCentralNodes = 4`:
 
 <img src="images/step18.png">
 
-To run the simulation with multiple different values of <tt>numCentralNodes</tt>, we specify
+To run the simulation with multiple different values of `numCentralNodes`, we specify
 the variable \e N in the ini file:
 
 @dontinclude omnetpp.ini
@@ -1430,7 +1430,7 @@ simulation batches are often run from the command line interface using the \e Cm
 @note You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the @opp manual.
 
 To increase the accuracy of the simulation we may need to run the same simulation several times
-using different random numbers. These runs are called \e Repetitions and are specified in <tt>omnetpp.ini</tt>:
+using different random numbers. These runs are called \e Repetitions and are specified in `omnetpp.ini`:
 
 @dontinclude omnetpp.ini
 @skipline repeat = 4
@@ -1466,7 +1466,7 @@ The -j parameter specifies the number of CPU cores, the \c -u parameter the user
 Now, we can visualize and analyze the data we've collected from the simulation runs.
 We'll display the average hop count for messages that reach their destinations vs \e N, the number of central nodes.
 Additionally, we will display the average number of packets that reached their destinations vs \e N.
-The analysis file <tt>Tictoc18.anf</tt> contains the dataset we will use for the visualization.
+The analysis file `Tictoc18.anf` contains the dataset we will use for the visualization.
 
 <img src="images/dataset.png">
 
@@ -1475,11 +1475,11 @@ These two average scalars are not recorded during the simulation, we will have t
 The hop count is recorded at each node when a message arrives, so the mean of hop count will be available as a statistic.
 But this is recorded per node, and we're interested in the average of the mean hop count for all nodes.
 The 'Compute Scalar' dataset node can be used to compute scalar statistics from other scalars.
-We compute <tt>AvgHopCount</tt> as <tt>mean(**.'hopCount:stats:mean')</tt>.
+We compute `AvgHopCount` as `mean(**.'hopCount:stats:mean')`.
 
 We're also interested in the average number of packets that arrive at their destination.
 The count of the arrived packets is available at each node. We can compute their average,
-<tt>AvgNumPackets</tt> as <tt>mean('hopCount:stats:count')</tt>.
+`AvgNumPackets` as `mean('hopCount:stats:count')`.
 
 @note Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
 @opp installation.
