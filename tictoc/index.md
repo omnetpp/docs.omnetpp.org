@@ -5,17 +5,17 @@ title: TicToc Tutorial
 
 This tutorial to guides you through building and working
 with an example simulation model, showing you along the way some
-of the commonly used @opp features.
+of the commonly used OMNeT++ features.
 
 The tutorial is based on the Tictoc example simulation, which you
 can find in the `samples/tictoc` directory of your
-@opp installation, so you can try out immediately how
+OMNeT++ installation, so you can try out immediately how
 the examples work. However, you'll find the tutorial much more useful
 if you actually carry out the steps described here.
 We assume that you have a good C++ knowledge, and you are in general
 familiar with C/C++ development (editing source files, compiling, debugging etc.)
 To make the examples easier to follow, all source code in here is
-cross-linked to the @opp API documentation.
+cross-linked to the OMNeT++ API documentation.
 
 This document and the TicToc model are an expanded version of
 the original TicToc tutorial from Ahmet Sekercioglu (Monash University).
@@ -34,17 +34,17 @@ For a start, let us begin with a "network" that consists of two nodes.
 The nodes will do something simple: one of the nodes will create a packet,
 and the two nodes will keep passing the same packet back and forth.
 We'll call the nodes `tic` and `toc`. Later we'll gradually
-improve this model, introducing @opp features at each step.
+improve this model, introducing OMNeT++ features at each step.
 
 Here are the steps you take to implement your first simulation from scratch.
 
 
 ### 1.2 Setting up the project
 
-Start the @opp IDE by typing `omnetpp` in your terminal. (We assume
-that you already have a working @opp installation. If not, please install the latest
+Start the OMNeT++ IDE by typing `omnetpp` in your terminal. (We assume
+that you already have a working OMNeT++ installation. If not, please install the latest
 version, consulting the <i>Installation Guide</i> as needed.)
-Once in the IDE, choose <i>New -> @opp Project</i> from the menu.
+Once in the IDE, choose <i>New -> OMNeT++ Project</i> from the menu.
 
 <img src="images/newproject.png">
 
@@ -52,7 +52,7 @@ A wizard dialog will appear. Enter `tictoc` as project name,
 choose <i>Empty project</i> when asked about the initial content of the project,
 then click <i>Finish</i>. An empty project will be created, as you can see
 in the <i>Project Explorer</i>.
-(Note: Some @opp versions will generate a `package.ned` file into the project.
+(Note: Some OMNeT++ versions will generate a `package.ned` file into the project.
 We don't need it now: delete the file by selecting it and hitting Delete.)
 
 The project will hold all files that belong to our simulation. In our example,
@@ -60,11 +60,11 @@ the project consists of a single directory. For larger simulations, the project'
 contents are usually sorted into `src/` and `simulations/` folders,
 and possibly subfolders underneath them.
 
-@note Using the IDE is entirely optional. Almost all functionality of @opp
+@note Using the IDE is entirely optional. Almost all functionality of OMNeT++
 (except for some very graphics-intensive and interactive features
 like sequence chart browsing and result plotting) is available on
 the command line. Model source files can be edited with any text editor,
-and @opp provides command-line tools for special tasks such as makefile
+and OMNeT++ provides command-line tools for special tasks such as makefile
 creation, message file to C++ translation, result file querying and data export,
 and so on.
 
@@ -74,14 +74,14 @@ NED, C++ and ini files in it with your favorite text editor.
 
 ### 1.3 Adding the NED file
 
-@opp uses NED files to define components and to assemble them into larger units
+OMNeT++ uses NED files to define components and to assemble them into larger units
 like networks. We start implementing our model by adding a NED file.
 To add the file to the project, right-click the project directory in the
 <i>Project Explorer</i> panel on the left, and choose <i>New -> Network Description File (NED)</i>
 from the menu. Enter `%tictoc1.ned` when prompted for the file name.
 
-Once created, the file can be edited in the <i>Editor area</i> of the @opp IDE.
-The @opp IDE's NED editor has two modes, *Design* and *Source*; one can switch
+Once created, the file can be edited in the <i>Editor area</i> of the OMNeT++ IDE.
+The OMNeT++ IDE's NED editor has two modes, *Design* and *Source*; one can switch
 between them using the tabs at the bottom of the editor. In *Design* mode,
 the topology can be edited graphically, using the mouse and the palette on the right.
 In *Source* mode, the NED source code can be directly edited as text.
@@ -113,8 +113,8 @@ submodules, \c tic and \c toc, both instances of the module type \c %Txc1.
 There will be a 100ms propagation delay both ways.
 
 @note You can find a detailed description of the NED language in the
-<a href="../manual/index.html#cha:ned-lang" target="blank">@opp Simulation Manual</a>.
-(The manual can also be found in the \c doc  directory of your @opp installation.)
+<a href="../manual/index.html#cha:ned-lang" target="blank">OMNeT++ Simulation Manual</a>.
+(The manual can also be found in the \c doc  directory of your OMNeT++ installation.)
 
 
 ### 1.4 Adding the C++ files
@@ -130,8 +130,8 @@ and enter the following content:
 @skipline }
 
 The Txc1 simple module type is represented by the C++ class Txc1. The Txc1
-class needs to subclass from @opp's cSimpleModule class, and needs to be
-registered in @opp with the Define_Module() macro.
+class needs to subclass from OMNeT++'s cSimpleModule class, and needs to be
+registered in OMNeT++ with the Define_Module() macro.
 
 @note It is a common mistake to forget the Define_Module() line. If it is missing,
 you'll get an error message similar to this one: <i>"Error: Class 'Txc1' not found -- perhaps
@@ -150,7 +150,7 @@ assigned to the link in the NED file. The other module just sends it back
 (another 100ms delay), so it will result in a continuous ping-pong.
 
 Messages (packets, frames, jobs, etc) and events (timers, timeouts) are
-all represented by cMessage objects (or its subclasses) in @opp.
+all represented by cMessage objects (or its subclasses) in OMNeT++.
 After you send or schedule them, they will be held by the simulation
 kernel in the "scheduled events" or "future events" list until
 their time comes and they are delivered to the modules via handleMessage().
@@ -218,7 +218,7 @@ an executable that can be run by entering `<b>./tictoc</b>`.
 
 After successfully building and launching your simulation, you should see
 a new GUI window appear, similar to the one in the screenshot below.
-The window belongs to *Qtenv*, the main @opp simulation runtime GUI.
+The window belongs to *Qtenv*, the main OMNeT++ simulation runtime GUI.
 You should also see the network containing *tic* and *toc* displayed
 graphically in the main area.
 
@@ -299,7 +299,7 @@ function calls) in the *Debug* view:
 
 <img src="images/stacktrace.png" width="600px">
 
-You can see that it was @opp's *breakIntoDebuggerIfRequested*() method that
+You can see that it was OMNeT++'s *breakIntoDebuggerIfRequested*() method that
 activated the debugger. From then on, you need to search for a function that
 looks familiar, i.e. for one that is part of the model. In our case, that is
 the "Txc1::handleMessage() at txc1.cc:54" line. Selecting that line will
@@ -388,7 +388,7 @@ The dialog allows you activate various settings for the launch.
 
 ### 2.5 Visualizing on a Sequence Chart
 
-The @opp simulation kernel can record the message exchanges during the
+The OMNeT++ simulation kernel can record the message exchanges during the
 simulation into an <i>event log file</i>. To enable recording the event log,
 check the <i>Record eventlog</i> checkbox in the launch configuration dialog.
 Alternatively, you can specify <i>record-eventlog = true</i> in omnetpp.ini,
@@ -397,7 +397,7 @@ after launching,
 
 The log file can be analyzed later with the <i>Sequence Chart</i> tool in the IDE.
 The `results` directory in the project folder contains the `.elog` file.
-Double-clicking on it in the @opp IDE opens the Sequence Chart tool,
+Double-clicking on it in the OMNeT++ IDE opens the Sequence Chart tool,
 and the event log tab at the bottom of the window.
 
 @note The resulting log file can be quite large, so enable this feature only
@@ -438,7 +438,7 @@ You can see the result here:
 ### 3.2 Adding logging
 
 We also modify the C++ code. We add log statements to *Txc*1 so that it
-prints what it is doing. @opp provides a sophisticated logging facility
+prints what it is doing. OMNeT++ provides a sophisticated logging facility
 with log levels, log channels, filtering, etc. that are useful for large
 and complex models, but in this model we'll use its simplest form
 \c EV:
@@ -450,7 +450,7 @@ and
 
 @skipline EV <<
 
-When you run the simulation in the @opp runtime environment, the following output
+When you run the simulation in the OMNeT++ runtime environment, the following output
 will appear in the log window:
 
 <img src="images/step2b.png">
@@ -621,7 +621,7 @@ redundant definitions and parameter settings.
 
 In the previous models, `tic` and `toc` immediately sent back the
 received message. Here we'll add some timing: `tic` and `toc` will hold the
-message for 1 simulated second before sending it back. In @opp
+message for 1 simulated second before sending it back. In OMNeT++
 such timing is achieved by the module sending a message to itself.
 Such messages are called self-messages (but only because of the way they
 are used, otherwise they are ordinary message objects).
@@ -691,7 +691,7 @@ We'll assign the parameters in omnetpp.ini:
 
 You can try that no matter how many times you re-run the simulation (or
 restart it, Simulate|Rebuild network menu item), you'll get exactly the
-same results. This is because @opp uses a deterministic algorithm
+same results. This is because OMNeT++ uses a deterministic algorithm
 (by default the Mersenne Twister RNG) to generate random numbers, and
 initializes it to the same seed. This is important for reproducible
 simulations. You can experiment with different seeds if you add the
@@ -702,7 +702,7 @@ following lines to omnetpp.ini:
 seed-0-mt=532569  # or any other 32-bit value
 @endcode
 
-From the syntax you have probably guessed that @opp supports
+From the syntax you have probably guessed that OMNeT++ supports
 more than one RNGs. That's right, however, all models in this tutorial
 use RNG 0.
 
@@ -882,7 +882,7 @@ Sources: @ref tictoc11.ned, @ref txc11.cc, @ref omnetpp.ini
 
 If we check the `connections` section a little more, we will realize that
 each node pair is connected with two connections. One for each direction.
-@opp 4 supports two way connections, so let's use them.
+OMNeT++ 4 supports two way connections, so let's use them.
 
 First of all, we have to define two-way (or so called `inout`) gates instead of the
 separate `input` and `output` gates we used previously.
@@ -917,14 +917,14 @@ random destination, and we'll add the destination address to the message.
 
 The best way is to subclass cMessage and add destination as a data member.
 Hand-coding the message class is usually tedious because it contains
-a lot of boilerplate code, so we let @opp generate the class for us.
+a lot of boilerplate code, so we let OMNeT++ generate the class for us.
 The message class specification is in tictoc13.msg:
 
 @dontinclude tictoc13.msg
 @skip message TicTocMsg13
 @until }
 
-@note See <a href="../manual/index.html#cha:msg-def" target="_blank">Section 6</a> of the @opp manual for more details on messages.
+@note See <a href="../manual/index.html#cha:msg-def" target="_blank">Section 6</a> of the OMNeT++ manual for more details on messages.
 
 The makefile is set up so that the message compiler, opp_msgc is invoked
 and it generates tictoc13_m.h and tictoc13_m.cc from the message declaration
@@ -958,7 +958,7 @@ is not safe because if the message is <i>not</i> a TicTocMsg13 after all
 the program will just crash, causing an error which is difficult to explore.
 
 C++ offers a solution which is called dynamic_cast. Here we use check_and_cast<>()
-which is provided by @opp: it tries to cast the pointer via dynamic_cast,
+which is provided by OMNeT++: it tries to cast the pointer via dynamic_cast,
 and if it fails it stops the simulation with an error message, similar to the
 following:
 
@@ -1048,7 +1048,7 @@ We'll record in the hop count of every message upon arrival into
 an output vector (a sequence of (time,value) pairs, sort of a time series).
 We also calculate mean, standard deviation, minimum, maximum values per node, and
 write them into a file at the end of the simulation. Then we'll use
-tools from the @opp IDE to analyse the output files.
+tools from the OMNeT++ IDE to analyse the output files.
 
 For that, we add an output vector object (which will record the data into
 `Tictoc15-#0.vec`) and a histogram object (which also calculates mean, etc)
@@ -1120,7 +1120,7 @@ In the previous step we have added statistic collection to our model.
 While we can compute and save any value we wish, usually it is not known
 at the time of writing the model, what data the enduser will need.
 
-@opp 4.1 provides an additional mechanism to record values and events.
+OMNeT++ 4.1 provides an additional mechanism to record values and events.
 Any model can emit 'signals' that can carry a value or an object. The
 model writer just have to decide what signals to emit, what data to attach
 to them and when to emit them. The enduser can attach 'listeners' to these
@@ -1195,7 +1195,7 @@ Sources: @ref tictoc16.ned, @ref tictoc16.msg, @ref txc16.cc, @ref omnetpp.ini
 
 ### 5.4 Adding figures
 
-@opp can display figures on the canvas, such as text, geometric shapes or images.
+OMNeT++ can display figures on the canvas, such as text, geometric shapes or images.
 These figures can be static, or change dinamically according to what happens in the simulation.
 In this case, we will display a static descriptive text, and a dynamic text showing the hop count of the last message that arrived at its destination.
 
@@ -1224,7 +1224,7 @@ We want to draw the figures on the network's canvas. The `getParentModule()` fun
 Then the `getCanvas()` function returns the network's canvas, and `getFigure()` gets the figure by name.
 Then, we update the figure's text with the `setText()` function.
 
-@note For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the @opp manual
+@note For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the OMNeT++ manual
 
 When you run the simulation, the figure displays 'last hopCount: N/A' before the arrival of the first message.
 Then, it is updated whenever a message arrives at its destination.
@@ -1242,17 +1242,17 @@ we'll see and analyze them in the IDE.
 Sources: @ref tictoc17.ned, @ref tictoc17.msg, @ref txc17.cc, @ref omnetpp.ini
 
 
-## Part 6 - Visualizing the results with the @opp IDE
+## Part 6 - Visualizing the results with the OMNeT++ IDE
 
 ### 6.1 Visualizing output scalars and vectors
 
-The @opp IDE can help you to analyze your results. It supports filtering,
+The OMNeT++ IDE can help you to analyze your results. It supports filtering,
 processing and displaying vector and scalar data, and can display histograms, too.
 The following diagrams have been created with the Result Analysis tool of the IDE.
 
 The `results` directory in the project folder contains .vec and .sca files, which are the files that store the results in vector and scalar form, respectively.
 Vectors record data values as a function of time, while scalars typically record aggregate values at the end of the simulation.
-To open the Result Analysis tool, double click on either the .vec or the .sca files in the @opp IDE. Both files will be loaded by the Result Analysis tool.
+To open the Result Analysis tool, double click on either the .vec or the .sca files in the OMNeT++ IDE. Both files will be loaded by the Result Analysis tool.
 You can find the `Browse Data` tab at the bottom of the Result Analysis tool panel. Here you can browse results by type by switching the various tabs
 at the top of the tool panel, ie. Scalars, Vectors, or Histograms. By default, all results of a result type are displayed. You can filter them by the module filter
 to view all or some of the individual modules, or the statistic name filter to display different types of statistics, ie. mean, max, min, standard deviation, etc.
@@ -1261,7 +1261,7 @@ You can select some or all of the individual results by highlighting them. If yo
 <img src="images/statistics.png">
 
 @note For further information about the charting and processing capabilities,
-please refer to the <a href="../UserGuide.pdf" target="_blank"><b>@opp Users Guide</b></a> (you can find it in the `doc` directory of the @opp installation).
+please refer to the <a href="../UserGuide.pdf" target="_blank"><b>OMNeT++ Users Guide</b></a> (you can find it in the `doc` directory of the OMNeT++ installation).
 
 Our last model records the `hopCount` of a message each time the message
 reaches its destination.
@@ -1308,17 +1308,13 @@ on the Browse data tab. Select all nodes, and right click | Plot.
 
 <img src="images/histogram.png">
 
-@nav{part5,part7}
-
 
 ## Part 7 - Parameter studies
-
-@tableofcontents
 
 ### 7.1 The goal
 
 We want to run the simulation with a different number of nodes, and see how
-the behavior of the network changes. With @opp you can do parameter studies,
+the behavior of the network changes. With OMNeT++ you can do parameter studies,
 which are multiple simulation runs with different parameter values.
 
 We'll make the number of central nodes (the "handle" in the dumbbell shape) a parameter, and
@@ -1366,7 +1362,7 @@ We specify that *N* should go from 2 to 100, in steps of 2.
 This produces about 50 simulation runs. Each can be explored in the graphical user interface, but
 simulation batches are often run from the command line interface using the *Cmdenv* runtime environment.
 
-@note You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the @opp manual.
+@note You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the OMNeT++ manual.
 
 To increase the accuracy of the simulation we may need to run the same simulation several times
 using different random numbers. These runs are called *Repetitions* and are specified in `omnetpp.ini`:
@@ -1421,7 +1417,7 @@ The count of the arrived packets is available at each node. We can compute their
 `AvgNumPackets` as `mean('hopCount:stats:count')`.
 
 @note Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
-@opp installation.
+OMNeT++ installation.
 
 Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.
 Here is the average hop count vs *N*:
@@ -1451,7 +1447,7 @@ as *N* increases, and the network gets larger.
 ### Congratulations!
 
 You have successfully completed this tutorial! You have gained a good overview
-and the basic skills to work with @opp, from writing simulations to analyzing
+and the basic skills to work with OMNeT++, from writing simulations to analyzing
 results. To go to the next level, we recommend you to read the <i>Simulation Manual</i>
 and skim through the <i>User Guide</i>.
 
