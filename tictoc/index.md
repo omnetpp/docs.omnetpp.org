@@ -105,22 +105,22 @@ When you're done, switch back to *Design* mode. You should see something like th
 The first block in the file declares %Txc1 as a simple module type.
 Simple modules are atomic on NED level. They are also active components,
 and their behavior is implemented in C++. The declaration also says that
-\c Txc1 has an input gate named \c in, and an output gate named \c out.
+`Txc1` has an input gate named `in`, and an output gate named `out`.
 
 The second block declares %Tictoc1 as a network. \c %Tictoc1 is assembled from two
-submodules, \c tic and \c toc, both instances of the module type \c %Txc1.
-\c tic's output gate is connected to \c toc's input gate, and vica versa.
+submodules, `tic` and `toc`, both instances of the module type \c %Txc1.
+`tic`'s output gate is connected to `toc`'s input gate, and vica versa.
 There will be a 100ms propagation delay both ways.
 
 @note You can find a detailed description of the NED language in the
 <a href="../manual/index.html#cha:ned-lang" target="blank">OMNeT++ Simulation Manual</a>.
-(The manual can also be found in the \c doc  directory of your OMNeT++ installation.)
+(The manual can also be found in the `doc`  directory of your OMNeT++ installation.)
 
 
 ### 1.4 Adding the C++ files
 
 We now need to implement the functionality of the Txc1 simple module in C++.
-Create a file named \c txc1.cc by choosing <i>New -> Source File</i> from the
+Create a file named `txc1.cc` by choosing <i>New -> Source File</i> from the
 project's context menu (or <i>File -> New -> File</i> from the IDE's main menu),
 and enter the following content:
 
@@ -275,7 +275,7 @@ suited to debugging. You can end the debugging session with the
 
 Debugging is most often needed to track down runtime errors. Let's try it!
 First, deliberately introduce an error into the program. In \ref txc1.cc,
-duplicate the \c send() line inside \c handleMessage(), so that the code
+duplicate the `send()` line inside `handleMessage()`, so that the code
 looks like this:
 
 @code
@@ -310,9 +310,9 @@ will help you determine the cause of the error and fix it.
 <b>Crashes</b>
 
 Tracking down crashes i.e. segfaults is similar, let's try that as well.
-Undo the previous source code edit (remove the duplicate \c send() line),
+Undo the previous source code edit (remove the duplicate `send()` line),
 and introduce another error. Let's pretend we forgot to create the message
-before sending it, and change the following lines in \c initialize()
+before sending it, and change the following lines in `initialize()`
 
 @code
         cMessage *msg = new cMessage("tictocMsg");
@@ -344,7 +344,7 @@ the context menu. The list of active (and inactive) breakpoints can be examined
 in the *Breakpoints* view.
 
 <i>Exercise: Experiment with breakpoints! Place a breakpoint at the beginning of
-the \c handleMessage() method function, and run the simulation. Use appropriate
+the `handleMessage()` method function, and run the simulation. Use appropriate
 buttons on the toolbar to single-step, continue execution until next time the
 breakpoint is hit, and so on.</i>
 
@@ -361,7 +361,7 @@ there is a potentially more convenient solution.
 
 In *Qtenv*, use <i>Run Until</i> to get to the event to be debugged. Then,
 choose <i>Simulation -> Debug Next Event</i> from the menu. This will trigger
-a breakpoint in the debugger at the beginning of \c handleMessage() of the
+a breakpoint in the debugger at the beginning of `handleMessage()` of the
 next event, and you can start debugging that event.
 
 <img src="images/debugnextevent.png">
@@ -441,7 +441,7 @@ We also modify the C++ code. We add log statements to *Txc*1 so that it
 prints what it is doing. OMNeT++ provides a sophisticated logging facility
 with log levels, log channels, filtering, etc. that are useful for large
 and complex models, but in this model we'll use its simplest form
-\c EV:
+`EV`:
 
 @dontinclude txc2.cc
 @skipline EV <<
@@ -1295,7 +1295,7 @@ The mean is displayed on the following chart. The lines are easier to see this w
 <img src="images/mean3.png">
 
 Scalar data can be plotted on bar charts.
-The next chart displays the mean and the maximum of the \c hopCount of the messages
+The next chart displays the mean and the maximum of the `hopCount` of the messages
 for each destination node, based on the scalar data recorded at the end of the simulation.
 In the Browse data tab, select Scalars. Now select `hop count:max` and `hop count:mean`
 for all 6 nodes.
@@ -1310,6 +1310,7 @@ on the Browse data tab. Select all nodes, and right click | Plot.
 
 
 ## Part 7 - Parameter studies
+
 
 ### 7.1 The goal
 
@@ -1386,7 +1387,7 @@ In the <i>Run Configurations</i> dialog, select the config name, make sure *Cmde
 
 If you have a multicore CPU, you can specify how many simulations to run concurrently.
 
-@note Alternatively, you can run the simulation batches from the command line with \c opp_runall tool
+@note Alternatively, you can run the simulation batches from the command line with `opp_runall` tool
 with the following command:
 
 @code
