@@ -4,3 +4,4 @@
 .cmdenv-log
 **/results/*
 _site
+.jekyll-metadata
