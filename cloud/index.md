@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Introduction
+title: Running Simulation Campaigns in the Cloud
 ---
 
 The goal of the tutorial is to give you an insight on how to start harnessing
