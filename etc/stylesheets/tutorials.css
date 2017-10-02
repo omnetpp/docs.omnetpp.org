@@ -1,0 +1,106 @@
+.include {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #c4cfe5;
+	background-color: #fbfcfd;
+	padding: 4px 6px;
+	display: inline-flex;
+	margin: 4px 8px 4px 2px;
+}
+
+.mark, .marker {
+	background-color: #cbda00;
+	padding: 0;
+}
+
+.snippet {
+	white-space: pre;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #c4cfe5;
+	background-color: #fbfcfd;
+	padding: 4px 6px;
+	margin: 4px 8px 4px 2px;
+	font-family: monospace;
+	border-radius: 0;
+}
+
+pre code {
+    white-space: pre;
+}
+
+var {
+	font-family: monospace;
+	font-weight: bold;
+	font-style: normal;
+}
+
+
+.screen {
+	display: block;
+	margin: auto;
+	max-width: 100%;
+	padding: 1em 0em 1em 0em;
+}
+
+
+div.stretchy-video-wrapper {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.stretchy-video-wrapper > video {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.border {
+	border: solid;
+	border-width: 2px;
+	margin: 0px 10px 0px 10px;
+}
+
+.shadow {
+	box-shadow: 0 1px 1px 0 grey;
+	display: block;
+	margin: 1em auto;
+}
+
+.fit {
+	display: inline-flex;
+}
+
+div.fragment
+{
+	overflow: auto;
+}
+
+.monospace {
+	font-family: "Courier New", monospace;
+	font-weight: bold;
+	background-color: transparent;
+	border: 0px;
+	margin-bottom: 0px
+}
+
+code {
+	color: #033c73;
+	font-family: monospace;
+}
+
+@media (min-width: 767px) {
+	.scroll-menu {
+		max-height: calc(90vh - 100px);
+		overflow: auto;
+	}
+}
+
+code.highlighter-rouge {
+	padding: 2px 2px;
+}
