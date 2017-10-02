@@ -22,24 +22,11 @@ the original TicToc tutorial from Ahmet Sekercioglu (Monash University).
 
 ### Contents
 
-  - @ref part1
-  - @ref part2
-  - @ref part3
-  - @ref part4
-  - @ref part5
-  - @ref part6
-  - @ref part7
-
-NEXT: @ref part1
-*/
+TODO
 
 --------------------------------------------------------------------------
 
 ## Part 1 - Getting started
-
-@nav{contents,part2}
-
-@tableofcontents
 
 ### 1.1 The model
 
@@ -204,17 +191,9 @@ We are now done with creating the first model, and ready to compile and run it.
 
 Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
 
-@nav{contents,part2}
-*/
+----------------------------------------------------------------------------
 
---------------------------------------------------------------------------
-
-/**
-@page part2 Part 2 - Running the simulation
-
-@nav{part1,part3}
-
-@tableofcontents
+## Part 2 - Running the simulation
 
 ### 2.1 Launching the simulation program
 
@@ -435,17 +414,9 @@ the model's behaviour.
 
 Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
 
-@nav{part1,part3}
-*/
+----------------------------------------------------------------------------
 
---------------------------------------------------------------------------
-
-/**
-@page part3 Part 3 - Enhancing the 2-node TicToc
-
-@nav{part2,part4}
-
-@tableofcontents
+## Part 3 - Enhancing the 2-node TicToc
 
 ### 3.1 Adding icons
 
@@ -814,17 +785,8 @@ The functions:
 
 Sources: @ref tictoc9.ned, @ref txc9.cc, @ref omnetpp.ini
 
-@nav{part2,part4}
-*/
 
---------------------------------------------------------------------------
-
-/**
-@page part4 Part 4 - Turning it into a real network
-
-@nav{part3,part5}
-
-@tableofcontents
+## Part 4 - Turning it into a real network
 
 ### 4.1 More than two nodes
 
@@ -1034,17 +996,8 @@ The interval between messages should be a module parameter, returning
 exponentially distributed random numbers.
 </i>
 
-@nav{part3,part5}
-*/
 
---------------------------------------------------------------------------
-
-/**
-@page part5 Part 5 - Adding statistics collection
-
-@nav{part4,part6}
-
-@tableofcontents
+## Part 5 - Adding statistics collection
 
 ### 5.1 Displaying the number of packets sent/received
 
@@ -1288,17 +1241,8 @@ we'll see and analyze them in the IDE.
 
 Sources: @ref tictoc17.ned, @ref tictoc17.msg, @ref txc17.cc, @ref omnetpp.ini
 
-@nav{part4,part6}
-*/
 
---------------------------------------------------------------------------
-
-/**
-@page part6 Part 6 - Visualizing the results with the @opp IDE
-
-@nav{part5,part7}
-
-@tableofcontents
+## Part 6 - Visualizing the results with the @opp IDE
 
 ### 6.1 Visualizing output scalars and vectors
 
@@ -1365,14 +1309,9 @@ on the Browse data tab. Select all nodes, and right click | Plot.
 <img src="images/histogram.png">
 
 @nav{part5,part7}
-*/
 
---------------------------------------------------------------------------
 
-/**
-@nav{part6,closing}
-
-@page part7 Part 7 - Parameter studies
+## Part 7 - Parameter studies
 
 @tableofcontents
 
@@ -1505,14 +1444,9 @@ Notice that the Y axis is logarithmic. The average number of packets that arrive
 as *N* increases, and the network gets larger.
 
 @nav{part6,closing}
-*/
 
---------------------------------------------------------------------------
 
-/**
-@nav{part7,contents}
-
-@page closing Closing words
+## Closing words
 
 ### Congratulations!
 
@@ -1522,9 +1456,6 @@ results. To go to the next level, we recommend you to read the <i>Simulation Man
 and skim through the <i>User Guide</i>.
 
 Comments and suggestions regarding this tutorial will be very much appreciated.
-
-*/
---------------------------------------------------------------------------
 
 
 /// @page tictoc1.ned tictoc1.ned
