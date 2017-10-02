@@ -94,24 +94,24 @@ To add the file to the project, right-click the project directory in the
 from the menu. Enter `%tictoc1.ned` when prompted for the file name.
 
 Once created, the file can be edited in the <i>Editor area</i> of the @opp IDE.
-The @opp IDE's NED editor has two modes, \e Design and \e Source; one can switch
-between them using the tabs at the bottom of the editor. In \e Design mode,
+The @opp IDE's NED editor has two modes, *Design* and *Source*; one can switch
+between them using the tabs at the bottom of the editor. In *Design* mode,
 the topology can be edited graphically, using the mouse and the palette on the right.
-In \e Source mode, the NED source code can be directly edited as text.
+In *Source* mode, the NED source code can be directly edited as text.
 Changes done in one mode will be immediately reflected in the other, so you can
 freely switch between modes during editing, and do each change in whichever mode
 it is more convenient. (Since NED files are plain text files, you can even use
 an external text editor to edit them, although you'll miss syntax highlighting,
 content assist, cross-references and other IDE features.)
 
-Switch into \e Source mode, and enter the following:
+Switch into *Source* mode, and enter the following:
 
 @dontinclude tictoc1.ned
 @skip simple Txc1
 @until toc.out
 @skipline }
 
-When you're done, switch back to \e Design mode. You should see something like this:
+When you're done, switch back to *Design* mode. You should see something like this:
 
 <img src="images/nededitor.png">
 
@@ -183,18 +183,18 @@ to the model, explicitly specify seeds for the random number generators, etc.
 
 Create an %omnetpp.ini file using the <i>File -> New -> Initialization file (INI)</i>
 menu item. The new file will open in an <i>Inifile Editor</i>.
-As the NED Editor, the Inifile Editor also has two modes, \e Form and \e Source,
+As the NED Editor, the Inifile Editor also has two modes, *Form* and *Source*,
 which edit the same content. The former is more suitable for configuring the
 simulation kernel, and the latter for entering module parameters.
 
-For now, just switch to \e Source mode and enter the following:
+For now, just switch to *Source* mode and enter the following:
 
 @code
 [General]
 network = Tictoc1
 @endcode
 
-You can verify the result in \e Form mode:
+You can verify the result in *Form* mode:
 
 <img src="images/inieditor.png" width="650px">
 
@@ -220,7 +220,7 @@ Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
 
 Once you complete the above steps, you can launch the simulation by selecting
 %omnetpp.ini (in either the editor area or the <i>Project Explorer</i>),
-and pressing the \e Run button.
+and pressing the *Run* button.
 
 <img src="images/run.png">
 
@@ -239,12 +239,12 @@ an executable that can be run by entering `<b>./tictoc</b>`.
 
 After successfully building and launching your simulation, you should see
 a new GUI window appear, similar to the one in the screenshot below.
-The window belongs to \e Qtenv, the main @opp simulation runtime GUI.
-You should also see the network containing \e tic and \e toc displayed
+The window belongs to *Qtenv*, the main @opp simulation runtime GUI.
+You should also see the network containing *tic* and *toc* displayed
 graphically in the main area.
 
-Press the \e Run button on the toolbar to start the simulation. What you should
-see is that \e tic and \e toc are exchanging messages with each other.
+Press the *Run* button on the toolbar to start the simulation. What you should
+see is that *tic* and *toc* are exchanging messages with each other.
 
 <img src="images/tictoc1_3.gif">
 
@@ -280,16 +280,16 @@ The simulation is just a C++ program, and as such, it often needs to be
 debugged while it is being developed. In this section we'll look at the
 basics of debugging to help you acquire this vital task.
 
-The simulation can be started in debug mode by clicking the \e Debug
+The simulation can be started in debug mode by clicking the *Debug*
 button on the IDE's main toolbar.
 
 <img src="images/debug.png">
 
 This will cause the simulation program to be launched under a debugger
-(usually \e gdb). The IDE will also switch into "Debug perspective",
+(usually *gdb*). The IDE will also switch into "Debug perspective",
 i.e. rearrange its various panes and views to a layout which is better
 suited to debugging. You can end the debugging session with the
-\e Terminate button (a red square) on the toolbar.
+*Terminate* button (a red square) on the toolbar.
 
 
 <b>Runtime errors</b>
@@ -308,24 +308,24 @@ void Txc1::handleMessage(cMessage *msg)
 }
 @endcode
 
-When you launch the simulation in normal mode (\e Run button) and try to run it,
+When you launch the simulation in normal mode (*Run* button) and try to run it,
 you'll get an error message like this:
 
 <img src="images/error.png" width="450px">
 
-Now, run the simulation in \e Debug mode. Due to a <i>debug-on-errors</i> option
+Now, run the simulation in *Debug* mode. Due to a <i>debug-on-errors</i> option
 being enabled by default, the simulation program will stop in the debugger.
 You can locate the error by examining the stack trace (the list of nested
-function calls) in the \e Debug view:
+function calls) in the *Debug* view:
 
 <img src="images/stacktrace.png" width="600px">
 
-You can see that it was @opp's \e breakIntoDebuggerIfRequested() method that
+You can see that it was @opp's *breakIntoDebuggerIfRequested*() method that
 activated the debugger. From then on, you need to search for a function that
 looks familiar, i.e. for one that is part of the model. In our case, that is
 the "Txc1::handleMessage() at txc1.cc:54" line. Selecting that line will
 show you the corresponding source code in the editor area, and lets you
-examine the values of variables in the \e Variables view. This information
+examine the values of variables in the *Variables* view. This information
 will help you determine the cause of the error and fix it.
 
 <b>Crashes</b>
@@ -349,8 +349,8 @@ to simply
 
 When you run the simulation, it will crash. (You will get an error message
 similar to "Simulation terminated with exit code: 139"). If you launch the simulation
-again, this time in \e Debug mode, the crash will bring you into the debugger.
-Once there, you'll be able to locate the error in the \e Debug view and examine
+again, this time in *Debug* mode, the crash will bring you into the debugger.
+Once there, you'll be able to locate the error in the *Debug* view and examine
 variables, which will help you identify and fix the bug.
 
 <b>Breakpoints</b>
@@ -362,7 +362,7 @@ or resume execution (until the next breakpint).
 A breakpoint can be placed at a specific line in the source code by double-clicking
 on the left gutter in the editor, or choosing <i>Toggle Breakpoint</i> from
 the context menu. The list of active (and inactive) breakpoints can be examined
-in the \e Breakpoints view.
+in the *Breakpoints* view.
 
 <i>Exercise: Experiment with breakpoints! Place a breakpoint at the beginning of
 the \c handleMessage() method function, and run the simulation. Use appropriate
@@ -375,12 +375,12 @@ If you did the previous exercise, you must have noticed that the breakpoint
 was triggered at each and every event in the Txc1 simple module. In real life
 it often occurs that an error only surfaces at, say, the 357th event in that module,
 so ideally that's when you'd want to start debugging. It is not very convenient
-to have to hit \e Resume 356 times just to get to the place of the error.
-A possible solution is to add a \e condition or an \e ignore-count to the
+to have to hit *Resume* 356 times just to get to the place of the error.
+A possible solution is to add a *condition* or an *ignore*-count to the
 breakpoint (see <i>Breakpoint Properties</i> in its context menu). However,
 there is a potentially more convenient solution.
 
-In \e Qtenv, use <i>Run Until</i> to get to the event to be debugged. Then,
+In *Qtenv*, use <i>Run Until</i> to get to the event to be debugged. Then,
 choose <i>Simulation -> Debug Next Event</i> from the menu. This will trigger
 a breakpoint in the debugger at the beginning of \c handleMessage() of the
 next event, and you can start debugging that event.
@@ -391,14 +391,14 @@ next event, and you can start debugging that event.
 
 Let us return to launching simulations once more.
 
-When you launch the simulation program with the \e Run or \e Debug
+When you launch the simulation program with the *Run* or *Debug*
 buttons on the IDE toolbar, settings associated with the launch
 are saved in a <i>launch configuration</i>. Launch configurations
 can be viewed in the <i>Run/Debug Configurations</i> dialog which
-can be opened e.g. by clicking the little \e down arrow next to the
-\e Run (\e Debug) toolbar button to open a menu, and choosing
+can be opened e.g. by clicking the little *down* arrow next to the
+*Run* (*Debug*) toolbar button to open a menu, and choosing
 <i>Run (Debug) Configurations...</i> in it. In the same menu, you can also
-click the name of a launch configuration (e.g. \e tictoc) while
+click the name of a launch configuration (e.g. *tictoc*) while
 holding down the Ctrl key to open the dialog with the corresponding
 configuration.
 
@@ -413,7 +413,7 @@ The @opp simulation kernel can record the message exchanges during the
 simulation into an <i>event log file</i>. To enable recording the event log,
 check the <i>Record eventlog</i> checkbox in the launch configuration dialog.
 Alternatively, you can specify <i>record-eventlog = true</i> in omnetpp.ini,
-or even, use the \e Record button in the Qtenv graphical runtime environment
+or even, use the *Record* button in the Qtenv graphical runtime environment
 after launching,
 
 The log file can be analyzed later with the <i>Sequence Chart</i> tool in the IDE.
@@ -466,7 +466,7 @@ You can see the result here:
 
 ### 3.2 Adding logging
 
-We also modify the C++ code. We add log statements to \e Txc1 so that it
+We also modify the C++ code. We add log statements to *Txc*1 so that it
 prints what it is doing. @opp provides a sophisticated logging facility
 with log levels, log channels, filtering, etc. that are useful for large
 and complex models, but in this model we'll use its simplest form
@@ -484,7 +484,7 @@ will appear in the log window:
 
 <img src="images/step2b.png">
 
-You can also open separate output windows for \e tic and \e toc by right-clicking
+You can also open separate output windows for *tic* and *toc* by right-clicking
 on their icons and choosing <i>Component log</i> from the menu. This feature
 will be useful when you have a large model ("fast scrolling logs syndrome")
 and you're interested only in the log messages of specific module.
@@ -1344,8 +1344,8 @@ The chart looks like the following:
 If we apply a `mean` operation we can see how the `hopCount` in the different
 nodes converge to an average.
 Right-click the chart, and select <i>Apply -> Mean</i>.
-Again, right-click on the chart background, and select \e Properties.
-In the \e Lines tab, set <i>Line type</i> to Linear, and <i>Symbol Type</i> to None.
+Again, right-click on the chart background, and select *Properties*.
+In the *Lines* tab, set <i>Line type</i> to Linear, and <i>Symbol Type</i> to None.
 The mean is displayed on the following chart. The lines are easier to see this way because they are thinner.
 
 <img src="images/mean3.png">
@@ -1416,21 +1416,21 @@ Here is how the network looks like with `numCentralNodes = 4`:
 <img src="images/step18.png">
 
 To run the simulation with multiple different values of `numCentralNodes`, we specify
-the variable \e N in the ini file:
+the variable *N* in the ini file:
 
 @dontinclude omnetpp.ini
 @skipline numCentralNodes = $
 
 ### 7.3 Setting up a parameter study
 
-We specify that \e N should go from 2 to 100, in steps of 2.
+We specify that *N* should go from 2 to 100, in steps of 2.
 This produces about 50 simulation runs. Each can be explored in the graphical user interface, but
-simulation batches are often run from the command line interface using the \e Cmdenv runtime environment.
+simulation batches are often run from the command line interface using the *Cmdenv* runtime environment.
 
 @note You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the @opp manual.
 
 To increase the accuracy of the simulation we may need to run the same simulation several times
-using different random numbers. These runs are called \e Repetitions and are specified in `omnetpp.ini`:
+using different random numbers. These runs are called *Repetitions* and are specified in `omnetpp.ini`:
 
 @dontinclude omnetpp.ini
 @skipline repeat = 4
@@ -1441,11 +1441,11 @@ to the expected values.
 
 ### 7.4 Running the parameter study
 
-Now, we can run the simulations. In the dropdown menu of the \e Run icon, select <i>Run Configurations</i>.
+Now, we can run the simulations. In the dropdown menu of the *Run* icon, select <i>Run Configurations</i>.
 
 <img src="images/runconfig.png">
 
-In the <i>Run Configurations</i> dialog, select the config name, make sure \e Cmdenv is selected as the user interface.
+In the <i>Run Configurations</i> dialog, select the config name, make sure *Cmdenv* is selected as the user interface.
 
 <img src="images/runconfig2.png">
 
@@ -1464,8 +1464,8 @@ The -j parameter specifies the number of CPU cores, the \c -u parameter the user
 ### 7.4 Analyzing the results
 
 Now, we can visualize and analyze the data we've collected from the simulation runs.
-We'll display the average hop count for messages that reach their destinations vs \e N, the number of central nodes.
-Additionally, we will display the average number of packets that reached their destinations vs \e N.
+We'll display the average hop count for messages that reach their destinations vs *N*, the number of central nodes.
+Additionally, we will display the average number of packets that reached their destinations vs *N*.
 The analysis file `Tictoc18.anf` contains the dataset we will use for the visualization.
 
 <img src="images/dataset.png">
@@ -1484,25 +1484,25 @@ The count of the arrived packets is available at each node. We can compute their
 @note Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
 @opp installation.
 
-Then, we plot these two computed scalars against \e N in two scatter charts. The data for different repetitions is automatically averaged.
-Here is the average hop count vs \e N:
+Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.
+Here is the average hop count vs *N*:
 
 <img src="images/avghopcount.png">
 
 The average hop count increases as the network gets larger, as packets travel more to reach their destination.
 The increase is polynomial. Notice that there are missing values at the far right of the chart.
 This is because in such a large network, some packets might not reach their destination in the simulation time limit.
-When no packets arrive at a node, the hop count statistic will be \e NaN (not a number) for that node.
-When there is a \e NaN in any mathematical expression, its result will be also \e NaN.
-Thus it takes just one node in all the simulation runs to have a \e NaN statistic, and the average will be \e NaN, and there'll be no data to display.
+When no packets arrive at a node, the hop count statistic will be *NaN* (not a number) for that node.
+When there is a *NaN* in any mathematical expression, its result will be also *NaN*.
+Thus it takes just one node in all the simulation runs to have a *NaN* statistic, and the average will be *NaN*, and there'll be no data to display.
 This can be remedied by increasing the simulation time limit, so more packets have a chance to arrive.
 
-Below is the average number of packets that arrived vs \e N:
+Below is the average number of packets that arrived vs *N*:
 
 <img src="images/avgnumpackets.png">
 
 Notice that the Y axis is logarithmic. The average number of packets that arrive decreases polynomially
-as \e N increases, and the network gets larger.
+as *N* increases, and the network gets larger.
 
 @nav{part6,closing}
 */
