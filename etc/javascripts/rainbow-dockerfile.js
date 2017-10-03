@@ -1,9 +1,9 @@
 Rainbow.extend('dockerfile', [
     {
         matches: {
-          1: 'command',
-          2: 'command-head',
-          3: 'command-tail',
+          1: 'dockerfile-command',
+          2: 'dockerfile-command-head',
+          3: 'dockerfile-command-tail',
         },
         pattern: /^([A-Z]+| +)(\s+[./a-z]\S+)?(.*)$/gm
     },

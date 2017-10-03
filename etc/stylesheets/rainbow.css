@@ -12,3 +12,7 @@ pre .entity.id, pre .entity.function { color:#900 }
 pre .attribute, pre .variable { color:teal } 
 pre .string, pre .support.value { font-weight:normal;color:#24970c } 
 pre .regexp { color:#009926 } 
+
+pre .dockerfile-command { color:#004693 }
+pre .dockerfile-command-head { color:#930020 }
+pre .dockerfile-command-tail { color:#446300 }
