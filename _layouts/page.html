@@ -38,8 +38,8 @@ layout: default
             <div class="page">
               <h1 class="page-title">{{ page.title }}</h1>
               {{ content }}
-              {% if prevStepPage %}<a href="{{site.baseurl}}/{{prevStepPage.url}}" class="btn btn-primary btn-sm">Previous</a>{% endif %}
-              {% if nextStepPage %}<a href="{{site.baseurl}}/{{nextStepPage.url}}" class="btn btn-primary btn-sm" >Next: {{nextStepTitle}}</a>{% endif %}
+              {% if prevStepPage %}<a href="{{site.baseurl}}{{prevStepPage.url}}" class="btn btn-primary btn-sm">Previous</a>{% endif %}
+              {% if nextStepPage %}<a href="{{site.baseurl}}{{nextStepPage.url}}" class="btn btn-primary btn-sm" >Next: {{nextStepTitle}}</a>{% endif %}
             </div>
           </div>
 
@@ -55,5 +55,3 @@ layout: default
         </div>
       </div>
     </div>
-
-

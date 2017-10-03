@@ -7,5 +7,5 @@
   <!-- nothing -->
 {% else %}
  {% capture linkstyle %}{% if pg.hidden %}style="text-decoration: line-through;"{% endif %}{% endcapture %}
-  <li><a href="{{site.baseurl}}/{{ pg.url }}" {{linkstyle}}>{{ pg.title }}</a></li>
+  <li><a href="{{site.baseurl}}{{ pg.url }}" {{linkstyle}}>{{ pg.title }}</a></li>
 {% endif %}

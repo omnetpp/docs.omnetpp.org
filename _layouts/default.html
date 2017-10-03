@@ -100,7 +100,7 @@
                         {% assign pg = site.pages | where: 'path', submenuitem.page | first %}
                         {% if pg == nil %}<li>BOGUS MENU ITEM: No such page: {{submenuitem.page}}</li>{% endif %}
                         {% capture pagetitle %}{% if submenuitem.name %}{{ submenuitem.name }}{% else %}{{ pg.title }}{% endif %}{% endcapture %}
-                        <li><a href="{{site.baseurl}}/{{ pg.url }}">{{ pagetitle }}</a></li>
+                        <li><a href="{{site.baseurl}}{{ pg.url }}">{{ pagetitle }}</a></li>
                       {% elsif submenuitem.link %}
                         <li><a href="{{ submenuitem.link }}">{{ submenuitem.name }}</a></li>
                       {% else %}
