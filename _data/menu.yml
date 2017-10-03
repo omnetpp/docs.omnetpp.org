@@ -1,23 +1,13 @@
 - name: Cloud Tutorial
   submenu:
     - page: cloud/index.md
-    - page: cloud/step0_1.md
-    - page: cloud/step0_2.md
-    - page: cloud/step0_3.md
-    - page: cloud/step0_4.md
-    - page: cloud/step0_5.md
 
-    - page: cloud/step1_0.md
-    - page: cloud/step1.md
-    - page: cloud/step2.md
-    - page: cloud/step3.md
-    - page: cloud/step4.md
-    - page: cloud/step5.md
-
-    - page: cloud/step6.md
-    - page: cloud/step7.md
-
-    - page: cloud/step8.md
+    - page: cloud/page1.md
+    - page: cloud/page2.md
+    - page: cloud/page4.md
+    - page: cloud/page5.md
+    - page: cloud/page6.md
+    - page: cloud/page7.md
 
 - name: Back to omnetpp.org
   link: https://omnetpp.org

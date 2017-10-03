@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Potential Improvements, Alternatives
+navbarIcon: cloud/images/opp_docker.png
 ---
 
 Keep in mind that the main point of this tutorial was to present a very simple

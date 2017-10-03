@@ -1,6 +1,8 @@
 ---
 layout: page
 title: AWS Configuration
+generateToC: true
+navbarIcon: cloud/images/opp_docker.png
 ---
 
 First you need an AWS account, so if you don't already have one, follow the
