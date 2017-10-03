@@ -27,6 +27,9 @@ var getLines = function(text, from, until) {
     let preface = matches ? matches[1] : "";
     startLine = preface.split('\n').length;
 
+    // trimming trailing whitespace (empty lines)
+    snippet = snippet.replace(/\s+$/, '');
+
     return { startLine: startLine, snippet: snippet };
 }
 
@@ -37,8 +40,9 @@ var fileLoaded = function(file, data) {
                          pre.attributes.from ? pre.attributes.from.value : null,
                          pre.attributes.until ? pre.attributes.until.value : null);
 
-      var language = file.includes(".ned") ? "ned" : file.includes(".xml") ? "xml"
-          : file.includes(".ini") ? "ini" : file.includes(".py") ? "python" : "generic";
+      var language = file.endsWith(".ned") ? "ned" : file.endsWith(".xml") ? "xml"
+          : file.endsWith(".ini") ? "ini" : file.endsWith(".py") ? "python"
+          : file.endsWith("Dockerfile") ? "dockerfile" : "generic";
 
       // this new element will hold some attributes to aid Rainbow and Rainbow.linenumbers, as well as the snippet content.
       var codeElement = document.createElement('code');
