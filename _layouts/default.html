@@ -64,7 +64,10 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="{{site.baseurl}}/" class="navbar-brand"><img src="{{site.baseurl}}/etc/images/router.png" style="width: 25px; display: inline; margin-top: -4px"> <b>OMNeT++ Tutorials</b></a>
+          <a href="{{site.baseurl}}/" class="navbar-brand">
+            <img src="{{site.baseurl}}/{% if page.navbarIcon %}{{page.navbarIcon}}{% else %}/etc/images/router.png{% endif %}" style="width: 25px; display: inline; margin-top: -4px">
+            <b>OMNeT++ Tutorials</b>
+          </a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>

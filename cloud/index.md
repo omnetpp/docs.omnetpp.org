@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Running Simulation Campaigns in the Cloud
+navbarIcon: cloud/images/opp_docker.png
 ---
 
 The goal of the tutorial is to give you an insight on how to start harnessing
