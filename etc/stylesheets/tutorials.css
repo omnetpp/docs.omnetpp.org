@@ -114,3 +114,45 @@ div.language-terminal > pre.highlight {
 	border-radius: 0;
 	font-weight: bold;
 }
+
+div.fullscreenimgshade {
+	cursor: zoom-out;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 6969;
+	background: rgba(0,0,0,.5);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+img.fullscreenimg {
+	width: auto;
+	height: auto;
+	max-width: 95%;
+	max-height: 95%;
+}
+
+
+p.thumbnails {
+	margin: 0;
+	text-align: center;
+}
+
+img.thumbnail {
+	cursor: zoom-in;
+
+	width: auto;
+	height: auto;
+	max-width: 160px;
+	max-height: 90px;
+
+	display: inline;
+
+	padding: 0;
+	margin: 5px 5px;
+}
