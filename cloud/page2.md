@@ -39,7 +39,7 @@ computer and downloads the results after simulation completion.
 
 The final architecture will look like this:
 
-![Architectural Graph](/images/architecture.svg)
+![Architectural Graph](images/architecture.svg)
 
 In the following sections, we will show how to implement this architecture.
 We will discuss how to create the Docker images, how to configure the cluster,
