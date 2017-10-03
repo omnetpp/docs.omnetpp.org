@@ -30,15 +30,21 @@ Install these using the native package manager of your distribution.
 
 On Ubuntu:
 
-    $ sudo apt install python3 python3-pip
+```terminal
+$ sudo apt install python3 python3-pip
+```
 
 On Fedora:
 
-    $ sudo dnf install python3 python3-pip
+```terminal
+$ sudo dnf install python3 python3-pip
+```
 
 Then, in any case, upgrade `pip`:
 
-    $ sudo pip3 install --upgrade pip
+```terminal
+$ sudo pip3 install --upgrade pip
+```
 
 Feel free to use a `virtualenv` for this instead of `sudo` if you're familiar
 with the concept.
@@ -47,6 +53,8 @@ with the concept.
 
 Use `pip` to install the RQ library:
 
-    $ sudo pip3 install rq
+```terminal
+$ sudo pip3 install rq
+```
 
 This will install the `redis` client module as well, as a dependency.

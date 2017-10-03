@@ -36,7 +36,9 @@ or sometimes via directories mounted into their file systems as volumes.
 If you have Docker installed, you can try it out right away by typing the
 following commands into a terminal:
 
-    $ docker run -ti hello-world
+```terminal
+$ docker run -ti hello-world
+```
 
 `hello-world` is the name of a Docker image. Docker will first check if the
 `hello-world` image is already available on your machine. If not, it will fetch
@@ -46,7 +48,9 @@ in the container will simply print a message, then terminate.
 A bit more useful one is the `ubuntu` image, which packages the latest Ubuntu
 LTS version without the graphical parts:
 
-    $ docker run -ti ubuntu
+```terminal
+$ docker run -ti ubuntu
+```
 
 After the image is downloaded and started, you will be presented with an Ubuntu
 *bash* prompt, and you can start issuing commands in the isolation of the
@@ -129,7 +133,9 @@ next to it, named `main.c`.
 
 Then issue the following command:
 
-    $ docker build . -t myimage
+```terminal
+$ docker build . -t myimage
+```
 
 Here the `.` is the build context, the `Dockerfile` will be picked up by its
 name, as this is the default, and the `-t myimage` will add the `myimage` tag
@@ -138,20 +144,28 @@ name, as this is the default, and the `-t myimage` will add the `myimage` tag
 You will see all the instructions being executed. Once it finishes, you can run
 the new image with:
 
-    $ docker run -ti myimage
+```terminal
+$ docker run -ti myimage
+```
 
 To push this image to Docker Hub so it can be reused by anyone, first
 log in to docker with you Docker ID:
 
-    $ docker login
+```terminal
+$ docker login
+```
 
 Then add another tag to this image, substituting `joe` with your Docker ID:
 
-    $ docker tag myimage joe/myimage
+```terminal
+$ docker tag myimage joe/myimage
+```
 
 And finally start the upload:
 
-    $ docker push joe/myimage
+```terminal
+$ docker push joe/myimage
+```
 
 Now anyone anywhere can run the C program in this image by typing `docker run
 -ti joe/myimage`.

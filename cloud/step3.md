@@ -56,7 +56,9 @@ additional arguments to the entrypoint.
 Building the image is done by issuing the following command in the directory
 where the above files can be found:
 
-    $ docker build . -t worker
+```terminal
+$ docker build . -t worker
+```
 
 The `Dockerfile` is picked up automatically, the build context is the current
 directory (`.`), and the resulting image will be named `worker`.
@@ -72,16 +74,22 @@ for our AWS Instances by uploading it to Docker Hub.
 First authenticate yourself (in case you haven't already) by typing in your
 Docker ID and password after running this command:
 
-    $ docker login
+```terminal
+$ docker login
+```
 
 Now tag the image "into your repo", substituting your user name (Docker ID), so
 Docker knows where to push the image:
 
-    $ docker tag worker username/worker
+```terminal
+$ docker tag worker username/worker
+```
 
 And finally issue the actual push:
 
-    $ docker push username/worker
+```terminal
+$ docker push username/worker
+```
 
 This will upload about 400-500 MB of data, so it can take a while. Once it's
 done, your image is available worldwide. You can see it appeared on [Docker
