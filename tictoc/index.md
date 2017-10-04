@@ -60,16 +60,14 @@ the project consists of a single directory. For larger simulations, the project'
 contents are usually sorted into `src/` and `simulations/` folders,
 and possibly subfolders underneath them.
 
-@note Using the IDE is entirely optional. Almost all functionality of OMNeT++
+**NOTE:** Using the IDE is entirely optional. Almost all functionality of OMNeT++
 (except for some very graphics-intensive and interactive features
 like sequence chart browsing and result plotting) is available on
 the command line. Model source files can be edited with any text editor,
 and OMNeT++ provides command-line tools for special tasks such as makefile
 creation, message file to C++ translation, result file querying and data export,
-and so on.
-
-@note To proceed without the IDE, simply create a directory and create the following
-NED, C++ and ini files in it with your favorite text editor.
+and so on. To proceed without the IDE, simply create a directory and create the
+following NED, C++ and ini files in it with your favorite text editor.
 
 
 ### 1.3 Adding the NED file
@@ -112,7 +110,7 @@ submodules, `tic` and `toc`, both instances of the module type \c %Txc1.
 `tic`'s output gate is connected to `toc`'s input gate, and vica versa.
 There will be a 100ms propagation delay both ways.
 
-@note You can find a detailed description of the NED language in the
+**NOTE:** You can find a detailed description of the NED language in the
 <a href="../manual/index.html#cha:ned-lang" target="blank">OMNeT++ Simulation Manual</a>.
 (The manual can also be found in the `doc`  directory of your OMNeT++ installation.)
 
@@ -133,7 +131,7 @@ The Txc1 simple module type is represented by the C++ class Txc1. The Txc1
 class needs to subclass from OMNeT++'s cSimpleModule class, and needs to be
 registered in OMNeT++ with the Define_Module() macro.
 
-@note It is a common mistake to forget the Define_Module() line. If it is missing,
+**NOTE:** It is a common mistake to forget the Define_Module() line. If it is missing,
 you'll get an error message similar to this one: *"Error: Class 'Txc1' not found -- perhaps
 its code was not linked in, or the class wasn't registered with Register_Class(), or in
 the case of modules and channels, with Define_Module()/Define_Channel()"*.
@@ -176,20 +174,20 @@ simulation kernel, and the latter for entering module parameters.
 
 For now, just switch to *Source* mode and enter the following:
 
-@code
+<pre>
 [General]
 network = Tictoc1
-@endcode
+</pre>
 
 You can verify the result in *Form* mode:
 
 <img src="images/inieditor.png" width="650px">
 
-tictoc2 and further steps will all share a common @ref omnetpp.ini file.
+tictoc2 and further steps will all share a common <a srcfile="tictoc/code/omnetpp.ini"/> file.
 
 We are now done with creating the first model, and ready to compile and run it.
 
-Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc1.ned"/>, <a srcfile="tictoc/code/txc1.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 ----------------------------------------------------------------------------
 
@@ -208,7 +206,7 @@ you need to rectify those until you get an error-free compilation and linking.
 You can manually trigger a build by hitting choosing *Project -> Build All*
 from the menu, or hitting *Ctrl+B*.
 
-@note If you want to build the simulation executable on the command-line,
+**NOTE:** If you want to build the simulation executable on the command-line,
 create a *Makefile* using the `opp_makemake`
 command, then enter `make` to build the project. It will produce
 an executable that can be run by entering `./tictoc`.
@@ -277,14 +275,14 @@ First, deliberately introduce an error into the program. In \ref txc1.cc,
 duplicate the `send()` line inside `handleMessage()`, so that the code
 looks like this:
 
-@code
+<pre>
 void Txc1::handleMessage(cMessage *msg)
 {
     //...
     send(msg, "out"); // send out the message
     send(msg, "out"); // THIS SHOULD CAUSE AN ERROR
 }
-@endcode
+</pre>
 
 When you launch the simulation in normal mode (*Run* button) and try to run it,
 you'll get an error message like this:
@@ -313,17 +311,17 @@ Undo the previous source code edit (remove the duplicate `send()` line),
 and introduce another error. Let's pretend we forgot to create the message
 before sending it, and change the following lines in `initialize()`
 
-@code
+<pre>
         cMessage *msg = new cMessage("tictocMsg");
         send(msg, "out");
-@endcode
+</pre>
 
 to simply
 
-@code
+<pre>
         cMessage *msg; // no initialization!
         send(msg, "out");
-@endcode
+</pre>
 
 When you run the simulation, it will crash. (You will get an error message
 similar to "Simulation terminated with exit code: 139"). If you launch the simulation
@@ -399,7 +397,7 @@ The `results` directory in the project folder contains the `.elog` file.
 Double-clicking on it in the OMNeT++ IDE opens the Sequence Chart tool,
 and the event log tab at the bottom of the window.
 
-@note The resulting log file can be quite large, so enable this feature only
+**NOTE:** The resulting log file can be quite large, so enable this feature only
 if you really need it.
 
 The following figure has been created with the Sequence Chart tool, and shows
@@ -411,7 +409,7 @@ the model's behaviour.
 <img src="images/eventlog.png">
 
 
-Sources: @ref tictoc1.ned, @ref txc1.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc1.ned"/>, <a srcfile="tictoc/code/txc1.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 ----------------------------------------------------------------------------
 
@@ -461,7 +459,7 @@ and you're interested only in the log messages of specific module.
 
 <img src="images/step2c.png">
 
-Sources: @ref tictoc2.ned, @ref txc2.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc2.ned"/>, <a srcfile="tictoc/code/txc2.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 3.3 Adding state variables
@@ -488,7 +486,7 @@ line in the source: this makes it possible to see the counter value
 in the graphical runtime environment.
 
 If you click on `tic`'s icon, the inspector window in the bottom left corner of the main window will display
-details about `tic`. Make sure that Children Mode is selected from the toolbar at the top.
+details about `tic`. Make sure that *Children* mode is selected from the toolbar at the top.
 The inspector now displays the counter variable.
 
 <img src="images/inspector.png">
@@ -496,7 +494,7 @@ The inspector now displays the counter variable.
 As you continue running the simulation, you can follow as the counter
 keeps decrementing until it reaches zero.
 
-Sources: @ref tictoc3.ned, @ref txc3.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc3.ned"/>, <a srcfile="tictoc/code/txc3.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 3.4 Adding parameters
@@ -546,15 +544,15 @@ Note that because omnetpp.ini supports wildcards, and parameters
 assigned from NED files take precedence over the ones in omnetpp.ini,
 we could have used
 
-@code
+<pre>
 Tictoc4.t*c.limit=5
-@endcode
+</pre>
 
 or
 
-@code
+<pre>
 Tictoc4.*.limit=5
-@endcode
+</pre>
 
 or even
 
@@ -573,7 +571,7 @@ clicking on a module).
 The module with the smaller limit will delete the message and thereby
 conclude the simulation.
 
-Sources: @ref tictoc4.ned, @ref txc4.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc4.ned"/>, <a srcfile="tictoc/code/txc4.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 3.5 Using NED inheritance
@@ -603,7 +601,7 @@ The `Toc` module looks similar, but with different parameter values.
 @skip simple Toc5
 @until }
 
-@note The C++ implementation is inherited from the base simple module (`Txc5`).
+**NOTE:** The C++ implementation is inherited from the base simple module (`Txc5`).
 
 Once we created the new simple modules, we can use them as submodule types in our network:
 
@@ -649,9 +647,9 @@ has arrived via the input gate or the self-message came back
 
 but we could have written
 
-@code
+<pre>
     if (msg->isSelfMessage())
-@endcode
+</pre>
 
 as well.
 
@@ -661,7 +659,7 @@ While running the simulation you will see the following log output:
 
 <img src="images/step6.png">
 
-Sources: @ref tictoc6.ned, @ref txc6.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc6.ned"/>, <a srcfile="tictoc/code/txc6.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 3.7 Random numbers and parameters
@@ -696,10 +694,10 @@ initializes it to the same seed. This is important for reproducible
 simulations. You can experiment with different seeds if you add the
 following lines to omnetpp.ini:
 
-@code
+<pre>
 [General]
 seed-0-mt=532569  # or any other 32-bit value
-@endcode
+</pre>
 
 From the syntax you have probably guessed that OMNeT++ supports
 more than one RNGs. That's right, however, all models in this tutorial
@@ -707,7 +705,7 @@ use RNG 0.
 
 Exercise: Try other distributions as well.
 
-Sources: @ref tictoc8.ned, @ref txc7.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc8.ned"/>, <a srcfile="tictoc/code/txc7.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 3.8 Timeout, cancelling timers
@@ -747,9 +745,9 @@ timeout message over and over.
 @skip Tic8::handleMessage
 @skipline cancelEvent(
 
-You can read Tic's full source in @ref txc8.cc.
+You can read Tic's full source in <a srcfile="tictoc/code/txc8.cc."/>
 
-Sources: @ref tictoc8.ned, @ref txc8.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc8.ned"/>, <a srcfile="tictoc/code/txc8.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 3.9 Retransmitting the same message
@@ -781,7 +779,7 @@ The functions:
 @skip Tic9::sendCopyOf
 @until }
 
-Sources: @ref tictoc9.ned, @ref txc9.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc9.ned"/>, <a srcfile="tictoc/code/txc9.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ## Part 4 - Turning it into a real network
@@ -829,7 +827,7 @@ a random gate number, and sends out message on that gate.
 
 When the message arrives at tic[3], its handleMessage() will delete the message.
 
-See the full code in @ref txc10.cc.
+See the full code in <a srcfile="tictoc/code/txc10.cc."/>
 
 Exercise: you'll notice that this simple "routing" is not very efficient:
 often the packet keeps bouncing between two nodes for a while before it is sent
@@ -839,7 +837,7 @@ the packet back to the sender. Implement this. Hints: `cMessage::getArrivalGate(
 a self-message, then `getArrivalGate()` returns `NULL`.
 
 
-Sources: @ref tictoc10.ned, @ref txc10.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc10.ned"/>, <a srcfile="tictoc/code/txc10.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 4.2 Channels and inner type definitions
@@ -860,7 +858,7 @@ by adding a `types` section. This type definition is only visible inside the
 network. It is called as a local or inner type. You can use simple modules as inner types
 too, if you wish.
 
-@note We have created the channel by specializing the built-in `DelayChannel`.
+**NOTE:** We have created the channel by specializing the built-in `DelayChannel`.
 (built-in channels can be found inside the `ned` package. Thats why we used
 the full type name `ned.DelayChannel`) after the `extends` keyword.
 
@@ -873,7 +871,7 @@ Now let's check how the `connections` section changed.
 As you see we just specify the channel name inside the connection definition.
 This allows to easily change the delay parameter for the whole network.
 
-Sources: @ref tictoc11.ned, @ref txc11.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc11.ned"/>, <a srcfile="tictoc/code/txc11.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 4.3 Using two-way connections
@@ -902,41 +900,41 @@ C++ code.
 @skip Txc12::forwardMessage
 @until }
 
-@note The special $i and $o suffix after the gate name allows us to use the
+**NOTE:** The special $i and $o suffix after the gate name allows us to use the
 connection's two direction separately.
 
-Sources: @ref tictoc12.ned, @ref txc12.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc12.ned"/>, <a srcfile="tictoc/code/txc12.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 4.4 Defining our message class
 
-In this step the destination address is no longer hardcoded tic[3] -- we draw a
+In this step the destination address is no longer hardcoded `tic[3]` -- we draw a
 random destination, and we'll add the destination address to the message.
 
 The best way is to subclass cMessage and add destination as a data member.
 Hand-coding the message class is usually tedious because it contains
 a lot of boilerplate code, so we let OMNeT++ generate the class for us.
-The message class specification is in tictoc13.msg:
+The message class specification is in `tictoc13.msg`:
 
 @dontinclude tictoc13.msg
 @skip message TicTocMsg13
 @until }
 
-@note See <a href="../manual/index.html#cha:msg-def" target="_blank">Section 6</a> of the OMNeT++ manual for more details on messages.
+**NOTE:** See <a href="../manual/index.html#cha:msg-def" target="_blank">Section 6</a> of the OMNeT++ manual for more details on messages.
 
 The makefile is set up so that the message compiler, opp_msgc is invoked
-and it generates tictoc13_m.h and tictoc13_m.cc from the message declaration
-(The file names are generated from the tictoc13.msg file name, not the message type name).
-They will contain a generated TicTocMsg13 class subclassed from cMessage;
+and it generates `tictoc13_m.h` and `tictoc13_m.cc` from the message declaration
+(The file names are generated from the `tictoc13.msg` file name, not the message type name).
+They will contain a generated `TicTocMsg13` class subclassed from `cMessage`;
 the class will have getter and setter methods for every field.
 
-We'll include tictoc13_m.h into our C++ code, and we can use TicTocMsg13 as
+We'll include `tictoc13_m.h` into our C++ code, and we can use `TicTocMsg13` as
 any other class.
 
 @dontinclude txc13.cc
 @skipline tictoc13_m.h
 
-For example, we use the following lines in generateMessage() to create the
+For example, we use the following lines in `generateMessage()` to create the
 message and fill its fields.
 
 @skip ::generateMessage(
@@ -949,14 +947,14 @@ Then, handleMessage() begins like this:
 @skip ::handleMessage(
 @until getDestination
 
-In the argument to handleMessage(), we get the message as a cMessage * pointer.
-However, we can only access its fields defined in TicTocMsg13 if we cast
-msg to TicTocMsg13 *. Plain C-style cast (<code>(TicTocMsg13 *)msg</code>)
-is not safe because if the message is *not* a TicTocMsg13 after all
+In the argument to handleMessage(), we get the message as a `cMessage*` pointer.
+However, we can only access its fields defined in `TicTocMsg13` if we cast
+msg to `TicTocMsg13*`. Plain C-style cast (`(TicTocMsg13 *)msg`)
+is not safe because if the message is *not* a `TicTocMsg13` after all
 the program will just crash, causing an error which is difficult to explore.
 
-C++ offers a solution which is called dynamic_cast. Here we use check_and_cast<>()
-which is provided by OMNeT++: it tries to cast the pointer via dynamic_cast,
+C++ offers a solution which is called `dynamic_cast`. Here we use `check_and_cast<>()`
+which is provided by OMNeT++: it tries to cast the pointer via `dynamic_cast`,
 and if it fails it stops the simulation with an error message, similar to the
 following:
 
@@ -969,7 +967,7 @@ declarared it as `tic: Txc13[6]`, so our nodes have addresses 0..5).
 
 To make the model execute longer, after a message arrives to its destination
 the destination node will generate another message with a random destination
-address, and so forth. Read the full code: @ref txc13.cc.
+address, and so forth. Read the full code: <a srcfile="tictoc/code/txc13.cc."/>
 
 When you run the model, it'll look like this:
 
@@ -980,11 +978,11 @@ Double-clicking will open the inspector in a new window.
 (You'll either have to temporarily stop the simulation for that,
 or to be very fast in handling the mouse). The inspector window
 displays lots of useful information; the message fields can be seen
-on the Contents page.
+on the *Contents* page.
 
 <img src="images/step13b.png">
 
-Sources: @ref tictoc13.ned, @ref tictoc13.msg, @ref txc13.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc13.ned"/>, <a srcfile="tictoc/code/tictoc13.msg"/>, <a srcfile="tictoc/code/txc13.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 Exercise: In this model, there is only one message underway at any
 given moment: nodes only generate a message when another message arrives
@@ -1005,8 +1003,8 @@ received, we've added two counters to the module class: numSent and numReceived.
 @skip class Txc14
 @until protected:
 
-They are set to zero and WATCH'ed in the initialize() method. Now we
-can use the Find/inspect objects dialog (Inspect menu; it is also on
+They are set to zero and WATCH'ed in the `initialize()` method. Now we
+can use the *Find/inspect* objects dialog (*Inspect* menu; it is also on
 the toolbar) to learn how many packets were sent or received by the
 various nodes.
 
@@ -1031,7 +1029,7 @@ And the result looks like this:
 
 <img src="images/step14b.png">
 
-Sources: @ref tictoc14.ned, @ref tictoc14.msg, @ref txc14.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc14.ned"/>, <a srcfile="tictoc/code/tictoc14.msg"/>, <a srcfile="tictoc/code/txc14.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 5.2 Adding statistics collection
@@ -1108,7 +1106,7 @@ from the menu (or click the corresponding toolbar button) before exiting --
 this will cause the `finish()` functions to run and data to be written into
 `Tictoc15-#0.sca`.
 
-Sources: @ref tictoc15.ned, @ref tictoc15.msg, @ref txc15.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc15.ned"/>, <a srcfile="tictoc/code/tictoc15.msg"/>, <a srcfile="tictoc/code/txc15.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 5.3 Statistic collection without modifying your model
@@ -1187,7 +1185,7 @@ files. Just open the INI file and modify the statistic recording:
 We can configure a wide range of statistics without even looking into the C++ code,
 provided that the original model emits the necessary signals for us.
 
-Sources: @ref tictoc16.ned, @ref tictoc16.msg, @ref txc16.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc16.ned"/>, <a srcfile="tictoc/code/tictoc16.msg"/>, <a srcfile="tictoc/code/txc16.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ### 5.4 Adding figures
@@ -1196,7 +1194,7 @@ OMNeT++ can display figures on the canvas, such as text, geometric shapes or ima
 These figures can be static, or change dinamically according to what happens in the simulation.
 In this case, we will display a static descriptive text, and a dynamic text showing the hop count of the last message that arrived at its destination.
 
-We create figures in @ref tictoc17.ned, with the `\@figure` property.
+We create figures in <a srcfile="tictoc/code/tictoc17.ned"/>, with the `\@figure` property.
 
 @dontinclude tictoc17.ned
 @skipline Tictoc17
@@ -1207,7 +1205,7 @@ The `font` attribute sets the figure text's font. It has three parameters: `type
 can be omitted to leave the parameter at default. Here we set the description figure's font to bold.
 
 By default the text in `lasthopcount` is static, but we'll
-change it when a message arrives. This is done in @ref txc17.cc, in the `handleMessage()` function.
+change it when a message arrives. This is done in <a srcfile="tictoc/code/txc17.cc"/>, in the `handleMessage()` function.
 
 @dontinclude txc17.cc
 @skipline hasGUI
@@ -1221,22 +1219,22 @@ We want to draw the figures on the network's canvas. The `getParentModule()` fun
 Then the `getCanvas()` function returns the network's canvas, and `getFigure()` gets the figure by name.
 Then, we update the figure's text with the `setText()` function.
 
-@note For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the OMNeT++ manual
+**NOTE:** For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the OMNeT++ manual
 
 When you run the simulation, the figure displays 'last hopCount: N/A' before the arrival of the first message.
 Then, it is updated whenever a message arrives at its destination.
 
 <img src="images/step17.png">
 
-@note If the figure text and nodes overlap, press 're-layout'.
+**NOTE:** If the figure text and nodes overlap, press 're-layout'.
 
-@note <img src="images/relayout.png">
+**NOTE:** <img src="images/relayout.png">
 
 In the last few steps, we have collected and displayed statistics. In the next part,
 we'll see and analyze them in the IDE.
 
 
-Sources: @ref tictoc17.ned, @ref tictoc17.msg, @ref txc17.cc, @ref omnetpp.ini
+Sources: <a srcfile="tictoc/code/tictoc17.ned"/>, <a srcfile="tictoc/code/tictoc17.msg"/>, <a srcfile="tictoc/code/txc17.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
 
 ## Part 6 - Visualizing the results with the OMNeT++ IDE
@@ -1257,7 +1255,7 @@ You can select some or all of the individual results by highlighting them. If yo
 
 <img src="images/statistics.png">
 
-@note For further information about the charting and processing capabilities,
+**NOTE:** For further information about the charting and processing capabilities,
 please refer to the <a href="../UserGuide.pdf" target="_blank"><b>OMNeT++ Users Guide</b></a> (you can find it in the `doc` directory of the OMNeT++ installation).
 
 Our last model records the `hopCount` of a message each time the message
@@ -1269,12 +1267,12 @@ Right click and select Plot.
 
 We can change various options about how the data on the chart is displayed.
 Right click on the chart background, and select Properties.
-This opens the Edit LineChart window.
-In the Lines tab, set `Line type` to Dots, and `Symbol Type` to Dot.
+This opens the *Edit LineChart* window.
+In the *Lines* tab, set *Line type* to *Dots*, and *Symbol Type* to *Dot*.
 
 <img src="images/editlinechart2.png" width="850px">
 
-To add a legend to the chart, select `Display legend` on the Legend tab.
+To add a legend to the chart, select *Display legend* on the *Legend* tab.
 
 <img src="images/displaylegend.png">
 
@@ -1294,14 +1292,14 @@ The mean is displayed on the following chart. The lines are easier to see this w
 Scalar data can be plotted on bar charts.
 The next chart displays the mean and the maximum of the `hopCount` of the messages
 for each destination node, based on the scalar data recorded at the end of the simulation.
-In the Browse data tab, select Scalars. Now select `hop count:max` and `hop count:mean`
+In the *Browse data* tab, select *Scalars*. Now select `hop count:max` and `hop count:mean`
 for all 6 nodes.
 
 
 <img src="images/scalars.png">
 
-To create a histogram that shows `hopCount`'s distribution, select Histograms
-on the Browse data tab. Select all nodes, and right click | Plot.
+To create a histogram that shows `hopCount`'s distribution, select *Histograms*
+on the *Browse data* tab. Select all nodes, and right click *Plot*.
 
 <img src="images/histogram.png">
 
@@ -1360,7 +1358,7 @@ We specify that *N* should go from 2 to 100, in steps of 2.
 This produces about 50 simulation runs. Each can be explored in the graphical user interface, but
 simulation batches are often run from the command line interface using the *Cmdenv* runtime environment.
 
-@note You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the OMNeT++ manual.
+**NOTE:** You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the OMNeT++ manual.
 
 To increase the accuracy of the simulation we may need to run the same simulation several times
 using different random numbers. These runs are called *Repetitions* and are specified in `omnetpp.ini`:
@@ -1384,12 +1382,12 @@ In the *Run Configurations* dialog, select the config name, make sure *Cmdenv* i
 
 If you have a multicore CPU, you can specify how many simulations to run concurrently.
 
-@note Alternatively, you can run the simulation batches from the command line with `opp_runall` tool
+**NOTE:** Alternatively, you can run the simulation batches from the command line with `opp_runall` tool
 with the following command:
 
-@code
+<pre>
 opp_runall -j4 ./tictoc -u Cmdenv -c TicToc18
-@endcode
+</pre>
 
 The -j parameter specifies the number of CPU cores, the \c -u parameter the user interface, and \c -c the config to run.
 
@@ -1414,7 +1412,7 @@ We're also interested in the average number of packets that arrive at their dest
 The count of the arrived packets is available at each node. We can compute their average,
 `AvgNumPackets` as `mean('hopCount:stats:count')`.
 
-@note Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
+**NOTE:** Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
 OMNeT++ installation.
 
 Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.
@@ -1437,8 +1435,6 @@ Below is the average number of packets that arrived vs *N*:
 Notice that the Y axis is logarithmic. The average number of packets that arrive decreases polynomially
 as *N* increases, and the network gets larger.
 
-@nav{part6,closing}
-
 
 ## Closing words
 
@@ -1452,127 +1448,4 @@ and skim through the *User Guide*.
 Comments and suggestions regarding this tutorial will be very much appreciated.
 
 
-/// @page tictoc1.ned tictoc1.ned
-/// @include tictoc1.ned
 
-/// @page tictoc2.ned tictoc2.ned
-/// @include tictoc2.ned
-
-/// @page tictoc3.ned tictoc3.ned
-/// @include tictoc3.ned
-
-/// @page tictoc4.ned tictoc4.ned
-/// @include tictoc4.ned
-
-/// @page tictoc5.ned tictoc5.ned
-/// @include tictoc5.ned
-
-/// @page tictoc6.ned tictoc6.ned
-/// @include tictoc6.ned
-
-/// @page tictoc7.ned tictoc7.ned
-/// @include tictoc7.ned
-
-/// @page tictoc8.ned tictoc8.ned
-/// @include tictoc8.ned
-
-/// @page tictoc9.ned tictoc9.ned
-/// @include tictoc9.ned
-
-/// @page tictoc10.ned tictoc10.ned
-/// @include tictoc10.ned
-
-/// @page tictoc11.ned tictoc11.ned
-/// @include tictoc11.ned
-
-/// @page tictoc12.ned tictoc12.ned
-/// @include tictoc12.ned
-
-/// @page tictoc13.ned tictoc13.ned
-/// @include tictoc13.ned
-
-/// @page tictoc14.ned tictoc14.ned
-/// @include tictoc14.ned
-
-/// @page tictoc15.ned tictoc15.ned
-/// @include tictoc15.ned
-
-/// @page tictoc16.ned tictoc16.ned
-/// @include tictoc16.ned
-
-/// @page tictoc17.ned tictoc17.ned
-/// @include tictoc17.ned
-
-/// @page tictoc18.ned tictoc18.ned
-/// @include tictoc18.ned
-
-/// @page txc1.cc txc1.cc
-/// @include txc1.cc
-
-/// @page txc2.cc txc2.cc
-/// @include txc2.cc
-
-/// @page txc3.cc txc3.cc
-/// @include txc3.cc
-
-/// @page txc4.cc txc4.cc
-/// @include txc4.cc
-
-/// @page txc6.cc txc6.cc
-/// @include txc6.cc
-
-/// @page txc7.cc txc7.cc
-/// @include txc7.cc
-
-/// @page txc8.cc txc8.cc
-/// @include txc8.cc
-
-/// @page txc9.cc txc9.cc
-/// @include txc9.cc
-
-/// @page txc10.cc txc10.cc
-/// @include txc10.cc
-
-/// @page txc11.cc txc11.cc
-/// @include txc11.cc
-
-/// @page txc12.cc txc12.cc
-/// @include txc12.cc
-
-/// @page txc13.cc txc13.cc
-/// @include txc13.cc
-
-/// @page txc14.cc txc14.cc
-/// @include txc14.cc
-
-/// @page txc15.cc txc15.cc
-/// @include txc15.cc
-
-/// @page txc16.cc txc16.cc
-/// @include txc16.cc
-
-/// @page txc17.cc txc17.cc
-/// @include txc17.cc
-
-/// @page txc18.cc txc18.cc
-/// @include txc18.cc
-
-/// @page tictoc13.msg tictoc13.msg
-/// @include tictoc13.msg
-
-/// @page tictoc14.msg tictoc14.msg
-/// @include tictoc14.msg
-
-/// @page tictoc15.msg tictoc15.msg
-/// @include tictoc15.msg
-
-/// @page tictoc16.msg tictoc16.msg
-/// @include tictoc16.msg
-
-/// @page tictoc17.msg tictoc17.msg
-/// @include tictoc17.msg
-
-/// @page omnetpp.ini omnetpp.ini
-/// @include omnetpp.ini
-
-};
