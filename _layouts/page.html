@@ -13,7 +13,9 @@ layout: default
             <!-- find active tutorial -->
             {% for item in site.data.menu %}
               {% if item.submenu %}
-                {% if page.tutorial == item.tutorial %}{% assign activeTutorialSubmenu = item.submenu %}{% endif %}
+                {% if page.tutorial %}
+                  {% if page.tutorial == item.tutorial %}{% assign activeTutorialSubmenu = item.submenu %}{% endif %}
+                {% endif %}
               {% endif %}
             {% endfor %}
 
