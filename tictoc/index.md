@@ -76,7 +76,7 @@ OMNeT++ uses NED files to define components and to assemble them into larger uni
 like networks. We start implementing our model by adding a NED file.
 To add the file to the project, right-click the project directory in the
 *Project Explorer* panel on the left, and choose *New -> Network Description File (NED)*
-from the menu. Enter `%tictoc1.ned` when prompted for the file name.
+from the menu. Enter `tictoc1.ned` when prompted for the file name.
 
 Once created, the file can be edited in the *Editor area* of the OMNeT++ IDE.
 The OMNeT++ IDE's NED editor has two modes, *Design* and *Source*; one can switch
@@ -100,13 +100,13 @@ When you're done, switch back to *Design* mode. You should see something like th
 
 <img src="images/nededitor.png">
 
-The first block in the file declares %Txc1 as a simple module type.
+The first block in the file declares `Txc1` as a simple module type.
 Simple modules are atomic on NED level. They are also active components,
 and their behavior is implemented in C++. The declaration also says that
 `Txc1` has an input gate named `in`, and an output gate named `out`.
 
-The second block declares %Tictoc1 as a network. \c %Tictoc1 is assembled from two
-submodules, `tic` and `toc`, both instances of the module type \c %Txc1.
+The second block declares `Tictoc1` as a network. `Tictoc1` is assembled from two
+submodules, `tic` and `toc`, both instances of the module type `Txc1`.
 `tic`'s output gate is connected to `toc`'s input gate, and vica versa.
 There will be a 100ms propagation delay both ways.
 
@@ -127,23 +127,23 @@ and enter the following content:
 @until // send out the message
 @skipline }
 
-The Txc1 simple module type is represented by the C++ class Txc1. The Txc1
-class needs to subclass from OMNeT++'s cSimpleModule class, and needs to be
-registered in OMNeT++ with the Define_Module() macro.
+The `Txc1` simple module type is represented by the C++ class `Txc1`. The `Txc1`
+class needs to subclass from OMNeT++'s `cSimpleModule` class, and needs to be
+registered in OMNeT++ with the `Define_Module()` macro.
 
-**NOTE:** It is a common mistake to forget the Define_Module() line. If it is missing,
-you'll get an error message similar to this one: *"Error: Class 'Txc1' not found -- perhaps
+**NOTE:** It is a common mistake to forget the `Define_Module()` line. If it is missing,
+you'll get an error message similar to this one: `"Error: Class 'Txc1' not found -- perhaps
 its code was not linked in, or the class wasn't registered with Register_Class(), or in
-the case of modules and channels, with Define_Module()/Define_Channel()"*.
+the case of modules and channels, with Define_Module()/Define_Channel()"`.
 
-We redefine two methods from cSimpleModule: initialize()
-and handleMessage(). They are invoked from the simulation kernel:
-the first one only once, and the second one whenever a message arrives at the module.
+We redefine two methods from `cSimpleModule`: `initialize()` and `handleMessage()`.
+They are invoked from the simulation kernel: the first one only once, and 
+the second one whenever a message arrives at the module.
 
-In initialize() we create a message object (cMessage), and send it out
+In `initialize()` we create a message object (`cMessage`), and send it out
 on gate `out`. Since this gate is connected to the other module's
 input gate, the simulation kernel will deliver this message to the other module
-in the argument to handleMessage() -- after a 100ms propagation delay
+in the argument to `handleMessage()` -- after a 100ms propagation delay
 assigned to the link in the NED file. The other module just sends it back
 (another 100ms delay), so it will result in a continuous ping-pong.
 
@@ -151,7 +151,7 @@ Messages (packets, frames, jobs, etc) and events (timers, timeouts) are
 all represented by cMessage objects (or its subclasses) in OMNeT++.
 After you send or schedule them, they will be held by the simulation
 kernel in the "scheduled events" or "future events" list until
-their time comes and they are delivered to the modules via handleMessage().
+their time comes and they are delivered to the modules via `handleMessage()`.
 
 Note that there is no stopping condition built into this simulation:
 it would continue forever. You will be able to stop it from the GUI.
@@ -161,12 +161,12 @@ in the configuration file, but we don't do that in the tutorial.)
 
 ### 1.5  Adding omnetpp.ini
 
-To be able to run the simulation, we need to create an %omnetpp.ini file.
-%omnetpp.ini tells the simulation program which network you want to simulate
+To be able to run the simulation, we need to create an `omnetpp.ini` file.
+`omnetpp.ini` tells the simulation program which network you want to simulate
 (as NED files may contain several networks), you can pass parameters
 to the model, explicitly specify seeds for the random number generators, etc.
 
-Create an %omnetpp.ini file using the *File -> New -> Initialization file (INI)*
+Create an `omnetpp.ini` file using the *File -> New -> Initialization file (INI)*
 menu item. The new file will open in an *Inifile Editor*.
 As the NED Editor, the Inifile Editor also has two modes, *Form* and *Source*,
 which edit the same content. The former is more suitable for configuring the
@@ -183,7 +183,7 @@ You can verify the result in *Form* mode:
 
 <img src="images/inieditor.png" width="650px">
 
-tictoc2 and further steps will all share a common <a srcfile="tictoc/code/omnetpp.ini"/> file.
+`tictoc2` and further steps will all share a common <a srcfile="tictoc/code/omnetpp.ini"/> file.
 
 We are now done with creating the first model, and ready to compile and run it.
 
@@ -243,10 +243,10 @@ F7 (express mode) completely turns off tracing features for maximum speed.
 Note the event/sec and simsec/sec gauges on the status bar of the
 main window (only visible when the simulation is running in fast or express mode).
 
-Exercise: Explore the GUI by running the simulation several times. Try
+**Exercise:** Explore the GUI by running the simulation several times. Try
 *Run*, *Run Until*, *Rebuild Network*, and other functions.
 
-You can exit the simulation program by clicking its Close icon or
+You can exit the simulation program by clicking its *Close* icon or
 choosing *File -> Exit*.
 
 
@@ -271,9 +271,9 @@ suited to debugging. You can end the debugging session with the
 <b>Runtime errors</b>
 
 Debugging is most often needed to track down runtime errors. Let's try it!
-First, deliberately introduce an error into the program. In \ref txc1.cc,
-duplicate the `send()` line inside `handleMessage()`, so that the code
-looks like this:
+First, deliberately introduce an error into the program. In 
+<a srcfile="tictoc/code/txc1.cc"/>, duplicate the `send()` line inside
+ `handleMessage()`, so that the code looks like this:
 
 <pre>
 void Txc1::handleMessage(cMessage *msg)
@@ -289,7 +289,7 @@ you'll get an error message like this:
 
 <img src="images/error.png" width="450px">
 
-Now, run the simulation in *Debug* mode. Due to a *debug-on-errors* option
+Now, run the simulation in *Debug* mode. Due to a `debug-on-errors` option
 being enabled by default, the simulation program will stop in the debugger.
 You can locate the error by examining the stack trace (the list of nested
 function calls) in the *Debug* view:
@@ -340,7 +340,7 @@ on the left gutter in the editor, or choosing *Toggle Breakpoint* from
 the context menu. The list of active (and inactive) breakpoints can be examined
 in the *Breakpoints* view.
 
-Exercise: Experiment with breakpoints! Place a breakpoint at the beginning of
+**Exercise:** Experiment with breakpoints! Place a breakpoint at the beginning of
 the `handleMessage()` method function, and run the simulation. Use appropriate
 buttons on the toolbar to single-step, continue execution until next time the
 breakpoint is hit, and so on.
@@ -400,7 +400,7 @@ and the event log tab at the bottom of the window.
 **NOTE:** The resulting log file can be quite large, so enable this feature only
 if you really need it.
 
-The following figure has been created with the Sequence Chart tool, and shows
+The following figure has been created with the *Sequence Chart* tool, and shows
 how the message is routed between the different nodes in the network.
 In this instance the chart is very simple, but when you have a complex model,
 sequence charts can be very valuable in debugging, exploring or documenting
@@ -418,7 +418,7 @@ Sources: <a srcfile="tictoc/code/tictoc1.ned"/>, <a srcfile="tictoc/code/txc1.cc
 ### 3.1 Adding icons
 
 Here we make the model look a bit prettier in the GUI. We assign
-the "block/routing" icon (the file `images/block/routing.png`), and paint it cyan for `tic`
+the `block/routing` icon (the file `images/block/routing.png`), and paint it cyan for `tic`
 and yellow for `toc`. This is achieved by adding display strings to the
 NED file. The `i=` tag in the display string specifies the icon.
 
@@ -434,11 +434,10 @@ You can see the result here:
 
 ### 3.2 Adding logging
 
-We also modify the C++ code. We add log statements to *Txc*1 so that it
+We also modify the C++ code. We add log statements to `Txc1` so that it
 prints what it is doing. OMNeT++ provides a sophisticated logging facility
 with log levels, log channels, filtering, etc. that are useful for large
-and complex models, but in this model we'll use its simplest form
-`EV`:
+and complex models, but in this model we'll use its simplest form `EV`:
 
 @dontinclude txc2.cc
 @skipline EV <<
@@ -473,7 +472,7 @@ We add the counter as a class member:
 @skip class Txc3
 @until protected:
 
-We set the variable to 10 in initialize() and decrement in handleMessage(),
+We set the variable to 10 in `initialize()` and decrement in `handleMessage()`,
 that is, on every message arrival. After it reaches zero, the simulation
 will run out of events and terminate.
 
@@ -523,7 +522,7 @@ We can use the second parameter to decide whether to send initial message:
 @dontinclude txc4.cc
     @skipline par("sendMsgOnInit")
 
-Now, we can assign the parameters in the NED file or from omnetpp.ini.
+Now, we can assign the parameters in the NED file or from `omnetpp.ini`.
 Assignments in the NED file take precedence. You can define default
 values for parameters if you use the `default(...)` syntax
 in the NED file. In this case you can either set the value of the
@@ -535,7 +534,7 @@ Here, we assign one parameter in the NED file:
 @skip network
 @until connections
 
-and the other in omnetpp.ini:
+and the other in `omnetpp.ini`:
 
 @dontinclude omnetpp.ini
 @skipline Tictoc4.toc
@@ -560,8 +559,8 @@ or even
 **.limit=5
 @endverbatim
 
-with the same effect. (The difference between * and ** is that * will not match
-a dot and ** will.)
+with the same effect. (The difference between `*` and `**` is that `*` will not match
+a dot and `**` will.)
 
 In the graphical runtime environment, you can inspect module parameters either in the object tree
 on the left-hand side of the main window, or in the Parameters page of
@@ -638,7 +637,7 @@ when it should be delivered back to the module.
 @skip ::handleMessage
 @skipline scheduleAt(
 
-In handleMessage() now we have to differentiate whether a new message
+In `handleMessage()` now we have to differentiate whether a new message
 has arrived via the input gate or the self-message came back
 (timer expired). Here we are using
 
@@ -687,7 +686,7 @@ We'll assign the parameters in omnetpp.ini:
 @skipline Tictoc7.
 
 You can try that no matter how many times you re-run the simulation (or
-restart it, Simulate|Rebuild network menu item), you'll get exactly the
+restart it, *Simulate -> Rebuild network* menu item), you'll get exactly the
 same results. This is because OMNeT++ uses a deterministic algorithm
 (by default the Mersenne Twister RNG) to generate random numbers, and
 initializes it to the same seed. This is important for reproducible
@@ -703,7 +702,7 @@ From the syntax you have probably guessed that OMNeT++ supports
 more than one RNGs. That's right, however, all models in this tutorial
 use RNG 0.
 
-Exercise: Try other distributions as well.
+**Exercise:** Try other distributions as well.
 
 Sources: <a srcfile="tictoc/code/tictoc8.ned"/>, <a srcfile="tictoc/code/txc7.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
@@ -723,7 +722,7 @@ Here's `toc`'s code:
 @skip Toc8::handleMessage(
 @until else
 
-Thanks to the bubble() call in the code, `toc`'ll display a callout whenever
+Thanks to the `bubble()` call in the code, `toc` will display a callout whenever
 it drops the message.
 
 <img src="images/step8.png">
@@ -737,7 +736,7 @@ The timer will be (what else?) a self-message.
 @skip Tic8::handleMessage
 @skipline scheduleAt(
 
-Cancelling the timer will be done with the cancelEvent() call. Note that
+Cancelling the timer will be done with the `cancelEvent()` call. Note that
 this does not prevent us from being able to reuse the same
 timeout message over and over.
 
@@ -765,9 +764,9 @@ We delete the original when `toc`'s acknowledgement arrives.
 To make it easier to visually verify the model, we'll include a message
 sequence number in the message names.
 
-In order to avoid handleMessage() growing too large, we'll put the
-corresponding code into two new functions, generateNewMessage()
-and sendCopyOf() and call them from handleMessage().
+In order to avoid `handleMessage()` growing too large, we'll put the
+corresponding code into two new functions, `generateNewMessage()`
+and `sendCopyOf()` and call them from `handleMessage()`.
 
 The functions:
 
@@ -792,14 +791,14 @@ one of the nodes generates a message, and the others keep tossing
 it around in random directions until it arrives at
 a predetermined destination node.
 
-The NED file will need a few changes. First of all, the Txc module will
+The NED file will need a few changes. First of all, the `Txc` module will
 need to have multiple input and output gates:
 
 @dontinclude tictoc10.ned
 @skip simple Txc10
 @until }
 
-The [ ] turns the gates into gate vectors. The size of the vector
+The `[ ]` turns the gates into gate vectors. The size of the vector
 (the number of gates) will be determined where we use Txc to build
 the network.
 
@@ -813,23 +812,23 @@ The resulting topology looks like this:
 
 <img src="images/step10.png">
 
-In this version, tic[0] will generate the message to be sent around.
-This is done in initialize(), with the help of the getIndex() function which
+In this version, `tic[0]` will generate the message to be sent around.
+This is done in `initialize()`, with the help of the `getIndex()` function which
 returns the index of the module in the vector.
 
-The meat of the code is the forwardMessage() function which we invoke
-from handleMessage() whenever a message arrives at the node. It draws
+The meat of the code is the `forwardMessage()` function which we invoke
+from `handleMessage()` whenever a message arrives at the node. It draws
 a random gate number, and sends out message on that gate.
 
 @dontinclude txc10.cc
 @skip ::forwardMessage
 @until }
 
-When the message arrives at tic[3], its handleMessage() will delete the message.
+When the message arrives at `tic[3]`, its `handleMessage()` will delete the message.
 
 See the full code in <a srcfile="tictoc/code/txc10.cc."/>
 
-Exercise: you'll notice that this simple "routing" is not very efficient:
+**Exercise:** you'll notice that this simple "routing" is not very efficient:
 often the packet keeps bouncing between two nodes for a while before it is sent
 to a different direction. This can be improved somewhat if nodes don't send
 the packet back to the sender. Implement this. Hints: `cMessage::getArrivalGate()`,
@@ -941,7 +940,7 @@ message and fill its fields.
 @skip TicTocMsg13 *msg
 @until return msg
 
-Then, handleMessage() begins like this:
+Then, `handleMessage()` begins like this:
 
 @dontinclude txc13.cc
 @skip ::handleMessage(
@@ -984,7 +983,7 @@ on the *Contents* page.
 
 Sources: <a srcfile="tictoc/code/tictoc13.ned"/>, <a srcfile="tictoc/code/tictoc13.msg"/>, <a srcfile="tictoc/code/txc13.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
-Exercise: In this model, there is only one message underway at any
+**Exercise:** In this model, there is only one message underway at any
 given moment: nodes only generate a message when another message arrives
 at them. We did it this way to make it easier to follow the simulation.
 Change the module class so that instead, it generates messages periodically.
@@ -1003,7 +1002,7 @@ received, we've added two counters to the module class: numSent and numReceived.
 @skip class Txc14
 @until protected:
 
-They are set to zero and WATCH'ed in the `initialize()` method. Now we
+They are set to zero and `WATCH`'ed in the `initialize()` method. Now we
 can use the *Find/inspect* objects dialog (*Inspect* menu; it is also on
 the toolbar) to learn how many packets were sent or received by the
 various nodes.
@@ -1011,7 +1010,7 @@ various nodes.
 <img src="images/step14a.png">
 
 It's true that in this concrete simulation model the numbers will be
-roughly the same, so you can only learn from them that intuniform()
+roughly the same, so you can only learn from them that `intuniform()`
 works properly. But in real-life simulations it can be very useful that
 you can quickly get an overview about the state of various nodes in the
 model.
@@ -1092,8 +1091,8 @@ The inspector:
 
 <img src="images/open_graphical_view.png">
 
-They will be initially empty -- run the simulation in Fast (or even Express) mode to get enough
-data to be displayed. After a while you'll get something like this:
+They will be initially empty -- run the simulation in *Fast* (or even *Express*)
+mode to get enough data to be displayed. After a while you'll get something like this:
 
 <img src="images/step15a.png">
 
@@ -1101,7 +1100,7 @@ data to be displayed. After a while you'll get something like this:
 
 When you think enough data has been collected, you can stop the simulation
 and then we'll analyse the result files (`Tictoc15-#0.vec` and
-`Tictoc15-#0.sca`) off-line. You'll need to choose Simulate|Call `finish()`
+`Tictoc15-#0.sca`) off-line. You'll need to choose *Simulate -> Call finish()*
 from the menu (or click the corresponding toolbar button) before exiting --
 this will cause the `finish()` functions to run and data to be written into
 `Tictoc15-#0.sca`.
@@ -1115,8 +1114,8 @@ In the previous step we have added statistic collection to our model.
 While we can compute and save any value we wish, usually it is not known
 at the time of writing the model, what data the enduser will need.
 
-OMNeT++ 4.1 provides an additional mechanism to record values and events.
-Any model can emit 'signals' that can carry a value or an object. The
+OMNeT++ provides an additional mechanism to record values and events.
+Any model can emit *signals* that can carry a value or an object. The
 model writer just have to decide what signals to emit, what data to attach
 to them and when to emit them. The enduser can attach 'listeners' to these
 signals that can process or record these data items. This way the model
@@ -1228,7 +1227,7 @@ Then, it is updated whenever a message arrives at its destination.
 
 **NOTE:** If the figure text and nodes overlap, press 're-layout'.
 
-**NOTE:** <img src="images/relayout.png">
+<img src="images/relayout.png">
 
 In the last few steps, we have collected and displayed statistics. In the next part,
 we'll see and analyze them in the IDE.
