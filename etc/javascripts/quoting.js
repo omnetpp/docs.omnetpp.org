@@ -8,16 +8,27 @@
 // Returns an object/dictionary/map with two values:
 //   startLine - the line number where the returned snippet begins in the whole text (starting from 1 as usual...)
 //   snippet   - the actual matched snippet text
-var getLines = function(text, from, until) {
+var getLines = function(text, from, until, upto) {
+
+    let endPattern = until == null ? upto : until;
+    let isEndInclusive = upto != null;
+
     let startLine = 1;
-    if (from == null && until == null) {
+    if (from == null && endPattern == null) {
         return { startLine: 1, snippet: text };
     } else if (from == null) {
-        re = new RegExp("()(^[\\s\\S]*?)\n^.*" + until, 'm'); //TODO alert on regex syntax error!
-    } else if (until == null) {
+        if (isEndInclusive)
+            re = new RegExp("()(^[\\s\\S]*?" + endPattern + ".*$)", 'm'); //TODO alert on regex syntax error!
+        else
+            re = new RegExp("()(^[\\s\\S]*?)\n^.*" + endPattern, 'm'); //TODO alert on regex syntax error!
+
+    } else if (endPattern == null) {
         re = new RegExp("([\\s\\S]*?)(^.*" + from + "[\\s\\S]*)", 'm'); //TODO alert on regex syntax error!
     } else {
-        re = new RegExp("([\\s\\S]*?)(^.*" + from + "[\\s\\S]*?)\n^.*" + until, 'm'); //TODO alert on regex syntax error!
+        if (isEndInclusive)
+            re = new RegExp("([\\s\\S]*?)(^.*" + from + "[\\s\\S]*?" + endPattern + ".*$)", 'm'); //TODO alert on regex syntax error!
+        else
+            re = new RegExp("([\\s\\S]*?)(^.*" + from + "[\\s\\S]*?)\n^.*" + endPattern, 'm'); //TODO alert on regex syntax error!
     }
     matches = text.match(re);
 
@@ -38,7 +49,8 @@ var fileLoaded = function(file, data) {
    $.each(pres, function(i,pre) {
       excerpt = getLines(data,
                          pre.attributes.from ? pre.attributes.from.value : null,
-                         pre.attributes.until ? pre.attributes.until.value : null);
+                         pre.attributes.until ? pre.attributes.until.value : null,
+                         pre.attributes.upto ? pre.attributes.upto.value : null);
 
       var language = file.endsWith(".ned") ? "ned" : file.endsWith(".xml") ? "xml"
           : file.endsWith(".ini") ? "ini" : file.endsWith(".py") ? "python"
