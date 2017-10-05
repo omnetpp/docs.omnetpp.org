@@ -68,6 +68,7 @@ and OMNeT++ provides command-line tools for special tasks such as makefile
 creation, message file to C++ translation, result file querying and data export,
 and so on. To proceed without the IDE, simply create a directory and create the
 following NED, C++ and ini files in it with your favorite text editor.
+{:.well}
 
 
 ### 1.3 Adding the NED file
@@ -113,6 +114,7 @@ There will be a 100ms propagation delay both ways.
 **NOTE:** You can find a detailed description of the NED language in the
 <a href="../manual/index.html#cha:ned-lang" target="blank">OMNeT++ Simulation Manual</a>.
 (The manual can also be found in the `doc`  directory of your OMNeT++ installation.)
+{:.well}
 
 
 ### 1.4 Adding the C++ files
@@ -135,9 +137,10 @@ registered in OMNeT++ with the `Define_Module()` macro.
 you'll get an error message similar to this one: `"Error: Class 'Txc1' not found -- perhaps
 its code was not linked in, or the class wasn't registered with Register_Class(), or in
 the case of modules and channels, with Define_Module()/Define_Channel()"`.
+{:.well}
 
 We redefine two methods from `cSimpleModule`: `initialize()` and `handleMessage()`.
-They are invoked from the simulation kernel: the first one only once, and 
+They are invoked from the simulation kernel: the first one only once, and
 the second one whenever a message arrives at the module.
 
 In `initialize()` we create a message object (`cMessage`), and send it out
@@ -210,7 +213,7 @@ from the menu, or hitting *Ctrl+B*.
 create a *Makefile* using the `opp_makemake`
 command, then enter `make` to build the project. It will produce
 an executable that can be run by entering `./tictoc`.
-
+{:.well}
 
 ### 2.2 Running the simulation
 
@@ -245,6 +248,7 @@ main window (only visible when the simulation is running in fast or express mode
 
 **Exercise:** Explore the GUI by running the simulation several times. Try
 *Run*, *Run Until*, *Rebuild Network*, and other functions.
+{:.well}
 
 You can exit the simulation program by clicking its *Close* icon or
 choosing *File -> Exit*.
@@ -271,7 +275,7 @@ suited to debugging. You can end the debugging session with the
 <b>Runtime errors</b>
 
 Debugging is most often needed to track down runtime errors. Let's try it!
-First, deliberately introduce an error into the program. In 
+First, deliberately introduce an error into the program. In
 <a srcfile="tictoc/code/txc1.cc"/>, duplicate the `send()` line inside
  `handleMessage()`, so that the code looks like this:
 
@@ -344,6 +348,7 @@ in the *Breakpoints* view.
 the `handleMessage()` method function, and run the simulation. Use appropriate
 buttons on the toolbar to single-step, continue execution until next time the
 breakpoint is hit, and so on.
+{:.well}
 
 <b>"Debug next event"</b>
 
@@ -399,6 +404,7 @@ and the event log tab at the bottom of the window.
 
 **NOTE:** The resulting log file can be quite large, so enable this feature only
 if you really need it.
+{:.well}
 
 The following figure has been created with the *Sequence Chart* tool, and shows
 how the message is routed between the different nodes in the network.
@@ -601,6 +607,7 @@ The `Toc` module looks similar, but with different parameter values.
 @until }
 
 **NOTE:** The C++ implementation is inherited from the base simple module (`Txc5`).
+{:.well}
 
 Once we created the new simple modules, we can use them as submodule types in our network:
 
@@ -703,6 +710,7 @@ more than one RNGs. That's right, however, all models in this tutorial
 use RNG 0.
 
 **Exercise:** Try other distributions as well.
+{:.well}
 
 Sources: <a srcfile="tictoc/code/tictoc8.ned"/>, <a srcfile="tictoc/code/txc7.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
@@ -834,7 +842,7 @@ to a different direction. This can be improved somewhat if nodes don't send
 the packet back to the sender. Implement this. Hints: `cMessage::getArrivalGate()`,
 `cGate::getIndex()`. Note that if the message didn't arrive via a gate but was
 a self-message, then `getArrivalGate()` returns `NULL`.
-
+{:.well}
 
 Sources: <a srcfile="tictoc/code/tictoc10.ned"/>, <a srcfile="tictoc/code/txc10.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
@@ -860,6 +868,7 @@ too, if you wish.
 **NOTE:** We have created the channel by specializing the built-in `DelayChannel`.
 (built-in channels can be found inside the `ned` package. Thats why we used
 the full type name `ned.DelayChannel`) after the `extends` keyword.
+{:.well}
 
 Now let's check how the `connections` section changed.
 
@@ -901,6 +910,7 @@ C++ code.
 
 **NOTE:** The special $i and $o suffix after the gate name allows us to use the
 connection's two direction separately.
+{:.well}
 
 Sources: <a srcfile="tictoc/code/tictoc12.ned"/>, <a srcfile="tictoc/code/txc12.cc"/>, <a srcfile="tictoc/code/omnetpp.ini"/>
 
@@ -920,6 +930,7 @@ The message class specification is in `tictoc13.msg`:
 @until }
 
 **NOTE:** See <a href="../manual/index.html#cha:msg-def" target="_blank">Section 6</a> of the OMNeT++ manual for more details on messages.
+{:.well}
 
 The makefile is set up so that the message compiler, opp_msgc is invoked
 and it generates `tictoc13_m.h` and `tictoc13_m.cc` from the message declaration
@@ -989,7 +1000,7 @@ at them. We did it this way to make it easier to follow the simulation.
 Change the module class so that instead, it generates messages periodically.
 The interval between messages should be a module parameter, returning
 exponentially distributed random numbers.
-
+{:.well}
 
 ## Part 5 - Adding statistics collection
 
@@ -1219,6 +1230,7 @@ Then the `getCanvas()` function returns the network's canvas, and `getFigure()` 
 Then, we update the figure's text with the `setText()` function.
 
 **NOTE:** For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the OMNeT++ manual
+{:.well}
 
 When you run the simulation, the figure displays 'last hopCount: N/A' before the arrival of the first message.
 Then, it is updated whenever a message arrives at its destination.
@@ -1226,6 +1238,7 @@ Then, it is updated whenever a message arrives at its destination.
 <img src="images/step17.png">
 
 **NOTE:** If the figure text and nodes overlap, press 're-layout'.
+{:.well}
 
 <img src="images/relayout.png">
 
@@ -1256,6 +1269,7 @@ You can select some or all of the individual results by highlighting them. If yo
 
 **NOTE:** For further information about the charting and processing capabilities,
 please refer to the <a href="../UserGuide.pdf" target="_blank"><b>OMNeT++ Users Guide</b></a> (you can find it in the `doc` directory of the OMNeT++ installation).
+{:.well}
 
 Our last model records the `hopCount` of a message each time the message
 reaches its destination.
@@ -1358,6 +1372,7 @@ This produces about 50 simulation runs. Each can be explored in the graphical us
 simulation batches are often run from the command line interface using the *Cmdenv* runtime environment.
 
 **NOTE:** You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the OMNeT++ manual.
+{:.well}
 
 To increase the accuracy of the simulation we may need to run the same simulation several times
 using different random numbers. These runs are called *Repetitions* and are specified in `omnetpp.ini`:
@@ -1383,6 +1398,7 @@ If you have a multicore CPU, you can specify how many simulations to run concurr
 
 **NOTE:** Alternatively, you can run the simulation batches from the command line with `opp_runall` tool
 with the following command:
+{:.well}
 
 <pre>
 opp_runall -j4 ./tictoc -u Cmdenv -c TicToc18
@@ -1413,6 +1429,7 @@ The count of the arrived packets is available at each node. We can compute their
 
 **NOTE:** Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
 OMNeT++ installation.
+{:.well}
 
 Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.
 Here is the average hop count vs *N*:
