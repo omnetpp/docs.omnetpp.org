@@ -143,7 +143,7 @@ We redefine two methods from `cSimpleModule`: `initialize()` and `handleMessage(
 They are invoked from the simulation kernel: the first one only once, and
 the second one whenever a message arrives at the module.
 
-In `initialize()` we create a message object (`cMessage`), and send it out
+In `initialize()` we create a message object ([`cMessage`]), and send it out
 on gate `out`. Since this gate is connected to the other module's
 input gate, the simulation kernel will deliver this message to the other module
 in the argument to `handleMessage()` -- after a 100ms propagation delay
@@ -935,7 +935,7 @@ The message class specification is in `tictoc13.msg`:
 The makefile is set up so that the message compiler, opp_msgc is invoked
 and it generates `tictoc13_m.h` and `tictoc13_m.cc` from the message declaration
 (The file names are generated from the `tictoc13.msg` file name, not the message type name).
-They will contain a generated `TicTocMsg13` class subclassed from `cMessage`;
+They will contain a generated `TicTocMsg13` class subclassed from [`cMessage`];
 the class will have getter and setter methods for every field.
 
 We'll include `tictoc13_m.h` into our C++ code, and we can use `TicTocMsg13` as
@@ -1464,4 +1464,4 @@ and skim through the *User Guide*.
 Comments and suggestions regarding this tutorial will be very much appreciated.
 
 
-
+[`cMessage`]: https://omnetpp.org/doc/omnetpp/api/classomnetpp_1_1cMessage.html
