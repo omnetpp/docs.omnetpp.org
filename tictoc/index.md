@@ -1167,7 +1167,7 @@ arriving messages, so let's collect the same data here, too.
 
 The `source` key specifies the signal we want our statistic to attach to.
 The `record` key can be used to tell what should be done with the received
-data. In our case we sepcify that each value must be saved in a vector file (vector)
+data. In our case we specify that each value must be saved in a vector file (vector)
 and also we need to calculate min,max,mean,count etc. (stats). (NOTE: `stats` is
 just a shorthand for min, max, mean, sum, count, etc.) With this step we have finished
 our model.
