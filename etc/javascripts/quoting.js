@@ -47,8 +47,8 @@ var getLines = function(text, after, from, until, upto, comment) {
     // trimming trailing whitespace (empty lines)
     snippet = snippet.replace(/\s+$/, '');
 
-    if (comment)
-        snippet = snippet.replace(new RegExp("[\\s]*" + comment + ".*$", "mg"), '\n');
+    if (comment) // [^\S\n] character class is a "double-negative": matches any whitespace, except a newline
+        snippet = snippet.replace(new RegExp("[^\\S\\n]*" + comment + ".*$", "mg"), '');
 
     return { startLine: startLine, snippet: snippet };
 }
