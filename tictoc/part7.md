@@ -79,11 +79,11 @@ If you have a multicore CPU, you can specify how many simulations to run concurr
 with the following command:
 {:.well}
 
-<pre>
+<pre class="snippet">
 opp_runall -j4 ./tictoc -u Cmdenv -c TicToc18
 </pre>
 
-The -j parameter specifies the number of CPU cores, the \c -u parameter the user interface, and \c -c the config to run.
+The `-j` parameter specifies the number of CPU cores, the `-u` parameter the user interface, and `-c` the config to run.
 
 
 ## 7.5 Analyzing the results
@@ -106,8 +106,8 @@ We're also interested in the average number of packets that arrive at their dest
 The count of the arrived packets is available at each node. We can compute their average,
 `AvgNumPackets` as `mean('hopCount:stats:count')`.
 
-**NOTE:** Refer to the chapter "Using the Analysis Editor" in the User Guide for more information on datasets. You can find it in the '/doc' directory of your
-OMNeT++ installation.
+**NOTE:** Refer to the chapter "Using the Analysis Editor" in the *User Guide* for more information on datasets.
+You can find it in the `doc/` directory of your OMNeT++ installation.
 {:.well}
 
 Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.

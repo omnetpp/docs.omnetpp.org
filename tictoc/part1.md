@@ -148,7 +148,7 @@ simulation kernel, and the latter for entering module parameters.
 
 For now, just switch to *Source* mode and enter the following:
 
-<pre>
+<pre class="snippet">
 [General]
 network = Tictoc1
 </pre>

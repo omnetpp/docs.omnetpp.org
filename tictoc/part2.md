@@ -88,7 +88,7 @@ First, deliberately introduce an error into the program. In
 <a srcfile="tictoc/code/txc1.cc"/>, duplicate the `send()` line inside
  `handleMessage()`, so that the code looks like this:
 
-<pre>
+<pre class="snippet">
 void Txc1::handleMessage(cMessage *msg)
 {
     //...
@@ -124,14 +124,14 @@ Undo the previous source code edit (remove the duplicate `send()` line),
 and introduce another error. Let's pretend we forgot to create the message
 before sending it, and change the following lines in `initialize()`
 
-<pre>
+<pre class="snippet">
         cMessage *msg = new cMessage("tictocMsg");
         send(msg, "out");
 </pre>
 
 to simply
 
-<pre>
+<pre class="snippet">
         cMessage *msg; // no initialization!
         send(msg, "out");
 </pre>

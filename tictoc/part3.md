@@ -119,19 +119,19 @@ Note that because omnetpp.ini supports wildcards, and parameters
 assigned from NED files take precedence over the ones in omnetpp.ini,
 we could have used
 
-<pre>
+<pre class="snippet">
 Tictoc4.t*c.limit=5
 </pre>
 
 or
 
-<pre>
+<pre class="snippet">
 Tictoc4.*.limit=5
 </pre>
 
 or even
 
-<pre>
+<pre class="snippet">
 **.limit=5
 </pre>
 
@@ -211,7 +211,7 @@ has arrived via the input gate or the self-message came back
 
 but we could have written
 
-<pre>
+<pre class="snippet">
     if (msg->isSelfMessage())
 </pre>
 
@@ -252,7 +252,7 @@ initializes it to the same seed. This is important for reproducible
 simulations. You can experiment with different seeds if you add the
 following lines to omnetpp.ini:
 
-<pre>
+<pre class="snippet">
 [General]
 seed-0-mt=532569  # or any other 32-bit value
 </pre>
