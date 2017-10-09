@@ -2,6 +2,7 @@
 layout: page
 tutorial: TicToc
 title: TicToc Tutorial
+generateToC: true
 ---
 
 This tutorial to guides you through building and working
