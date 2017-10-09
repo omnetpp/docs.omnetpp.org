@@ -94,6 +94,7 @@ content assist, cross-references and other IDE features.)
 
 Switch into *Source* mode, and enter the following:
 
+<pre class="snippet" src="code/tictoc1.ned" from="simple Txc1"  upto="toc\.out;\n}" comment="//"></pre>
 @dontinclude tictoc1.ned
 @skip simple Txc1
 @until toc.out
@@ -126,6 +127,7 @@ Create a file named `txc1.cc` by choosing *New -> Source File* from the
 project's context menu (or *File -> New -> File* from the IDE's main menu),
 and enter the following content:
 
+<pre class="snippet" src="code/txc1.cc" from="include" comment="//"></pre>
 @dontinclude txc1.cc
 @skip #include
 @until // send out the message
@@ -430,6 +432,7 @@ the `block/routing` icon (the file `images/block/routing.png`), and paint it cya
 and yellow for `toc`. This is achieved by adding display strings to the
 NED file. The `i=` tag in the display string specifies the icon.
 
+<pre class="snippet" src="code/tictoc2.ned" from="simple Txc2" upto="toc.out;\n}" comment="//"></pre>
 @dontinclude tictoc2.ned
 @skip Here we make
 @until toc.out
@@ -447,11 +450,13 @@ prints what it is doing. OMNeT++ provides a sophisticated logging facility
 with log levels, log channels, filtering, etc. that are useful for large
 and complex models, but in this model we'll use its simplest form `EV`:
 
+<pre class="snippet" src="code/txc2.cc" from="EV" until="cMessage" comment="//"></pre>
 @dontinclude txc2.cc
 @skipline EV <<
 
 and
 
+<pre class="snippet" src="code/txc2.cc" after="here it will be" upto="EV" comment="//"></pre>
 @skipline EV <<
 
 When you run the simulation in the OMNeT++ runtime environment, the following output
@@ -476,6 +481,7 @@ after ten exchanges.
 
 We add the counter as a class member:
 
+<pre class="snippet" src="code/txc3.cc" from="class Txc3" upto="protected" comment="//"></pre>
 @dontinclude txc3.cc
 @skip class Txc3
 @until protected:
@@ -486,6 +492,7 @@ will run out of events and terminate.
 
 Note the
 
+<pre class="snippet" src="code/txc3.cc" after="in the list." upto="WATCH" comment="//"></pre>
 @dontinclude txc3.cc
 @skipline WATCH(c
 
@@ -515,6 +522,7 @@ Module parameters have to be declared in the NED file. The data type can
 be numeric, string, bool, or xml (the latter is for easy access to
 XML config files), among others.
 
+<pre class="snippet" src="code/tictoc4.ned" from="simple Txc4" upto="gates" comment="//"></pre>
 @dontinclude tictoc4.ned
 @skip simple
 @until gates
@@ -522,11 +530,13 @@ XML config files), among others.
 We also have to modify the C++ code to read the parameter in
 initialize(), and assign it to the counter.
 
+<pre class="snippet" src="code/txc4.cc" after="in the NED file" upto="counter" comment="//"></pre>
 @dontinclude txc4.cc
 @skipline par("limit")
 
 We can use the second parameter to decide whether to send initial message:
 
+<pre class="snippet" src="code/txc4.cc" after="whether to send" upto="par\(" comment="//"></pre>
 @dontinclude txc4.cc
     @skipline par("sendMsgOnInit")
 
