@@ -1,7 +1,7 @@
 ---
 layout: page
 tutorial: TicToc
-title: TicToc Tutorial
+title: Introduction
 generateToC: true
 ---
 
@@ -21,8 +21,4 @@ cross-linked to the OMNeT++ API documentation.
 
 This document and the TicToc model are an expanded version of
 the original TicToc tutorial from Ahmet Sekercioglu (Monash University).
-
-### Contents
-
-TODO
 

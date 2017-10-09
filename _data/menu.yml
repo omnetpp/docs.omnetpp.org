@@ -14,6 +14,14 @@
   tutorial: TicToc
   submenu:
     - page: tictoc/index.md
+    - page: tictoc/part1.md
+    - page: tictoc/part2.md
+    - page: tictoc/part3.md
+    - page: tictoc/part4.md
+    - page: tictoc/part5.md
+    - page: tictoc/part6.md
+    - page: tictoc/part7.md
+    - page: tictoc/conclusion.md
 
 - name: Back to omnetpp.org
   link: https://omnetpp.org
