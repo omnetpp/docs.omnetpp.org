@@ -1,4 +1,5 @@
 - name: Cloud Tutorial
+  tutorial: Cloud
   submenu:
     - page: cloud/index.md
 
@@ -8,6 +9,11 @@
     - page: cloud/page5.md
     - page: cloud/page6.md
     - page: cloud/page7.md
+
+- name: TicToc Tutorial
+  tutorial: TicToc
+  submenu:
+    - page: tictoc/index.md
 
 - name: Back to omnetpp.org
   link: https://omnetpp.org

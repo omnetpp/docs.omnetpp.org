@@ -1,5 +1,6 @@
 ---
 layout: page
+tutorial: TicToc
 title: TicToc Tutorial
 ---
 

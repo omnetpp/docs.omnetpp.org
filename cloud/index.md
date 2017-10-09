@@ -1,5 +1,6 @@
 ---
 layout: page
+tutorial: Cloud
 title: Running Simulation Campaigns in the Cloud
 navbarIcon: cloud/images/opp_docker.png
 ---

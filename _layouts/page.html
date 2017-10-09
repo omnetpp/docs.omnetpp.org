@@ -13,9 +13,21 @@ layout: default
             <!-- find active tutorial -->
             {% for item in site.data.menu %}
               {% if item.submenu %}
-                {% if page.tutorial %}
-                  {% if page.tutorial == item.tutorial %}{% assign activeTutorialSubmenu = item.submenu %}{% endif %}
+
+                {% if item.tutorial == nil %}
+                  <div class="alert alert-danger">
+                    Missing <strong>tutorial</strong> tag from menu item <strong>{{ item.name }}</strong> in <strong>_data/menu.yml</strong>!
+                  </div>
                 {% endif %}
+
+                {% if page.tutorial == nil %}
+                  <div class="alert alert-danger">
+                    Missing <strong>tutorial</strong> tag from page <strong>{{ page.title }}</strong>!
+                  </div>
+                {% endif %}
+
+                {% if page.tutorial == item.tutorial %}{% assign activeTutorialSubmenu = item.submenu %}{% endif %}
+
               {% endif %}
             {% endfor %}
 

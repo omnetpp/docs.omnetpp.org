@@ -1,5 +1,6 @@
 ---
 layout: page
+tutorial: Cloud
 title: Trying It Out
 generateToC: true
 navbarIcon: cloud/images/opp_docker.png

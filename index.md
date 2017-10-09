@@ -1,5 +1,6 @@
 ---
 layout: page
+tutorial: none
 title: OMNeT++ Tutorials
 ---
 

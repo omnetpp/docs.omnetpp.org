@@ -1,5 +1,6 @@
 ---
 layout: page
+tutorial: Cloud
 title: Implementation
 generateToC: true
 navbarIcon: cloud/images/opp_docker.png
