@@ -2,7 +2,6 @@
 layout: page
 tutorial: Cloud
 title: Potential Improvements, Alternatives
-generateToC: true
 navbarIcon: cloud/images/opp_docker.png
 ---
 

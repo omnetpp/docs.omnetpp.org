@@ -1,15 +1,17 @@
 ---
 layout: page
 tutorial: Cloud
-title: Code
+title: Examining the Code
 generateToC: true
 navbarIcon: cloud/images/opp_docker.png
 ---
 
 
-This page describes the code for the simulation jobs, running on the workers.
+This page describes in detail the contents of each used code file.
+
 
 ## Utilities
+
 
 There are a few things that both the workers and the client need. These are
 factored out into a common module, `utils.py`. You can download the entire file
@@ -29,7 +31,9 @@ some directories.
 
 <p><pre class="snippet" from="def unzip_bytes" src="code/utils.py"></pre></p>
 
+
 ## Worker code
+
 
 And the code for the jobs, <a href="code/worker.py">worker.py</a>:
 
@@ -47,9 +51,7 @@ the host system, which would lead to incompatibility problems, possibly
 preventing the simulation from starting.
 
 
-
 ## Dockerfile
-
 
 
 We select the base image to be `ubuntu:16.04`, then we install Python, pip, the

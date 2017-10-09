@@ -2,30 +2,22 @@
 layout: page
 tutorial: Cloud
 title: Implementation
-generateToC: true
 navbarIcon: cloud/images/opp_docker.png
 ---
-
-## TODO this page still needs some work...
-
 
 To put all of this together into a working solution, in the rest of this
 tutorial, we're going to:
 
 - Install some necessary software packages on our machine
-- Build a Docker image which includes the worker code and OMNeT++
+- Build a Docker image which includes OMNeT++ and the worker code
 - Deploy the system on AWS
-- Run a simple simulation campaign with it
-- Create the Python function that will perform the jobs
-- Write a command line application for submitting simulations to the queue
+- Run a simple simulation campaign with it using a custom client
+- Take a look at all the code needed to perform the above
 
 Before you begin, create a new empty folder. Later save all linked source files
 from this tutorial in that.
 
-
-
 ## Solution Architecture
-
 
 We will create the following architecture for running simulations on AWS:
 
@@ -48,7 +40,6 @@ how to implement the worker and the end-user client and so on.
 
 
 ## Preparation
-
 
 First we need to install a few things on our computer.
 
@@ -107,8 +98,16 @@ $ sudo pip3 install rq
 This will install the `redis` client module as well, as a dependency.
 
 
-TODO download all code: with links
+### Getting the Code
 
+Download the following files into the directory you just created:
+
+ - [utils.py](code/utils.py) - Contains some common utilities used by both `worker.py` and `client.py`.
+ - [worker.py](code/worker.py) -  Contains the code to be executed by the workers as a job.
+ - [Dockerfile](code/Dockerfile) - Is a recipe to build the Docker image for the workers.
+ - [client.py](code/client.py) - Is the client-side software to submit the simulations.
+
+We will take a closer look at their contents in the "Examining the Code" chapter.
 
 ### Building the Docker Image
 
@@ -120,8 +119,8 @@ where the above files can be found:
 $ docker build . -t worker
 ```
 
-The `Dockerfile` is picked up automatically, the build context is the current
-directory (`.`), and the resulting image will be named `worker`.
+The `Dockerfile` is picked up automatically by name, the build context is the 
+current directory (`.`), and the resulting image will be named `worker`. 
 
 This will likely take a few minutes to complete. If you see a couple of warnings
 written in red, but the process continues, don't worry, this is expected.

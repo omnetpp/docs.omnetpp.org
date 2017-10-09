@@ -1,7 +1,7 @@
 ---
 layout: page
 tutorial: Cloud
-title: AWS Configuration
+title: Deploying on AWS
 generateToC: true
 navbarIcon: cloud/images/opp_docker.png
 ---
