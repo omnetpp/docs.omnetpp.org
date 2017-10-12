@@ -205,6 +205,12 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
+    /usr/local/lib/python2.7/dist-packages/pandas/core/computation/__init__.py:18: UserWarning: The installed version of numexpr 2.4.3 is not supported in pandas and will be not be used
+    The minimum supported version is 2.4.6
+    
+      ver=ver, min_ver=_MIN_NUMEXPR_VERSION), UserWarning)
+
+
 We utilize the `read_csv()` function to import the contents of the
 CSV file into a data frame. The data frame is the central concept of
 Pandas. We will continue to work with this data frame throughout
@@ -227,6 +233,153 @@ of the data frame to view just the first few lines.
 aloha.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>configname</td>
+      <td>PureAlohaExperiment</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>datetime</td>
+      <td>20170627-20:42:20</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>experiment</td>
+      <td>PureAlohaExperiment</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>inifile</td>
+      <td>omnetpp.ini</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>iterationvars</td>
+      <td>numHosts=10, iaMean=3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 You can see that the structure of the data frame, i.e. rows and columns,
 directly corresponds to the contents of the CSV file. Column names have
 been taken from the first line of the CSV file. Missing values are
@@ -242,6 +395,153 @@ selects 10 lines from line 20, `aloha.iloc[:5]` is like `head()`, and
 ```
 aloha.iloc[1200:1205]
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1200</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collidedFrames:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40692.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1201</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>attr</td>
+      <td>Aloha.server</td>
+      <td>collidedFrames:last</td>
+      <td>source</td>
+      <td>sum(collision)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1202</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>attr</td>
+      <td>Aloha.server</td>
+      <td>collidedFrames:last</td>
+      <td>title</td>
+      <td>collided frames, last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1203</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.156176</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1204</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>attr</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>interpolationmode</td>
+      <td>linear</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 Hint: If you are in the terminal and you find that the data frame printout does
 not make use of the whole width of the terminal, you can increase the display 
@@ -268,6 +568,18 @@ Names that are known to cause trouble include `name`, `min`, `max`, `mean`).
 aloha.run.head()  # .head() is for limiting the output to 5 lines here
 ```
 
+
+
+
+    0    PureAlohaExperiment-4-20170627-20:42:20-22739
+    1    PureAlohaExperiment-4-20170627-20:42:20-22739
+    2    PureAlohaExperiment-4-20170627-20:42:20-22739
+    3    PureAlohaExperiment-4-20170627-20:42:20-22739
+    4    PureAlohaExperiment-4-20170627-20:42:20-22739
+    Name: run, dtype: object
+
+
+
 Selecting multiple columns is also possible, one just needs to use a list of
 column names as index. The result will be another data frame. (The double
 brackets in the command are due to the fact that both the array indexing and 
@@ -278,6 +590,69 @@ the list syntax use square brackets.)
 tmp = aloha[['run', 'attrname', 'attrvalue']]
 tmp.head()
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>configname</td>
+      <td>PureAlohaExperiment</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>datetime</td>
+      <td>20170627-20:42:20</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>experiment</td>
+      <td>PureAlohaExperiment</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>inifile</td>
+      <td>omnetpp.ini</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>iterationvars</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 The `describe()` method can be used to get an idea about the contents of a 
 column. When applied to a non-numeric column, it prints the number of 
@@ -290,6 +665,17 @@ and the inferred data type (more about that later.)
 aloha.module.describe()
 ```
 
+
+
+
+    count             1012
+    unique              11
+    top       Aloha.server
+    freq               932
+    Name: module, dtype: object
+
+
+
 You can get a list of the unique values using the `unique()` method. For example,
 the following command lists the names of modules that have recorded any statistics:
 
@@ -297,6 +683,15 @@ the following command lists the names of modules that have recorded any statisti
 ```
 aloha.module.unique()
 ```
+
+
+
+
+    array([nan, 'Aloha.server', 'Aloha.host[0]', 'Aloha.host[1]',
+           'Aloha.host[2]', 'Aloha.host[3]', 'Aloha.host[4]', 'Aloha.host[5]',
+           'Aloha.host[6]', 'Aloha.host[7]', 'Aloha.host[8]', 'Aloha.host[9]'], dtype=object)
+
+
 
 When you apply `describe()` to a numeric column, you get a statistical summary
 with things like mean, standard deviation, minimum, maximum, and various 
@@ -307,6 +702,21 @@ quantiles.
 aloha.value.describe()
 ```
 
+
+
+
+    count      294.000000
+    mean      4900.038749
+    std      11284.077075
+    min          0.045582
+    25%          0.192537
+    50%        668.925298
+    75%       5400.000000
+    max      95630.000000
+    Name: value, dtype: float64
+
+
+
 Applying `describe()` to the whole data frame creates a similar report about
 all numeric columns.
 
@@ -314,6 +724,123 @@ all numeric columns.
 ```
 aloha.describe()
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>294.000000</td>
+      <td>84.000000</td>
+      <td>0.0</td>
+      <td>84.000000</td>
+      <td>84.000000</td>
+      <td>84.000000</td>
+      <td>84.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>4900.038749</td>
+      <td>5591.380952</td>
+      <td>NaN</td>
+      <td>1.489369</td>
+      <td>0.599396</td>
+      <td>1.049606</td>
+      <td>6.560987</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>11284.077075</td>
+      <td>4528.796760</td>
+      <td>NaN</td>
+      <td>1.530455</td>
+      <td>0.962515</td>
+      <td>0.956102</td>
+      <td>9.774404</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.045582</td>
+      <td>470.000000</td>
+      <td>NaN</td>
+      <td>0.152142</td>
+      <td>0.031326</td>
+      <td>0.099167</td>
+      <td>0.272013</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.192537</td>
+      <td>1803.000000</td>
+      <td>NaN</td>
+      <td>0.164796</td>
+      <td>0.049552</td>
+      <td>0.099186</td>
+      <td>0.498441</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>668.925298</td>
+      <td>4065.500000</td>
+      <td>NaN</td>
+      <td>1.197140</td>
+      <td>0.243035</td>
+      <td>1.049776</td>
+      <td>3.084077</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>5400.000000</td>
+      <td>8815.000000</td>
+      <td>NaN</td>
+      <td>2.384397</td>
+      <td>0.741081</td>
+      <td>2.000000</td>
+      <td>9.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>95630.000000</td>
+      <td>14769.000000</td>
+      <td>NaN</td>
+      <td>6.936747</td>
+      <td>5.323887</td>
+      <td>2.000000</td>
+      <td>54.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 Let's spend a minute on data types and column data types. Every column has a
 data type (abbreviated *dtype*) that determines what type of values it may
@@ -323,6 +850,30 @@ contain. Column dtypes can be printed with `dtypes`:
 ```
 aloha.dtypes
 ```
+
+
+
+
+    run            object
+    type           object
+    module         object
+    name           object
+    attrname       object
+    attrvalue      object
+    value         float64
+    count         float64
+    sumweights    float64
+    mean          float64
+    stddev        float64
+    min           float64
+    max           float64
+    binedges       object
+    binvalues      object
+    vectime        object
+    vecvalue       object
+    dtype: object
+
+
 
 The two most commonly used dtypes are *float64* and *object*. A *float64* column
 contains floating-point numbers, and missing values are represented with NaNs. 
@@ -365,6 +916,153 @@ tmp = aloha[(aloha.type=='scalar') & (aloha.module=='Aloha.server') & (aloha.nam
 tmp.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1186</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.156057</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1203</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.156176</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1220</th>
+      <td>PureAlohaExperiment-2-20170627-20:42:19-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.196381</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1237</th>
+      <td>PureAlohaExperiment-3-20170627-20:42:20-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.193253</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1254</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.176507</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 You'll also need to know how to add a new column to the data frame. Now that is
 a bit controversial topic, because at the time of writing, there is a "convenient"
 syntax and an "official" syntax for it. The "convenient" syntax is a simple
@@ -375,6 +1073,159 @@ assignment, for example:
 aloha['qname'] = aloha.module + "." + aloha.name
 aloha[aloha.type=='scalar'].head()  # print excerpt
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+      <th>qname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1176</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>duration</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5400.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.duration</td>
+    </tr>
+    <tr>
+      <th>1177</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:mean</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.198275</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collisionLength:mean</td>
+    </tr>
+    <tr>
+      <th>1179</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:sum</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2457.026781</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collisionLength:sum</td>
+    </tr>
+    <tr>
+      <th>1181</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:max</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.901897</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collisionLength:max</td>
+    </tr>
+    <tr>
+      <th>1183</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collidedFrames:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40805.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collidedFrames:last</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 It looks nice and natural, but it is not entirely correct. It often results in 
 a warning: *SettingWithCopyWarning: A value is trying to be set on a copy of a 
@@ -390,6 +1241,159 @@ solution, the `assign()` method of the data frame is recommended, like this:
 aloha = aloha.assign(qname = aloha.module + "." + aloha.name)
 aloha[aloha.type=='scalar'].head()
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+      <th>qname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1176</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>duration</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5400.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.duration</td>
+    </tr>
+    <tr>
+      <th>1177</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:mean</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.198275</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collisionLength:mean</td>
+    </tr>
+    <tr>
+      <th>1179</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:sum</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2457.026781</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collisionLength:sum</td>
+    </tr>
+    <tr>
+      <th>1181</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:max</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.901897</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collisionLength:max</td>
+    </tr>
+    <tr>
+      <th>1183</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server</td>
+      <td>collidedFrames:last</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40805.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aloha.server.collidedFrames:last</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 For completeness, one can remove a column from a data frame using either the
 `del` operator or the `drop()` method of the data frame. Here we show the former
@@ -414,6 +1418,13 @@ the `type()` operator on an element:
 ```
 type( aloha[aloha.type=='scalar'].iloc[0].value )
 ```
+
+
+
+
+    numpy.float64
+
+
 
 The reason is that `read_csv()` infers data types of columns from the data
 it finds in them. Since the `attrvalue` column is shared by run attributes, 
@@ -526,6 +1537,143 @@ scalars.value = scalars.value.combine_first(scalars.attrvalue.astype('float64'))
 scalars[['run', 'type', 'qname', 'value', 'module', 'name', 'attrname']].iloc[80:90]  # print an excerpt of the result
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>qname</th>
+      <th>value</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1134</th>
+      <td>PureAlohaExperiment-40-20170627-20:42:22-22773</td>
+      <td>itervar</td>
+      <td>iaMean</td>
+      <td>9.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>iaMean</td>
+    </tr>
+    <tr>
+      <th>1135</th>
+      <td>PureAlohaExperiment-40-20170627-20:42:22-22773</td>
+      <td>itervar</td>
+      <td>numHosts</td>
+      <td>20.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>numHosts</td>
+    </tr>
+    <tr>
+      <th>1162</th>
+      <td>PureAlohaExperiment-41-20170627-20:42:22-22773</td>
+      <td>itervar</td>
+      <td>iaMean</td>
+      <td>9.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>iaMean</td>
+    </tr>
+    <tr>
+      <th>1163</th>
+      <td>PureAlohaExperiment-41-20170627-20:42:22-22773</td>
+      <td>itervar</td>
+      <td>numHosts</td>
+      <td>20.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>numHosts</td>
+    </tr>
+    <tr>
+      <th>1176</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server.duration</td>
+      <td>5400.000000</td>
+      <td>Aloha.server</td>
+      <td>duration</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1177</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server.collisionLength:mean</td>
+      <td>0.198275</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:mean</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1179</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server.collisionLength:sum</td>
+      <td>2457.026781</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:sum</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1181</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server.collisionLength:max</td>
+      <td>0.901897</td>
+      <td>Aloha.server</td>
+      <td>collisionLength:max</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1183</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server.collidedFrames:last</td>
+      <td>40805.000000</td>
+      <td>Aloha.server</td>
+      <td>collidedFrames:last</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1186</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>scalar</td>
+      <td>Aloha.server.channelUtilization:last</td>
+      <td>0.156057</td>
+      <td>Aloha.server</td>
+      <td>channelUtilization:last</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 To work further, it would be very convenient if we had a format where each
 simulation run corresponds to one row, and all variables produced by that
 run had their own columns. We can call it the *wide* format, and it can be
@@ -537,12 +1685,192 @@ scalars_wide = scalars.pivot('run', columns='qname', values='value')
 scalars_wide.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>qname</th>
+      <th>Aloha.server.channelUtilization:last</th>
+      <th>Aloha.server.collidedFrames:last</th>
+      <th>Aloha.server.collisionLength:max</th>
+      <th>Aloha.server.collisionLength:mean</th>
+      <th>Aloha.server.collisionLength:sum</th>
+      <th>Aloha.server.duration</th>
+      <th>Aloha.server.receivedFrames:last</th>
+      <th>iaMean</th>
+      <th>numHosts</th>
+    </tr>
+    <tr>
+      <th>run</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PureAlohaExperiment-0-20170627-20:42:16-22739</th>
+      <td>0.156057</td>
+      <td>40805.0</td>
+      <td>0.901897</td>
+      <td>0.198275</td>
+      <td>2457.026781</td>
+      <td>5400.0</td>
+      <td>8496.0</td>
+      <td>1.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-1-20170627-20:42:17-22739</th>
+      <td>0.156176</td>
+      <td>40692.0</td>
+      <td>0.958902</td>
+      <td>0.198088</td>
+      <td>2456.494983</td>
+      <td>5400.0</td>
+      <td>8503.0</td>
+      <td>1.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-10-20170627-20:42:16-22741</th>
+      <td>0.109571</td>
+      <td>1760.0</td>
+      <td>0.326138</td>
+      <td>0.155154</td>
+      <td>126.450220</td>
+      <td>5400.0</td>
+      <td>5965.0</td>
+      <td>7.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-11-20170627-20:42:16-22741</th>
+      <td>0.108992</td>
+      <td>1718.0</td>
+      <td>0.340096</td>
+      <td>0.154529</td>
+      <td>125.477252</td>
+      <td>5400.0</td>
+      <td>5934.0</td>
+      <td>7.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-12-20170627-20:42:16-22741</th>
+      <td>0.090485</td>
+      <td>1069.0</td>
+      <td>0.272013</td>
+      <td>0.152142</td>
+      <td>78.201174</td>
+      <td>5400.0</td>
+      <td>4926.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 We are interested in only three columns for our plot:
 
 
 ```
 scalars_wide[['numHosts', 'iaMean', 'Aloha.server.channelUtilization:last']].head()
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>qname</th>
+      <th>numHosts</th>
+      <th>iaMean</th>
+      <th>Aloha.server.channelUtilization:last</th>
+    </tr>
+    <tr>
+      <th>run</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PureAlohaExperiment-0-20170627-20:42:16-22739</th>
+      <td>10.0</td>
+      <td>1.0</td>
+      <td>0.156057</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-1-20170627-20:42:17-22739</th>
+      <td>10.0</td>
+      <td>1.0</td>
+      <td>0.156176</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-10-20170627-20:42:16-22741</th>
+      <td>10.0</td>
+      <td>7.0</td>
+      <td>0.109571</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-11-20170627-20:42:16-22741</th>
+      <td>10.0</td>
+      <td>7.0</td>
+      <td>0.108992</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-12-20170627-20:42:16-22741</th>
+      <td>10.0</td>
+      <td>9.0</td>
+      <td>0.090485</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 Since we have our *x* and *y* data in separate columns now, we can utilize the
 scatter plot feature of the data frame for plotting it:
@@ -552,6 +1880,10 @@ scatter plot feature of the data frame for plotting it:
 scalars_wide.plot.scatter('iaMean', 'Aloha.server.channelUtilization:last')
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_55_0.png)
+
 
 NOTE: Although `plt.show()` is not needed in Jupyter (`%matplotlib inline`
 turns on immediate display), we'll continue to include it in further code
@@ -586,6 +1918,75 @@ aloha_pivot = scalars_wide.pivot_table(index='iaMean', columns='numHosts', value
 aloha_pivot.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>numHosts</th>
+      <th>10.0</th>
+      <th>15.0</th>
+      <th>20.0</th>
+    </tr>
+    <tr>
+      <th>iaMean</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1.0</th>
+      <td>0.156116</td>
+      <td>0.089539</td>
+      <td>0.046586</td>
+    </tr>
+    <tr>
+      <th>2.0</th>
+      <td>0.194817</td>
+      <td>0.178159</td>
+      <td>0.147564</td>
+    </tr>
+    <tr>
+      <th>3.0</th>
+      <td>0.176321</td>
+      <td>0.191571</td>
+      <td>0.183976</td>
+    </tr>
+    <tr>
+      <th>4.0</th>
+      <td>0.153569</td>
+      <td>0.182324</td>
+      <td>0.190452</td>
+    </tr>
+    <tr>
+      <th>5.0</th>
+      <td>0.136997</td>
+      <td>0.168780</td>
+      <td>0.183742</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 Note that rows correspond to various `iaMean` values (`iaMean` serves as index);
 there is one column for each value of `numHosts`; and that data in the table
 are the averages of the channel utilizations produced by the simulations 
@@ -604,6 +2005,10 @@ plt.ylabel('channel utilization')
 plt.show()
 ```
 
+
+![png](tmp_files/tmp_59_0.png)
+
+
 ## 8. Interactive pivot tables
 
 
@@ -618,6 +2023,21 @@ that integrates nicely with Jupyter. Let's try it!
 import pivottablejs as pj
 pj.pivot_ui(scalars_wide)
 ```
+
+
+
+
+
+        <iframe
+            width="100%"
+            height="500"
+            src="pivottablejs.html"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        
+
+
 
 An interactive panel containing the pivot table will appear. Here is how
 you can reproduce the above "Channel utilization vs iaMean" plot in it:
@@ -642,6 +2062,21 @@ configure the pivot table in the appropriate way:
 ```
 pj.pivot_ui(scalars_wide, rows=['numHosts'], cols=['iaMean'], vals=['Aloha.server.channelUtilization:last'], aggregatorName='Average', rendererName='Line Chart')
 ```
+
+
+
+
+
+        <iframe
+            width="100%"
+            height="500"
+            src="pivottablejs.html"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        
+
+
 
 If you want experiment with Excel's or LibreOffice's built-in pivot table 
 functionality, the data frame's `to_clipboard()` and `to_csv()` methods
@@ -669,6 +2104,13 @@ histograms = aloha[aloha.type=='histogram']
 len(histograms)
 ```
 
+
+
+
+    84
+
+
+
 We have 84 histograms. It makes no sense to plot so many histograms on one chart,
 so let's just take one on them, and examine its content.
 
@@ -677,6 +2119,23 @@ so let's just take one on them, and examine its content.
 hist = histograms.iloc[0]  # the first histogram
 hist.binedges, hist.binvalues
 ```
+
+
+
+
+    (array([-0.11602833, -0.08732314, -0.05861794, -0.02991275, -0.00120756,
+             0.02749763,  0.05620283,  0.08490802,  0.11361321,  0.1423184 ,
+             0.1710236 ,  0.19972879,  0.22843398,  0.25713917,  0.28584437,
+             0.31454956,  0.34325475,  0.37195994,  0.40066514,  0.42937033,
+             0.45807552,  0.48678071,  0.51548591,  0.5441911 ,  0.57289629,
+             0.60160148,  0.63030668,  0.65901187,  0.68771706,  0.71642225,
+             0.74512745]),
+     array([    0.,     0.,     0.,     0.,     0.,     0.,     0.,  1234.,
+             2372.,  2180.,  2115.,  1212.,   917.,   663.,   473.,   353.,
+              251.,   186.,   123.,    99.,    60.,    44.,    31.,    25.,
+               15.,    13.,     9.,     3.,     5.,     3.]))
+
+
 
 The easiest way to plot the histogram from these two arrays is to look at it
 as a step function, and create a line plot with the appropriate drawing style.
@@ -688,6 +2147,10 @@ side of the last histogram bin.
 plt.plot(hist.binedges, np.append(hist.binvalues, 0), drawstyle='steps-post')   # or maybe steps-mid, for integers
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_69_0.png)
+
 
 Another way to plot a recorded histogram is Matplotlib's `hist()` method, 
 although that is a bit tricky. Instead of taking histogram data, `hist()` 
@@ -704,6 +2167,10 @@ plt.hist(bins=hist.binedges, x=hist.binedges[:-1], weights=hist.binvalues)
 plt.show()
 ```
 
+
+![png](tmp_files/tmp_71_0.png)
+
+
 `hist()` has some interesting options. For example, we can change the plotting
 style to be similar to a line plot by setting `histtype='step'`. To plot the
 normalized version of the histogram, specify `normed=True` or `density=True` 
@@ -716,6 +2183,10 @@ The following plot shows the effect of some of these options.
 plt.hist(bins=hist.binedges, x=hist.binedges[:-1], weights=hist.binvalues, histtype='step', normed=True)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_73_0.png)
+
 
 To plot several histograms, we can iterate over the histograms and draw them
 one by one on the same plot. The following code does that, and also adds a 
@@ -730,6 +2201,10 @@ plt.legend(somehistograms.module + "." + somehistograms.name)
 plt.xlim(0, 0.5)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_75_0.png)
+
 
 Note, however, that the legend contains the same string for all histograms, 
 which is not very meaningful. We could improve that by including some 
@@ -755,6 +2230,69 @@ itervars_df = aloha.loc[aloha.type=='itervar', ['run', 'attrname', 'attrvalue']]
 itervars_df.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>14</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>iaMean</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>numHosts</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>PureAlohaExperiment-3-20170627-20:42:20-22739</td>
+      <td>iaMean</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>PureAlohaExperiment-3-20170627-20:42:20-22739</td>
+      <td>numHosts</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>iaMean</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 We reshape the result by using the `pivot()` method. The following statement
 will convert unique values in the `attrname` column into separate columns:
 `iaMean` and `numHosts`. The new data frame will be indexed with the run id.
@@ -765,6 +2303,68 @@ itervarspivot_df = itervars_df.pivot(index='run', columns='attrname', values='at
 itervarspivot_df.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>attrname</th>
+      <th>iaMean</th>
+      <th>numHosts</th>
+    </tr>
+    <tr>
+      <th>run</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PureAlohaExperiment-0-20170627-20:42:16-22739</th>
+      <td>1</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-1-20170627-20:42:17-22739</th>
+      <td>1</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-10-20170627-20:42:16-22741</th>
+      <td>7</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-11-20170627-20:42:16-22741</th>
+      <td>7</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>PureAlohaExperiment-12-20170627-20:42:16-22741</th>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 Now, we only need to add the new columns back into the original dataframe, using
 `merge()`. This operation is not quite unlike an SQL join of two tables on the
 `run` column.
@@ -774,6 +2374,165 @@ Now, we only need to add the new columns back into the original dataframe, using
 aloha2 = aloha.merge(itervarspivot_df, left_on='run', right_index=True, how='outer')
 aloha2.head()
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+      <th>iaMean</th>
+      <th>numHosts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>configname</td>
+      <td>PureAlohaExperiment</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>datetime</td>
+      <td>20170627-20:42:20</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>experiment</td>
+      <td>PureAlohaExperiment</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>inifile</td>
+      <td>omnetpp.ini</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>iterationvars</td>
+      <td>numHosts=10, iaMean=3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 For plot legends, it is also useful to have a single `iterationvars` column with
 string values like `numHosts=10, iaMean=2`. This is easier than the above: we
@@ -793,6 +2552,63 @@ itervarscol_df = itervarscol_df.rename(columns={'attrvalue': 'iterationvars'})
 itervarscol_df.head()
 ```
 
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>iterationvars</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>PureAlohaExperiment-3-20170627-20:42:20-22739</td>
+      <td>numHosts=10, iaMean=2</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>PureAlohaExperiment-0-20170627-20:42:16-22739</td>
+      <td>numHosts=10, iaMean=1</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>PureAlohaExperiment-1-20170627-20:42:17-22739</td>
+      <td>numHosts=10, iaMean=1</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>PureAlohaExperiment-2-20170627-20:42:19-22739</td>
+      <td>numHosts=10, iaMean=2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 In the merging step, we join the two tables (I mean, data frames) on the `run`
 column:
 
@@ -801,6 +2617,171 @@ column:
 aloha3 = aloha2.merge(itervarscol_df, left_on='run', right_on='run', how='outer')
 aloha3.head()
 ```
+
+
+
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>type</th>
+      <th>module</th>
+      <th>name</th>
+      <th>attrname</th>
+      <th>attrvalue</th>
+      <th>value</th>
+      <th>count</th>
+      <th>sumweights</th>
+      <th>mean</th>
+      <th>stddev</th>
+      <th>min</th>
+      <th>max</th>
+      <th>binedges</th>
+      <th>binvalues</th>
+      <th>vectime</th>
+      <th>vecvalue</th>
+      <th>iaMean</th>
+      <th>numHosts</th>
+      <th>iterationvars</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>configname</td>
+      <td>PureAlohaExperiment</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>datetime</td>
+      <td>20170627-20:42:20</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>experiment</td>
+      <td>PureAlohaExperiment</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>inifile</td>
+      <td>omnetpp.ini</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PureAlohaExperiment-4-20170627-20:42:20-22739</td>
+      <td>runattr</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>iterationvars</td>
+      <td>numHosts=10, iaMean=3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>3</td>
+      <td>10</td>
+      <td>numHosts=10, iaMean=3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 To see the result of our work, let's try plotting the same histograms again,
 this time with a proper legend:
@@ -816,6 +2797,10 @@ plt.legend(somehistograms.iterationvars)
 plt.xlim(0, 0.5)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_87_0.png)
+
 
 ## 11. Plotting vectors
 
@@ -840,7 +2825,7 @@ Then we read the the CSV file into a data frame in the same way we saw with the
 
 
 ```
-routing = pd.read_csv('../routing/routing.csv', converters = {
+routing = pd.read_csv('routing.csv', converters = {
     'attrvalue': parse_if_number,
     'binedges': parse_ndarray,
     'binvalues': parse_ndarray,
@@ -856,6 +2841,13 @@ vectors = routing[routing.type=='vector']
 len(vectors)
 ```
 
+
+
+
+    65
+
+
+
 Our data frame contains results from one run. To get some idea what vectors
 we have, let's print the list unique vector names and module names:
 
@@ -863,6 +2855,30 @@ we have, let's print the list unique vector names and module names:
 ```
 vectors.name.unique(), vectors.module.unique()
 ```
+
+
+
+
+    (array(['busy:vector', 'qlen:vector', 'txBytes:vector',
+            'endToEndDelay:vector', 'hopCount:vector', 'sourceAddress:vector',
+            'rxBytes:vector', 'drop:vector'], dtype=object),
+     array(['Net5.rte[0].port$o[0].channel', 'Net5.rte[0].port$o[1].channel',
+            'Net5.rte[1].port$o[0].channel', 'Net5.rte[1].port$o[1].channel',
+            'Net5.rte[1].port$o[2].channel', 'Net5.rte[2].port$o[0].channel',
+            'Net5.rte[2].port$o[1].channel', 'Net5.rte[2].port$o[2].channel',
+            'Net5.rte[2].port$o[3].channel', 'Net5.rte[3].port$o[0].channel',
+            'Net5.rte[3].port$o[1].channel', 'Net5.rte[3].port$o[2].channel',
+            'Net5.rte[4].port$o[0].channel', 'Net5.rte[4].port$o[1].channel',
+            'Net5.rte[0].queue[0]', 'Net5.rte[0].queue[1]',
+            'Net5.rte[1].queue[0]', 'Net5.rte[1].queue[1]',
+            'Net5.rte[1].queue[2]', 'Net5.rte[2].queue[0]',
+            'Net5.rte[2].queue[1]', 'Net5.rte[2].queue[2]',
+            'Net5.rte[2].queue[3]', 'Net5.rte[3].queue[0]',
+            'Net5.rte[3].queue[1]', 'Net5.rte[3].queue[2]',
+            'Net5.rte[4].queue[0]', 'Net5.rte[4].queue[1]', 'Net5.rte[4].app',
+            'Net5.rte[1].app'], dtype=object))
+
+
 
 A vector can be plotted on a line chart by simply passing the `vectime` and
 `vecvalue` arrays to `plt.plot()`:
@@ -874,6 +2890,10 @@ plt.plot(vec.vectime, vec.vecvalue, drawstyle='steps-post')
 plt.xlim(0,100)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_97_0.png)
+
 
 When several vectors need to be placed on the same plot, one can simply
 use a `for` loop.
@@ -887,6 +2907,10 @@ plt.title(somevectors.name.values[0])
 plt.legend(somevectors.module)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_99_0.png)
+
 
 ## 12. Vector Filtering
 
@@ -908,11 +2932,22 @@ np.cumsum(x)
 ```
 
 
+
+
+    array([ 8, 10, 11, 16, 23])
+
+
+
+
 ```
 for row in somevectors.itertuples():
     plt.plot(row.vectime, np.cumsum(row.vecvalue))
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_102_0.png)
+
 
 Plotting cumulative sum against time might be useful e.g. for an output
 vector where the simulation emits the packet length for each packet
@@ -931,6 +2966,10 @@ for row in somevectors.itertuples():
 plt.xlim(0,5); plt.ylim(0,20)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_104_0.png)
+
 
 Note that we changed the plotting style to "steps-post", so
 that for any *t* time the plot accurately represents the number
@@ -958,6 +2997,13 @@ t = np.array([0.1, 1.5, 1.6, 2.0, 3.1])
 diff(t)
 ```
 
+
+
+
+    array([ 1.4,  0.1,  0.4,  1.1])
+
+
+
 We can now plot it. Note that as `diff()` makes the array one element
 shorter, we need to write `row.vectime[1:]` to drop the first element
 (it has no preceding element, so `diff()` cannot be computed for it.)
@@ -971,6 +3017,10 @@ for row in somevectors.itertuples():
 plt.xlim(0,100)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_108_0.png)
+
 
 We now know enough NumPy to be able to write a function that computes
 running average (a.k.a. "mean filter"). Let's try it out in a plot
@@ -987,6 +3037,10 @@ for row in somevectors.itertuples():
 plt.xlim(0,100)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_110_0.png)
+
 
 For certain quantities such as queue length or on-off status,
 weighted average (with time intervals used as weights) makes
@@ -1005,6 +3059,10 @@ plt.xlim(0,100)
 plt.show()
 ```
 
+
+![png](tmp_files/tmp_112_0.png)
+
+
 Computing the integral of the vector as a step function is very similar
 to the `running_timeavg()` function. (Note: Computing integral in other
 ways is part of NumPy and SciPy, if you ever need it. For example,
@@ -1021,6 +3079,10 @@ for row in somevectors.itertuples():
     plt.plot(row.vectime[1:], integrate_steps(row.vectime, row.vecvalue))
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_114_0.png)
+
 
 As the last example in this section, here is a function that computes
 moving window average. It relies on the clever trick of subtracting
@@ -1043,6 +3105,10 @@ for row in somevectors.itertuples():
 plt.xlim(0,200)
 plt.show()
 ```
+
+
+![png](tmp_files/tmp_116_0.png)
+
 
 You can find further hints for smoothing the plot of an output vector
 in the signal processing chapter of the SciPy Cookbook (see References).

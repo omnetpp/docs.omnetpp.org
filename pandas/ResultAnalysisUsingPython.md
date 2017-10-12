@@ -785,7 +785,7 @@ Then we read the the CSV file into a data frame in the same way we saw with the
 *aloha* dataset:
 
 ```{.python .input}
-routing = pd.read_csv('../routing/routing.csv', converters = {
+routing = pd.read_csv('routing.csv', converters = {
     'attrvalue': parse_if_number,
     'binedges': parse_ndarray,
     'binvalues': parse_ndarray,
