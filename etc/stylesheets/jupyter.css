@@ -3,10 +3,11 @@
  *
  * Author: Jupyter Development Team
  */
+/*
 body {
   background-color: #fff;
-  /* This makes sure that the body covers the entire window and needs to
-       be in a different element than the display: box in wrapper below */
+  / * This makes sure that the body covers the entire window and needs to
+       be in a different element than the display: box in wrapper below * /
   position: absolute;
   left: 0px;
   right: 0px;
@@ -15,10 +16,10 @@ body {
   overflow: visible;
 }
 body > #header {
-  /* Initially hidden to prevent FLOUC */
+  / * Initially hidden to prevent FLOUC * /
   display: none;
   background-color: #fff;
-  /* Display over codemirror */
+  / * Display over codemirror * /
   position: relative;
   z-index: 100;
 }
@@ -35,6 +36,7 @@ body > #header .header-bar {
   background: #e7e7e7;
   margin-bottom: -1px;
 }
+*/
 @media print {
   body > #header {
     display: none !important;
@@ -854,14 +856,15 @@ div.cell.selected.jupyter-soft-selected {
 }
 .prompt {
   /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
-  min-width: 14ex;
+/*  min-width: 14ex; */
   /* This padding is tuned to match the padding on the CodeMirror editor. */
-  padding: 0.4em;
+/*  padding: 0.4em; */
+  padding-top: 0.4em;
   margin: 0px;
   font-family: monospace;
   text-align: right;
   /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
+/*  line-height: 1.21429em; */
   /* Don't highlight prompt number selection */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -1432,9 +1435,10 @@ div.output_unrecognized a:hover {
   color: inherit;
   text-decoration: none;
 }
+/*
 .rendered_html {
   color: #000;
-  /* any extras will just be numbers: */
+  / * any extras will just be numbers: * /
 }
 .rendered_html em {
   font-style: italic;
@@ -1565,6 +1569,7 @@ div.output_unrecognized a:hover {
 .rendered_html blockquote {
   margin: 1em 2em;
 }
+*/
 .rendered_html table {
   margin-left: auto;
   margin-right: auto;
@@ -1590,6 +1595,7 @@ div.output_unrecognized a:hover {
 .rendered_html * + table {
   margin-top: 1em;
 }
+/*
 .rendered_html p {
   text-align: left;
 }
@@ -1613,6 +1619,7 @@ div.output_unrecognized a:hover {
 .rendered_html svg.unconfined {
   max-width: none;
 }
+*/
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -1634,8 +1641,9 @@ div.text_cell {
     display: none;
   }
 }
+/*
 div.text_cell_render {
-  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  / *font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;* /
   outline: none;
   resize: none;
   width: inherit;
@@ -1646,6 +1654,7 @@ div.text_cell_render {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
+*/
 a.anchor-link:link {
   text-decoration: none;
   padding: 0px 20px;
