@@ -7,11 +7,8 @@ jupyter: true
 ---
 
 
-Analysing Simulation Results With Python
-========================================
+## 1. When to use Python?
 
-1. When to use Python?
-----------------------
 
 The Analysis Tool in the OMNeT++ IDE is best suited for casual exploration of
 simulation results. If you are doing sophisticated result analysis, you will
@@ -34,8 +31,8 @@ The tutorial assumes that you have a working knowledge of OMNeT++ with regard
 to result recording, and basic familiarity with Python.
 
 
-2. Setting up
--------------
+## 2. Setting up
+
 
 Before we can start, you need to install the necessary software.
 First, make sure you have Python, either version 2.x or 3.x (they are
@@ -70,9 +67,8 @@ the PivotTable.js main Javascript library uses different version numbers, e.g.
 2.7.0.)
 
 
+## 3. Getting your simulation results into Python
 
-3. Getting your simulation results into Python
-----------------------------------------------
 
 OMNeT++ result files have their own file format which is not directly
 digestible by Python. There are a number of ways to get your data
@@ -219,8 +215,8 @@ the whole tutorial.
 aloha = pd.read_csv('aloha.csv')
 ```
 
-4. Exploring the data frame
----------------------------
+## 4. Exploring the data frame
+
 
 You can view the contents of the data frame by simply entering the name
 of the variable (`aloha`). Alternatively, you can use the `head()` method
@@ -404,8 +400,8 @@ For completeness, one can remove a column from a data frame using either the
 del aloha['qname']
 ```
 
-5. Revisiting CSV loading
--------------------------
+## 5. Revisiting CSV loading
+
 
 The way we have read the CSV file has one small deficiency: all data in the
 `attrvalue` column are represented as strings, event though many of them
@@ -459,8 +455,8 @@ aloha = pd.read_csv('aloha.csv', converters = {
 You can verify the result e.g. by printing the unique values again.
 
 
-6. Load-time filtering
-----------------------
+## 6. Load-time filtering
+
 
 If the CSV file is large, you may want to skip certain columns or rows when
 reading it into memory. (File size is about the only valid reason for using
@@ -487,8 +483,8 @@ chunks = [ chunk[chunk['type']!='histogram'] for chunk in iter ]  # discards typ
 tmp = pd.concat(chunks)
 ```
 
-7. Plotting scalars
--------------------
+## 7. Plotting scalars
+
 
 Scalars can serve as input for many different kinds of plots. Here we'll show
 how one can create a "throughput versus offered load" type plot. We will plot
@@ -608,8 +604,8 @@ plt.ylabel('channel utilization')
 plt.show()
 ```
 
-8. Interactive pivot tables
----------------------------
+## 8. Interactive pivot tables
+
 
 Getting the pivot table right is not always easy, so having a GUI where 
 one can drag columns around and immediately see the result is definitely 
@@ -657,8 +653,8 @@ Or, use `scalars_wide.to_csv("scalars.csv")` to save the data into a file
 which you can import.
 
 
-9. Plotting histograms
-----------------------
+## 9. Plotting histograms
+
 
 In this section we explore how to plot histograms recorded by the simulation.
 Histograms are in rows that have `"histogram"` in the `type` column. 
@@ -742,8 +738,8 @@ characteristics of the simulation that generated them, i.e. the number of hosts
 variable). We'll see in the next section how that can be achieved.
 
 
-10. Adding iteration variables as columns
------------------------------------------
+## 10. Adding iteration variables as columns
+
 
 In this step, we add the iteration variables associated with the simulation
 run to the data frame as columns. There are several reasons why this is a
@@ -821,8 +817,8 @@ plt.xlim(0, 0.5)
 plt.show()
 ```
 
-11. Plotting vectors
---------------------
+## 11. Plotting vectors
+
 
 This section deals with basic plotting of output vectors. Output vectors
 are basically time series data, but values have timestamps instead
@@ -892,8 +888,8 @@ plt.legend(somevectors.module)
 plt.show()
 ```
 
-12. Vector Filtering
---------------------
+## 12. Vector Filtering
+
 
 Plotting vectors "as is" is often not practical, as the result will be a crowded
 plot that's difficult to draw conclusions from. To remedy that, one can apply
@@ -1052,8 +1048,8 @@ You can find further hints for smoothing the plot of an output vector
 in the signal processing chapter of the SciPy Cookbook (see References).
 
 
-Resources
----------
+## Resources
+
 
 The primary and authentic source of information on Pandas, Matplotlib and other
 libraries is their official documentation. I do not link them here because they 
@@ -1077,15 +1073,9 @@ StackOverflow pages I visited.)
   https://www.youtube.com/playlist?list=PLyBBc46Y6aAz54aOUgKXXyTcEmpMisAq3
 
 
-Acknowledgements
-----------------
-
-I would like to thank the participants of the 2016 OMNeT++ Summit for the 
-valuable feedback, and especially Dr Kyeong Soo (Joseph) Kim for bringing
-my attention to Pandas and Jupyter.
+## Acknowledgements
 
 
-Author
-------
-
-Andras Varga
+The author, Andras Varga would like to thank the participants of the
+2016 OMNeT++ Summit for the valuable feedback, and especially
+Dr Kyeong Soo (Joseph) Kim for bringing my attention to Pandas and Jupyter.
