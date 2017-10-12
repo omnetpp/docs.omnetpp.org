@@ -1,0 +1,4 @@
+#! /bin/bash
+
+ipython nbconvert --to markdown tmp.ipynb
+
