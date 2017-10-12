@@ -1,4 +1,17 @@
 #! /bin/bash
+notedown --match=fenced ResultAnalysisUsingPython.md -o tmp.ipynb
+jupyter nbconvert --to markdown tmp.ipynb
 
-ipython nbconvert --to markdown tmp.ipynb
+cat >index.md <<END
+---
+layout: page
+tutorial: Pandas
+title: Analysing Simulation Results With Python
+generateToC: true
+jupyter: true
+---
+
+END
+cat tmp.md >> index.md
+rm tmp.*
 
