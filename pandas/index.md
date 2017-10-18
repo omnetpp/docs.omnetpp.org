@@ -205,12 +205,6 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-    /usr/local/lib/python2.7/dist-packages/pandas/core/computation/__init__.py:18: UserWarning: The installed version of numexpr 2.4.3 is not supported in pandas and will be not be used
-    The minimum supported version is 2.4.6
-    
-      ver=ver, min_ver=_MIN_NUMEXPR_VERSION), UserWarning)
-
-
 We utilize the `read_csv()` function to import the contents of the
 CSV file into a data frame. The data frame is the central concept of
 Pandas. We will continue to work with this data frame throughout

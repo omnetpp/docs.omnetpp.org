@@ -1,6 +1,24 @@
+/*
+body {
+   color: #111;
+}
+h1:not(.panel-title), h2:not(.panel-title), h3, h4, h5, h6, h7, h8 {
+   color: #333;
+   padding-top: 0px !important;
+   margin-top: 40px !important;
+   padding-bottom: 0px !important;
+   margin-bottom: 30px !important;
+}
+p {
+   font-size: 18px;
+}
+
 div.dataframe {
     overflow-x: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
+*/
 
 .dataframe table {
   margin-left: auto;
