@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# docker pull squidfunk/mkdocs-material
+
+cd $(dirname $0)
+docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material build

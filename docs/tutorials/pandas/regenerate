@@ -1,0 +1,12 @@
+#! /bin/bash
+notedown --match=fenced ResultAnalysisUsingPython.md -o tmp.ipynb
+jupyter nbconvert --execute --to markdown tmp.ipynb
+
+cat >index.md <<END
+previous_page_disabled: true
+next_page_disabled: true
+
+END
+cat tmp.md >> index.md
+rm tmp.*
+

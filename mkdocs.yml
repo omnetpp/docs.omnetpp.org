@@ -1,0 +1,106 @@
+# Project information
+site_name: OMNeT++ Documentation
+site_description: Docmentation for the OMNeT++ Simulator
+site_author: OMNeT++ Team
+site_url: http://tutorials.omnetpp.org/
+
+# Repository
+repo_name: omnetpp/omnetpp-tutorials
+repo_url: https://github.com/omnetpp/omnetpp-tutorials
+
+# Copyright
+copyright: 'Copyright &copy; 2017 OpenSim Ltd.'
+
+theme: material
+# Theme directory
+theme_dir: material
+
+extra_css:
+  - 'stylesheets/omnetpp-docs.css'
+  - 'stylesheets/rainbow.css'
+  - 'stylesheets/rainbow.linenumbers.theme.css'
+  - 'stylesheets/jupyter.css'
+
+extra_javascript:
+  - 'javascripts/jquery-3.2.1.min.js'
+  - 'javascripts/jupyter-output.js'
+  - 'javascripts/quoting.js'
+  - 'javascripts/rainbow-custom.min.js'
+  - 'javascripts/rainbow.linenumbers.min.js'
+  - 'javascripts/rainbow-ini.js'
+  - 'javascripts/rainbow-ned.js'
+  - 'javascripts/rainbow-yaml.js'
+  - 'javascripts/rainbow-dockerfile.js'
+  - 'javascripts/rainbow-html.js'
+
+# Options
+extra:
+  feature:
+    tabs: true
+  palette:
+    primary: indigo
+    accent: indigo
+  social:
+    - type: globe
+      link: http://omnetpp.org
+    - type: github-alt
+      link: https://github.com/omnetpp/omnetpp-tutorials
+    - type: twitter
+      link: https://twitter.com/omnetpp
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite(guess_lang=true)
+  - markdown.extensions.attr_list
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc(permalink=true)
+  - pymdownx.arithmatex
+  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tilde
+
+# Page tree
+pages:
+  - Tutorials:
+    - Learn OMNeT++ with TicToc:
+      - Introduction: tutorials/tictoc/index.md
+      - Getting Started: tutorials/tictoc/part1.md
+      - Running the Simulation: tutorials/tictoc/part2.md
+      - Enhancing the 2-node TicToc: tutorials/tictoc/part3.md
+      - Turning it Into a Real Network: tutorials/tictoc/part4.md
+      - Adding Statistics Collection: tutorials/tictoc/part5.md
+      - Visualizing the Results: tutorials/tictoc/part6.md
+      - Parameter Studies: tutorials/tictoc/part7.md
+      - Closing words: tutorials/tictoc/conclusion.md
+    - Running Simulation Campaigns in the Cloud:
+      - Introduction: tutorials/cloud/index.md
+      - Concepts: tutorials/cloud/page1.md
+      - Implementation: tutorials/cloud/page2.md
+      - Deploying on AWS: tutorials/cloud/page4.md
+      - Trying It Out: tutorials/cloud/page5.md
+      - Examining the Code: tutorials/cloud/page6.md
+      - Potential Improvements, Alternatives: tutorials/cloud/page7.md
+    - Result Analysis with Python: tutorials/pandas/index.md
+# - Documentation:
+#   - Page1: index.md
+# - API:
+#   - Core: api/index.md
+  - Source File Listing: showfile.md
+
+# Google Analytics
+#google_analytics:
+#  - ""
+#  - auto
