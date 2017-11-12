@@ -36,7 +36,7 @@ extra_javascript:
 # Options
 extra:
   feature:
-    tabs: true
+    tabs: false
   palette:
     primary: indigo
     accent: indigo
