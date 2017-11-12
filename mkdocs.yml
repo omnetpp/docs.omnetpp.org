@@ -74,6 +74,7 @@ markdown_extensions:
 
 # Page tree
 pages:
+  - OMNeT++ Documentation: index.md
   - Tutorials:
     - Learn OMNeT++ with TicToc:
       - Introduction: tutorials/tictoc/index.md
