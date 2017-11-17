@@ -512,6 +512,10 @@ Since we have our *x* and *y* data in separate columns now, we can utilize the
 scatter plot feature of the data frame for plotting it:
 
 ```{.python .input}
+# set the default image resolution and size
+plt.rcParams['figure.figsize'] = [8.0, 3.0]
+plt.rcParams['figure.dpi'] = 144
+# create a scatter plot
 scalars_wide.plot.scatter('iaMean', 'Aloha.server.channelUtilization:last')
 plt.show()
 ```

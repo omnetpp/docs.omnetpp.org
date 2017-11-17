@@ -8,5 +8,5 @@ next_page_disabled: true
 
 END
 cat tmp.md >> index.md
-rm tmp.*
+#rm tmp.*
 
