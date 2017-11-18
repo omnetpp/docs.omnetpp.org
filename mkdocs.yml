@@ -2,11 +2,11 @@
 site_name: OMNeT++ Documentation
 site_description: Docmentation for the OMNeT++ Simulator
 site_author: OMNeT++ Team
-site_url: http://tutorials.omnetpp.org/
+site_url: http://docs.omnetpp.org/
 
 # Repository
-repo_name: omnetpp/omnetpp-tutorials
-repo_url: https://github.com/omnetpp/omnetpp-tutorials
+repo_name: omnetpp/omnetpp-docs
+repo_url: https://github.com/omnetpp/omnetpp-docs
 
 # Copyright
 copyright: 'Copyright &copy; 2017 OpenSim Ltd.'
@@ -23,7 +23,6 @@ extra_css:
 
 extra_javascript:
   - 'javascripts/jquery-3.2.1.min.js'
-  - 'javascripts/jupyter-output.js'
   - 'javascripts/quoting.js'
   - 'javascripts/rainbow-custom.min.js'
   - 'javascripts/rainbow.linenumbers.min.js'
@@ -44,7 +43,7 @@ extra:
     - type: globe
       link: http://omnetpp.org
     - type: github-alt
-      link: https://github.com/omnetpp/omnetpp-tutorials
+      link: https://github.com/omnetpp/omnetpp-docs
     - type: twitter
       link: https://twitter.com/omnetpp
 

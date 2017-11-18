@@ -183,7 +183,7 @@ Pandas, NumpPy and Matplotlib available in the session. The last, `%matplotlib`
 line is only needed for Jupyter. (It is a "magic command" that arranges plots
 to be displayed within the notebook.)
 
-```python
+```
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -195,7 +195,7 @@ CSV file into a data frame. The data frame is the central concept of
 Pandas. We will continue to work with this data frame throughout
 the whole tutorial.
 
-```python
+```
 aloha = pd.read_csv('aloha.csv')
 ```
 
@@ -206,7 +206,7 @@ You can view the contents of the data frame by simply entering the name
 of the variable (`aloha`). Alternatively, you can use the `head()` method
 of the data frame to view just the first few lines.
 
-```{.python .input}
+```
 aloha.head()
 ```
 
@@ -221,7 +221,7 @@ from the middle of the data frame. It accepts a range: `aloha.iloc[20:30]`
 selects 10 lines from line 20, `aloha.iloc[:5]` is like `head()`, and
 `aloha.iloc[-5:]` is like `tail()`.
 
-```{.python .input}
+```
 aloha.iloc[1200:1205]
 ```
 
@@ -229,7 +229,7 @@ Hint: If you are in the terminal and you find that the data frame printout does
 not make use of the whole width of the terminal, you can increase the display
 width for better readability with the following commands:
 
-```{.python .input}
+```
 pd.set_option('display.width', 180)
 pd.set_option('display.max_colwidth', 100)
 ```
@@ -244,7 +244,7 @@ also be used, with restrictions. (E.g. the column name must be valid as a Python
 identifier, and should not collide with existing methods of the data frame.
 Names that are known to cause trouble include `name`, `min`, `max`, `mean`).
 
-```{.python .input}
+```
 aloha.run.head()  # .head() is for limiting the output to 5 lines here
 ```
 
@@ -253,7 +253,7 @@ column names as index. The result will be another data frame. (The double
 brackets in the command are due to the fact that both the array indexing and
 the list syntax use square brackets.)
 
-```{.python .input}
+```
 tmp = aloha[['run', 'attrname', 'attrvalue']]
 tmp.head()
 ```
@@ -264,14 +264,14 @@ non-null elements in it (`count`), the number of unique values (`unique`),
 the most frequently occurring value (`top`) and its multiplicity (`freq`),
 and the inferred data type (more about that later.)
 
-```{.python .input}
+```
 aloha.module.describe()
 ```
 
 You can get a list of the unique values using the `unique()` method. For example,
 the following command lists the names of modules that have recorded any statistics:
 
-```{.python .input}
+```
 aloha.module.unique()
 ```
 
@@ -279,14 +279,14 @@ When you apply `describe()` to a numeric column, you get a statistical summary
 with things like mean, standard deviation, minimum, maximum, and various
 quantiles.
 
-```{.python .input}
+```
 aloha.value.describe()
 ```
 
 Applying `describe()` to the whole data frame creates a similar report about
 all numeric columns.
 
-```{.python .input}
+```
 aloha.describe()
 ```
 
@@ -294,7 +294,7 @@ Let's spend a minute on data types and column data types. Every column has a
 data type (abbreviated *dtype*) that determines what type of values it may
 contain. Column dtypes can be printed with `dtypes`:
 
-```{.python .input}
+```
 aloha.dtypes
 ```
 
@@ -333,7 +333,7 @@ Conditions can be combined with AND/OR using the "`&`" and "`|`" operators, but
 you need parentheses because of operator precedence. The following command
 selects the rows that contain scalars with a certain name and owner module:
 
-```{.python .input}
+```
 tmp = aloha[(aloha.type=='scalar') & (aloha.module=='Aloha.server') & (aloha.name=='channelUtilization:last')]
 tmp.head()
 ```
@@ -343,7 +343,7 @@ a bit controversial topic, because at the time of writing, there is a "convenien
 syntax and an "official" syntax for it. The "convenient" syntax is a simple
 assignment, for example:
 
-```{.python .input}
+```
 aloha['qname'] = aloha.module + "." + aloha.name
 aloha[aloha.type=='scalar'].head()  # print excerpt
 ```
@@ -357,7 +357,7 @@ Luckily, that is not the case most of the time (the operation *does* take
 effect). Nevertheless, for production code, i.e. scripts, the "official"
 solution, the `assign()` method of the data frame is recommended, like this:
 
-```{.python .input}
+```
 aloha = aloha.assign(qname = aloha.module + "." + aloha.name)
 aloha[aloha.type=='scalar'].head()
 ```
@@ -366,7 +366,7 @@ For completeness, one can remove a column from a data frame using either the
 `del` operator or the `drop()` method of the data frame. Here we show the former
 (also to remove the column we added above, as we won't need it for now):
 
-```{.python .input}
+```
 del aloha['qname']
 ```
 
@@ -381,7 +381,7 @@ iteration variables. You can verify that by printing the unique values (
 `aloha.attrvalue.unique()` -- it will print all values with quotes), or using
 the `type()` operator on an element:
 
-```{.python .input}
+```
 type( aloha[aloha.type=='scalar'].iloc[0].value )
 ```
 
@@ -400,7 +400,7 @@ in plots or as computation input.
 Luckily, `read_csv()` allows us to specify conversion functions for each column.
 So, armed with the following two short functions:
 
-```{.python .input}
+```
 def parse_if_number(s):
     try: return float(s)
     except: return True if s=="true" else False if s=="false" else s if s else None
@@ -411,7 +411,7 @@ def parse_ndarray(s):
 
 we can read the CSV file again, this time with the correct conversions:
 
-```{.python .input}
+```
 aloha = pd.read_csv('aloha.csv', converters = {
     'attrvalue': parse_if_number,
     'binedges': parse_ndarray,
@@ -434,7 +434,7 @@ from the data frame when it is already loaded.)
 To filter out columns, you need to specify in the `usecols` parameter
 the list of columns to keep:
 
-```{.python .input}
+```
 tmp = pd.read_csv('aloha.csv', usecols=['run', 'type', 'module', 'name', 'value'])
 ```
 
@@ -443,7 +443,7 @@ but we can implement it using the iterator API that reads the CSV file
 in chunks. We can filter each chunk before storing and finally concatenating
 them into a single data frame:
 
-```{.python .input}
+```
 iter = pd.read_csv('aloha.csv', iterator=True, chunksize=100)
 chunks = [ chunk[chunk['type']!='histogram'] for chunk in iter ]  # discards type=='histogram' lines
 tmp = pd.concat(chunks)
@@ -485,7 +485,7 @@ numeric, so the dtype conversion is possible. In other simulations that contain
 non-numeric itervars, one needs to filter those out, force them into numeric
 values somehow, or find some other trick to make things work.)
 
-```{.python .input}
+```
 scalars = aloha[(aloha.type=='scalar') | (aloha.type=='itervar')]  # filter rows
 scalars = scalars.assign(qname = scalars.attrname.combine_first(scalars.module + '.' + scalars.name))  # add qname column
 scalars.value = scalars.value.combine_first(scalars.attrvalue.astype('float64'))  # merge value columns
@@ -497,21 +497,21 @@ simulation run corresponds to one row, and all variables produced by that
 run had their own columns. We can call it the *wide* format, and it can be
 produced using the `pivot()` method:
 
-```{.python .input}
+```
 scalars_wide = scalars.pivot('run', columns='qname', values='value')
 scalars_wide.head()
 ```
 
 We are interested in only three columns for our plot:
 
-```{.python .input}
+```
 scalars_wide[['numHosts', 'iaMean', 'Aloha.server.channelUtilization:last']].head()
 ```
 
 Since we have our *x* and *y* data in separate columns now, we can utilize the
 scatter plot feature of the data frame for plotting it:
 
-```{.python .input}
+```
 # set the default image resolution and size
 plt.rcParams['figure.figsize'] = [8.0, 3.0]
 plt.rcParams['figure.dpi'] = 144
@@ -546,7 +546,7 @@ pivot table creation operation, and primarily intended for numerical data.
 which is quite convenient for us now (we want to average channel utilization
 over repetitions.)
 
-```{.python .input}
+```
 aloha_pivot = scalars_wide.pivot_table(index='iaMean', columns='numHosts', values='Aloha.server.channelUtilization:last')  # note: aggregation function = mean (that's the default)
 aloha_pivot.head()
 ```
@@ -562,7 +562,7 @@ The basic Matplotlib interface cannot create such plot in one step. However,
 the Pandas data frame itself has a plotting interface which knows how to
 interpret the data, and produces the correct plot without much convincing:
 
-```{.python .input}
+```
 aloha_pivot.plot.line()
 plt.ylabel('channel utilization')
 plt.show()
@@ -578,7 +578,7 @@ a blessing. Pivottable.js presents such a GUI inside a browser, and
 although the bulk of the code is Javascript, it has a Python frond-end
 that integrates nicely with Jupyter. Let's try it!
 
-```{.python .input}
+```
 import pivottablejs as pj
 pj.pivot_ui(scalars_wide)
 ```
@@ -602,7 +602,7 @@ you can reproduce the above "Channel utilization vs iaMean" plot in it:
 If you can't get to see it, the following command will programmatically
 configure the pivot table in the appropriate way:
 
-```{.python .input}
+```
 pj.pivot_ui(scalars_wide, rows=['numHosts'], cols=['iaMean'], vals=['Aloha.server.channelUtilization:last'], aggregatorName='Average', rendererName='Line Chart')
 ```
 
@@ -626,7 +626,7 @@ Histogram bin edges and bin values (counts) are in the `binedges` and
 
 Let us begin by selecting the histograms into a new data frame for convenience.
 
-```{.python .input}
+```
 histograms = aloha[aloha.type=='histogram']
 len(histograms)
 ```
@@ -634,7 +634,7 @@ len(histograms)
 We have 84 histograms. It makes no sense to plot so many histograms on one chart,
 so let's just take one on them, and examine its content.
 
-```{.python .input}
+```
 hist = histograms.iloc[0]  # the first histogram
 hist.binedges, hist.binvalues
 ```
@@ -644,7 +644,7 @@ as a step function, and create a line plot with the appropriate drawing style.
 The only caveat is that we need to add an extra `0` element to draw the right
 side of the last histogram bin.
 
-```{.python .input}
+```
 plt.plot(hist.binedges, np.append(hist.binvalues, 0), drawstyle='steps-post')   # or maybe steps-mid, for integers
 plt.show()
 ```
@@ -658,7 +658,7 @@ for the values. Thus, we can trick it into doing what we want by passing
 in our `binedges` array twice, once as bin edges and once as values, and
 specifying `binvalues` as weights.
 
-```{.python .input}
+```
 plt.hist(bins=hist.binedges, x=hist.binedges[:-1], weights=hist.binvalues)
 plt.show()
 ```
@@ -670,7 +670,7 @@ normalized version of the histogram, specify `normed=True` or `density=True`
 To draw the cumulative density function, also specify `cumulative=True`.
 The following plot shows the effect of some of these options.
 
-```{.python .input}
+```
 plt.hist(bins=hist.binedges, x=hist.binedges[:-1], weights=hist.binvalues, histtype='step', normed=True)
 plt.show()
 ```
@@ -679,7 +679,7 @@ To plot several histograms, we can iterate over the histograms and draw them
 one by one on the same plot. The following code does that, and also adds a
 legend and adjusts the bounds of the x axis.
 
-```{.python .input}
+```
 somehistograms = histograms[histograms.name == 'collisionLength:histogram'][:5]
 for row in somehistograms.itertuples():
     plt.plot(row.binedges, np.append(row.binvalues, 0), drawstyle='steps-post')
@@ -706,7 +706,7 @@ numHosts=20 and iaMean=2s"), and often needed as chart input as well.
 
 First, we select the iteration variables vars as a smaller data frame.
 
-```{.python .input}
+```
 itervars_df = aloha.loc[aloha.type=='itervar', ['run', 'attrname', 'attrvalue']]
 itervars_df.head()
 ```
@@ -715,7 +715,7 @@ We reshape the result by using the `pivot()` method. The following statement
 will convert unique values in the `attrname` column into separate columns:
 `iaMean` and `numHosts`. The new data frame will be indexed with the run id.
 
-```{.python .input}
+```
 itervarspivot_df = itervars_df.pivot(index='run', columns='attrname', values='attrvalue')
 itervarspivot_df.head()
 ```
@@ -724,7 +724,7 @@ Now, we only need to add the new columns back into the original dataframe, using
 `merge()`. This operation is not quite unlike an SQL join of two tables on the
 `run` column.
 
-```{.python .input}
+```
 aloha2 = aloha.merge(itervarspivot_df, left_on='run', right_index=True, how='outer')
 aloha2.head()
 ```
@@ -740,7 +740,7 @@ The selection and renaming step can be done as follows. (Note: we need
 `.astype(str)` in the condition so that rows where `attrname` is not filled in
 do not cause trouble.)
 
-```{.python .input}
+```
 itervarscol_df = aloha.loc[(aloha.type=='runattr') & (aloha.attrname.astype(str)=='iterationvars'), ['run', 'attrvalue']]
 itervarscol_df = itervarscol_df.rename(columns={'attrvalue': 'iterationvars'})
 itervarscol_df.head()
@@ -749,7 +749,7 @@ itervarscol_df.head()
 In the merging step, we join the two tables (I mean, data frames) on the `run`
 column:
 
-```{.python .input}
+```
 aloha3 = aloha2.merge(itervarscol_df, left_on='run', right_on='run', how='outer')
 aloha3.head()
 ```
@@ -757,7 +757,7 @@ aloha3.head()
 To see the result of our work, let's try plotting the same histograms again,
 this time with a proper legend:
 
-```{.python .input}
+```
 histograms = aloha3[aloha3.type=='histogram']
 somehistograms = histograms[histograms.name == 'collisionLength:histogram'][:5]
 for row in somehistograms.itertuples():
@@ -788,7 +788,7 @@ issue the following command to convert them to CSV:
 Then we read the the CSV file into a data frame in the same way we saw with the
 *aloha* dataset:
 
-```{.python .input}
+```
 routing = pd.read_csv('routing.csv', converters = {
     'attrvalue': parse_if_number,
     'binedges': parse_ndarray,
@@ -799,7 +799,7 @@ routing = pd.read_csv('routing.csv', converters = {
 
 Let us begin by selecting the vectors into a new data frame for convenience.
 
-```{.python .input}
+```
 vectors = routing[routing.type=='vector']
 len(vectors)
 ```
@@ -807,14 +807,14 @@ len(vectors)
 Our data frame contains results from one run. To get some idea what vectors
 we have, let's print the list unique vector names and module names:
 
-```{.python .input}
+```
 vectors.name.unique(), vectors.module.unique()
 ```
 
 A vector can be plotted on a line chart by simply passing the `vectime` and
 `vecvalue` arrays to `plt.plot()`:
 
-```{.python .input}
+```
 vec = vectors[vectors.name == 'qlen:vector'].iloc[4]  # take some vector
 plt.plot(vec.vectime, vec.vecvalue, drawstyle='steps-post')
 plt.xlim(0,100)
@@ -824,7 +824,7 @@ plt.show()
 When several vectors need to be placed on the same plot, one can simply
 use a `for` loop.
 
-```{.python .input}
+```
 somevectors = vectors[vectors.name == 'qlen:vector'][:5]
 for row in somevectors.itertuples():
     plt.plot(row.vectime, row.vecvalue, drawstyle='steps-post')
@@ -847,12 +847,12 @@ Vector time and value are already stored in the data frame as NumPy arrays
 (`ndarray`), so we can apply NumPy functions to them. For example, let's
 try `np.cumsum()` which computes cumulative sum:
 
-```{.python .input}
+```
 x = np.array([8, 2, 1, 5, 7])
 np.cumsum(x)
 ```
 
-```{.python .input}
+```
 for row in somevectors.itertuples():
     plt.plot(row.vectime, np.cumsum(row.vecvalue))
 plt.show()
@@ -868,7 +868,7 @@ represent "number of packets received". For such a plot, we can utilize
 `np.arange(1,n)` which simply returns the numbers 1, 2, .., n-1
 as an array:
 
-```{.python .input}
+```
 for row in somevectors.itertuples():
     plt.plot(row.vectime, np.arange(1, row.vecvalue.size+1), '.-', drawstyle='steps-post')
 plt.xlim(0,5); plt.ylim(0,20)
@@ -891,7 +891,7 @@ Negative indices count from the end of the array, so `t[:-1]` means
 sizes of the two arrays must match. or convenience, we encapsulate
 the formula into a Python function:
 
-```{.python .input}
+```
 def diff(t):
     return t[1:] - t[:-1]
 
@@ -906,7 +906,7 @@ shorter, we need to write `row.vectime[1:]` to drop the first element
 Also, we use dots for plotting instead of lines, as it makes more
 sense here.
 
-```{.python .input}
+```
 for row in somevectors.itertuples():
     plt.plot(row.vectime[1:], diff(row.vectime), 'o')
 plt.xlim(0,100)
@@ -917,7 +917,7 @@ We now know enough NumPy to be able to write a function that computes
 running average (a.k.a. "mean filter"). Let's try it out in a plot
 immediately.
 
-```{.python .input}
+```
 def running_avg(x):
     return np.cumsum(x) / np.arange(1, x.size + 1)
 
@@ -932,7 +932,7 @@ For certain quantities such as queue length or on-off status,
 weighted average (with time intervals used as weights) makes
 more sense. Here is a function that computes running time-average:
 
-```{.python .input}
+```
 def running_timeavg(t,x):
     dt = t[1:] - t[:-1]
     return np.cumsum(x[:-1] * dt) / t[1:]
@@ -949,7 +949,7 @@ to the `running_timeavg()` function. (Note: Computing integral in other
 ways is part of NumPy and SciPy, if you ever need it. For example,
 `np.trapz(y,x)` computes integral using the trapezoidal rule.)
 
-```{.python .input}
+```
 def integrate_steps(t,x):
     dt = t[1:] - t[:-1]
     return np.cumsum(x[:-1] * dt)
@@ -965,7 +965,7 @@ moving window average. It relies on the clever trick of subtracting
 the cumulative sum of the original vector from its shifted version
 to get the sum of values in every *N*-sized window.
 
-```{.python .input}
+```
 def winavg(x, N):
     xpad = np.concatenate((np.zeros(N), x)) # pad with zeroes
     s = np.cumsum(xpad)

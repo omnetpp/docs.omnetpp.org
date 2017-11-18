@@ -1,7 +1,0 @@
-#!/bin/sh
-notedown ResultAnalysisUsingPython.md --to markdown --match fenced --run --render > index.md
-#notedown ResultAnalysisUsingPython.md --match fenced --run > index.md
-
-# regex : \{\.python .input.*    to python
-# regex (![]() image format to HTML img tag) : !\[\]\((.*)\)   to <img src="$1">
-

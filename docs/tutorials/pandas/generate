@@ -1,0 +1,4 @@
+#!/bin/sh
+# install: pip3 install notedown
+notedown ResultAnalysisUsingPython.md --match fenced --run --render --template mkdocs-markdown.tpl > index.md
+
