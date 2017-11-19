@@ -35,7 +35,7 @@ extra_javascript:
 # Options
 extra:
   feature:
-    tabs: false
+    tabs: true
   palette:
     primary: indigo
     accent: indigo
@@ -73,7 +73,9 @@ markdown_extensions:
 
 # Page tree
 pages:
-  - OMNeT++ Documentation: index.md
+  - Documentation:
+    - Index: index.md
+    - Introduction: intro.md
   - Tutorials:
     - Learn OMNeT++ with TicToc:
       - Introduction: tutorials/tictoc/index.md
@@ -94,13 +96,9 @@ pages:
       - Examining the Code: tutorials/cloud/page6.md
       - Potential Improvements, Alternatives: tutorials/cloud/page7.md
     - Result Analysis with Python: tutorials/pandas/index.md
-# - Documentation:
-#   - Page1: index.md
-# - API:
-#   - Core: api/index.md
-  - Source File Listing: showfile.md
+  - API Reference:
+    - Browser: api/index.md
+    - Source Viewer: showfile.md
 
 # Google Analytics
-#google_analytics:
-#  - ""
-#  - auto
+google_analytics: ['UA-240922-2', 'docs.omnetpp.org']
