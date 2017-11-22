@@ -1,5 +1,5 @@
 
-
+.snippet { overflow-x: auto; }
 pre .comment { color:#998 } 
 pre .config { color:#0086B3 } 
 pre .tag, pre .tag-name { color:navy } 
