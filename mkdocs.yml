@@ -2,7 +2,7 @@
 site_name: OMNeT++ Tutorials
 site_description: Docmentation for the OMNeT++ Simulator
 site_author: OMNeT++ Team
-site_url: http://docs.omnetpp.org/
+site_url: https://docs.omnetpp.org/
 
 # Repository
 repo_name: omnetpp/omnetpp-docs
@@ -73,10 +73,6 @@ markdown_extensions:
 
 # Page tree
 pages:
-#  - Documentation:
-#    - Index: index.md
-#    - Introduction: intro.md
-#  - Tutorials:
     - Overview: index.md
     - Learn OMNeT++ with TicToc:
       - Introduction: tutorials/tictoc/index.md
@@ -97,9 +93,7 @@ pages:
       - Examining the Code: tutorials/cloud/page6.md
       - Potential Improvements, Alternatives: tutorials/cloud/page7.md
     - Result Analysis with Python: tutorials/pandas/index.md
-#  - API Reference:
-#    - Browser: api/index.md
-    - Source Viewer: showfile.md
+    - _Source Browser_: showfile.md
 
 # Google Analytics
 google_analytics: ['UA-240922-2', 'docs.omnetpp.org']
