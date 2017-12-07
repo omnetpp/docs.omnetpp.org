@@ -6,3 +6,4 @@
   to harness the power of computing clouds like AWS for running simulation campaigns.
 - [Result Analysis with Python](tutorials/pandas/index.md). This tutorial will walk you through the initial steps of
   using Python for analysing simulation results, and shows how to do some of the most common tasks.
+- [Swarm/AWS](tutorials/swarm/index.md). The new and improved "cloud" tutorial.

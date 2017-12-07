@@ -93,6 +93,7 @@ pages:
       - Examining the Code: tutorials/cloud/page6.md
       - Potential Improvements, Alternatives: tutorials/cloud/page7.md
     - Result Analysis with Python: tutorials/pandas/index.md
+    - Inet Swarm: tutorials/swarm/index.md
     - _Source Browser_: showfile.md
 
 # Google Analytics
