@@ -6,9 +6,17 @@ tutorial: AWS
 
 # Introduction
 
-This tutorial will show you how to
+This tutorial will show you how to accelerate INET simulation campaigns by
+distributing the individual runs to several machines - either locally, or on AWS -,
+using the new INET Swarm application.
 
+It will work with any INET fork (but not with other, independent projects yet),
+so you can run your own code as well, not just the built-in examples.
 
+We provide a client utility as a replacement of `opp_runall` two Docker images (on Docker Hub),
+
+Additionally, a Python script is also available to make the management of the Swarm on AWS
+easier.
 
 ## Docker Swarm
 
@@ -28,10 +36,6 @@ Here we will only consider two of the many deployment options: On AWS (Amazon We
 and on local computers you have access to.
 
 ## Deployment on AWS
-
-
-
-## Deployment on Local Computers
 
 
 
@@ -57,12 +61,21 @@ pip3 install boto3
 
 ### Creating the swarm
 
+
+aws_swarm_tool.py
 Deploying the CloudFormation template cupplied by Docker, called Docker for AWS.
 
 
 
 ### Connecting to the swarm
 
+
+
+aws_swarm_tool.py connect
+
+
+
+## Deployment on Local Computers
 
 
 
