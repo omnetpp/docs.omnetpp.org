@@ -97,12 +97,18 @@ If the Swarm is not already running, you have to start it up again:
 
 `$ aws_swarm_tool.py resume`
 
-Change into the INET directory.
+Change into the directory under INET (your INET fork) that contains your simulation. 
+
+IMPORTANT: Your INET installation should be a checked-out copy of a GitHub repository with all changes pushed up to GitHub, 
+because our tool only sends the Git URL of your project and the hash of the currently checked-out commit to AWS, not the full source code.
 
 `$ cd examples/inet/ber`
+
+Enter the command for running the simulations, but replace `inet` in it with our `inet_runall` program:
+
 `$ inet_runall_swarm.py -c ber-flavour-experiment`
 
-This should query the runs to be executed, submit them to the job queue, and wait for the jobs to finish.
+The `inet_runall` tool will expand the list of simulation runs to be executed, submits them to the job queue, and wait for the jobs to finish.
 The results will be downloaded automatically into the `results` folder.
 
 If you are done with it, you can stop the machines:
