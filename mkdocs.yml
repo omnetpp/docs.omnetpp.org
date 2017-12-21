@@ -94,7 +94,7 @@ pages:
       - Examining the Code: tutorials/cloud/page6.md
       - Potential Improvements, Alternatives: tutorials/cloud/page7.md
     - Running INET Simulation Campaigns on AWS:
-      - Introduction and Background: tutorials/swarm/index.md
+      - Motivation: tutorials/swarm/index.md
       - Installation and Usage: tutorials/swarm/page1.md
       - How it Works: tutorials/swarm/page2.md
     - _Source Browser_: showfile.md

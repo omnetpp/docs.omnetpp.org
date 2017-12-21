@@ -3,31 +3,35 @@ previous_page_disabled: true
 ## Introduction
 
 
-This tutorial will show you how to accelerate INET simulation campaigns by
-distributing the individual runs to several virtual machines on AWS (Amazon Web Services,
-a cloud computing service).
-It will work with any INET fork (but not yet with other, independent projects),
-so you can run your own code as well, not just the built-in examples.
+This tutorial will show you how to run INET simulation campaigns on the AWS (Amazon Web Services,
+a cloud computing service). The solution given here works with INET, and any INET fork published on GitHub.
+It does not work with other, independent projects yet; work is underway to make the tool generic
+enought to run any simulation. (The project needs to be published on GitHub, because the tool
+retrieves the source code of the simulation model to the cloud nodes by checking it out from GitHub.)
 
-We provide a client utility as a replacement of `opp_runall`.
+You can out this solution for free, because AWS Free Tier is quite sufficient for running smaller 
+simulation campaigns. For serious simulations, AWS usage is very affordable. (We are not affiliated
+with Amazon.)
 
-It can speed up your simulation campaigns significantly.
-It will have the best results if the campaign consists of many runs,
-and each of them takes more than a couple seconds.
+Running the simulation on a cloud service incurs some overhead (checking out the git repo of the
+simulation, building it, distributing the binaries to all processors, and finally downloading
+the results to your own computer), so your simulation campaign needs to be large enough to
+benefit from cloud computing: it needs to consist of several simulation runs, and each 
+run should be longer than at least a couple seconds.
 
 
 ## Background
 
-This is a Docker Swarm application, consisting of several services, using a couple
-of "official" images, and three custom ones.
-
-Additionally, a Python script is available to make the management of the Swarm on AWS
+This solution utilizes Docker Swarm, and a couple of other services and technologies.
+In addition to scripts that manage the tasks closely associated with running simulations
+remotely, we also provide a command-line tool make the management of the Swarm on AWS
 easier.
 
-### Docker Swarm
+
+### What is Docker Swarm?
 
 
-With version 1.12.0, Docker introduced **Swarm Mode**. It makes it possible to
+With version 1.12.0, Docker introduced *Swarm Mode*. It makes it possible to
 connect multiple computers (called hosts or nodes) on a network, into a cluster - called swarm.
 
 This new feature enables someting called "container orchestration". It makes the development, deployment,

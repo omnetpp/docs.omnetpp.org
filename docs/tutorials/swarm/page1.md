@@ -1,10 +1,10 @@
 
-In this section we consider just one of the many deployment options: On AWS (Amazon Web Services).
+In this section we show you how to deploy and use the tools to run simulations on AWS.
 
 
 ## Installation
 
-Install python3 and pip3.
+Install python3 and pip3 on your local computer. We recommend that you use Linux.
 
 ### Deployment on AWS
 
@@ -12,7 +12,7 @@ Install python3 and pip3.
 
 To access any web service AWS offers, you must first create an AWS account at http://aws.amazon.com. An AWS account is simply an Amazon.com account that is enabled to use AWS products; you can use an existing Amazon.com account login and password when creating the AWS account. ([source](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/AboutAWSAccounts.html))
 
-If you already have one, just log in to the [AWS Management Console](console.aws.amazon.com) with it, and ignore the rest of this section.
+If you already have one, just log in to the [AWS Management Console](https://console.aws.amazon.com) with it, and ignore the rest of this section.
 
 Otherwise, follow the instructions here: [AWS registration](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html)
 
@@ -25,7 +25,7 @@ Click the **Create policy** button. Switch over to the **JSON** tab. Paste the c
 
 This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/). It had to be slightly altered to make it fit into the default size limit. This way it doesn't strictly adhere to the "principle of least privilege", because it grants full access to some services (namely: AutoScaling, CloudFormation, ElasticFileSystem, and ElasticLoadBalancing), but most of the permissions in those services were already granted one-by-one, so it isn't so bad.
 
-Click **Review policy**. Enter a **Name** for the new policy, for example "inet-docker-swarm-policy", then click **Create policy**
+Click **Review policy**. Enter a **Name** for the new policy, for example "inet-docker-swarm-policy", then click **Create policy**.
 
 #### Creating the User
 
@@ -42,7 +42,7 @@ Also, read the notice in the green area, particularly this part: "This is the la
 
 #### Configuring CLI Access
 
-To let our computer manage and use our AWS account, we have to configure it with the credentials of the user we just created for it.
+To let your computer manage and use your AWS account, we have to configure it with the credentials of the user you just created for it.
 First we need to install the AWS CLI utility using `pip`:
 
 `$ pip3 install --upgrade awscli`
@@ -51,20 +51,18 @@ Then start the configuration:
 
 `$ aws configure`
 
-*(If at first you get `aws: command not found`, or `The program 'aws' is currently not installed. ...`, try running `~/.local/bin/aws configure` instead.)*
+If at first you get `aws: command not found`, or `The program 'aws' is currently not installed`, try running `~/.local/bin/aws configure` instead.
 
-When asked, enter the Access Key ID, then the Secret Access Key. These will be recorded into an INI file, which is by default at `~/.aws/credentials`.
+When asked, enter the *Access Key ID*, then the *Secret Access Key*. They will be recorded into an INI file, which is by default at `~/.aws/credentials`.
 
 For default region, choose the one closest to you geographically. You can find the list of region codes and their locations [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
-In my case the Frankfurt datacenter was closest, so I entered `eu-central-1`. This setting is recorded in the `~/.aws/config` file.
+In my case, the Frankfurt datacenter was closest, so I entered `eu-central-1`. This setting is recorded in the `~/.aws/config` file.
 
-You can leave Default output format empty.
+You can leave *Default output format* empty.
 
 **Note:** Once all this information is entered correctly, any software you run on your computer has access to your AWS account, as permitted by the policy attached to the configured user. Remove (rename) the `credentials` file mentioned above to (temporarily) disable access. The proper way to completely and permanently revoke this access is to delete the IAM User we just created.
 
 From this point on in this tutorial, we won't need the AWS Management Console to initiate any actions. However, if you wish, you can use it to observe and check for yourself what the `aws_swarm_tool.py` script does.
-
-----
 
 More info about Regions and Availability Zones:
 
@@ -76,17 +74,21 @@ More info about Regions and Availability Zones:
 
 ### Installing Local Client Scripts
 
+Having set up your AWS account and access to it, we can proceed by installing the client-side tools for submitting simulations.
 
 First, installing the required libraries:
 
 `$ pip3 install boto3 psutil pymongo redis rq`
 
-Save these files into `~/bin`: [aws_swarm_tool.py](code/aws_swarm_tool.py),
+Save the following files into `~/bin`: [aws_swarm_tool.py](code/aws_swarm_tool.py),
 [docker-compose.yml](code/docker-compose.yml), [inet_runall_swarm.py](code/inet_runall_swarm.py)
+
+Issue the following commands:
 
 `$ export PATH=$PATH:$HOME/bin`
 
 `$ aws_swarm_tool.py init`
+
 
 
 ## Usage
@@ -104,6 +106,9 @@ This should query the runs to be executed, submit them to the job queue, and wai
 The results will be downloaded automatically into the `results` folder.
 
 If you are done with it, you can stop the machines:
+
 `$ aws_swarm_tool.py halt`
 
 They will shut down automatically after an hour of being idle.
+
+
