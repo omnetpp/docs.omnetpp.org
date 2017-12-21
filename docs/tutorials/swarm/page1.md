@@ -19,7 +19,7 @@ Otherwise, follow the instructions here: [AWS registration](https://portal.aws.a
 
 On the AWS Management Console, navigate to the IAM Service configuration page, and switch to **Policies**. Or just
 click [this link](https://console.aws.amazon.com/iam/home#/policies), it will take you there.
-Click the **Create policy** button. Switch over to the **JSON** tab. Paste the contents of [this file](docker-for-aws-policy.json) into the entry field.
+Click the **Create policy** button. Switch over to the **JSON** tab. Paste the contents of [this file](code/docker-for-aws-policy.json) into the entry field.
 
 This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/). It had to be slightly altered to make it fit into the default size limit, so it grants slightly more privileges than necessary.
 It also adds the ec2:CreateKeyPair permission, and the cloudwatch:PutMetricAlarm. This is necessary to automate the connection to the swarm, and the shutting down of the machines after they have been idle for a while.
@@ -57,7 +57,7 @@ When asked, enter the **Access Key ID**, then the **Secret Access Key**. They wi
 For **Default region**, choose the one closest to you geographically. You can find the list of region codes and their locations
 [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
 In my case, the Frankfurt datacenter was closest, so I entered `eu-central-1`. This setting is recorded in the `~/.aws/config` file.
-You can find more info about Regions and Availability Zones 
+You can find more info about Regions and Availability Zones
 [here](https://docs.aws.amazon.com/general/latest/gr/rande.html),
 [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html), and
 [here](https://aws.amazon.com/about-aws/global-infrastructure/).
@@ -96,9 +96,9 @@ If the Swarm is not already running, you have to start it up again:
 
 `$ aws_swarm_tool.py resume`
 
-Change into the directory under INET (your INET fork) that contains your simulation. 
+Change into the directory under INET (your INET fork) that contains your simulation.
 
-IMPORTANT: Your INET installation should be a checked-out copy of a GitHub repository with all changes pushed up to GitHub, 
+IMPORTANT: Your INET installation should be a checked-out copy of a GitHub repository with all changes pushed up to GitHub,
 because our tool only sends the Git URL of your project and the hash of the currently checked-out commit to AWS, not the full source code.
 
 `$ cd examples/inet/ber`
