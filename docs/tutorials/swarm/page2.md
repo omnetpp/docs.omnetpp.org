@@ -1,6 +1,5 @@
 next_page_disabled: true
 
-
 This is a distributed application, built on top of Docker Swarm[1]. It is composed of
 7 different services.
 

@@ -84,7 +84,8 @@ pages:
       - Visualizing the Results: tutorials/tictoc/part6.md
       - Parameter Studies: tutorials/tictoc/part7.md
       - Closing words: tutorials/tictoc/conclusion.md
-    - Running Simulation Campaigns in the Cloud:
+    - Result Analysis with Python: tutorials/pandas/index.md
+    - Introduction into Running Simulations in the Cloud:
       - Introduction: tutorials/cloud/index.md
       - Concepts: tutorials/cloud/page1.md
       - Implementation: tutorials/cloud/page2.md
@@ -92,10 +93,9 @@ pages:
       - Trying It Out: tutorials/cloud/page5.md
       - Examining the Code: tutorials/cloud/page6.md
       - Potential Improvements, Alternatives: tutorials/cloud/page7.md
-    - Result Analysis with Python: tutorials/pandas/index.md
-    - Inet Swarm:
+    - Running INET Simulation Campaigns on AWS:
       - Introduction and Background: tutorials/swarm/index.md
-      - Deployment and Usage: tutorials/swarm/page1.md
+      - Installation and Usage: tutorials/swarm/page1.md
       - How it Works: tutorials/swarm/page2.md
     - _Source Browser_: showfile.md
 

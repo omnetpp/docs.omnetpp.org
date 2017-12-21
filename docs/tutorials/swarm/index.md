@@ -1,12 +1,11 @@
 previous_page_disabled: true
 
-
 ## Introduction
 
 
 This tutorial will show you how to accelerate INET simulation campaigns by
-distributing the individual runs to several machines on AWS.
-
+distributing the individual runs to several virtual machines on AWS (Amazon Web Services,
+a cloud computing service).
 It will work with any INET fork (but not yet with other, independent projects),
 so you can run your own code as well, not just the built-in examples.
 
