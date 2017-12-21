@@ -1,33 +1,25 @@
 next_page_disabled: true
 
-This is a distributed application, built on top of Docker Swarm[1]. It is composed of
-7 different services.
-
-
-[1] The new, integrated "Swarm Mode", not the legacy docker-swarm utility.
+This is a distributed application, built on top of [Docker Swarm](https://docs.docker.com/engine/swarm/)
+(the new, integrated "Swarm Mode", not the legacy docker-swarm utility).
+It is composed of seven different Docker [services](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/).
 
 
 ## Services
 
 
-The application is made up of several Docker services. These are:
-
--  redis:
--  mongo:
--  builder:
--  runner:
--  visualizer:
--  dashboard:
--  distcc:
-
+The application is made up of several Docker services:
+redis, mongo, builder, runner, visualizer, dashboard, distcc.
 Let's discuss what each of them are there for, and what they do.
 
 ### Redis
 
-This runs the official on the Manager. It is needed only to operate RQ,
-and is not used directly at all.
+This service runs the official Redis image on the Manager. It is needed by RQ (Redis Queue)
+that we use for job queueing.
 
 ### Mongo
+
+Mongo is a database that we use for temporary storage of binaries and result files.
 
 ### Builder
 
@@ -37,7 +29,7 @@ container on the manager, and listens on the `build` queue for jobs.
 It uses the distcc servers from the `distcc` service through the `buildnet`
 network to distribute the compilation tasks across all nodes.
 
-Once a build is done, it submits the results (concretely the libINET.so file) to the `Mongo` service,
+Once a build is done, it submits the binaries (actually, the `libINET.so` file) to the Mongo service,
 so the runner containers can access it later.
 
 ### Runner
@@ -60,7 +52,7 @@ just using your web browser. It listens on port `8080`, so once
 your swarm application is up and running (and you are connected to the swarm
 if it is on AWS), you can check it out at [http://localhost:8080/].
 
-[! insert screenshot here? ]
+<!-- insert screenshot here? -->
 
 ### Dashboard
 
@@ -69,7 +61,7 @@ container on the manager, with a web server in it.
 This one lets you see, and manage in a limited way, the RQ queues, workers, and jobs.
 See: [http://localhost:9181/].
 
-[! insert screenshot here? ]
+<!-- insert screenshot here? -->
 
 ### distcc
 
