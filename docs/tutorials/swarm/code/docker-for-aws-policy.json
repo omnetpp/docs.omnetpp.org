@@ -16,6 +16,7 @@
             "Sid": "SelectivePermissions",
             "Effect": "Allow",
             "Action": [
+                "cloudwatch:PutMetricAlarm",
                 "dynamodb:CreateTable",
                 "dynamodb:DeleteItem",
                 "dynamodb:DeleteTable",
@@ -35,6 +36,7 @@
                 "ec2:AuthorizeSecurityGroupEgress",
                 "ec2:AuthorizeSecurityGroupIngress",
                 "ec2:CreateInternetGateway",
+                "ec2:CreateKeyPair",
                 "ec2:CreateNatGateway",
                 "ec2:CreateNetworkAcl",
                 "ec2:CreateNetworkAclEntry",

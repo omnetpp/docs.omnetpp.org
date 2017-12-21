@@ -21,6 +21,7 @@ click [this link](https://console.aws.amazon.com/iam/home#/policies), it will ta
 Click the **Create policy** button. Switch over to the **JSON** tab. Paste the contents of [this file](docker-for-aws-policy.json) into the entry field.
 
 This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/). It had to be slightly altered to make it fit into the default size limit, so it grants slightly more privileges than necessary.
+It also adds the ec2:CreateKeyPair permission, and the cloudwatch:PutMetricAlarm. This is necessary to automate the connection to the swarm, and the shutting down of the machines after they have been idle for a while.
 
 Click **Review policy**. Enter a **Name** for the new policy, for example "inet-docker-swarm-policy", then click **Create policy**.
 
