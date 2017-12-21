@@ -4,7 +4,8 @@ In this section we show you how to deploy and use the tools to run simulations o
 
 ## Installation
 
-Install python3 and pip3 on your local computer. We recommend that you use Linux.
+Install Docker, python3 and pip3 on your local computer. We recommend that you use Linux.
+A working OMNeT++ installation, and a checked-out INET (fork) git repository is also necessary.
 
 ### Deployment on AWS
 
