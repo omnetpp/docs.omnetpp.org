@@ -128,6 +128,8 @@ $ aws_swarm_tool.py init
 
 ## Usage
 
+### Running Simulations
+
 Change into the directory under INET (or your INET fork) that contains your simulation.
 
 IMPORTANT: Your INET installation should be a checked-out copy of a GitHub repository with all changes pushed up to GitHub,
@@ -150,7 +152,7 @@ The results will be downloaded automatically into the `results` folder.
 
 You can monitor progress at http://localhost:9181/ which displays the content of the job queue.
 
-## Stopping, Restarting and Deleting the Swarm
+### Stopping, Restarting and Deleting the Swarm
 
 Once you are done, you can stop the machines:
 
