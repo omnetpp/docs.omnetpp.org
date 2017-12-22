@@ -11,9 +11,9 @@ A working OMNeT++ installation, and a checked-out INET (fork) git repository is 
 
 #### Creating an AWS Account
 
-To access any web service AWS offers, you must first create an AWS account at http://aws.amazon.com. An AWS account is simply an Amazon.com account that is enabled to use AWS products; you can use an existing Amazon.com account login and password when creating the AWS account. ([source](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/AboutAWSAccounts.html))
-If you already have one, just log in to the [AWS Management Console](https://console.aws.amazon.com) with it, and ignore the rest of this section.
-Otherwise, follow the instructions here: [AWS registration](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html)
+To access any web service AWS offers, you must first create an AWS account at http://aws.amazon.com. If you already have one, just log in to the [AWS Management Console](https://console.aws.amazon.com) with it; otherwise, follow the instructions here: [AWS registration](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html).
+
+During registration, you will have to enter your credit card number. Amazon will charge it with a small amount ($1) to verify it.
 
 #### Creating the Access Policy
 
@@ -22,7 +22,7 @@ click [this link](https://console.aws.amazon.com/iam/home#/policies), it will ta
 Click the **Create policy** button. Switch over to the **JSON** tab. Paste the contents of [this file](code/docker-for-aws-policy.json) into the entry field.
 
 This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/). It had to be slightly altered to make it fit into the default size limit, so it grants slightly more privileges than necessary.
-It also adds the ec2:CreateKeyPair permission, and the cloudwatch:PutMetricAlarm. This is necessary to automate the connection to the swarm, and the shutting down of the machines after they have been idle for a while.
+It also adds the `ec2:CreateKeyPair` and the `cloudwatch:PutMetricAlarm` permissions. These are necessary to automate the connection to the swarm, and the shutting down of the machines after they have been idle for a while.
 
 Click **Review policy**. Enter a **Name** for the new policy, for example "inet-docker-swarm-policy", then click **Create policy**.
 
