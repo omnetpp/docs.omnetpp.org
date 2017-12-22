@@ -186,7 +186,7 @@ To completely delete the entire Swarm:
 $ aws_swarm_tool.py delete
 ````
 
-To check whether the stack is running: on the AWS Management Console, select the EC2 service,
+To make sure that the stack is no longer running: select the EC2 service on the AWS Management Console,
 and check the [Running Instances](https://console.aws.amazon.com/ec2/v2/home#Instances).
 If you see instances named `inet-Node` or `inet-Manager`, in the `running` state, the Swarm is active.
 
