@@ -19,9 +19,8 @@ import pymongo
 import gridfs
 
 
-LOCAL_INET_ROOT = os.path.abspath(
-    os.path.dirname(os.path.realpath(__file__)) + "/..")
-
+LOCAL_INET_ROOT = re.sub(R"(/showcases|/tutorials)$", "",
+                         subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode("utf-8").strip())
 
 def guess_project_name():
     origin_url = subprocess.check_output(
@@ -241,6 +240,7 @@ class Runall:
             exit(1)
 
     def resolveRunNumbers(self, sim_prog_args):
+        # XXX handle _dbg as well as not _dbg ?
         tmp_args = ["opp_run_dbg"] + sim_prog_args + ["-s", "-q", "runnumbers"]
         print("running: " + " ".join(tmp_args))
         try:

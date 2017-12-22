@@ -3,9 +3,9 @@ In this page we show you how to deploy and use the tools to run simulations on A
 
 !!! caution
     The solution and the toolset presented here are currently experimental, and we are collecting
-    feedback about it. Please let us know if you are interested, and if you try it, 
-    we request you to report bugs, errors or any difficulty you experience in using it. 
-    We'd also be happy to hear about successful usage. 
+    feedback about it. Please let us know if you are interested, and if you try it,
+    we request you to report bugs, errors or any difficulty you experience in using it.
+    We'd also be happy to hear about successful usage.
     Use the bugtracker link at the bottom of this page for feedback.
 
 
@@ -20,7 +20,7 @@ A working OMNeT++ installation, and a checked-out INET (fork) git repository is 
 #### Creating an AWS Account
 
 To access any web service AWS offers, you must first create an AWS account at http://aws.amazon.com.
-If you already have one, just log in to the [AWS Management Console](https://console.aws.amazon.com) with it; 
+If you already have one, just log in to the [AWS Management Console](https://console.aws.amazon.com) with it;
 otherwise, follow the instructions here: [AWS registration](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html).
 
 During registration, you will have to enter your credit card number. Amazon will charge it with a small amount (1 USD) to verify it.
@@ -33,7 +33,7 @@ click [this link](https://console.aws.amazon.com/iam/home#/policies), it will ta
 Click the **Create policy** button. Switch over to the **JSON** tab.
 Paste the contents of [this file](code/docker-for-aws-policy.json) into the entry field, replacing its entire contents.
 
-This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/). 
+This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/).
 It had to be slightly altered to make it fit into the default size limit, so it grants slightly more privileges than necessary.
 It also adds the `ec2:CreateKeyPair` and the `cloudwatch:PutMetricAlarm` permissions.
 These are necessary to automate the connection to the swarm, and the shutting down of the machines after they have been idle for a while.
@@ -48,8 +48,8 @@ Enter a **User name**, for example "inet-swarm-cli", and tick the checkbox next 
 
 As the final step of user creation, save the **Access key ID** and the **Secret access key**, somewhere safe. It's a good idea that you do this by clicking **Download .csv**. This will let you download this information into a simple text file, so you won't make any mistakes while copy-pasting them.
 
-Also, read the notice in the green area, particularly this part: 
-*"This is the last time these credentials will be available to download. However, you can create new credentials at any time."* 
+Also, read the notice in the green area, particularly this part:
+*"This is the last time these credentials will be available to download. However, you can create new credentials at any time."*
 This means that if you don't save the key ID and the secret key now, you will have to delete this user and create a new one.
 
 !!! caution "Important"
@@ -87,9 +87,9 @@ You can find more info about Regions and Availability Zones
 You can leave **Default output format** empty.
 
 !!! caution "Important"
-    Once all this information is entered correctly, any software you run on your computer has access 
-    to your AWS account, as permitted by the policy attached to the configured user. 
-    Remove (rename) the `credentials` file mentioned above to (temporarily) disable access. 
+    Once all this information is entered correctly, any software you run on your computer has access
+    to your AWS account, as permitted by the policy attached to the configured user.
+    Remove (rename) the `credentials` file mentioned above to (temporarily) disable access.
     The proper way to completely and permanently revoke this access is to delete the IAM User we just created.
 
 From this point on in this tutorial, we won't need the AWS Management Console to initiate any actions. However, if you wish, you can use it to observe and check for yourself what the `aws_swarm_tool.py` script does.
@@ -145,8 +145,6 @@ Enter the command for running the simulations, using our `inet_runall_swarm.py` 
 $ inet_runall_swarm.py -c ber-flavour-experiment
 ````
 
-XXX handle opp_run_dbg or not _dbg...
-
 The `inet_runall_swarm.py` tool will expand the list of simulation runs to be executed, submit them to the job queue, and wait for the jobs to finish.
 The results will be downloaded automatically into the `results` folder.
 
@@ -185,7 +183,6 @@ To completely delete the entire Swarm:
 ````
 $ aws_swarm_tool.py remove
 ````
-
 
 TODO refine the following:
 
