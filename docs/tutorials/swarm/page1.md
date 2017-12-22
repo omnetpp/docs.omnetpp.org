@@ -150,7 +150,7 @@ The results will be downloaded automatically into the `results` folder.
 
 You can monitor progress at http://localhost:9181/ which displays the content of the job queue.
 
-## Stopping and Restarting
+## Stopping, Restarting and Deleting the Swarm
 
 Once you are done, you can stop the machines:
 
@@ -181,20 +181,20 @@ $ aws_swarm_tool.py resume
 To completely delete the entire Swarm:
 
 ````
-$ aws_swarm_tool.py remove
+$ aws_swarm_tool.py delete
 ````
 
-TODO refine the following:
+To check whether the stack is running: on the AWS Management Console, select the EC2 service,
+and check the [Running Instances](https://console.aws.amazon.com/ec2/v2/home#Instances).
+If you see instances named `inet-Node` or `inet-Manager`, in the `running` state, the Swarm is active.
 
-To check whether the stack is running: go to management console, EC2 service, check running instances. If you see
-running instances of `inet-Node` or `inet-Manager`.
-
-If the tool does not work, go to the management console on AWS, and delete inet stack.
-Open xxx, go to y and click Z and click OK.
-
+To delete the Swarm manually (if the tool does not work for some reason), go to the
+[CloudFormation service page](https://console.aws.amazon.com/cloudformation/home#/stacks) on
+the AWS Management Console. Tick the checkbox next to the `inet` Stack in the table, then click
+**Actions > Delete Stack**. This should remove all INET-related resources.
 
 ## Feedback and Discussion
 
-We are looking for feedback:
+We are looking for any kind of feedback or suggestion you might have regarding this tutorial here:
 https://github.com/omnetpp/omnetpp-tutorials/issues/3
 

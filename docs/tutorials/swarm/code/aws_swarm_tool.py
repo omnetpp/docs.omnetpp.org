@@ -237,9 +237,9 @@ def deploy_app(stack_name="inet"):
     subprocess.call(["docker", "-H", "tcp://localhost:2374", "stack", "up",
                      "--compose-file", os.path.dirname(os.path.realpath(__file__)) + "/docker-compose.yml", stack_name])
 
+    """
     print("Waiting for the services to start...")
 
-    """
     # wait for completion by polling the visualizer http service - this does not seem to work
     while True:
         time.sleep(1)
