@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -396,6 +396,7 @@ if __name__ == "__main__":
     if args.command == "init":
         create_add_key_pair()
         create_swarm()
+        connect_to_swarm()
         deploy_app()
     elif args.command == "connect":
         connect_to_swarm()

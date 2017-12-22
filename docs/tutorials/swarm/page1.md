@@ -29,8 +29,9 @@ During registration, you will have to enter your credit card number. Amazon will
 
 On the AWS Management Console, navigate to the IAM Service configuration page, and switch to **Policies**. Or just
 click [this link](https://console.aws.amazon.com/iam/home#/policies), it will take you there.
-Click the **Create policy** button. Switch over to the **JSON** tab. 
-Paste the contents of [this file](code/docker-for-aws-policy.json) into the entry field.
+
+Click the **Create policy** button. Switch over to the **JSON** tab.
+Paste the contents of [this file](code/docker-for-aws-policy.json) into the entry field, replacing its entire contents.
 
 This policy is the superset of the officially published one on the [Docker for AWS website](https://docs.docker.com/docker-for-aws/iam-permissions/). 
 It had to be slightly altered to make it fit into the default size limit, so it grants slightly more privileges than necessary.
@@ -143,6 +144,8 @@ Enter the command for running the simulations, using our `inet_runall_swarm.py` 
 ````
 $ inet_runall_swarm.py -c ber-flavour-experiment
 ````
+
+XXX handle opp_run_dbg or not _dbg...
 
 The `inet_runall_swarm.py` tool will expand the list of simulation runs to be executed, submit them to the job queue, and wait for the jobs to finish.
 The results will be downloaded automatically into the `results` folder.
