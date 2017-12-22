@@ -186,11 +186,18 @@ To completely delete the entire Swarm:
 $ aws_swarm_tool.py delete
 ````
 
-To make sure that the stack is no longer running: select the EC2 service on the AWS Management Console,
+### Checking the Status Manually
+
+!!! caution "Important"
+    When you do not intend to work with AWS for an extended period of time, you may want to
+    double-check manually that the stack on AWS has been stopped indeed, and you are no longer
+    being billed for it.
+
+To check the status, select the EC2 service on the AWS Management Console,
 and check the [Running Instances](https://console.aws.amazon.com/ec2/v2/home#Instances).
 If you see instances named `inet-Node` or `inet-Manager`, in the `running` state, the Swarm is active.
 
-To delete the Swarm manually (if the tool does not work for some reason), go to the
+To delete the Swarm manually (if the command-line tool does not work for some reason), go to the
 [CloudFormation service page](https://console.aws.amazon.com/cloudformation/home#/stacks) on
 the AWS Management Console. Tick the checkbox next to the `inet` Stack in the table, then click
 **Actions > Delete Stack**. This should remove all INET-related resources.
