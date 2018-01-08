@@ -259,7 +259,7 @@ use RNG 0.
 !!! tip "Exercise"
     Try other distributions as well.
 
-Sources: <a srcfile="tutorials/tictoc/code/tictoc8.ned"></a>, <a srcfile="tutorials/tictoc/code/txc7.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
+Sources: <a srcfile="tutorials/tictoc/code/tictoc7.ned"></a>, <a srcfile="tutorials/tictoc/code/txc7.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 
 
 ## 3.8 Timeout, cancelling timers
