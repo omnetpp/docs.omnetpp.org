@@ -18,7 +18,10 @@ import rq
 import pymongo
 import gridfs
 
+# Configuation area
+REDIS_TARGET_HOST = "localhost"
 
+# Logic - DON'T TOUCH FOR CONFIGURATON
 LOCAL_INET_ROOT = re.sub(R"(/showcases|/tutorials)$", "",
                          subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode("utf-8").strip())
 
@@ -95,7 +98,7 @@ class Runall:
 
     def __init__(self):
         print("connecting to the job queue")
-        conn = redis.Redis(host="localhost")
+        conn = redis.Redis(host=REDIS_TARGET_HOST)
         self.build_q = rq.Queue("build", connection=conn,
                                 default_timeout=10 * 60 * 60)
         self.run_q = rq.Queue("run", connection=conn,
