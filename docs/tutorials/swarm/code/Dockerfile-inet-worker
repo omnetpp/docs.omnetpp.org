@@ -12,10 +12,10 @@ ENV LANG C.UTF-8
 
 WORKDIR /opt/
 
-RUN wget https://omnetpp.org/omnetpp/send/30-omnet-releases/2319-omnetpp-5-2-core \
-        --referer=https://omnetpp.org/omnetpp -O omnetpp-5.2-src-core.tgz --progress=dot:giga \
-      && tar xf omnetpp-5.2-src-core.tgz && rm omnetpp-5.2-src-core.tgz
-
+RUN wget https://omnetpp.org/component/jdownloads/send/31-release-test-versions/2327-omnetpp-5-3p2-core \
+        --referer=https://omnetpp.org/omnetpp -O omnetpp-5.3p2-src-core.tgz --progress=dot:giga && \
+    tar xf omnetpp-5.3p2-src-core.tgz && rm omnetpp-5.3p2-src-core.tgz
+    
 # cloning inet here, so we can apply the patch needed for INET 4.0 (which is in the integration branch)
 RUN git clone --recursive --branch integration https://github.com/inet-framework/inet.git /opt/projects/inet-framework/inet/
 WORKDIR /opt/projects/inet-framework/inet/
@@ -26,12 +26,9 @@ RUN git config --global user.email "anon@example.com" && git config --global use
 # creating a new branch just so we don't mess up the integration reference
 RUN git checkout -b local/work
 
-WORKDIR /opt/omnetpp-5.2
+WORKDIR /opt/omnetpp-5.3p2
 
-# applying the patch required for INET 4
-RUN patch -p1 -i /opt/projects/inet-framework/inet/misc/patch/inet-4.0-omnetpp-5.1_or_5.2.patch
-
-ENV PATH /opt/omnetpp-5.2/bin:$PATH
+ENV PATH /opt/omnetpp-5.3p2/bin:$PATH
 
 # removing -march=native -mtune=native from cflags
 RUN echo "CFLAGS_RELEASE='-O3 -DNDEBUG=1'" >> configure.user
