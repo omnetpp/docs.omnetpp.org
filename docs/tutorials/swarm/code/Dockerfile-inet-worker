@@ -15,7 +15,7 @@ WORKDIR /opt/
 RUN wget https://omnetpp.org/component/jdownloads/send/31-release-test-versions/2327-omnetpp-5-3p2-core \
         --referer=https://omnetpp.org/omnetpp -O omnetpp-5.3p2-src-core.tgz --progress=dot:giga && \
     tar xf omnetpp-5.3p2-src-core.tgz && rm omnetpp-5.3p2-src-core.tgz
-    
+
 # cloning inet here, so we can apply the patch needed for INET 4.0 (which is in the integration branch)
 RUN git clone --recursive --branch integration https://github.com/inet-framework/inet.git /opt/projects/inet-framework/inet/
 WORKDIR /opt/projects/inet-framework/inet/
@@ -48,7 +48,7 @@ ENV CCACHE_DIR /host-cache/inet-ccache
 
 WORKDIR /opt/
 
-RUN pip3 install pymongo flock
+RUN pip3 install requests flock
 
 COPY inet_worker.py /opt/
 

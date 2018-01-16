@@ -10,8 +10,7 @@ import io
 import zipfile
 
 import rq
-import pymongo
-import gridfs
+import requests
 import flock
 
 # project name is for example "inet-framework/inet" (as used on GitHub)
@@ -25,7 +24,6 @@ def get_project_github_url(project_name):
     return "https://github.com/" + project_name + ".git"
 
 INET_LIB_CACHE_DIR = "/host-cache/inetlib" # /host-cache is mounted into the container from the host, so it will persist between redeployments
-MONGO_HOST = "mongo" # service name, resolved using the DNS server built into Docker Swarm
 LOGGER = logging.getLogger("rq.worker")
 
 
@@ -79,10 +77,8 @@ def build_project(project_name, git_hash):
 
     project_root = get_project_root_dir(project_name)
 
-    client = pymongo.MongoClient(MONGO_HOST)
-    gfs = gridfs.GridFS(client.opp)
-
-    if gfs.exists(git_hash):
+    r = requests.head("http://sos:3001/blob/" + git_hash)
+    if r.ok:
         return "build " + git_hash + " already exists, not rebuilding."
 
     (exitcode, output) = run_program("make makefiles", project_root)
@@ -95,7 +91,7 @@ def build_project(project_name, git_hash):
         raise Exception("Failed to build INET:\n" + output)
 
     with open(get_project_lib_file(project_name), "rb") as lib_file:
-        gfs.put(lib_file, _id=git_hash)
+        requests.post("http://sos:3001/blob/" + git_hash, data=lib_file)
 
     return project_name + " commit " + git_hash + " built and stored"
 
@@ -117,10 +113,9 @@ def replace_inet_lib(project_name, git_hash):
 
                     LOGGER.info(
                         "we have just created the file, so we need to download it")
-                    client = pymongo.MongoClient(MONGO_HOST)
-                    gfs = gridfs.GridFS(client.opp)
+
                     LOGGER.info("connected, downloading")
-                    f.write(gfs.get(git_hash).read())
+                    f.write(requests.get("http://sos:3001/blob/" + git_hash, stream=True).iter_content(chunk_size=1024*1024))
                     LOGGER.info("download done")
 
             except FileExistsError:
@@ -174,14 +169,12 @@ def zip_directory(directory, exclude_dirs=[]):
 
 
 def submit_results(result_dir):
-    client = pymongo.MongoClient(MONGO_HOST)
-    gfs = gridfs.GridFS(client.opp)
-
+    # TODO: streaming upload
     results_zip = zip_directory(result_dir)
 
     job = rq.get_current_job()
-
-    gfs.put(results_zip, _id=job.id)
+    LOGGER.info("Pushing " + str(len(results_zip)) + " bytes to id " + job.id)
+    requests.post('http://sos:3001/blob/' + job.id.replace('-',''), data=io.BytesIO(results_zip))
 
 
 # this is the second kind of job

@@ -15,9 +15,7 @@ import pprint
 
 import redis
 import rq
-import pymongo
-import gridfs
-
+import requests
 
 LOCAL_INET_ROOT = re.sub(R"(/showcases|/tutorials)$", "",
                          subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode("utf-8").strip())
@@ -85,17 +83,21 @@ runs it needs to perform, then ... magic happens. TODO
 """
 
 
-def unzip_bytes(zip_bytes):
-    with io.BytesIO(zip_bytes) as bytestream:
-        with zipfile.ZipFile(bytestream, "r") as zipf:
-            zipf.extractall(".")
+def unzip_stream(zip_stream):
+    with zipfile.ZipFile(zip_stream, "r") as zipf:
+        zipf.extractall(".")
+
+
+def get_job_results(key):
+    req = requests.get('http://giga:3001/blob/' + key, stream=True)
+    unzip_stream(req.iter_content(chunk_size=1024*1024))
 
 
 class Runall:
 
     def __init__(self):
         print("connecting to the job queue")
-        conn = redis.Redis(host="localhost")
+        conn = redis.Redis(host="giga")
         self.build_q = rq.Queue("build", connection=conn,
                                 default_timeout=10 * 60 * 60)
         self.run_q = rq.Queue("run", connection=conn,
@@ -184,11 +186,7 @@ class Runall:
                     else:
                         if j.result is not None:
                             pprint.pprint(j.result)
-
-                            with pymongo.MongoClient("localhost", socketTimeoutMS=10 * 60 * 1000, connectTimeoutMS=10 * 60 * 1000, serverSelectionTimeoutMS=10 * 60 * 1000) as client:
-                                gfs = gridfs.GridFS(client.opp)
-                                unzip_bytes(gfs.get(j.id).read())
-
+                            get_job_results(j.id.replace('-', ''))
                             run_jobs.remove(j)
 
                 time.sleep(1)

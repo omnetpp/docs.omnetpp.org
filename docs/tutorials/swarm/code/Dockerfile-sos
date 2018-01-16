@@ -1,0 +1,7 @@
+FROM golang:1.9.2
+
+RUN go get -u github.com/skx/sos/...
+
+COPY sos-entrypoint.sh /root
+
+ENTRYPOINT /root/sos-entrypoint.sh
