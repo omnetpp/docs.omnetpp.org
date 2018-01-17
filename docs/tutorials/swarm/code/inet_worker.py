@@ -115,7 +115,7 @@ def replace_inet_lib(project_name, git_hash):
                         "we have just created the file, so we need to download it")
 
                     LOGGER.info("connected, downloading")
-                    f.write(requests.get("http://sos:3001/blob/" + git_hash, stream=True).iter_content(chunk_size=1024*1024))
+                    f.write(requests.get("http://sos:3001/blob/" + git_hash, stream=True).raw.read())
                     LOGGER.info("download done")
 
             except FileExistsError:

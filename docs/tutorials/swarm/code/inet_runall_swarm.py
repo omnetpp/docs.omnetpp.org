@@ -90,7 +90,7 @@ def unzip_stream(zip_stream):
 
 def get_job_results(key):
     req = requests.get('http://giga:3001/blob/' + key, stream=True)
-    unzip_stream(req.iter_content(chunk_size=1024*1024))
+    unzip_stream(io.BytesIO(req.raw.read()))
 
 
 class Runall:
