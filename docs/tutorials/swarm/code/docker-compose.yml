@@ -16,12 +16,12 @@ services:
         constraints: [node.role == manager]
 
 
-  mongo:
-    image: mongo
+  sos:
+    image: torokati44/sos
     networks:
       interlink:
     ports:
-      - "27017:27017"
+      - "3001:3001" # we use the "internal" api to store blobs directly
     deploy:
       resources:
         reservations:
@@ -31,7 +31,7 @@ services:
 
 
   builder:
-    image: torokati44/inet-worker
+    image: torokati44/inet-worker:testing
     networks:
       interlink:
       buildnet:
@@ -56,7 +56,7 @@ services:
 
 
   runner:
-    image: torokati44/inet-worker
+    image: torokati44/inet-worker:testing
     networks:
       interlink:
     depends_on:
@@ -130,3 +130,4 @@ networks:
     ipam:
       config:
         - subnet: 13.37.42.0/24
+
