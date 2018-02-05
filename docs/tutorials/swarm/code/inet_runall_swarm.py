@@ -114,7 +114,7 @@ class Runall:
         if opts.directory != None:
             self.changeDir(opts.directory)
 
-        run_numbers = self.resolveRunNumbers(opts.sim_prog_args)
+        run_numbers = self.resolveRunNumbers(opts)
 
         global githash
 
@@ -211,6 +211,7 @@ class Runall:
             description=DESCRIPTION, epilog=EPILOG, formatter_class=argparse.RawDescriptionHelpFormatter)
         parser.add_argument(
             '--commit', default=currentGitRef, metavar='commit')
+        parser.add_argument('-r', default=None, metavar='runfilter')
         parser.add_argument('-C', '--directory', metavar='DIR',
                             help='Change to the given directory before doing anything.')
 
@@ -237,19 +238,23 @@ class Runall:
             print("Cannot change directory: " + str(exc))
             exit(1)
 
-    def resolveRunNumbers(self, sim_prog_args):
+    def resolveRunNumbers(self, opts):
         # XXX handle _dbg as well as not _dbg ?
-        tmp_args = ["opp_run_dbg"] + sim_prog_args + ["-s", "-q", "runnumbers"]
-        print("running: " + " ".join(tmp_args))
+        tmp_args = ["opp_run_dbg"] + opts.sim_prog_args + ["-s", "-q", "runnumbers"]
+        if opts.r is not None:
+            tmp_args += ["-r", opts.r]
+
+        tmp_args_str = " ".join(tmp_args)
+
+        print("running: " + tmp_args_str)
+
         try:
             output = subprocess.check_output(tmp_args)
         except subprocess.CalledProcessError as exc:
-            print(
-                sim_prog_args[0] + " [...] -q runnumbers returned nonzero exit status")
+            print("'" + tmp_args_str + "' returned nonzero exit status")
             exit(1)
         except IOError as exc:
-            print("Cannot execute " +
-                  sim_prog_args[0] + " [...] -q runnumbers: " + str(exc))
+            print("Cannot execute '" +tmp_args_str + "'" + str(exc))
             exit(1)
 
         try:
@@ -258,8 +263,7 @@ class Runall:
             print("run numbers: " + str(run_numbers))
             return run_numbers
         except:
-            print("Error parsing output of " +
-                  sim_prog_args[0] + " [...] -q runnumbers")
+            print("Error parsing output of '" + tmp_args_str + "'")
             exit(1)
 
 
