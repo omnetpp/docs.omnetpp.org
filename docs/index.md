@@ -1,5 +1,10 @@
-# OMNeT++ Tutorials
+next_page_disabled: true
+previous_page_disabled: true
 
+# OMNeT++ Documentation
+
+## OMNeT++ Tutorials
+ 
 - [TicToc](tutorials/tictoc/index.md). An introductory tutorial that guides you through building and working with
   an example simulation model.
 - [Result Analysis with Python](tutorials/pandas/index.md). This tutorial will walk you through the initial steps of

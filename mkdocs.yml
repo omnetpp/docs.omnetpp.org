@@ -98,6 +98,7 @@ pages:
       - Installation and Usage: tutorials/swarm/page1.md
       - How it Works: tutorials/swarm/page2.md
     - _Source Browser_: showfile.md
+    - _Tutorials_: tutorials/index.md
 
 # Google Analytics
 google_analytics: ['UA-240922-2', 'docs.omnetpp.org']
