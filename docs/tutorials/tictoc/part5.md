@@ -180,7 +180,7 @@ Sources: <a srcfile="tutorials/tictoc/code/tictoc16.ned"></a>, <a srcfile="tutor
 ## 5.4 Adding figures
 
 OMNeT++ can display figures on the canvas, such as text, geometric shapes or images.
-These figures can be static, or change dinamically according to what happens in the simulation.
+These figures can be static, or change dynamically according to what happens in the simulation.
 In this case, we will display a static descriptive text, and a dynamic text showing the hop count of the last message that arrived at its destination.
 
 We create figures in <a srcfile="tutorials/tictoc/code/tictoc17.ned"></a>, with the `@figure` property.
