@@ -120,7 +120,7 @@ Below is the average number of packets that arrived vs *N*:
 
 <img src="../images/avgnumpackets.png">
 
-Notice that the Y axis is logarithmic. The average number of packets that arrive decreases polynomially
+Notice that the Y axis is logarithmic. The average number of packets that arrive decreases exponentially
 as *N* increases, and the network gets larger.
 
 [`cMessage`]: https://omnetpp.org/doc/omnetpp/api/classomnetpp_1_1cMessage.html
