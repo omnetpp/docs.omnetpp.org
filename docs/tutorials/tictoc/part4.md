@@ -37,7 +37,7 @@ a random gate number, and sends out message on that gate.
 
 When the message arrives at `tic[3]`, its `handleMessage()` will delete the message.
 
-See the full code in <a srcfile="tutorials/tictoc/code/txc10.cc."></a>
+See the full code in <a srcfile="tutorials/tictoc/code/txc10.cc"></a>
 
 !!! tip "Exercise"
     You'll notice that this simple "routing" is not very efficient:
@@ -163,7 +163,7 @@ declarared it as `tic: Txc13[6]`, so our nodes have addresses 0..5).
 
 To make the model execute longer, after a message arrives to its destination
 the destination node will generate another message with a random destination
-address, and so forth. Read the full code: <a srcfile="tutorials/tictoc/code/txc13.cc."></a>
+address, and so forth. Read the full code: <a srcfile="tutorials/tictoc/code/txc13.cc"></a>
 
 When you run the model, it'll look like this:
 

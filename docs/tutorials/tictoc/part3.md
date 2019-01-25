@@ -293,7 +293,7 @@ timeout message over and over.
 
 <pre class="snippet" src="../code/txc8.cc" after="Timer cancelled." upto="cancelEvent\("></pre>
 
-You can read Tic's full source in <a srcfile="tutorials/tictoc/code/txc8.cc."></a>
+You can read Tic's full source in <a srcfile="tutorials/tictoc/code/txc8.cc"></a>
 
 Sources: <a srcfile="tutorials/tictoc/code/tictoc8.ned"></a>, <a srcfile="tutorials/tictoc/code/txc8.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 

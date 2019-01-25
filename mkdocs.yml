@@ -5,11 +5,11 @@ site_author: OMNeT++ Team
 site_url: https://docs.omnetpp.org/
 
 # Repository
-repo_name: omnetpp/omnetpp-docs
-repo_url: https://github.com/omnetpp/omnetpp-docs
+repo_name: omnetpp/docs.omnetpp.org
+repo_url: https://github.com/omnetpp/docs.omnetpp.org
 
 # Copyright
-copyright: 'Copyright &copy; 2017 OpenSim Ltd.'
+copyright: 'Copyright &copy; 2019 OpenSim Ltd.'
 
 theme: material
 # Theme directory
@@ -43,7 +43,7 @@ extra:
     - type: globe
       link: http://omnetpp.org
     - type: github-alt
-      link: https://github.com/omnetpp/omnetpp-docs
+      link: https://github.com/omnetpp/docs.omnetpp.org
     - type: twitter
       link: https://twitter.com/omnetpp
 

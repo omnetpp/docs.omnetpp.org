@@ -1,8 +1,8 @@
-About OMNeT++ Tutorials
-=======================
+About OMNeT++ Documentation and Tutorials
+=========================================
 
 This repository contains a GitHub Pages based web site that contains tutorials
-for OMNeT++. The site is made available online at https://tutorials.omnetpp.org.
+for OMNeT++. The site is made available online at https://docs.omnetpp.org.
 
 Web pages in the repo are in Markdown format (.md). One way to view
 them in the browser is to install a Markdown plugin into the browser;

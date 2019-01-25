@@ -2,6 +2,10 @@
 .tkenvrc
 .tkenvlog
 .cmdenv-log
+.ipynb_checkpoints
+test.ipynb
 **/results/*
 _site
 .jekyll-metadata
+/site
+/docs/tutorials/pandas/index.md
