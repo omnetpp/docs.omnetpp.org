@@ -11,9 +11,9 @@ repo_url: https://github.com/omnetpp/docs.omnetpp.org
 # Copyright
 copyright: 'Copyright &copy; 2019 OpenSim Ltd.'
 
-theme: material
-# Theme directory
-theme_dir: material
+theme:
+    name: material
+    custom_dir: material
 
 extra_css:
   - 'stylesheets/omnetpp-docs.css'
@@ -49,15 +49,18 @@ extra:
 
 # Extensions
 markdown_extensions:
-  - markdown.extensions.admonition
-  - markdown.extensions.codehilite(guess_lang=true)
-  - markdown.extensions.attr_list
-  - markdown.extensions.def_list
-  - markdown.extensions.footnotes
-  - markdown.extensions.meta
-  - markdown.extensions.toc(permalink=true)
+  - admonition
+  - codehilite:
+      guess_lang: true
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
   - pymdownx.arithmatex
-  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.betterem:
+      smart_enable: all
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
@@ -68,11 +71,12 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
-  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.tilde
 
-# Page tree
-pages:
+# Navigation tree
+nav:
     - Overview: index.md
     - Learn OMNeT++ with TicToc:
       - Introduction: tutorials/tictoc/index.md

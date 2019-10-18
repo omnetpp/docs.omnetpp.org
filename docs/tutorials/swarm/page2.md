@@ -1,4 +1,6 @@
+---
 next_page_disabled: true
+---
 
 This is a distributed application, built on top of [Docker Swarm](https://docs.docker.com/engine/swarm/)
 (the new, integrated "Swarm Mode", not the legacy docker-swarm utility).

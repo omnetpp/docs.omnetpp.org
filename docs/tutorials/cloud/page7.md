@@ -1,4 +1,6 @@
+---
 next_page_disabled: true
+---
 
 # Potential Improvements, Alternatives
 

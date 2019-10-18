@@ -1,5 +1,7 @@
+---
 previous_page_disabled: true
 next_page_disabled: true
+---
 
 {% extends 'display_priority.tpl' %}
 
