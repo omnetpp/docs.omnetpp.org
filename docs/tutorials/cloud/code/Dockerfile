@@ -18,15 +18,15 @@ COPY worker.py /opt/
 
 
 WORKDIR /opt/
+RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-5.6.1/omnetpp-5.6.1-src-core.tgz \
+	--referer=https://omnetpp.org/omnetpp -O omnetpp-5.6.1-src-core.tgz --progress=dot:giga
 
-RUN wget https://omnetpp.org/omnetpp/send/30-omnet-releases/2312-omnetpp-5-1-1-core \
-      --referer=https://omnetpp.org/omnetpp -O omnetpp-5.1.1-src-core.tgz --progress=dot:giga
-RUN tar xf omnetpp-5.1.1-src-core.tgz && rm omnetpp-5.1.1-src-core.tgz
+RUN tar xf omnetpp-5.6.1-src-core.tgz && rm omnetpp-5.6.1-src-core.tgz
 
 
-ENV PATH /opt/omnetpp-5.1.1/bin:$PATH
+ENV PATH /opt/omnetpp-5.6.1/bin:$PATH
 
-WORKDIR omnetpp-5.1.1
+WORKDIR omnetpp-5.6.1
 RUN ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no
 RUN make MODE=release -j $(nproc)
 WORKDIR /opt/
