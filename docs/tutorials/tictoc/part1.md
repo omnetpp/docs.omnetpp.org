@@ -77,7 +77,7 @@ and their behavior is implemented in C++. The declaration also says that
 
 The second block declares `Tictoc1` as a network. `Tictoc1` is assembled from two
 submodules, `tic` and `toc`, both instances of the module type `Txc1`.
-`tic`'s output gate is connected to `toc`'s input gate, and vica versa.
+`tic`'s output gate is connected to `toc`'s input gate, and vice versa.
 There will be a 100ms propagation delay both ways.
 
 !!! note
