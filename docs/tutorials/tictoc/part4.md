@@ -23,7 +23,7 @@ Here we created 6 modules as a module vector, and connected them.
 
 The resulting topology looks like this:
 
-<img src="../images/step10.png">
+<img src="images/step10.png">
 
 In this version, `tic[0]` will generate the message to be sent around.
 This is done in `initialize()`, with the help of the `getIndex()` function which
@@ -154,7 +154,7 @@ which is provided by OMNeT++: it tries to cast the pointer via `dynamic_cast`,
 and if it fails it stops the simulation with an error message, similar to the
 following:
 
-<img src="../images/step13e.png">
+<img src="images/step13e.png">
 
 In the next line, we check if the destination address is the same as the
 node's address. The `getIndex()` member function returns the index
@@ -167,7 +167,7 @@ address, and so forth. Read the full code: <a srcfile="tutorials/tictoc/code/txc
 
 When you run the model, it'll look like this:
 
-<img src="../images/step13a.png">
+<img src="images/step13a.png">
 
 You can click on the messages to see their content in the inspector window.
 Double-clicking will open the inspector in a new window.
@@ -176,7 +176,7 @@ or to be very fast in handling the mouse). The inspector window
 displays lots of useful information; the message fields can be seen
 on the *Contents* page.
 
-<img src="../images/step13b.png">
+<img src="images/step13b.png">
 
 Sources: <a srcfile="tutorials/tictoc/code/tictoc13.ned"></a>, <a srcfile="tutorials/tictoc/code/tictoc13.msg"></a>, <a srcfile="tutorials/tictoc/code/txc13.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 
