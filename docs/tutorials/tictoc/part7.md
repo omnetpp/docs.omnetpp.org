@@ -16,7 +16,7 @@ To parameterize the network, the number of nodes is given as a NED parameter,
 `numCentralNodes`. This parameter specifies how many nodes are in the central
 section of the network, but doesn't cover the two nodes at each side.
 
-<img src="../images/numberofnodes.png">
+<img src="images/numberofnodes.png">
 
 The total number of nodes including the four nodes on the sides is `numCentralNodes+4`.
 The default of the `numCentralNodes` parameter is 2, this corresponds
@@ -33,7 +33,7 @@ Starting from the third, each *i*th node is connected to the *i+1*th.
 
 Here is how the network looks like with `numCentralNodes = 4`:
 
-<img src="../images/step18.png">
+<img src="images/step18.png">
 
 To run the simulation with multiple different values of `numCentralNodes`, we specify
 the variable *N* in the ini file:
@@ -62,11 +62,11 @@ to the expected values.
 
 Now, we can run the simulations. In the dropdown menu of the *Run* icon, select *Run Configurations*.
 
-<img src="../images/runconfig.png">
+<img src="images/runconfig.png">
 
 In the *Run Configurations* dialog, select the config name, make sure *Cmdenv* is selected as the user interface.
 
-<img src="../images/runconfig2.png">
+<img src="images/runconfig2.png">
 
 If you have a multicore CPU, you can specify how many simulations to run concurrently.
 
@@ -87,7 +87,7 @@ We'll display the average hop count for messages that reach their destinations v
 Additionally, we will display the average number of packets that reached their destinations vs *N*.
 The analysis file `Tictoc18.anf` contains the dataset we will use for the visualization.
 
-<img src="../images/dataset.png">
+<img src="images/dataset.png">
 
 These two average scalars are not recorded during the simulation, we will have to compute them from the available data.
 
@@ -106,7 +106,7 @@ The count of the arrived packets is available at each node. We can compute their
 Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.
 Here is the average hop count vs *N*:
 
-<img src="../images/avghopcount.png">
+<img src="images/avghopcount.png">
 
 The average hop count increases as the network gets larger, as packets travel more to reach their destination.
 The increase is polynomial. Notice that there are missing values at the far right of the chart.
@@ -118,7 +118,7 @@ This can be remedied by increasing the simulation time limit, so more packets ha
 
 Below is the average number of packets that arrived vs *N*:
 
-<img src="../images/avgnumpackets.png">
+<img src="images/avgnumpackets.png">
 
 Notice that the Y axis is logarithmic. The average number of packets that arrive decreases polynomially
 as *N* increases, and the network gets larger.
