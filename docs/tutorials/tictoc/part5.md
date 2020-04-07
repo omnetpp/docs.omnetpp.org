@@ -12,7 +12,7 @@ can use the *Find/inspect* objects dialog (*Inspect* menu; it is also on
 the toolbar) to learn how many packets were sent or received by the
 various nodes.
 
-<img src="../images/step14a.png">
+<img src="images/step14a.png">
 
 It's true that in this concrete simulation model the numbers will be
 roughly the same, so you can only learn from them that `intuniform()`
@@ -29,7 +29,7 @@ The following code does the job:
 
 And the result looks like this:
 
-<img src="../images/step14b.png">
+<img src="images/step14b.png">
 
 Sources: <a srcfile="tutorials/tictoc/code/tictoc14.ned"></a>, <a srcfile="tutorials/tictoc/code/tictoc14.msg"></a>, <a srcfile="tutorials/tictoc/code/txc14.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 
@@ -83,18 +83,18 @@ choose *Open Details*. In the module inspector's *Contents* page you'll find the
 and `hopCountVector` objects. To open their inspectors, right click on `cLongHistogram hopCountStats` or
 `cOutVector HopCount`, and click `Open Graphical View`.
 
-<img src="../images/open_details.png">
+<img src="images/open_details.png">
 
 The inspector:
 
-<img src="../images/open_graphical_view.png">
+<img src="images/open_graphical_view.png">
 
 They will be initially empty -- run the simulation in *Fast* (or even *Express*)
 mode to get enough data to be displayed. After a while you'll get something like this:
 
-<img src="../images/step15a.png">
+<img src="images/step15a.png">
 
-<img src="../images/step15b.png">
+<img src="images/step15b.png">
 
 When you think enough data has been collected, you can stop the simulation
 and then we'll analyse the result files (`Tictoc15-#0.vec` and
@@ -210,11 +210,11 @@ Then, we update the figure's text with the `setText()` function.
 When you run the simulation, the figure displays 'last hopCount: N/A' before the arrival of the first message.
 Then, it is updated whenever a message arrives at its destination.
 
-<img src="../images/step17.png">
+<img src="images/step17.png">
 
 !!! tip
     If the figure text and nodes overlap, press 're-layout'.
-    <img src="../images/relayout.png">
+    <img src="images/relayout.png">
 
 In the last few steps, we have collected and displayed statistics. In the next part,
 we'll see and analyze them in the IDE.
