@@ -6,7 +6,7 @@ Once you complete the above steps, you can launch the simulation by selecting
 %omnetpp.ini (in either the editor area or the *Project Explorer*),
 and pressing the *Run* button.
 
-<img src="../images/run.png">
+<img src="images/run.png">
 
 The IDE will build your project automatically. If there are compilation errors,
 you need to rectify those until you get an error-free compilation and linking.
@@ -30,7 +30,7 @@ graphically in the main area.
 Press the *Run* button on the toolbar to start the simulation. What you should
 see is that *tic* and *toc* are exchanging messages with each other.
 
-<img src="../images/tictoc1_3.gif">
+<img src="images/tictoc1_3.gif">
 
 The main window toolbar displays the current simulation time. This is virtual time,
 it has nothing to do with the actual (or wall-clock) time that the program takes to
@@ -67,7 +67,7 @@ basics of debugging to help you acquire this vital task.
 The simulation can be started in debug mode by clicking the *Debug*
 button on the IDE's main toolbar.
 
-<img src="../images/debug.png">
+<img src="images/debug.png">
 
 This will cause the simulation program to be launched under a debugger
 (usually *gdb*). The IDE will also switch into "Debug perspective",
@@ -95,14 +95,14 @@ void Txc1::handleMessage(cMessage *msg)
 When you launch the simulation in normal mode (*Run* button) and try to run it,
 you'll get an error message like this:
 
-<img src="../images/error.png" width="450px">
+<img src="images/error.png" width="450px">
 
 Now, run the simulation in *Debug* mode. Due to a `debug-on-errors` option
 being enabled by default, the simulation program will stop in the debugger.
 You can locate the error by examining the stack trace (the list of nested
 function calls) in the *Debug* view:
 
-<img src="../images/stacktrace.png" width="600px">
+<img src="images/stacktrace.png" width="600px">
 
 You can see that it was OMNeT++'s `breakIntoDebuggerIfRequested()` method that
 activated the debugger. From then on, you need to search for a function that
@@ -170,7 +170,7 @@ choose *Simulation -> Debug Next Event* from the menu. This will trigger
 a breakpoint in the debugger at the beginning of `handleMessage()` of the
 next event, and you can start debugging that event.
 
-<img src="../images/debugnextevent.png">
+<img src="images/debugnextevent.png">
 
 ## 2.4 The Debug/Run dialog
 
@@ -189,7 +189,7 @@ configuration.
 
 The dialog allows you activate various settings for the launch.
 
-<img src="../images/launchdialog.png" width="550px">
+<img src="images/launchdialog.png" width="550px">
 
 ## 2.5 Visualizing on a Sequence Chart
 
@@ -215,7 +215,7 @@ In this instance the chart is very simple, but when you have a complex model,
 sequence charts can be very valuable in debugging, exploring or documenting
 the model's behaviour.
 
-<img src="../images/eventlog.png">
+<img src="images/eventlog.png">
 
 Sources: <a srcfile="tutorials/tictoc/code/tictoc1.ned"></a>, <a srcfile="tutorials/tictoc/code/txc1.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 
