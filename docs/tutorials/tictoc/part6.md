@@ -14,7 +14,7 @@ at the top of the tool panel, ie. Scalars, Vectors, or Histograms. By default, a
 to view all or some of the individual modules, or the statistic name filter to display different types of statistics, ie. mean, max, min, standard deviation, etc.
 You can select some or all of the individual results by highlighting them. If you select multiple results, they will be plotted on one chart. Right click and select Plot to display the figures.
 
-<img src="../images/statistics.png">
+<img src="images/statistics.png">
 
 !!! tip
     For further information about the charting and processing capabilities,
@@ -25,22 +25,22 @@ reaches its destination.
 To plot these vectors for all nodes, select the 6 nodes in the browse data tab.
 Right click and select Plot.
 
-<img src="../images/selectplot2.png">
+<img src="images/selectplot2.png">
 
 We can change various options about how the data on the chart is displayed.
 Right click on the chart background, and select Properties.
 This opens the *Edit LineChart* window.
 In the *Lines* tab, set *Line type* to *Dots*, and *Symbol Type* to *Dot*.
 
-<img src="../images/editlinechart2.png" width="850px">
+<img src="images/editlinechart2.png" width="850px">
 
 To add a legend to the chart, select *Display legend* on the *Legend* tab.
 
-<img src="../images/displaylegend.png">
+<img src="images/displaylegend.png">
 
 The chart looks like the following:
 
-<img src="../images/hopcountchart.png">
+<img src="images/hopcountchart.png">
 
 If we apply a `mean` operation we can see how the `hopCount` in the different
 nodes converge to an average.
@@ -49,7 +49,7 @@ Again, right-click on the chart background, and select *Properties*.
 In the *Lines* tab, set *Line type* to Linear, and *Symbol Type* to None.
 The mean is displayed on the following chart. The lines are easier to see this way because they are thinner.
 
-<img src="../images/mean3.png">
+<img src="images/mean3.png">
 
 Scalar data can be plotted on bar charts.
 The next chart displays the mean and the maximum of the `hopCount` of the messages
@@ -58,12 +58,12 @@ In the *Browse data* tab, select *Scalars*. Now select `hop count:max` and `hop 
 for all 6 nodes.
 
 
-<img src="../images/scalars.png">
+<img src="images/scalars.png">
 
 To create a histogram that shows `hopCount`'s distribution, select *Histograms*
 on the *Browse data* tab. Select all nodes, and right click *Plot*.
 
-<img src="../images/histogram.png">
+<img src="images/histogram.png">
 
 [`cMessage`]: https://omnetpp.org/doc/omnetpp/api/classomnetpp_1_1cMessage.html
 
