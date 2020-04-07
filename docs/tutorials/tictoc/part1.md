@@ -18,7 +18,7 @@ that you already have a working OMNeT++ installation. If not, please install the
 version, consulting the *Installation Guide* as needed.)
 Once in the IDE, choose *New -> OMNeT++ Project* from the menu.
 
-<img src="../images/newproject.png">
+<img src="images/newproject.png">
 
 A wizard dialog will appear. Enter `tictoc` as project name,
 choose *Empty project* when asked about the initial content of the project,
@@ -68,7 +68,7 @@ Switch into *Source* mode, and enter the following:
 
 When you're done, switch back to *Design* mode. You should see something like this:
 
-<img src="../images/nededitor.png">
+<img src="images/nededitor.png">
 
 The first block in the file declares `Txc1` as a simple module type.
 Simple modules are atomic on NED level. They are also active components,
@@ -150,7 +150,7 @@ network = Tictoc1
 
 You can verify the result in *Form* mode:
 
-<img src="../images/inieditor.png" width="650px">
+<img src="images/inieditor.png" width="650px">
 
 `tictoc2` and further steps will all share a common <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a> file.
 
