@@ -11,7 +11,7 @@ NED file. The `i=` tag in the display string specifies the icon.
 
 You can see the result here:
 
-<img src="../images/step2a.png">
+<img src="images/step2a.png">
 
 
 ## 3.2 Adding logging
@@ -30,14 +30,14 @@ and
 When you run the simulation in the OMNeT++ runtime environment, the following output
 will appear in the log window:
 
-<img src="../images/step2b.png">
+<img src="images/step2b.png">
 
 You can also open separate output windows for *tic* and *toc* by right-clicking
 on their icons and choosing *Component log* from the menu. This feature
 will be useful when you have a large model ("fast scrolling logs syndrome")
 and you're interested only in the log messages of specific module.
 
-<img src="../images/step2c.png">
+<img src="images/step2c.png">
 
 Sources: <a srcfile="tutorials/tictoc/code/tictoc2.ned"></a>, <a srcfile="tutorials/tictoc/code/txc2.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 
@@ -66,7 +66,7 @@ If you click on `tic`'s icon, the inspector window in the bottom left corner of 
 details about `tic`. Make sure that *Children* mode is selected from the toolbar at the top.
 The inspector now displays the counter variable.
 
-<img src="../images/inspector.png">
+<img src="images/inspector.png">
 
 As you continue running the simulation, you can follow as the counter
 keeps decrementing until it reaches zero.
@@ -216,7 +216,7 @@ We have left out the counter, to keep the source code small.
 
 While running the simulation you will see the following log output:
 
-<img src="../images/step6.png">
+<img src="images/step6.png">
 
 Sources: <a srcfile="tutorials/tictoc/code/tictoc6.ned"></a>, <a srcfile="tutorials/tictoc/code/txc6.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a>
 
@@ -278,7 +278,7 @@ Here's `toc`'s code:
 Thanks to the `bubble()` call in the code, `toc` will display a callout whenever
 it drops the message.
 
-<img src="../images/step8.png">
+<img src="images/step8.png">
 
 So, `tic` will start a timer whenever it sends the message. When
 the timer expires, we'll assume the message was lost and send another
