@@ -205,7 +205,7 @@ Then the `getCanvas()` function returns the network's canvas, and `getFigure()` 
 Then, we update the figure's text with the `setText()` function.
 
 !!! tip
-    For more information on figures and the canvas, see <a href="../manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the OMNeT++ manual
+    For more information on figures and the canvas, see <a href="https://doc.omnetpp.org/omnetpp/manual/index.html#sec:graphics:canvas" target="_blank">The Canvas</a> section of the OMNeT++ manual
 
 When you run the simulation, the figure displays 'last hopCount: N/A' before the arrival of the first message.
 Then, it is updated whenever a message arrives at its destination.

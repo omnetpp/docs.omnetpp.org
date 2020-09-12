@@ -82,7 +82,7 @@ There will be a 100ms propagation delay both ways.
 
 !!! note
     You can find a detailed description of the NED language in the
-    <a href="../manual/index.html#cha:ned-lang" target="blank">OMNeT++ Simulation Manual</a>.
+    <a href="https://doc.omnetpp.org/omnetpp/manual/index.html#cha:ned-lang" target="blank">OMNeT++ Simulation Manual</a>.
     (The manual can also be found in the `doc`  directory of your OMNeT++ installation.)
 
 

@@ -47,7 +47,7 @@ This produces about 50 simulation runs. Each can be explored in the graphical us
 simulation batches are often run from the command line interface using the *Cmdenv* runtime environment.
 
 !!! tip
-    You can find more information on variables and parameter studies in the <a href="../manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the OMNeT++ manual.
+    You can find more information on variables and parameter studies in the <a href="https://doc.omnetpp.org/omnetpp/manual/index.html#sec:config-sim:parameter-studies" target="_blank">Parameter Studies</a> section of the OMNeT++ manual.
 
 To increase the accuracy of the simulation we may need to run the same simulation several times
 using different random numbers. These runs are called *Repetitions* and are specified in `omnetpp.ini`:
