@@ -159,7 +159,7 @@ following:
 In the next line, we check if the destination address is the same as the
 node's address. The `getIndex()` member function returns the index
 of the module in the submodule vector (remember, in the NED file we
-declarared it as `tic: Txc13[6]`, so our nodes have addresses 0..5).
+declarared it as `tic[6]: Txc13`, so our nodes have addresses 0..5).
 
 To make the model execute longer, after a message arrives to its destination
 the destination node will generate another message with a random destination
