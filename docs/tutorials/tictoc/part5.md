@@ -197,7 +197,7 @@ change it when a message arrives. This is done in <a srcfile="tutorials/tictoc/c
 <pre class="snippet" src="../code/txc17.cc" from="hasGUI" upto="setText"></pre>
 
 The figure is represented by the `cTextFigure` C++ class. There are several figure types,
-all of them are subclassed from the <a href="file:///home/user/omnetpp-git-tictoc/doc/api/classomnetpp_1_1cFigure.html">`cFigure`</a> base class.
+all of them are subclassed from the `cFigure` base class.
 We insert the code responsible for updating the figure text after we retreive the `hopcount` variable.
 
 We want to draw the figures on the network's canvas. The `getParentModule()` function returns the parent of the node, ie. the network.
