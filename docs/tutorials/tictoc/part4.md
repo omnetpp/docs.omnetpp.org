@@ -121,7 +121,7 @@ The message class specification is in `tictoc13.msg`:
 <pre class="snippet" src="../code/tictoc13.msg" from="message TicTocMsg13" upto="}"></pre>
 
 !!! note
-    See <a href="../manual/index.html#cha:msg-def" target="_blank">Section 6</a> of the OMNeT++ manual for more details on messages.
+    See <a href="https://doc.omnetpp.org/omnetpp/manual/#cha:msg-def" target="_blank">Section 6</a> of the OMNeT++ manual for more details on messages.
 
 The makefile is set up so that the message compiler, opp_msgc is invoked
 and it generates `tictoc13_m.h` and `tictoc13_m.cc` from the message declaration
