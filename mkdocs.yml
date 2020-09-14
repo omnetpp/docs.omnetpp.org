@@ -89,8 +89,8 @@ nav:
         - Visualizing the Results: tutorials/tictoc/part6.md
         - Parameter Studies: tutorials/tictoc/part7.md
         - Closing words: tutorials/tictoc/conclusion.md
-    - Articles:
       - Result Analysis with Python: tutorials/pandas/index.md
+    - Articles:
       - Introduction into Running Simulations in the Cloud:
         - Introduction: tutorials/cloud/index.md
         - Concepts: tutorials/cloud/page1.md
@@ -103,6 +103,10 @@ nav:
         - Motivation: tutorials/swarm/index.md
         - Installation and Usage: tutorials/swarm/page1.md
         - How it Works: tutorials/swarm/page2.md
+      - 'articles/building-omnetpp-in-docker.md'
+      - 'articles/running-omnetppgui-in-docker.md'
+      - 'articles/running-omnetpp-in-docker.md'
+      - 'articles/omnetpp-debugging-tips.md'
     - _Source Browser_: showfile.md
     - _Tutorials_: tutorials/index.md
 
