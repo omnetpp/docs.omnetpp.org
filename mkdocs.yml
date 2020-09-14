@@ -1,5 +1,5 @@
 # Project information
-site_name: OMNeT++ Tutorials
+site_name: OMNeT++ Technical Articles
 site_description: Docmentation for the OMNeT++ Simulator
 site_author: OMNeT++ Team
 site_url: https://docs.omnetpp.org/
@@ -78,29 +78,31 @@ markdown_extensions:
 # Navigation tree
 nav:
     - Overview: index.md
-    - Learn OMNeT++ with TicToc:
-      - Introduction: tutorials/tictoc/index.md
-      - Getting Started: tutorials/tictoc/part1.md
-      - Running the Simulation: tutorials/tictoc/part2.md
-      - Enhancing the 2-node TicToc: tutorials/tictoc/part3.md
-      - Turning it Into a Real Network: tutorials/tictoc/part4.md
-      - Adding Statistics Collection: tutorials/tictoc/part5.md
-      - Visualizing the Results: tutorials/tictoc/part6.md
-      - Parameter Studies: tutorials/tictoc/part7.md
-      - Closing words: tutorials/tictoc/conclusion.md
-    - Result Analysis with Python: tutorials/pandas/index.md
-    - Introduction into Running Simulations in the Cloud:
-      - Introduction: tutorials/cloud/index.md
-      - Concepts: tutorials/cloud/page1.md
-      - Implementation: tutorials/cloud/page2.md
-      - Deploying on AWS: tutorials/cloud/page4.md
-      - Trying It Out: tutorials/cloud/page5.md
-      - Examining the Code: tutorials/cloud/page6.md
-      - Potential Improvements, Alternatives: tutorials/cloud/page7.md
-    - Running INET Simulation Campaigns on AWS:
-      - Motivation: tutorials/swarm/index.md
-      - Installation and Usage: tutorials/swarm/page1.md
-      - How it Works: tutorials/swarm/page2.md
+    - Tutorials:
+      - Learn OMNeT++ with TicToc:
+        - Introduction: tutorials/tictoc/index.md
+        - Getting Started: tutorials/tictoc/part1.md
+        - Running the Simulation: tutorials/tictoc/part2.md
+        - Enhancing the 2-node TicToc: tutorials/tictoc/part3.md
+        - Turning it Into a Real Network: tutorials/tictoc/part4.md
+        - Adding Statistics Collection: tutorials/tictoc/part5.md
+        - Visualizing the Results: tutorials/tictoc/part6.md
+        - Parameter Studies: tutorials/tictoc/part7.md
+        - Closing words: tutorials/tictoc/conclusion.md
+    - Articles:
+      - Result Analysis with Python: tutorials/pandas/index.md
+      - Introduction into Running Simulations in the Cloud:
+        - Introduction: tutorials/cloud/index.md
+        - Concepts: tutorials/cloud/page1.md
+        - Implementation: tutorials/cloud/page2.md
+        - Deploying on AWS: tutorials/cloud/page4.md
+        - Trying It Out: tutorials/cloud/page5.md
+        - Examining the Code: tutorials/cloud/page6.md
+        - Potential Improvements, Alternatives: tutorials/cloud/page7.md
+      - Using AWS for Running INET Simulation Campaigns:
+        - Motivation: tutorials/swarm/index.md
+        - Installation and Usage: tutorials/swarm/page1.md
+        - How it Works: tutorials/swarm/page2.md
     - _Source Browser_: showfile.md
     - _Tutorials_: tutorials/index.md
 
