@@ -665,13 +665,12 @@ plt.show()
 
 `hist()` has some interesting options. For example, we can change the plotting
 style to be similar to a line plot by setting `histtype='step'`. To plot the
-normalized version of the histogram, specify `normed=True` or `density=True`
-(they work differently; see the Matplotlib documentation for details).
+normalized version of the histogram, specify `density=True`.
 To draw the cumulative density function, also specify `cumulative=True`.
 The following plot shows the effect of some of these options.
 
 ```
-plt.hist(bins=hist.binedges, x=hist.binedges[:-1], weights=hist.binvalues, histtype='step', normed=True)
+plt.hist(bins=hist.binedges, x=hist.binedges[:-1], weights=hist.binvalues, histtype='step', density=True)
 plt.show()
 ```
 
