@@ -103,6 +103,7 @@ nav:
         - Motivation: tutorials/swarm/index.md
         - Installation and Usage: tutorials/swarm/page1.md
         - How it Works: tutorials/swarm/page2.md
+      - 'articles/porting-code-into-omnetpp.md'
       - 'articles/building-omnetpp-in-docker.md'
       - 'articles/running-omnetppgui-in-docker.md'
       - 'articles/running-omnetpp-in-docker.md'
