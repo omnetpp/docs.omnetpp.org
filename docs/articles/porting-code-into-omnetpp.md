@@ -161,6 +161,73 @@ errors, but they are usually not hard to fix.
 
 An example of this approach is how lwIP was ported into INET Framework.
 
+Original header file:
+
+```C
+#ifndef FOO_H
+#define FOO_H
+
+#include <...>
+
+extern int g_bar;
+extern struct Foo *g_foo;
+
+void do_stuff();
+
+#endif
+```
+
+Modified header file:
+
+```C
+#ifndef FOO_H
+#define FOO_H
+
+#include <...>
+
+class Foo {  // added line
+public: // added line
+
+int g_bar = 42;  // "extern" removed, initializer copied from .c file
+struct Foo *g_foo = nulltpr;  // ditto
+
+void do_stuff();
+
+}; // added line
+
+#endif
+```
+
+Original C file:
+
+```C
+#include <...>
+
+int g_bar = 42;
+struct Foo *g_foo;
+
+void
+do_stuff() {
+  ...
+}
+```
+
+Modified C file:
+
+```C
+#include <...>
+
+//int g_bar = 42;  -- global variable definitions commented out
+//struct Foo *g_foo;
+
+void
+Foo::do_stuff() {  // added "Foo::"
+  ...
+}
+```
+
+
+
 ## Introducing indirection
 
 An extra level of indirection solves everything, right? Maybe not, but here it
