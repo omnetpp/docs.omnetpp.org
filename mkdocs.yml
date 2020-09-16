@@ -107,6 +107,7 @@ nav:
       - 'articles/building-omnetpp-in-docker.md'
       - 'articles/running-omnetppgui-in-docker.md'
       - 'articles/running-omnetpp-in-docker.md'
+      - 'articles/wsl2.md'
       - 'articles/omnetpp-debugging-tips.md'
     - _Source Browser_: showfile.md
     - _Tutorials_: tutorials/index.md

@@ -1,5 +1,5 @@
 ---
-title: Tips for Improving the C++ Debugging Experience on Linux and other OSes
+title: Improving the C++ Debugging Experience on Linux and other OSes
 author: Rudolf Hornig
 date: 2020-07-05
 ---
