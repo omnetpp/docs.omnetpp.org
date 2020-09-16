@@ -46,8 +46,8 @@ The idea related to the last point is described in further detail here:
 
 The module structure of the simulation network can be thought of as a graph
 where each node corresponds to a module and each edge corresponds to a
-connection between the two modules. Other cross module dependencies such as
-possible C++ method calls or communication via signals must also be included as
+connection between the two modules. Other cross-module dependencies, such as
+possible C++ method calls or communication via signals, must also be included as
 edges.
 
 Each node and edge has a delay associated with it. Node delays are 0 by default
@@ -73,14 +73,14 @@ several thousands of events, the number of events that can be concurrently
 executed can be larger than the number of available CPUs, thus allowing
 efficient concurrent execution.
 
-It's also important to note that individual CPUs can grab several concurrently
-executable events from the FES at once and execute them in any order. This
+It is also important to note that individual CPUs can grab several concurrently
+executable events from the FES at once, and execute them in any order. This
 approach can further decrease the contention on the FES when the workers
 concurrently access it.
 
 Let's colorize concurrently executable events as green and all other events as
-red. All events are red by default but may be colored green later on. Once an
-event becomes green it remains green until it's executed. The colorizing
+red. All events are red by default, but may be colored green later on. Once an
+event becomes green it, remains green until it is executed. The colorizing
 algorithm could work as follows:
 
     for each red event E1 in module M1 in the FES:
@@ -90,9 +90,9 @@ algorithm could work as follows:
             mark E1 as green
 
 The above algorithm can be run concurrently with the parallel simulation worker
-threads, because it's conservative with respect to coloring events.
+threads, because it is conservative with respect to coloring events.
 
-The minimumDelay between two modules can be predetermined during initialize if
+The minimumDelay between two modules can be predetermined during initialization if
 the network topology is static or refreshed if necessary. This data structure
 could be quite large. For example, in a simulation containing 1000 nodes there
 could be 100,000 modules, so the table would contain 10,000,000,000 rows.
@@ -102,15 +102,15 @@ M2 the delay D is the same towards module M3, then the two rows could be
 represented by one where the source is the set of M1 and M2. This can be done
 similarly when the source is the same and the destinations are different but the
 delay is still the same. If a set contains all modules within a compound module
-(i.e. the complete module hierarchy) then it can be simply represented by the
+(i.e. the complete module hierarchy), then it can be simply represented by the
 compound module.
 
 In an INET simulation, most modules inside a network node are connected with
-each other via 0 delay connections and C++ method calls. Thus the above method
+each other via zero-delay connections and C++ method calls. Thus, the above method
 should naturally lead to a data structure where the connections between network
 nodes have separate rows and they use the connection delay between the network
 nodes. Please note that INET allows combining its modules in many different
-ways, so it's not necessarily this trivial. For example, sub-networks can be
+ways, so it is not necessarily so trivial. For example, sub-networks can be
 represented as extra compound module levels, etc.
 
 Another important optimization opportunity is to use the fact that most
@@ -126,9 +126,9 @@ method.
 The above approach has been quickly tested with an INET simulation that consists
 of 4 sub-networks each containing an Ethernet switch and a few communicating
 hosts, plus some cross-sub-network communication. The result was that the above
-approach listed 4-6 concurrent messages out of usually 100 in the FES. At first,
-this isn't necessarily that much but it would scale linearly with the size of
-the FES. That is in much larger network with a FES containing several thousands
-of events, the concurrently executable events can be as large a few hundreds.
+approach listed 4-6 concurrent messages out of usually 100 in the FES. This number
+may not seem very high, but it would scale linearly with the size of
+the FES. That is, in a much larger network with a FES containing several thousands
+of events, the number of concurrently executable events can be as large as a few hundred.
 This would perhaps allow using all CPUs of a modern computer with almost linear
 performance gains.

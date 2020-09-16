@@ -41,7 +41,7 @@ combined with existing representations.
 The next step would be to come up with better wireless error models, because the
 current ones don't take advantage of the capabilities of the new representation.
 Error models are responsible for determining whether a packet has been received
-correctly from the complete description of the physical signal and interference
+correctly, from the complete description of the physical signal and interference
 characteristics.
 
 All current wireless error models solely rely on the minimum (or average) SNIR
@@ -49,7 +49,7 @@ in order to determine the packet error rate. In both cases, the SNIR is
 calculated over the whole received signal both in time and frequency. Using the
 minimum SNIR as input often yields completely incorrect results (e.g. a short
 strong interfering spike ruins the minimum SNIR regardless of its duration).
-Moreover, the current Wifi error models are not even up-to-date for the latest
+Moreover, the current WiFi error models are not even up-to-date for the latest
 versions of the IEEE 802.11 standard, so the highest datarates are not
 supported.
 
@@ -91,3 +91,6 @@ already in INET. It is also clear from the early experiments that a researcher
 with more experience in neural networks than ourselves could achieve much more
 than we could, and the end result would be practical to be used in INET
 simulations.
+
+Our code can be found in the `topic/neuralnetworkerrormodel` branch of the
+INET repository.
