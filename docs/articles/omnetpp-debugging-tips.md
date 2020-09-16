@@ -45,7 +45,8 @@ The OMNeT++ IDE, which is based on Eclipse, contains a debugger frontend provide
 `gdb` from a 3rd party package manager (like homebrew), because the `gdb` instance that comes with macOS is no longer maintained
 and is quite outdated. (This is because macOS uses `lldb` as the default debugger, and they no longer need/care about `gdb`.) Installing `gdb` on macOS can be a headache, because the 3rd party `gdb` executable must be digitally signed locally to be able to debug other processes. Because of the above limitations, sometimes it makes sense to debug OMNeT++ models outside of the IDE.
 
-> NOTE: On macOS, OMNeT++ 6 uses `lldb` (through the bundled `lldb-mi2` driver) so the above issues are no longer present and debugging is working out of box.
+!!! note
+    On macOS, OMNeT++ 6 uses `lldb` (through the bundled `lldb-mi2` driver) so the above issues are no longer present and debugging is working out of box.
 
 ## Debugger Backends - Pros and Cons
 
@@ -105,7 +106,8 @@ To achieve the best possible experience during debugging, you should fine tune s
 
   A more generic solution is to force the `clang` compiler to emit debug information for all types it encounters during compilation, but this greatly increases the size of the debug info (and the linking time as a consequence), because debug info for the standard C++ library will be included for *each* compilation unit. To force the compiler to generate full debug info, add `-fstandalone-debug` to the `CFLAGS_DEBUG` variable. However, this is recommended only if you cannot install the debugging symbols for the given library.
 
-  > NOTE: This is not a problem with `gcc` and `clang` on macOS, where the default behavior is to generate full debug info anyway.
+  !!! note
+      This is not a problem with `gcc` and `clang` on macOS, where the default behavior is to generate full debug info anyway.
 
 - If you had to apply the above workaround to get the standard C++ types working in the debugger, you may experience increased linking times, especially with big projects. You can specify `-gsplit-dwarf` in the `CFLAGS_DEBUG` variable to force the debug info into a separate (*.dwo) file for each compilation unit. This will speed up the linking process, but it will impact the startup time of the debugger. In turn, debugger startup time can be improved by supplying the `-Wl,--gdb-index` option as well, which enables pre-indexing of the `.dwo` files, thereby allowing faster loading.
 
@@ -150,7 +152,8 @@ Both `gdb` and `lldb` allows you to define pretty printers in Python that allow 
 
     command script import <OMNETPP_ROOT>/python/omnetpp/lldb/formatters/omnetpp.py
 
-> NOTE: formatters for `gdb` and `lldb` are not compatible with each other!
+!!! note
+    Formatters for `gdb` and `lldb` are not compatible with each other!
 
 ## Debugging with gdbgui
 
@@ -168,13 +171,15 @@ which will launch also a browser window containing the debugger UI.
 
 Reverse debugging allows you to step/run in forward and reverse direction. It is very easy to run until an exception happened, then set a breakpoint and run backwards until that breakpoint is reached. This will stop at the point when last time the execution passed that point before the exception happened. It is very easy to uncover the actual cause of the bug this way. Both `gdbgui` and `VS Code` support reverse debugging using [mozilla's `rr`](https://rr-project.org/) as a backend.
 
-> NOTE: `rr` works only on recent Intel processors.
+!!! note
+    `rr` works only on recent Intel processors.
 
 To record a simulation, use:
 
     $ rr record ./aloha_dbg -u Cmdenv -c PureAloha1
 
-> NOTE: Graphical programs cannot be recorded properly so we recommend running your simulation in Cmdenv mode.
+!!! note
+    Graphical programs cannot be recorded properly so we recommend running your simulation in Cmdenv mode.
 
 If you want to send a recorded simulation to an other machine, you can *pack* it, so all dependencies of the executable will be copied into the directory, and then that directory can be compressed and sent to a different user.
 
