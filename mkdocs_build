@@ -1,6 +1,4 @@
 #!/bin/sh
 
-# docker pull squidfunk/mkdocs-material
-
 cd $(dirname $0)
-docker run --rm -it -v $(pwd):/docs -u "$(id -u):$(id -g)" squidfunk/mkdocs-material:4.4.3 build
+docker run --rm -it -v $(pwd):/docs -u "$(id -u):$(id -g)" squidfunk/mkdocs-material:4.6.3 build
