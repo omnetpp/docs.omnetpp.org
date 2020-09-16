@@ -55,18 +55,22 @@ routing table, list of open sockets, etc. Thus, we need separate sets of global
 variables for each lwIP instance, and make sure each instance uses its own set.
 
 There are a few distinct approaches to solve this problem, such as:
+
 1. Packaging the software as a shared library, and loading it at runtime as many
    times as the number of instances you need. The dynamic loader of your system
    would take care that each loaded instance is a self-contained one, having no
    data common with the other instances.
+
 2. Exploiting object-orientation. If the library is implemented in C++, odds are
    that creating multiple instances is only as much as instantiating the
    corresponding classes multiple times. Or, if the library is programmed in C,
    it could be feasible to wrap the code into C++ classes.
+
 3. Introducing indirection, i.e. collecting all global variables into a struct
    and modifying the library to access them via a pointer, a single global
    variable that we always set to point to the appropriate set of variables
    before calling into the library.
+
 4. Copying, that is, we maintain a "backup" (or "shadow", if you like) set of
    global variables of each instance, and we copy its contents in/out of the
    actual global variables before and after each call into the library.
