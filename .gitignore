@@ -1,6 +1,4 @@
 .qtenvrc
-.tkenvrc
-.tkenvlog
 .cmdenv-log
 .ipynb_checkpoints
 test.ipynb
@@ -8,4 +6,3 @@ test.ipynb
 _site
 .jekyll-metadata
 /site
-/docs/tutorials/pandas/index.md
