@@ -109,6 +109,9 @@ nav:
       - 'articles/running-omnetpp-in-docker.md'
       - 'articles/wsl2.md'
       - 'articles/omnetpp-debugging-tips.md'
+    - Proposed Research Topics:
+      - 'articles/neuralnet-errormodels.md'
+      - 'articles/zero-conf-parsim.md'
     - _Source Browser_: showfile.md
     - _Tutorials_: tutorials/index.md
 
