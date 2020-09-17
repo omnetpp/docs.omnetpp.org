@@ -84,10 +84,15 @@ event becomes green it, remains green until it is executed. The colorizing
 algorithm could work as follows:
 
     for each red event E1 in module M1 in the FES:
-        for each event E2 in module M2 before E1 in the FES:
-            Minimize arrivalTime(E2) + minimumDelay(M2, M1) as T
+        /* if there is no other event whose execution could possibly
+           affect E1, color it green */
+        let T = minimum of arrivalTime(E2) + minimumDelay(M2, M1)
+            for each event E2 in module M2 before E1 in the FES
         if arrivalTime(E1) < T:
             mark E1 as green
+
+The word "before" refers to the OMNeT++ event ordering rules: first by arrival time,
+second by priority, and third by insertion order.
 
 The above algorithm can be run concurrently with the parallel simulation worker
 threads, because it is conservative with respect to coloring events.
