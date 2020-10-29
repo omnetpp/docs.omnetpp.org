@@ -146,7 +146,7 @@ It is also possible to configure OMNeT++ to allow invoking the debugger from ins
   debugger-attach-command="code --open-url \"vscode://vadimcn.vscode-lldb/launch/config?{request:'attach', pid:'%u'}\""
   ```
 
-Both approach will allow you to drop into the debugger interactively from Qtenv.
+Both approaches will allow you to drop into the debugger interactively from Qtenv.
 
 ### Pretty Printing OMNeT++ Data Structures
 
