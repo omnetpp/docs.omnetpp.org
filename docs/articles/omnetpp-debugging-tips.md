@@ -138,12 +138,12 @@ It is also possible to configure OMNeT++ to allow invoking the debugger from ins
 
 - You can configure it globally by setting the following environment variable in your shell's startup file (i.e. `.bashrc`):
   ```
-  export OMNETPP_DEBUGGER_COMMAND="code --open-url \"vscode://vadimcn.vscode-lldb/launch/config?{request:'attach', pid:'%u'}\""
+  export OMNETPP_DEBUGGER_COMMAND="code --open-url \"vscode://vadimcn.vscode-lldb/launch/config?{request: 'attach', pid: '%u'}\""
   ```
 
 - You can set it only for the current simulation by setting the following configuration key in your `omnetpp.ini`:
   ```
-  debugger-attach-command="code --open-url \"vscode://vadimcn.vscode-lldb/launch/config?{request:'attach', pid:'%u'}\""
+  debugger-attach-command="code --open-url \"vscode://vadimcn.vscode-lldb/launch/config?{request: 'attach', pid: '%u'}\""
   ```
 
 Both approaches will allow you to drop into the debugger interactively from Qtenv.
@@ -205,6 +205,6 @@ First, start a replay
 
 then the VS Code editor using the same port number
 
-    $ code --open-url "vscode://vadimcn.vscode-lldb/launch/config?{targetCreateCommands: ['target create full/path/to/omnetpp/samples/aloha/aloha_dbg'],processCreateCommands: ['gdb-remote 127.0.0.1:50001'],request: 'custom',reverseDebugging: true }"
+    $ code --open-url "vscode://vadimcn.vscode-lldb/launch/config?{targetCreateCommands: ['target create full/path/to/omnetpp/samples/aloha/aloha_dbg'], processCreateCommands: ['gdb-remote 127.0.0.1:50001'], request: 'custom', reverseDebugging: true }"
 
 You will see some extra buttons on the debugger toolbar allowing reverse stepping and execution.
