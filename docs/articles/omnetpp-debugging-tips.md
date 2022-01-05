@@ -100,6 +100,8 @@ To achieve the best possible experience during debugging, you should fine tune s
 
 - Depending on whether you intend to use `gdb` or `lldb` for debugging, you should add `-ggdb3` or `-glldb` to the `CFLAGS_DEBUG` variable. Note that by default OMNeT++ assumes you intend to use gdb.
 
+- You may need to configure `gdb` to improve load times if you work with big projects. In `~/.gdbinit` specify `main set worker-threads unlimited` to allow parallel loading of debug information.
+
 - If you use `clang` as your compiler and use 3rd-party libraries in you project that do not have debugging symbols, you may have a hard time inspecting some types defined in those libraries. This is especially painful with the standard C++ library, where you cannot inspect `std::string` or other standard containers. This usually surfaces as a debugger error complaining about 'incomplete types'.
 
   To remedy this situation, you should install the corresponding debug symbols on your operating system (i.e. on Ubuntu: `sudo apt-get install libstdc++6-8-dbg`), however note that the actual name of the debug symbol package varies widely.
