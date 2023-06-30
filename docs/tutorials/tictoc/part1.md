@@ -101,7 +101,7 @@ registered in OMNeT++ with the `Define_Module()` macro.
 
 !!! note
     It is a common mistake to forget the `Define_Module()` line. If it is missing,
-    you'll get an error message similar to this one: `"Error: Class 'Txc1' not found -- perhaps
+    you'll get an error message similar to this one: `"Error: Class 'Txc1' not found -- perhaps 
     its code was not linked in, or the class wasn't registered with Register_Class(), or in
     the case of modules and channels, with Define_Module()/Define_Channel()"`.
 
