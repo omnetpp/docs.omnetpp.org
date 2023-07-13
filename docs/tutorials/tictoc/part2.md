@@ -141,7 +141,7 @@ variables, which will help you identify and fix the bug.
 
 You can also manually place breakpoints into the code. Breakpoints will stop
 execution, and let you examine variables, execute the code line-by-line,
-or resume execution (until the next breakpint).
+or resume execution (until the next breakpoint).
 
 A breakpoint can be placed at a specific line in the source code by double-clicking
 on the left gutter in the editor, or choosing *Toggle Breakpoint* from
