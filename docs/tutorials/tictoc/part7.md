@@ -87,34 +87,28 @@ We'll display the average hop count for messages that reach their destinations v
 Additionally, we will display the average number of packets that reached their destinations vs *N*.
 The analysis file `Tictoc18.anf` contains the dataset we will use for the visualization.
 
-<img src="../images/dataset.png">
-
 These two average scalars are not recorded during the simulation, we will have to compute them from the available data.
 
 The hop count is recorded at each node when a message arrives, so the mean of hop count will be available as a statistic.
 But this is recorded per node, and we're interested in the average of the mean hop count for all nodes.
-The 'Compute Scalar' dataset node can be used to compute scalar statistics from other scalars.
-We compute `AvgHopCount` as `mean(**.'hopCount:stats:mean')`.
-
-We're also interested in the average number of packets that arrive at their destination.
-The count of the arrived packets is available at each node. We can compute their average,
-`AvgNumPackets` as `mean('hopCount:stats:count')`.
+The Scatter Chart can average multiple values before plotting them.
 
 !!! tip
-    Refer to the chapter "Using the Analysis Editor" in the *User Guide* for more information on datasets. You can find it in the `doc/` directory of your OMNeT++ installation.
+    Refer to the chapter "Analysing the Results" in the *User Guide* for more information on charts. You can find it in the `doc/` directory of your OMNeT++ installation.
 
-Then, we plot these two computed scalars against *N* in two scatter charts. The data for different repetitions is automatically averaged.
+To make the chart average the hop count over all nodes instead of plotting them as separate lines, set the axes in the configuration dialog as shown:
+
+<img src="../images/editscatterchart.png">
+
 Here is the average hop count vs *N*:
 
 <img src="../images/avghopcount.png">
 
 The average hop count increases as the network gets larger, as packets travel more to reach their destination.
-The increase is polynomial. Notice that there are missing values at the far right of the chart.
-This is because in such a large network, some packets might not reach their destination in the simulation time limit.
-When no packets arrive at a node, the hop count statistic will be *NaN* (not a number) for that node.
-When there is a *NaN* in any mathematical expression, its result will be also *NaN*.
-Thus it takes just one node in all the simulation runs to have a *NaN* statistic, and the average will be *NaN*, and there'll be no data to display.
-This can be remedied by increasing the simulation time limit, so more packets have a chance to arrive.
+The increase is polynomial.
+
+We're also interested in the average number of packets that arrive at their destination.
+The count of the arrived packets is available at each node.
 
 Below is the average number of packets that arrived vs *N*:
 
