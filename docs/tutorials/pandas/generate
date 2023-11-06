@@ -1,8 +1,8 @@
 #!/bin/sh
-# prerequisits: python3 -m pip install --user --upgrade notedown ipython jupyter numpy pandas matplotlib scipy pivottablejs
-# Note also that later versions of notedown has a bug which does not allow have a bug where
-# filters are not properly installed for the JINJA2 template if the teamplate file is specified from the command line 
-# so you most likely have to copy the mkdocs-markdown.tpl to ~/.local/lib/python3.8/site-packages/notedown/templates/markdown_outputs.tpl
+# prerequisites: python3 -m pip install --user --upgrade notedown ipython jupyter numpy pandas matplotlib scipy pivottablejs
+# Note also that later versions of notedown have a bug where filters are not properly installed for the
+# JINJA2 template if the template file is specified from the command line, so you most likely have to copy
+# the mkdocs-markdown.tpl file to ~/.local/lib/python3.8/site-packages/notedown/templates/markdown_outputs.tpl
 # and remove the --template argument here.
 
 cd $(dirname $0)
