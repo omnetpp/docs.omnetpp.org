@@ -3,6 +3,17 @@ previous_page_disabled: true
 next_page_disabled: true
 ---
 
+
+!!! attention
+    This tutorial is obsolete - it was written before OMNeT++ 6.
+
+    In that version, the result analysis toolset was completely overhauled,
+    already relying heavily on Python, NumPy, Pandas, and Matplotlib.
+    Both graphical and command-line tools, as well as libraries usable from
+    standalone Python scripts are available now, which are preferred over
+    the methods described below.
+
+
 ## 1. When to use Python?
 
 
@@ -2140,7 +2151,7 @@ pj.pivot_ui(scalars_wide)
             frameborder="0"
             allowfullscreen
         ></iframe>
-        
+
 </div>
 
 
@@ -2185,7 +2196,7 @@ pj.pivot_ui(scalars_wide, rows=['numHosts'], cols=['iaMean'], vals=['Aloha.serve
             frameborder="0"
             allowfullscreen
         ></iframe>
-        
+
 </div>
 
 
