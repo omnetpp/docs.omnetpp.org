@@ -1,8 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 
 
-RUN apt-get update -y && apt-get install -y python3-minimal python3-pip \
-      build-essential bison flex libxml2-dev zlib1g-dev python-minimal wget
+RUN apt-get update -y && apt-get install -y python3 python3-pip \
+      build-essential bison flex libxml2-dev zlib1g-dev wget
 
 
 RUN pip3 install --upgrade pip && pip3 install rq
