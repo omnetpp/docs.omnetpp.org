@@ -169,7 +169,7 @@ having the vector data for the first three module `tic` 0,1,2. No problem. We ca
 histogram and remove the unneeded vector recording without even touching the C++ or NED
 files. Just open the INI file and modify the statistic recording:
 
-<pre class="snippet" src="../code/omnetpp.ini" from="\[Config Tictoc16\]" upto="tic\[0..2\]"></pre>
+<pre class="snippet" src="../code/omnetpp.ini" from="\[Tictoc16\]" upto="tic\[0..2\]"></pre>
 
 We can configure a wide range of statistics without even looking into the C++ code,
 provided that the original model emits the necessary signals for us.

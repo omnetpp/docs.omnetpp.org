@@ -57,7 +57,7 @@ will run out of events and terminate.
 
 Note the
 
-<pre class="snippet" src="../code/txc3.cc" after="in the list." upto="WATCH"></pre>
+<pre class="snippet" src="../code/txc3.cc" after="bottom left" upto="WATCH"></pre>
 
 line in the source: this makes it possible to see the counter value
 in the graphical runtime environment.
