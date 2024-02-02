@@ -1,0 +1,1275 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Docmentation for the OMNeT++ Simulator">
+      
+      
+        <link rel="canonical" href="https://docs.omnetpp.org/tutorials/tictoc/part2/">
+      
+      
+        <meta name="author" content="OMNeT++ Team">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Running the Simulation - OMNeT++ Technical Articles</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    <script>
+    // handle <a srcfile></a> references to source files
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('a[srcfile]').each(function(i) {
+            var srcref = $(this).attr('srcfile');
+            var name = srcref.replace(/.*\//g, "");
+            $(this).text(name);
+            $(this).attr('href', '/showfile/?url='+srcref);
+            $(this).attr('target', '_blank');
+        });
+    });
+    // function th show a full size image when clicked ona thumbnail
+    imageFullSizeZoom = function(img){
+        img = $(img);
+        let fullSizeSrc = img.attr('src').replace(/.thumb.jpg$/, '.png');
+
+        $(document.body).append(
+        '<div class="fullscreenimgshade" onclick="$(this).remove();">' +
+            '<img src="' + fullSizeSrc + '" class="fullscreenimg"/>' +
+        '</div>'
+        );
+    };
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/omnetpp-docs.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/rainbow.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/rainbow.linenumbers.theme.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/jupyter.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-240922-2", "docs.omnetpp.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#part-2-running-the-simulation" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.omnetpp.org/" title="OMNeT++ Technical Articles" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              OMNeT++ Technical Articles
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Running the Simulation
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </span>
+    OMNeT++ Technical Articles
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1" checked>
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Learn OMNeT++ with TicToc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Learn OMNeT++ with TicToc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../part1/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Running the Simulation
+      </label>
+    
+    <a href="./" title="Running the Simulation" class="md-nav__link md-nav__link--active">
+      Running the Simulation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-launching-the-simulation-program" class="md-nav__link">
+    2.1 Launching the simulation program
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-running-the-simulation" class="md-nav__link">
+    2.2 Running the simulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-debugging" class="md-nav__link">
+    2.3 Debugging
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#runtime-errors" class="md-nav__link">
+    Runtime errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crashes" class="md-nav__link">
+    Crashes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breakpoints" class="md-nav__link">
+    Breakpoints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-next-event" class="md-nav__link">
+    Debug next event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-the-debugrun-dialog" class="md-nav__link">
+    2.4 The Debug/Run dialog
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-visualizing-on-a-sequence-chart" class="md-nav__link">
+    2.5 Visualizing on a Sequence Chart
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../part3/" title="Enhancing the 2-node TicToc" class="md-nav__link">
+      Enhancing the 2-node TicToc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../part4/" title="Turning it Into a Real Network" class="md-nav__link">
+      Turning it Into a Real Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../part5/" title="Adding Statistics Collection" class="md-nav__link">
+      Adding Statistics Collection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../part6/" title="Visualizing the Results" class="md-nav__link">
+      Visualizing the Results
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../part7/" title="Parameter Studies" class="md-nav__link">
+      Parameter Studies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../conclusion/" title="Closing words" class="md-nav__link">
+      Closing words
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../pandas/" title="Result Analysis with Python" class="md-nav__link">
+      Result Analysis with Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Articles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Articles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Introduction into Running Simulations in the Cloud
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Introduction into Running Simulations in the Cloud
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page1/" title="Concepts" class="md-nav__link">
+      Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page2/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page4/" title="Deploying on AWS" class="md-nav__link">
+      Deploying on AWS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page5/" title="Trying It Out" class="md-nav__link">
+      Trying It Out
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page6/" title="Examining the Code" class="md-nav__link">
+      Examining the Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page7/" title="Potential Improvements, Alternatives" class="md-nav__link">
+      Potential Improvements, Alternatives
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Using AWS for Running INET Simulation Campaigns
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Using AWS for Running INET Simulation Campaigns
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/" title="Motivation" class="md-nav__link">
+      Motivation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/page1/" title="Installation and Usage" class="md-nav__link">
+      Installation and Usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/page2/" title="How it Works" class="md-nav__link">
+      How it Works
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/porting-code-into-omnetpp/" title="Porting Real-World Protocol Implementations into OMNeT++" class="md-nav__link">
+      Porting Real-World Protocol Implementations into OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/building-omnetpp-in-docker/" title="Building an OMNeT++ Distro" class="md-nav__link">
+      Building an OMNeT++ Distro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/running-omnetppgui-in-docker/" title="OMNeT++ GUI in Docker" class="md-nav__link">
+      OMNeT++ GUI in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/running-omnetpp-in-docker/" title="Using Docker for Running Simulations on Various Versions of OMNeT++" class="md-nav__link">
+      Using Docker for Running Simulations on Various Versions of OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/wsl2/" title="Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)" class="md-nav__link">
+      Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/omnetpp-debugging-tips/" title="Improving the C++ Debugging Experience on Linux and other OSes" class="md-nav__link">
+      Improving the C++ Debugging Experience on Linux and other OSes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Proposed Research Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Proposed Research Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/neuralnet-errormodels/" title="Better Wireless Error Models Using Neural Networks" class="md-nav__link">
+      Better Wireless Error Models Using Neural Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/zero-conf-parsim/" title="Zero Configuration Automatic Parallel Simulation" class="md-nav__link">
+      Zero Configuration Automatic Parallel Simulation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+    
+      
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-launching-the-simulation-program" class="md-nav__link">
+    2.1 Launching the simulation program
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-running-the-simulation" class="md-nav__link">
+    2.2 Running the simulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-debugging" class="md-nav__link">
+    2.3 Debugging
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#runtime-errors" class="md-nav__link">
+    Runtime errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crashes" class="md-nav__link">
+    Crashes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breakpoints" class="md-nav__link">
+    Breakpoints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-next-event" class="md-nav__link">
+    Debug next event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-the-debugrun-dialog" class="md-nav__link">
+    2.4 The Debug/Run dialog
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-visualizing-on-a-sequence-chart" class="md-nav__link">
+    2.5 Visualizing on a Sequence Chart
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/omnetpp/docs.omnetpp.org/edit/master/docs/tutorials/tictoc/part2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="part-2-running-the-simulation">Part 2 - Running the Simulation<a class="headerlink" href="#part-2-running-the-simulation" title="Permanent link">&para;</a></h1>
+<h2 id="21-launching-the-simulation-program">2.1 Launching the simulation program<a class="headerlink" href="#21-launching-the-simulation-program" title="Permanent link">&para;</a></h2>
+<p>Once you complete the above steps, you can launch the simulation by selecting
+%omnetpp.ini (in either the editor area or the <em>Project Explorer</em>),
+and pressing the <em>Run</em> button.</p>
+<p><img src="../images/run.png"></p>
+<p>The IDE will build your project automatically. If there are compilation errors,
+you need to rectify those until you get an error-free compilation and linking.
+You can manually trigger a build by hitting choosing <em>Project -&gt; Build All</em>
+from the menu, or hitting <em>Ctrl+B</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to build the simulation executable on the command-line,
+create a <em>Makefile</em> using the <code class="codehilite"><span class="err">opp_makemake</span></code>
+command, then enter <code class="codehilite"><span class="err">make</span></code> to build the project. It will produce
+an executable that can be run by entering <code class="codehilite"><span class="err">./tictoc</span></code>.</p>
+</div>
+<h2 id="22-running-the-simulation">2.2 Running the simulation<a class="headerlink" href="#22-running-the-simulation" title="Permanent link">&para;</a></h2>
+<p>After successfully building and launching your simulation, you should see
+a new GUI window appear, similar to the one in the screenshot below.
+The window belongs to <em>Qtenv</em>, the main OMNeT++ simulation runtime GUI.
+You should also see the network containing <em>tic</em> and <em>toc</em> displayed
+graphically in the main area.</p>
+<p>Press the <em>Run</em> button on the toolbar to start the simulation. What you should
+see is that <em>tic</em> and <em>toc</em> are exchanging messages with each other.</p>
+<p><img src="../images/tictoc1_3.gif"></p>
+<p>The main window toolbar displays the current simulation time. This is virtual time,
+it has nothing to do with the actual (or wall-clock) time that the program takes to
+execute. Actually, how many seconds you can simulate in one real-world second
+depends highly on the speed of your hardware and even more on the nature and
+complexity of the simulation model itself.</p>
+<p>Note that it takes zero simulation time for a node to process the message.
+The only thing that makes the simulation time pass in this model is
+the propagation delay on the connections.</p>
+<p>You can play with slowing down the animation or making it faster with
+the slider at the top of the graphics window. You can stop the simulation
+by hitting F8 (equivalent to the STOP button on the toolbar), single-step
+through it (F4), run it with (F5) or without (F6) animation.
+F7 (express mode) completely turns off tracing features for maximum speed.
+Note the event/sec and simsec/sec gauges on the status bar of the
+main window (only visible when the simulation is running in fast or express mode).</p>
+<div class="admonition tip">
+<p class="admonition-title">Exercise</p>
+<p>Explore the GUI by running the simulation several times. Try
+<em>Run</em>, <em>Run Until</em>, <em>Rebuild Network</em>, and other functions.</p>
+</div>
+<p>You can exit the simulation program by clicking its <em>Close</em> icon or
+choosing <em>File -&gt; Exit</em>.</p>
+<h2 id="23-debugging">2.3 Debugging<a class="headerlink" href="#23-debugging" title="Permanent link">&para;</a></h2>
+<p>The simulation is just a C++ program, and as such, it often needs to be
+debugged while it is being developed. In this section we'll look at the
+basics of debugging to help you acquire this vital task.</p>
+<p>The simulation can be started in debug mode by clicking the <em>Debug</em>
+button on the IDE's main toolbar.</p>
+<p><img src="../images/debug.png"></p>
+<p>This will cause the simulation program to be launched under a debugger
+(usually <em>gdb</em>). The IDE will also switch into "Debug perspective",
+i.e. rearrange its various panes and views to a layout which is better
+suited to debugging. You can end the debugging session with the
+<em>Terminate</em> button (a red square) on the toolbar.</p>
+<h3 id="runtime-errors">Runtime errors<a class="headerlink" href="#runtime-errors" title="Permanent link">&para;</a></h3>
+<p>Debugging is most often needed to track down runtime errors. Let's try it!
+First, deliberately introduce an error into the program. In
+<a srcfile="tutorials/tictoc/code/txc1.cc"></a>, duplicate the <code class="codehilite"><span class="err">send()</span></code> line inside
+ <code class="codehilite"><span class="err">handleMessage()</span></code>, so that the code looks like this:</p>
+<div class="codehilite"><pre><span></span><span class="err">void Txc1::handleMessage(cMessage *msg)</span>
+<span class="err">{</span>
+<span class="err">    //...</span>
+<span class="err">    send(msg, &quot;out&quot;); // send out the message</span>
+<span class="err">    send(msg, &quot;out&quot;); // THIS SHOULD CAUSE AN ERROR</span>
+<span class="err">}</span>
+</pre></div>
+
+<p>When you launch the simulation in normal mode (<em>Run</em> button) and try to run it,
+you'll get an error message like this:</p>
+<p><img src="../images/error.png" width="450px"></p>
+<p>Now, run the simulation in <em>Debug</em> mode. Due to a <code class="codehilite"><span class="err">debug-on-errors</span></code> option
+being enabled by default, the simulation program will stop in the debugger.
+You can locate the error by examining the stack trace (the list of nested
+function calls) in the <em>Debug</em> view:</p>
+<p><img src="../images/stacktrace.png" width="600px"></p>
+<p>You can see that it was OMNeT++'s <code class="codehilite"><span class="err">breakIntoDebuggerIfRequested()</span></code> method that
+activated the debugger. From then on, you need to search for a function that
+looks familiar, i.e. for one that is part of the model. In our case, that is
+the "Txc1::handleMessage() at txc1.cc:54" line. Selecting that line will
+show you the corresponding source code in the editor area, and lets you
+examine the values of variables in the <em>Variables</em> view. This information
+will help you determine the cause of the error and fix it.</p>
+<h3 id="crashes">Crashes<a class="headerlink" href="#crashes" title="Permanent link">&para;</a></h3>
+<p>Tracking down crashes i.e. segfaults is similar, let's try that as well.
+Undo the previous source code edit (remove the duplicate <code class="codehilite"><span class="err">send()</span></code> line),
+and introduce another error. Let's pretend we forgot to create the message
+before sending it, and change the following lines in <code class="codehilite"><span class="err">initialize()</span></code></p>
+<div class="codehilite"><pre><span></span><span class="err">        cMessage *msg = new cMessage(&quot;tictocMsg&quot;);</span>
+<span class="err">        send(msg, &quot;out&quot;);</span>
+</pre></div>
+
+<p>to simply</p>
+<div class="codehilite"><pre><span></span><span class="err">        cMessage *msg; // no initialization!</span>
+<span class="err">        send(msg, &quot;out&quot;);</span>
+</pre></div>
+
+<p>When you run the simulation, it will crash. (You will get an error message
+similar to "Simulation terminated with exit code: 139"). If you launch the simulation
+again, this time in <em>Debug</em> mode, the crash will bring you into the debugger.
+Once there, you'll be able to locate the error in the <em>Debug</em> view and examine
+variables, which will help you identify and fix the bug.</p>
+<h3 id="breakpoints">Breakpoints<a class="headerlink" href="#breakpoints" title="Permanent link">&para;</a></h3>
+<p>You can also manually place breakpoints into the code. Breakpoints will stop
+execution, and let you examine variables, execute the code line-by-line,
+or resume execution (until the next breakpoint).</p>
+<p>A breakpoint can be placed at a specific line in the source code by double-clicking
+on the left gutter in the editor, or choosing <em>Toggle Breakpoint</em> from
+the context menu. The list of active (and inactive) breakpoints can be examined
+in the <em>Breakpoints</em> view.</p>
+<div class="admonition tip">
+<p class="admonition-title">Exercise</p>
+<p>Experiment with breakpoints! Place a breakpoint at the beginning of
+the <code class="codehilite"><span class="err">handleMessage()</span></code> method function, and run the simulation. Use appropriate
+buttons on the toolbar to single-step, continue execution until next time the
+breakpoint is hit, and so on.</p>
+</div>
+<h3 id="debug-next-event">Debug next event<a class="headerlink" href="#debug-next-event" title="Permanent link">&para;</a></h3>
+<p>If you did the previous exercise, you must have noticed that the breakpoint
+was triggered at each and every event in the Txc1 simple module. In real life
+it often occurs that an error only surfaces at, say, the 357<sup>th</sup> event in that module,
+so ideally that's when you'd want to start debugging. It is not very convenient
+to have to hit <em>Resume</em> 356 times just to get to the place of the error.
+A possible solution is to add a <em>condition</em> or an <em>ignore</em>-count to the
+breakpoint (see <em>Breakpoint Properties</em> in its context menu). However,
+there is a potentially more convenient solution.</p>
+<p>In <em>Qtenv</em>, use <em>Run Until</em> to get to the event to be debugged. Then,
+choose <em>Simulation -&gt; Debug Next Event</em> from the menu. This will trigger
+a breakpoint in the debugger at the beginning of <code class="codehilite"><span class="err">handleMessage()</span></code> of the
+next event, and you can start debugging that event.</p>
+<p><img src="../images/debugnextevent.png"></p>
+<h2 id="24-the-debugrun-dialog">2.4 The Debug/Run dialog<a class="headerlink" href="#24-the-debugrun-dialog" title="Permanent link">&para;</a></h2>
+<p>Let us return to launching simulations once more.</p>
+<p>When you launch the simulation program with the <em>Run</em> or <em>Debug</em>
+buttons on the IDE toolbar, settings associated with the launch
+are saved in a <em>launch configuration</em>. Launch configurations
+can be viewed in the <em>Run/Debug Configurations</em> dialog which
+can be opened e.g. by clicking the little <em>down</em> arrow next to the
+<em>Run</em> (<em>Debug</em>) toolbar button to open a menu, and choosing
+<em>Run (Debug) Configurations...</em> in it. In the same menu, you can also
+click the name of a launch configuration (e.g. <em>tictoc</em>) while
+holding down the Ctrl key to open the dialog with the corresponding
+configuration.</p>
+<p>The dialog allows you activate various settings for the launch.</p>
+<p><img src="../images/launchdialog.png" width="550px"></p>
+<h2 id="25-visualizing-on-a-sequence-chart">2.5 Visualizing on a Sequence Chart<a class="headerlink" href="#25-visualizing-on-a-sequence-chart" title="Permanent link">&para;</a></h2>
+<p>The OMNeT++ simulation kernel can record the message exchanges during the
+simulation into an <em>event log file</em>. To enable recording the event log,
+check the <em>Record eventlog</em> checkbox in the launch configuration dialog.
+Alternatively, you can specify <em>record-eventlog = true</em> in omnetpp.ini,
+or even, use the <em>Record</em> button in the Qtenv graphical runtime environment
+after launching,</p>
+<p>The log file can be analyzed later with the <em>Sequence Chart</em> tool in the IDE.
+The <code class="codehilite"><span class="err">results</span></code> directory in the project folder contains the <code class="codehilite"><span class="na">.elog</span></code> file.
+Double-clicking on it in the OMNeT++ IDE opens the Sequence Chart tool,
+and the event log tab at the bottom of the window.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The resulting log file can be quite large, so enable this feature only
+if you really need it.</p>
+</div>
+<p>The following figure has been created with the <em>Sequence Chart</em> tool, and shows
+how the message is routed between the different nodes in the network.
+In this instance the chart is very simple, but when you have a complex model,
+sequence charts can be very valuable in debugging, exploring or documenting
+the model's behaviour.</p>
+<p><img src="../images/eventlog.png"></p>
+<p>Sources: <a srcfile="tutorials/tictoc/code/tictoc1.ned"></a>, <a srcfile="tutorials/tictoc/code/txc1.cc"></a>, <a srcfile="tutorials/tictoc/code/omnetpp.ini"></a></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../part1/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Getting Started
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../part3/" title="Enhancing the 2-node TicToc" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Enhancing the 2-node TicToc
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 OpenSim Ltd.
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
+    
+      <a href="http://omnetpp.org" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/omnetpp/docs.omnetpp.org" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/omnetpp" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/jquery-3.2.1.min.js"></script>
+      
+        <script src="../../../javascripts/quoting.js"></script>
+      
+        <script src="../../../javascripts/rainbow-custom.min.js"></script>
+      
+        <script src="../../../javascripts/rainbow.linenumbers.min.js"></script>
+      
+        <script src="../../../javascripts/rainbow-ini.js"></script>
+      
+        <script src="../../../javascripts/rainbow-ned.js"></script>
+      
+        <script src="../../../javascripts/rainbow-yaml.js"></script>
+      
+        <script src="../../../javascripts/rainbow-dockerfile.js"></script>
+      
+        <script src="../../../javascripts/rainbow-html.js"></script>
+      
+    
+  </body>
+</html>
