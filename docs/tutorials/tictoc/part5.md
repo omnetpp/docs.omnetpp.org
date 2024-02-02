@@ -80,7 +80,7 @@ The files are stored in the `results/` subdirectory.
 
 You can also view the data during simulation. To do that, right click on a module, and
 choose *Open Details*. In the module inspector's *Contents* page you'll find the `hopCountStats`
-and `hopCountVector` objects. To open their inspectors, right click on `cLongHistogram hopCountStats` or
+and `hopCountVector` objects. To open their inspectors, right click on `cHistogram hopCountStats` or
 `cOutVector HopCount`, and click `Open Graphical View`.
 
 <img src="../images/open_details.png">
@@ -124,7 +124,7 @@ even looking into the C++ code.
 We will re-write the statistic collection introduced in the last step to
 use signals. First of all, we can safely remove all statistic related variables
 from our module. There is no need for the `cOutVector` and
-`cLongHistogram` classes either. We will need only a single signal
+`cHistogram` classes either. We will need only a single signal
 that carries the `hopCount` of the message at the time of message
 arrival at the destination.
 

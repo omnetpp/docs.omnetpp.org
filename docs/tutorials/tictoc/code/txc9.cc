@@ -23,12 +23,11 @@ class Tic9 : public cSimpleModule
 {
   private:
     simtime_t timeout;  // timeout
-    cMessage *timeoutEvent;  // holds pointer to the timeout self-message
+    cMessage *timeoutEvent = nullptr;  // holds pointer to the timeout self-message
     int seq;  // message sequence number
-    cMessage *message;  // message that has to be re-sent on timeout
+    cMessage *message = nullptr;  // message that has to be re-sent on timeout
 
   public:
-    Tic9();
     virtual ~Tic9();
 
   protected:
@@ -39,11 +38,6 @@ class Tic9 : public cSimpleModule
 };
 
 Define_Module(Tic9);
-
-Tic9::Tic9()
-{
-    timeoutEvent = message = nullptr;
-}
 
 Tic9::~Tic9()
 {

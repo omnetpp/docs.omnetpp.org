@@ -21,11 +21,10 @@ using namespace omnetpp;
 class Txc7 : public cSimpleModule
 {
   private:
-    cMessage *event;
-    cMessage *tictocMsg;
+    cMessage *event = nullptr;
+    cMessage *tictocMsg = nullptr;
 
   public:
-    Txc7();
     virtual ~Txc7();
 
   protected:
@@ -34,11 +33,6 @@ class Txc7 : public cSimpleModule
 };
 
 Define_Module(Txc7);
-
-Txc7::Txc7()
-{
-    event = tictocMsg = nullptr;
-}
 
 Txc7::~Txc7()
 {

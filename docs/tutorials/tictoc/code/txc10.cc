@@ -19,7 +19,7 @@ using namespace omnetpp;
  * and connecting every module to every other. For now, let's keep it
  * simple what they do: module 0 generates a message, and the others
  * keep tossing it around in random directions until it arrives at
- * module 3.
+ * module 2.
  */
 class Txc10 : public cSimpleModule
 {
