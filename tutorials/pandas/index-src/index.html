@@ -1,0 +1,1844 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Docmentation for the OMNeT++ Simulator">
+      
+      
+        <link rel="canonical" href="https://docs.omnetpp.org/tutorials/pandas/index-src/">
+      
+      
+        <meta name="author" content="OMNeT++ Team">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Index src - OMNeT++ Technical Articles</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    <script>
+    // handle <a srcfile></a> references to source files
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('a[srcfile]').each(function(i) {
+            var srcref = $(this).attr('srcfile');
+            var name = srcref.replace(/.*\//g, "");
+            $(this).text(name);
+            $(this).attr('href', '/showfile/?url='+srcref);
+            $(this).attr('target', '_blank');
+        });
+    });
+    // function th show a full size image when clicked ona thumbnail
+    imageFullSizeZoom = function(img){
+        img = $(img);
+        let fullSizeSrc = img.attr('src').replace(/.thumb.jpg$/, '.png');
+
+        $(document.body).append(
+        '<div class="fullscreenimgshade" onclick="$(this).remove();">' +
+            '<img src="' + fullSizeSrc + '" class="fullscreenimg"/>' +
+        '</div>'
+        );
+    };
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/omnetpp-docs.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/rainbow.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/rainbow.linenumbers.theme.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/jupyter.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-240922-2", "docs.omnetpp.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#1-when-to-use-python" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.omnetpp.org/" title="OMNeT++ Technical Articles" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              OMNeT++ Technical Articles
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Index src
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </span>
+    OMNeT++ Technical Articles
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Learn OMNeT++ with TicToc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Learn OMNeT++ with TicToc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part1/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part2/" title="Running the Simulation" class="md-nav__link">
+      Running the Simulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part3/" title="Enhancing the 2-node TicToc" class="md-nav__link">
+      Enhancing the 2-node TicToc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part4/" title="Turning it Into a Real Network" class="md-nav__link">
+      Turning it Into a Real Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part5/" title="Adding Statistics Collection" class="md-nav__link">
+      Adding Statistics Collection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part6/" title="Visualizing the Results" class="md-nav__link">
+      Visualizing the Results
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part7/" title="Parameter Studies" class="md-nav__link">
+      Parameter Studies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/conclusion/" title="Closing words" class="md-nav__link">
+      Closing words
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Result Analysis with Python" class="md-nav__link">
+      Result Analysis with Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Articles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Articles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Introduction into Running Simulations in the Cloud
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Introduction into Running Simulations in the Cloud
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page1/" title="Concepts" class="md-nav__link">
+      Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page2/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page4/" title="Deploying on AWS" class="md-nav__link">
+      Deploying on AWS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page5/" title="Trying It Out" class="md-nav__link">
+      Trying It Out
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page6/" title="Examining the Code" class="md-nav__link">
+      Examining the Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cloud/page7/" title="Potential Improvements, Alternatives" class="md-nav__link">
+      Potential Improvements, Alternatives
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Using AWS for Running INET Simulation Campaigns
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Using AWS for Running INET Simulation Campaigns
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/" title="Motivation" class="md-nav__link">
+      Motivation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/page1/" title="Installation and Usage" class="md-nav__link">
+      Installation and Usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/page2/" title="How it Works" class="md-nav__link">
+      How it Works
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/porting-code-into-omnetpp/" title="Porting Real-World Protocol Implementations into OMNeT++" class="md-nav__link">
+      Porting Real-World Protocol Implementations into OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/building-omnetpp-in-docker/" title="Building an OMNeT++ Distro" class="md-nav__link">
+      Building an OMNeT++ Distro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/running-omnetppgui-in-docker/" title="OMNeT++ GUI in Docker" class="md-nav__link">
+      OMNeT++ GUI in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/running-omnetpp-in-docker/" title="Using Docker for Running Simulations on Various Versions of OMNeT++" class="md-nav__link">
+      Using Docker for Running Simulations on Various Versions of OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/wsl2/" title="Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)" class="md-nav__link">
+      Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/omnetpp-debugging-tips/" title="Improving the C++ Debugging Experience on Linux and other OSes" class="md-nav__link">
+      Improving the C++ Debugging Experience on Linux and other OSes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Proposed Research Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Proposed Research Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/neuralnet-errormodels/" title="Better Wireless Error Models Using Neural Networks" class="md-nav__link">
+      Better Wireless Error Models Using Neural Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/zero-conf-parsim/" title="Zero Configuration Automatic Parallel Simulation" class="md-nav__link">
+      Zero Configuration Automatic Parallel Simulation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+    
+      
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-when-to-use-python" class="md-nav__link">
+    1. When to use Python?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setting-up" class="md-nav__link">
+    2. Setting up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-getting-your-simulation-results-into-python" class="md-nav__link">
+    3. Getting your simulation results into Python
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-exploring-the-data-frame" class="md-nav__link">
+    4. Exploring the data frame
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-revisiting-csv-loading" class="md-nav__link">
+    5. Revisiting CSV loading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-load-time-filtering" class="md-nav__link">
+    6. Load-time filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-plotting-scalars" class="md-nav__link">
+    7. Plotting scalars
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-interactive-pivot-tables" class="md-nav__link">
+    8. Interactive pivot tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-plotting-histograms" class="md-nav__link">
+    9. Plotting histograms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-adding-iteration-variables-as-columns" class="md-nav__link">
+    10. Adding iteration variables as columns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-plotting-vectors" class="md-nav__link">
+    11. Plotting vectors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-vector-filtering" class="md-nav__link">
+    12. Vector Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    Resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" class="md-nav__link">
+    Acknowledgements
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/omnetpp/docs.omnetpp.org/edit/master/docs/tutorials/pandas/index-src.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Index src</h1>
+                
+                <div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This tutorial is obsolete - it was written before OMNeT++ 6.</p>
+<p>In that version, the result analysis toolset was completely overhauled,
+already relying heavily on Python, NumPy, Pandas, and Matplotlib.
+Both graphical and command-line tools, as well as libraries usable from
+standalone Python scripts are available now, which are preferred over
+the methods described below.</p>
+</div>
+<h2 id="1-when-to-use-python">1. When to use Python?<a class="headerlink" href="#1-when-to-use-python" title="Permanent link">&para;</a></h2>
+<p>The Analysis Tool in the OMNeT++ IDE is best suited for casual exploration of
+simulation results. If you are doing sophisticated result analysis, you will
+notice after a while that you have outgrown the IDE. The need for customized
+charts, the necessity of multi-step computations to produce chart input, or the
+sheer volume of raw simulation results might all be causes to make you look for
+something else.</p>
+<p>If you are an R or Matlab expert, you'll probably reach for those tools, but for
+everyone else, Python with the right libraries is pretty much the best choice.
+Python has a big momentum for data science, and in addition to having excellent
+libraries for data analysis and visualization, it is also a great general-purpose
+programming language. Python is used for diverse problems ranging from building
+desktop GUIs to machine learning and AI, so the knowledge you gain by learning
+it will be convertible to other areas.</p>
+<p>This tutorial will walk you through the initial steps of using Python for
+analysing simulation results, and shows how to do some of the most common tasks.
+The tutorial assumes that you have a working knowledge of OMNeT++ with regard
+to result recording, and basic familiarity with Python.</p>
+<h2 id="2-setting-up">2. Setting up<a class="headerlink" href="#2-setting-up" title="Permanent link">&para;</a></h2>
+<p>Before we can start, you need to install the necessary software.
+First, make sure you have Python, either version 2.x or 3.x (they are
+slightly incompatible.) If you have both versions available on your system,
+we recommend version 3.x. You also need OMNeT++ version 5.2 or later.</p>
+<p>We will heavily rely on three Python packages: <a href="http://www.numpy.org/">NumPy</a>,
+<a href="http://pandas.pydata.org/">Pandas</a>, and <a href="https://matplotlib.org/">Matplotlib</a>.
+There are also optional packages that will be useful for certain tasks:
+<a href="https://www.scipy.org/">SciPy</a>,
+<a href="https://github.com/nicolaskruchten/pivottable">PivotTable.js</a>.
+We also recommend that you install <a href="https://ipython.org/">IPython</a> and
+<a href="https://jupyter.org/">Jupyter</a>, because they let you work much more comfortably
+than the bare Python shell.</p>
+<p>On most systems, these packages can be installed with <code class="codehilite"><span class="err">pip</span></code>, the Python package
+manager (if you go for Python 3, replace <code class="codehilite"><span class="err">pip</span></code> with <code class="codehilite"><span class="err">pip3</span></code> in the commands
+below):</p>
+<div class="codehilite"><pre><span></span><span class="err">sudo pip install ipython jupyter</span>
+<span class="err">sudo pip install numpy pandas matplotlib</span>
+<span class="err">sudo pip install scipy pivottablejs</span>
+</pre></div>
+
+
+<p>As packages continually evolve, there might be incompatibilities between
+versions. We used the following versions when writing this tutorial:
+Pandas 0.20.2, NumPy 1.12.1, SciPy 0.19.1, Matplotlib 1.5.1, PivotTable.js 0.8.0.
+An easy way to determine which versions you have installed is using the <code class="codehilite"><span class="err">pip list</span></code>
+command. (Note that the last one is the version of the Python interface library,
+the PivotTable.js main Javascript library uses different version numbers, e.g.
+2.7.0.)</p>
+<h2 id="3-getting-your-simulation-results-into-python">3. Getting your simulation results into Python<a class="headerlink" href="#3-getting-your-simulation-results-into-python" title="Permanent link">&para;</a></h2>
+<p>OMNeT++ result files have their own file format which is not directly
+digestible by Python. There are a number of ways to get your data
+inside Python:</p>
+<ol>
+<li>
+<p>Export from the IDE. The Analysis Tool can export data in a number of
+  formats, the ones that are useful here are CSV and Python-flavoured JSON.
+  In this tutorial we'll use the CSV export, and read the result into Pandas
+  using its <code class="codehilite"><span class="err">read_csv()</span></code> function.</p>
+</li>
+<li>
+<p>Export using scavetool. Exporting from the IDE may become tedious
+  after a while, because you have to go through the GUI every time your
+  simulations are re-run. Luckily, you can automate the exporting with
+  OMNeT++'s scavetool program. scavetool exposes the same export
+  functionality as the IDE, and also allows filtering of the data.</p>
+</li>
+<li>
+<p>Read the OMNeT++ result files directly from Python. Development
+  of a Python package to read these files into Pandas data frames is
+  underway, but given that these files are line-oriented text files
+  with a straightforward and well-documented structure, writing your
+  own custom reader is also a perfectly feasible option.</p>
+</li>
+<li>
+<p>SQLite. Since version 5.1, OMNeT++ has the ability to record simulation
+  results int SQLite3 database files, which can be opened directly from
+  Python using the <a href="https://docs.python.org/3/library/sqlite3.html">sqlite</a>
+  package. This lets you use SQL queries to select the input data for your
+  charts or computations, which is kind of cool! You can even use GUIs like
+  <a href="http://sqlitebrowser.org/">SQLiteBrowser</a> to browse the database and
+  craft your SELECT statements. Note: if you configure OMNeT++ for SQLite3
+  output, you'll still get <code class="codehilite"><span class="na">.vec</span></code> and <code class="codehilite"><span class="na">.sca</span></code> files as before, only their
+  format will change from textual to SQLite's binary format. When querying
+  the contents of the files, one issue  to deal with is that SQLite does not
+  allow cross-database queries, so you either need to configure OMNeT++
+  to record everything into one file (i.e. each run should append instead
+  of creating a new file), or use scavetool's export functionality to
+  merge the files into one.</p>
+</li>
+<li>
+<p>Custom result recording. There is also the option to instrument
+  the simulation (via C++ code) or OMNeT++ (via custom result recorders)
+  to produce files that Python can directly digest, e.g. CSV.
+  However, in the light of the above options, it is rarely necessary
+  to go this far.</p>
+</li>
+</ol>
+<p>With large-scale simulation studies, it can easily happen that the
+full set of simulation results do not fit into the memory at once.
+There are also multiple approaches to deal with this problem:</p>
+<ol>
+<li>If you don't need all simulation results for the analysis, you can
+  configure OMNeT++ to record only a subset of them. Fine-grained control
+  is available.</li>
+<li>Perform filtering and aggregation steps before analysis. The IDE and
+  scavetool are both capable of filtering the results before export.</li>
+<li>When the above approaches are not enough, it can help to move
+  part of the result processing (typically, filtering and aggregation)
+  into the simulation model as dedicated result collection modules.
+  However, this solution requires significantly more work than the previous
+  two, so use with care.</li>
+</ol>
+<p>In this tutorial, we'll work with the contents of the <code class="codehilite"><span class="err">samples/resultfiles</span></code>
+directory distributed with OMNeT++. The directory contains result
+files produced by the Aloha and Routing sample simulations, both
+of which are parameter studies. We'll start by looking at the Aloha results.</p>
+<p>As the first step, we use OMNeT++'s <em>scavetool</em> to convert Aloha's scalar files
+to CSV. Run the following commands in the terminal (replace <code class="codehilite"><span class="err">~/omnetpp</span></code> with
+the location of your OMNeT++ installation):</p>
+<div class="codehilite"><pre><span></span><span class="err">cd ~/omnetpp/samples/resultfiles/aloha</span>
+<span class="err">scavetool x *.sca -o aloha.csv</span>
+</pre></div>
+
+
+<p>In the scavetool command line, <code class="codehilite"><span class="err">x</span></code> means export, and the export format is
+inferred from the output file's extension. (Note that scavetool supports
+two different CSV output formats. We need <em>CSV Records</em>, or CSV-R for short,
+which is the default for the <code class="codehilite"><span class="na">.csv</span></code> extension.)</p>
+<p>Let us spend a minute on what the export has created. The CSV file
+has a fixed number of columns named <code class="codehilite"><span class="err">run</span></code>, <code class="codehilite"><span class="err">type</span></code>, <code class="codehilite"><span class="err">module</span></code>, <code class="codehilite"><span class="err">name</span></code>,
+<code class="codehilite"><span class="err">value</span></code>, etc. Each result item, i.e. scalar, statistic, histogram
+and vector, produces one row of output in the CSV. Other items such
+as run attributes, iteration variables of the parameter study and result
+attributes also generate their own rows. The content of the <code class="codehilite"><span class="err">type</span></code> column
+determines what type of information a given row contains. The <code class="codehilite"><span class="err">type</span></code>
+column also determines which other columns are in use. For example,
+the <code class="codehilite"><span class="err">binedges</span></code> and <code class="codehilite"><span class="err">binvalues</span></code> columns are only filled in for histogram
+items. The colums are:</p>
+<ul>
+<li><em>run</em>: Identifies the simulation run</li>
+<li><em>type</em>: Row type, one of the following: <code class="codehilite"><span class="err">scalar</span></code>, <code class="codehilite"><span class="err">vector</span></code>, <code class="codehilite"><span class="err">statistics</span></code>,
+  <code class="codehilite"><span class="err">histogram</span></code>, <code class="codehilite"><span class="err">runattr</span></code>, <code class="codehilite"><span class="err">itervar</span></code>, <code class="codehilite"><span class="err">param</span></code>, <code class="codehilite"><span class="err">attr</span></code></li>
+<li><em>module</em>: Hierarchical name (a.k.a. full path) of the module that recorded the
+  result item</li>
+<li><em>name</em>: Name of the result item (scalar, statistic, histogram or vector)</li>
+<li><em>attrname</em>: Name of the run attribute or result item attribute (in the latter
+  case, the <code class="codehilite"><span class="err">module</span></code> and <code class="codehilite"><span class="err">name</span></code> columns identify the result item the attribute
+  belongs to)</li>
+<li><em>attrvalue</em>: Value of run and result item attributes, iteration variables,
+  saved ini param settings (<code class="codehilite"><span class="err">runattr</span></code>, <code class="codehilite"><span class="err">attr</span></code>, <code class="codehilite"><span class="err">itervar</span></code>, <code class="codehilite"><span class="err">param</span></code>)</li>
+<li><em>value</em>: Output scalar value</li>
+<li><em>count</em>, <em>sumweights</em>, <em>mean</em>, <em>min</em>, <em>max</em>, <em>stddev</em>: Fields of the statistics
+  or histogram</li>
+<li><em>binedges</em>, <em>binvalues</em>: Histogram bin edges and bin values, as space-separated
+  lists. <em>len(binedges)==len(binvalues)+1</em></li>
+<li><em>vectime</em>, <em>vecvalue</em>: Output vector time and value arrays, as space-separated
+  lists</li>
+</ul>
+<p>When the export is done, you can start Jupyter server with the following command:</p>
+<div class="codehilite"><pre><span></span><span class="err">jupyter notebook</span>
+</pre></div>
+
+
+<p>Open a web browser with the displayed URL to access the Jupyter GUI. Once there,
+choose <em>New</em> -&gt; <em>Python3</em> in the top right corner to open a blank notebook.
+The notebook allows you to enter Python commands or sequences of commands,
+run them, and view the output. Note that <em>Enter</em> simply inserts a newline;
+hit <em>Ctrl+Enter</em> to execute the commands in the current cell, or <em>Alt+Enter</em>
+to execute them and also insert a new cell below.</p>
+<p>If you cannot use Jupyter for some reason, a terminal-based Python shell
+(<code class="codehilite"><span class="err">python</span></code> or <code class="codehilite"><span class="err">ipython</span></code>) will also allow you to follow the tutorial.</p>
+<p>On the Python prompt, enter the following lines to make the functionality of
+Pandas, NumpPy and Matplotlib available in the session. The last, <code class="codehilite"><span class="nf">%matplotlib</span></code>
+line is only needed for Jupyter. (It is a "magic command" that arranges plots
+to be displayed within the notebook.)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+
+<p>We utilize the <code class="codehilite"><span class="err">read_csv()</span></code> function to import the contents of the
+CSV file into a data frame. The data frame is the central concept of
+Pandas. We will continue to work with this data frame throughout
+the whole tutorial.</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha = pd.read_csv(&#39;aloha.csv&#39;)</span>
+</pre></div>
+
+<h2 id="4-exploring-the-data-frame">4. Exploring the data frame<a class="headerlink" href="#4-exploring-the-data-frame" title="Permanent link">&para;</a></h2>
+<p>You can view the contents of the data frame by simply entering the name
+of the variable (<code class="codehilite"><span class="err">aloha</span></code>). Alternatively, you can use the <code class="codehilite"><span class="err">head()</span></code> method
+of the data frame to view just the first few lines.</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.head()</span>
+</pre></div>
+
+<p>You can see that the structure of the data frame, i.e. rows and columns,
+directly corresponds to the contents of the CSV file. Column names have
+been taken from the first line of the CSV file. Missing values are
+represented with NaNs (not-a-number).</p>
+<p>The complementary <code class="codehilite"><span class="err">tail()</span></code> method shows the last few lines. There is also
+an <code class="codehilite"><span class="err">iloc</span></code> method that we use at places in this tutorial to show rows
+from the middle of the data frame. It accepts a range: <code class="codehilite"><span class="err">aloha.iloc[20:30]</span></code>
+selects 10 lines from line 20, <code class="codehilite"><span class="err">aloha.iloc[:5]</span></code> is like <code class="codehilite"><span class="err">head()</span></code>, and
+<code class="codehilite"><span class="err">aloha.iloc[-5:]</span></code> is like <code class="codehilite"><span class="err">tail()</span></code>.</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.iloc[1200:1205]</span>
+</pre></div>
+
+<p>Hint: If you are in the terminal and you find that the data frame printout does
+not make use of the whole width of the terminal, you can increase the display
+width for better readability with the following commands:</p>
+<div class="codehilite"><pre><span></span><span class="err">pd.set_option(&#39;display.width&#39;, 180)</span>
+<span class="err">pd.set_option(&#39;display.max_colwidth&#39;, 100)</span>
+</pre></div>
+
+<p>If you have not looked at any Pandas tutorial yet, now is a very good
+time to read one. (See References at the bottom of this page for hints.)
+Until you finish, here are some basics for your short-term survival.</p>
+<p>You can refer to a column as a whole with the array index syntax: <code class="codehilite"><span class="err">aloha[&#39;run&#39;]</span></code>.
+Alternatively, the more convenient member access syntax (<code class="codehilite"><span class="err">aloha.run</span></code>) can
+also be used, with restrictions. (E.g. the column name must be valid as a Python
+identifier, and should not collide with existing methods of the data frame.
+Names that are known to cause trouble include <code class="codehilite"><span class="err">name</span></code>, <code class="codehilite"><span class="err">min</span></code>, <code class="codehilite"><span class="err">max</span></code>, <code class="codehilite"><span class="err">mean</span></code>).</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.run.head()  # .head() is for limiting the output to 5 lines here</span>
+</pre></div>
+
+<p>Selecting multiple columns is also possible, one just needs to use a list of
+column names as index. The result will be another data frame. (The double
+brackets in the command are due to the fact that both the array indexing and
+the list syntax use square brackets.)</p>
+<div class="codehilite"><pre><span></span><span class="err">tmp = aloha[[&#39;run&#39;, &#39;attrname&#39;, &#39;attrvalue&#39;]]</span>
+<span class="err">tmp.head()</span>
+</pre></div>
+
+<p>The <code class="codehilite"><span class="err">describe()</span></code> method can be used to get an idea about the contents of a
+column. When applied to a non-numeric column, it prints the number of
+non-null elements in it (<code class="codehilite"><span class="err">count</span></code>), the number of unique values (<code class="codehilite"><span class="err">unique</span></code>),
+the most frequently occurring value (<code class="codehilite"><span class="err">top</span></code>) and its multiplicity (<code class="codehilite"><span class="err">freq</span></code>),
+and the inferred data type (more about that later.)</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.module.describe()</span>
+</pre></div>
+
+<p>You can get a list of the unique values using the <code class="codehilite"><span class="err">unique()</span></code> method. For example,
+the following command lists the names of modules that have recorded any statistics:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.module.unique()</span>
+</pre></div>
+
+<p>When you apply <code class="codehilite"><span class="err">describe()</span></code> to a numeric column, you get a statistical summary
+with things like mean, standard deviation, minimum, maximum, and various
+quantiles.</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.value.describe()</span>
+</pre></div>
+
+<p>Applying <code class="codehilite"><span class="err">describe()</span></code> to the whole data frame creates a similar report about
+all numeric columns.</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.describe()</span>
+</pre></div>
+
+<p>Let's spend a minute on data types and column data types. Every column has a
+data type (abbreviated <em>dtype</em>) that determines what type of values it may
+contain. Column dtypes can be printed with <code class="codehilite"><span class="err">dtypes</span></code>:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha.dtypes</span>
+</pre></div>
+
+<p>The two most commonly used dtypes are <em>float64</em> and <em>object</em>. A <em>float64</em> column
+contains floating-point numbers, and missing values are represented with NaNs.
+An <em>object</em> column may contain basically anything -- usually strings, but we'll
+also have NumPy arrays (<code class="codehilite"><span class="err">np.ndarray</span></code>) as elements in this tutorial.
+Numeric values and booleans may also occur in an <em>object</em> column. Missing values
+in an <em>object</em> column are usually represented with <code class="codehilite"><span class="err">None</span></code>, but Pandas also
+interprets the floating-point NaN like that.
+Some degree of confusion arises from fact that some Pandas functions check
+the column's dtype, while others are already happy if the contained elements
+are of the required type. To clarify: applying <code class="codehilite"><span class="err">describe()</span></code> to a column
+prints a type inferred from the individual elements, <em>not</em> the column dtype.
+The column dtype type can be changed with the <code class="codehilite"><span class="err">astype()</span></code> method; we'll see an
+example for using it later in this tutorial.</p>
+<p>The column dtype can be accessed as the <code class="codehilite"><span class="err">dtype</span></code> property of a column, for example
+<code class="codehilite"><span class="err">aloha.stddev.dtype</span></code> yields <code class="codehilite"><span class="err">dtype(&#39;float64&#39;)</span></code>. There are also convenience
+functions such as <code class="codehilite"><span class="err">is_numeric_dtype()</span></code> and <code class="codehilite"><span class="err">is_string_dtype()</span></code> for checking
+column dtype. (They need to be imported from the <code class="codehilite"><span class="err">pandas.api.types</span></code> package
+though.)</p>
+<p>Another vital thing to know, especially due of the existence of the <em>type</em>
+column in the OMNeT++ CSV format, is how to filter rows. Perhaps surprisingly,
+the array index syntax can be used here as well. For example, the following expression
+selects the rows that contain iteration variables: <code class="codehilite"><span class="err">aloha[aloha.type == &#39;itervar&#39;]</span></code>.
+With a healthy degree of sloppiness, here's how it works: <code class="codehilite"><span class="err">aloha.type</span></code> yields
+the values in the <code class="codehilite"><span class="err">type</span></code> column as an array-like data structure;
+<code class="codehilite"><span class="err">aloha.type==&#39;itervar&#39;</span></code> performs element-wise comparison and produces an array
+of booleans containing <code class="codehilite"><span class="err">True</span></code> where the condition holds and <code class="codehilite"><span class="err">False</span></code> where not;
+and indexing a data frame with an array of booleans returns the rows that
+correspond to <code class="codehilite"><span class="err">True</span></code> values in the array.</p>
+<p>Conditions can be combined with AND/OR using the "<code class="codehilite"><span class="err">&amp;</span></code>" and "<code class="codehilite"><span class="err">|</span></code>" operators, but
+you need parentheses because of operator precedence. The following command
+selects the rows that contain scalars with a certain name and owner module:</p>
+<div class="codehilite"><pre><span></span><span class="err">tmp = aloha[(aloha.type==&#39;scalar&#39;) &amp; (aloha.module==&#39;Aloha.server&#39;) &amp; (aloha.name==&#39;channelUtilization:last&#39;)]</span>
+<span class="err">tmp.head()</span>
+</pre></div>
+
+<p>You'll also need to know how to add a new column to the data frame. Now that is
+a bit controversial topic, because at the time of writing, there is a "convenient"
+syntax and an "official" syntax for it. The "convenient" syntax is a simple
+assignment, for example:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha[&#39;qname&#39;] = aloha.module + &quot;.&quot; + aloha.name</span>
+<span class="err">aloha[aloha.type==&#39;scalar&#39;].head()  # print excerpt</span>
+</pre></div>
+
+<p>It looks nice and natural, but it is not entirely correct. It often results in
+a warning: <em>SettingWithCopyWarning: A value is trying to be set on a copy of a
+slice from a DataFrame...</em>. The message essentially says that the operation
+(here, adding the new column) might have been applied to a temporary object
+instead of the original data frame, and thus might have been ineffective.
+Luckily, that is not the case most of the time (the operation <em>does</em> take
+effect). Nevertheless, for production code, i.e. scripts, the "official"
+solution, the <code class="codehilite"><span class="err">assign()</span></code> method of the data frame is recommended, like this:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha = aloha.assign(qname = aloha.module + &quot;.&quot; + aloha.name)</span>
+<span class="err">aloha[aloha.type==&#39;scalar&#39;].head()</span>
+</pre></div>
+
+<p>For completeness, one can remove a column from a data frame using either the
+<code class="codehilite"><span class="err">del</span></code> operator or the <code class="codehilite"><span class="err">drop()</span></code> method of the data frame. Here we show the former
+(also to remove the column we added above, as we won't need it for now):</p>
+<div class="codehilite"><pre><span></span><span class="err">del aloha[&#39;qname&#39;]</span>
+</pre></div>
+
+<h2 id="5-revisiting-csv-loading">5. Revisiting CSV loading<a class="headerlink" href="#5-revisiting-csv-loading" title="Permanent link">&para;</a></h2>
+<p>The way we have read the CSV file has one small deficiency: all data in the
+<code class="codehilite"><span class="err">attrvalue</span></code> column are represented as strings, event though many of them
+are really numbers, for example the values of the <code class="codehilite"><span class="err">iaMean</span></code> and <code class="codehilite"><span class="err">numHosts</span></code>
+iteration variables. You can verify that by printing the unique values (
+<code class="codehilite"><span class="err">aloha.attrvalue.unique()</span></code> -- it will print all values with quotes), or using
+the <code class="codehilite"><span class="err">type()</span></code> operator on an element:</p>
+<div class="codehilite"><pre><span></span><span class="err">type( aloha[aloha.type==&#39;scalar&#39;].iloc[0].value )</span>
+</pre></div>
+
+<p>The reason is that <code class="codehilite"><span class="err">read_csv()</span></code> infers data types of columns from the data
+it finds in them. Since the <code class="codehilite"><span class="err">attrvalue</span></code> column is shared by run attributes,
+result item attributes, iteration variables and some other types of rows,
+there are many non-numeric strings in it, and <code class="codehilite"><span class="err">read_csv()</span></code> decides that it is
+a string column.</p>
+<p>A similar issue arises with the <code class="codehilite"><span class="err">binedges</span></code>, <code class="codehilite"><span class="err">binvalues</span></code>, <code class="codehilite"><span class="err">vectime</span></code>, <code class="codehilite"><span class="err">vecvalue</span></code>
+columns. These columns contain lists of numbers separated by spaces, so they
+are read into strings as well. However, we would like to store them as NumPy
+arrays (<code class="codehilite"><span class="err">ndarray</span></code>) inside the data frame, because that's the form we can use
+in plots or as computation input.</p>
+<p>Luckily, <code class="codehilite"><span class="err">read_csv()</span></code> allows us to specify conversion functions for each column.
+So, armed with the following two short functions:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">parse_if_number</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">try</span><span class="p">:</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span> <span class="k">return</span> <span class="k">True</span> <span class="k">if</span> <span class="n">s</span><span class="o">==</span><span class="ss">&quot;true&quot;</span> <span class="k">else</span> <span class="k">False</span> <span class="k">if</span> <span class="n">s</span><span class="o">==</span><span class="ss">&quot;false&quot;</span> <span class="k">else</span> <span class="n">s</span> <span class="k">if</span> <span class="n">s</span> <span class="k">else</span> <span class="k">None</span>
+
+<span class="n">def</span> <span class="n">parse_ndarray</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span> <span class="k">else</span> <span class="k">None</span>
+</pre></div>
+
+<p>we can read the CSV file again, this time with the correct conversions:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha = pd.read_csv(&#39;aloha.csv&#39;, converters = {</span>
+<span class="err">    &#39;attrvalue&#39;: parse_if_number,</span>
+<span class="err">    &#39;binedges&#39;: parse_ndarray,</span>
+<span class="err">    &#39;binvalues&#39;: parse_ndarray,</span>
+<span class="err">    &#39;vectime&#39;: parse_ndarray,</span>
+<span class="err">    &#39;vecvalue&#39;: parse_ndarray})</span>
+</pre></div>
+
+<p>You can verify the result e.g. by printing the unique values again.</p>
+<h2 id="6-load-time-filtering">6. Load-time filtering<a class="headerlink" href="#6-load-time-filtering" title="Permanent link">&para;</a></h2>
+<p>If the CSV file is large, you may want to skip certain columns or rows when
+reading it into memory. (File size is about the only valid reason for using
+load-time filtering, because you can also filter out or drop rows/columns
+from the data frame when it is already loaded.)</p>
+<p>To filter out columns, you need to specify in the <code class="codehilite"><span class="err">usecols</span></code> parameter
+the list of columns to keep:</p>
+<div class="codehilite"><pre><span></span><span class="err">tmp = pd.read_csv(&#39;aloha.csv&#39;, usecols=[&#39;run&#39;, &#39;type&#39;, &#39;module&#39;, &#39;name&#39;, &#39;value&#39;])</span>
+</pre></div>
+
+<p>There is no such direct support for filtering out rows based on their content,
+but we can implement it using the iterator API that reads the CSV file
+in chunks. We can filter each chunk before storing and finally concatenating
+them into a single data frame:</p>
+<div class="codehilite"><pre><span></span><span class="err">iter = pd.read_csv(&#39;aloha.csv&#39;, iterator=True, chunksize=100)</span>
+<span class="err">chunks = [ chunk[chunk[&#39;type&#39;]!=&#39;histogram&#39;] for chunk in iter ]  # discards type==&#39;histogram&#39; lines</span>
+<span class="err">tmp = pd.concat(chunks)</span>
+</pre></div>
+
+<h2 id="7-plotting-scalars">7. Plotting scalars<a class="headerlink" href="#7-plotting-scalars" title="Permanent link">&para;</a></h2>
+<p>Scalars can serve as input for many different kinds of plots. Here we'll show
+how one can create a "throughput versus offered load" type plot. We will plot
+the channel utilization in the Aloha model in the function of the packet
+generation frequency. Channel utilization is also affected by the number of
+hosts in the network -- we want results belonging to the same number of hosts
+to form iso lines. Packet generation frequency and the number of hosts are
+present in the results as iteration variables named <code class="codehilite"><span class="err">iaMean</span></code> and <code class="codehilite"><span class="err">numHosts</span></code>;
+channel utilization values are the <code class="codehilite"><span class="n">channelUtilization</span><span class="o">:</span><span class="n">last</span></code> scalars saved
+by the <code class="codehilite"><span class="err">Aloha.server</span></code> module. The data contains the results from two simulation
+runs for each <em>(iaMean, numHosts)</em> pair done with different seeds; we want
+to average them for the plot.</p>
+<p>The first few steps are fairly straightforward. We only need the scalars and the
+iteration variables from the data frame, so we filter out the rest. Then we
+create a <code class="codehilite"><span class="err">qname</span></code> column from other columns to hold the names of our variables:
+the names of scalars are in the <code class="codehilite"><span class="err">module</span></code> and <code class="codehilite"><span class="err">name</span></code> columns (we want to join them
+with a dot), and the names of iteration variables are in the <code class="codehilite"><span class="err">attrname</span></code> column.
+Since <code class="codehilite"><span class="err">attrname</span></code> is not filled in for scalar rows, we can take <code class="codehilite"><span class="err">attrname</span></code> as<code class="codehilite"><span class="err">qname</span></code>
+first, then fill in the holes with <em>module.name</em>. We use the <code class="codehilite"><span class="err">combine_first()</span></code>
+method for that: <code class="codehilite"><span class="err">a.combine_first(b)</span></code> fills the holes in <code class="codehilite"><span class="err">a</span></code> using the
+corresponding values from <code class="codehilite"><span class="err">b</span></code>.</p>
+<p>The similar issue arises with values: values of output scalars are in the <code class="codehilite"><span class="err">value</span></code>
+column, while that of iteration variables are in the <code class="codehilite"><span class="err">attrvalue</span></code> column.
+Since <code class="codehilite"><span class="err">attrvalue</span></code> is unfilled for scalar rows, we can again utilize
+<code class="codehilite"><span class="err">combine_first()</span></code> to merge two. There is one more catch: we need to change
+the dtype of the <code class="codehilite"><span class="err">attrvalue</span></code> to <code class="codehilite"><span class="err">float64</span></code>, otherwise the resulting <code class="codehilite"><span class="err">value</span></code>
+column also becomes <code class="codehilite"><span class="err">object</span></code> dtype. (Luckily, all our iteration variables are
+numeric, so the dtype conversion is possible. In other simulations that contain
+non-numeric itervars, one needs to filter those out, force them into numeric
+values somehow, or find some other trick to make things work.)</p>
+<div class="codehilite"><pre><span></span><span class="err">scalars = aloha[(aloha.type==&#39;scalar&#39;) | (aloha.type==&#39;itervar&#39;)]  # filter rows</span>
+<span class="err">scalars = scalars.assign(qname = scalars.attrname.combine_first(scalars.module + &#39;.&#39; + scalars.name))  # add qname column</span>
+<span class="err">scalars.value = scalars.value.combine_first(scalars.attrvalue.astype(&#39;float64&#39;))  # merge value columns</span>
+<span class="err">scalars[[&#39;run&#39;, &#39;type&#39;, &#39;qname&#39;, &#39;value&#39;, &#39;module&#39;, &#39;name&#39;, &#39;attrname&#39;]].iloc[80:90]  # print an excerpt of the result</span>
+</pre></div>
+
+<p>To work further, it would be very convenient if we had a format where each
+simulation run corresponds to one row, and all variables produced by that
+run had their own columns. We can call it the <em>wide</em> format, and it can be
+produced using the <code class="codehilite"><span class="err">pivot()</span></code> method:</p>
+<div class="codehilite"><pre><span></span><span class="err">scalars_wide = scalars.pivot(&#39;run&#39;, columns=&#39;qname&#39;, values=&#39;value&#39;)</span>
+<span class="err">scalars_wide.head()</span>
+</pre></div>
+
+<p>We are interested in only three columns for our plot:</p>
+<div class="codehilite"><pre><span></span><span class="err">scalars_wide[[&#39;numHosts&#39;, &#39;iaMean&#39;, &#39;Aloha.server.channelUtilization:last&#39;]].head()</span>
+</pre></div>
+
+<p>Since we have our <em>x</em> and <em>y</em> data in separate columns now, we can utilize the
+scatter plot feature of the data frame for plotting it:</p>
+<p><div class="codehilite"><pre><span></span><span class="err"># set the default image resolution and size</span>
+<span class="err">plt.rcParams[&#39;figure.figsize&#39;] = [8.0, 3.0]</span>
+<span class="err">plt.rcParams[&#39;figure.dpi&#39;] = 144</span>
+<span class="err"># create a scatter plot</span>
+<span class="err">scalars_wide.plot.scatter(&#39;iaMean&#39;, &#39;Aloha.server.channelUtilization:last&#39;)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+NOTE: Although <code class="codehilite"><span class="err">plt.show()</span></code> is not needed in Jupyter (<code class="codehilite"><span class="nf">%matplotlib</span> <span class="kr">inline</span></code>
+turns on immediate display), we'll continue to include it in further code
+fragments, so that they work without change when you use another Python shell.</p>
+<p>The resulting chart looks quite good as the first attempt. However, it has some
+shortcomings:</p>
+<ul>
+<li>Dots are not connected. The dots that have the same <code class="codehilite"><span class="err">numHosts</span></code> value should
+  be connected with iso lines.</li>
+<li>As the result of having two simulation runs for each <em>(iaMean,numHosts)</em> pair,
+  the dots appear in pairs. We'd like to see their averages instead.</li>
+</ul>
+<p>Unfortunately, scatter plot can only take us this far, we need to look for
+another way.</p>
+<p>What we really need as chart input is a table where rows correspond to different
+<code class="codehilite"><span class="err">iaMean</span></code> values, columns correspond to different <code class="codehilite"><span class="err">numHosts</span></code> values, and cells
+contain channel utilization values (the average of the repetitions).
+Such table can be produced from the "wide format" with another pivoting
+operation. We use <code class="codehilite"><span class="err">pivot_table()</span></code>, a cousin of the <code class="codehilite"><span class="err">pivot()</span></code> method we've seen above.
+The difference between them is that <code class="codehilite"><span class="err">pivot()</span></code> is a reshaping operation (it just
+rearranges elements), while <code class="codehilite"><span class="err">pivot_table()</span></code> is more of a spreadsheet-style
+pivot table creation operation, and primarily intended for numerical data.
+<code class="codehilite"><span class="err">pivot_table()</span></code> accepts an aggregation function with the default being <em>mean</em>,
+which is quite convenient for us now (we want to average channel utilization
+over repetitions.)</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha_pivot = scalars_wide.pivot_table(index=&#39;iaMean&#39;, columns=&#39;numHosts&#39;, values=&#39;Aloha.server.channelUtilization:last&#39;)  # note: aggregation function = mean (that&#39;s the default)</span>
+<span class="err">aloha_pivot.head()</span>
+</pre></div>
+
+<p>Note that rows correspond to various <code class="codehilite"><span class="err">iaMean</span></code> values (<code class="codehilite"><span class="err">iaMean</span></code> serves as index);
+there is one column for each value of <code class="codehilite"><span class="err">numHosts</span></code>; and that data in the table
+are the averages of the channel utilizations produced by the simulations
+performed with the respective <code class="codehilite"><span class="err">iaMean</span></code> and <code class="codehilite"><span class="err">numHosts</span></code> values.</p>
+<p>For the plot, every column should generate a separate line (with the <em>x</em> values
+coming from the index column, <code class="codehilite"><span class="err">iaMean</span></code>) labelled with the column name.
+The basic Matplotlib interface cannot create such plot in one step. However,
+the Pandas data frame itself has a plotting interface which knows how to
+interpret the data, and produces the correct plot without much convincing:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha_pivot.plot.line()</span>
+<span class="err">plt.ylabel(&#39;channel utilization&#39;)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<h2 id="8-interactive-pivot-tables">8. Interactive pivot tables<a class="headerlink" href="#8-interactive-pivot-tables" title="Permanent link">&para;</a></h2>
+<p>Getting the pivot table right is not always easy, so having a GUI where
+one can drag columns around and immediately see the result is definitely
+a blessing. Pivottable.js presents such a GUI inside a browser, and
+although the bulk of the code is Javascript, it has a Python frond-end
+that integrates nicely with Jupyter. Let's try it!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pivottablejs</span> <span class="kn">as</span> <span class="nn">pj</span>
+<span class="n">pj</span><span class="o">.</span><span class="n">pivot_ui</span><span class="p">(</span><span class="n">scalars_wide</span><span class="p">)</span>
+</pre></div>
+
+<p>An interactive panel containing the pivot table will appear. Here is how
+you can reproduce the above "Channel utilization vs iaMean" plot in it:</p>
+<ol>
+<li>Drag <code class="codehilite"><span class="err">numHosts</span></code> to the "rows" area of the pivot table.
+   The table itself is the area on the left that initially only displays "Totals | 42",
+   and the "rows" area is the empty rectangle directly of left it.
+   The table should show have two columns (<em>numHosts</em> and <em>Totals</em>) and
+   five rows in total after dragging.</li>
+<li>Drag <code class="codehilite"><span class="err">iaMean</span></code> to the "columns" area (above the table). Columns for each value
+   of <code class="codehilite"><span class="err">iaMean</span></code> should appear in the table.</li>
+<li>Near the top-left corner of the table, select <em>Average</em> from the combo box
+   that originally displays <em>Count</em>, and select <code class="codehilite"><span class="n">ChannelUtilization</span><span class="o">:</span><span class="n">last</span></code>
+   from the combo box that appears below it.</li>
+<li>In the top-left corner of the panel, select <em>Line Chart</em> from the combo box
+   that originally displays <em>Table</em>.</li>
+</ol>
+<p>If you can't get to see it, the following command will programmatically
+configure the pivot table in the appropriate way:</p>
+<div class="codehilite"><pre><span></span><span class="err">pj.pivot_ui(scalars_wide, rows=[&#39;numHosts&#39;], cols=[&#39;iaMean&#39;], vals=[&#39;Aloha.server.channelUtilization:last&#39;], aggregatorName=&#39;Average&#39;, rendererName=&#39;Line Chart&#39;)</span>
+</pre></div>
+
+<p>If you want experiment with Excel's or LibreOffice's built-in pivot table
+functionality, the data frame's <code class="codehilite"><span class="err">to_clipboard()</span></code> and <code class="codehilite"><span class="err">to_csv()</span></code> methods
+will help you transfer the data. For example, you can issue the
+<code class="codehilite"><span class="err">scalars_wide.to_clipboard()</span></code> command to put the data on the clipboard, then
+paste it into the spreadsheet. Alternatively, type <code class="codehilite"><span class="err">print(scalars_wide.to_csv())</span></code>
+to print the data in CSV format that you can select and then copy/paste.
+Or, use <code class="codehilite"><span class="err">scalars_wide.to_csv(&quot;scalars.csv&quot;)</span></code> to save the data into a file
+which you can import.</p>
+<h2 id="9-plotting-histograms">9. Plotting histograms<a class="headerlink" href="#9-plotting-histograms" title="Permanent link">&para;</a></h2>
+<p>In this section we explore how to plot histograms recorded by the simulation.
+Histograms are in rows that have <code class="codehilite"><span class="err">&quot;histogram&quot;</span></code> in the <code class="codehilite"><span class="err">type</span></code> column.
+Histogram bin edges and bin values (counts) are in the <code class="codehilite"><span class="err">binedges</span></code> and
+<code class="codehilite"><span class="err">binvalues</span></code> columns as NumPy array objects (<code class="codehilite"><span class="err">ndarray</span></code>).</p>
+<p>Let us begin by selecting the histograms into a new data frame for convenience.</p>
+<div class="codehilite"><pre><span></span><span class="err">histograms = aloha[aloha.type==&#39;histogram&#39;]</span>
+<span class="err">len(histograms)</span>
+</pre></div>
+
+<p>We have 84 histograms. It makes no sense to plot so many histograms on one chart,
+so let's just take one on them, and examine its content.</p>
+<div class="codehilite"><pre><span></span><span class="err">hist = histograms.iloc[0]  # the first histogram</span>
+<span class="err">hist.binedges, hist.binvalues</span>
+</pre></div>
+
+<p>The easiest way to plot the histogram from these two arrays is to look at it
+as a step function, and create a line plot with the appropriate drawing style.
+The only caveat is that we need to add an extra <code class="codehilite"><span class="err">0</span></code> element to draw the right
+side of the last histogram bin.</p>
+<div class="codehilite"><pre><span></span><span class="err">plt.plot(hist.binedges, np.append(hist.binvalues, 0), drawstyle=&#39;steps-post&#39;)   # or maybe steps-mid, for integers</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<p>Another way to plot a recorded histogram is Matplotlib's <code class="codehilite"><span class="err">hist()</span></code> method,
+although that is a bit tricky. Instead of taking histogram data, <code class="codehilite"><span class="err">hist()</span></code>
+insists on computing the histogram itself from an array of values -- but we only
+have the histogram, and not the data it was originally computed from.
+Fortunately, <code class="codehilite"><span class="err">hist()</span></code> can accept a bin edges array, and another array as weights
+for the values. Thus, we can trick it into doing what we want by passing
+in our <code class="codehilite"><span class="err">binedges</span></code> array twice, once as bin edges and once as values, and
+specifying <code class="codehilite"><span class="err">binvalues</span></code> as weights.</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span><span class="s s-Atom">bins</span><span class="o">=</span><span class="s s-Atom">hist</span><span class="p">.</span><span class="s s-Atom">binedges</span><span class="p">,</span> <span class="s s-Atom">x</span><span class="o">=</span><span class="s s-Atom">hist</span><span class="p">.</span><span class="s s-Atom">binedges</span><span class="p">[:-</span><span class="mi">1</span><span class="p">],</span> <span class="s s-Atom">weights</span><span class="o">=</span><span class="s s-Atom">hist</span><span class="p">.</span><span class="s s-Atom">binvalues</span><span class="p">)</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+
+<p><code class="codehilite"><span class="err">hist()</span></code> has some interesting options. For example, we can change the plotting
+style to be similar to a line plot by setting <code class="codehilite"><span class="err">histtype=&#39;step&#39;</span></code>. To plot the
+normalized version of the histogram, specify <code class="codehilite"><span class="err">density=True</span></code>.
+To draw the cumulative density function, also specify <code class="codehilite"><span class="err">cumulative=True</span></code>.
+The following plot shows the effect of some of these options.</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span><span class="s s-Atom">bins</span><span class="o">=</span><span class="s s-Atom">hist</span><span class="p">.</span><span class="s s-Atom">binedges</span><span class="p">,</span> <span class="s s-Atom">x</span><span class="o">=</span><span class="s s-Atom">hist</span><span class="p">.</span><span class="s s-Atom">binedges</span><span class="p">[:-</span><span class="mi">1</span><span class="p">],</span> <span class="s s-Atom">weights</span><span class="o">=</span><span class="s s-Atom">hist</span><span class="p">.</span><span class="s s-Atom">binvalues</span><span class="p">,</span> <span class="s s-Atom">histtype=&#39;step&#39;</span><span class="p">,</span> <span class="s s-Atom">density</span><span class="o">=</span><span class="nv">True</span><span class="p">)</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+
+<p>To plot several histograms, we can iterate over the histograms and draw them
+one by one on the same plot. The following code does that, and also adds a
+legend and adjusts the bounds of the x axis.</p>
+<div class="codehilite"><pre><span></span><span class="err">somehistograms = histograms[histograms.name == &#39;collisionLength:histogram&#39;][:5]</span>
+<span class="err">for row in somehistograms.itertuples():</span>
+<span class="err">    plt.plot(row.binedges, np.append(row.binvalues, 0), drawstyle=&#39;steps-post&#39;)</span>
+<span class="err">plt.legend(somehistograms.module + &quot;.&quot; + somehistograms.name)</span>
+<span class="err">plt.xlim(0, 0.5)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<p>Note, however, that the legend contains the same string for all histograms,
+which is not very meaningful. We could improve that by including some
+characteristics of the simulation that generated them, i.e. the number of hosts
+(<code class="codehilite"><span class="err">numHosts</span></code> iteration variable) and frame interarrival times (<code class="codehilite"><span class="err">iaTime</span></code> iteration
+variable). We'll see in the next section how that can be achieved.</p>
+<h2 id="10-adding-iteration-variables-as-columns">10. Adding iteration variables as columns<a class="headerlink" href="#10-adding-iteration-variables-as-columns" title="Permanent link">&para;</a></h2>
+<p>In this step, we add the iteration variables associated with the simulation
+run to the data frame as columns. There are several reasons why this is a
+good idea: they are very useful for generating the legends for plots of
+e.g. histograms and vectors (e.g. "collision multiplicity histogram for
+numHosts=20 and iaMean=2s"), and often needed as chart input as well.</p>
+<p>First, we select the iteration variables vars as a smaller data frame.</p>
+<div class="codehilite"><pre><span></span><span class="err">itervars_df = aloha.loc[aloha.type==&#39;itervar&#39;, [&#39;run&#39;, &#39;attrname&#39;, &#39;attrvalue&#39;]]</span>
+<span class="err">itervars_df.head()</span>
+</pre></div>
+
+<p>We reshape the result by using the <code class="codehilite"><span class="err">pivot()</span></code> method. The following statement
+will convert unique values in the <code class="codehilite"><span class="err">attrname</span></code> column into separate columns:
+<code class="codehilite"><span class="err">iaMean</span></code> and <code class="codehilite"><span class="err">numHosts</span></code>. The new data frame will be indexed with the run id.</p>
+<div class="codehilite"><pre><span></span><span class="err">itervarspivot_df = itervars_df.pivot(index=&#39;run&#39;, columns=&#39;attrname&#39;, values=&#39;attrvalue&#39;)</span>
+<span class="err">itervarspivot_df.head()</span>
+</pre></div>
+
+<p>Now, we only need to add the new columns back into the original dataframe, using
+<code class="codehilite"><span class="err">merge()</span></code>. This operation is not quite unlike an SQL join of two tables on the
+<code class="codehilite"><span class="err">run</span></code> column.</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha2 = aloha.merge(itervarspivot_df, left_on=&#39;run&#39;, right_index=True, how=&#39;outer&#39;)</span>
+<span class="err">aloha2.head()</span>
+</pre></div>
+
+<p>For plot legends, it is also useful to have a single <code class="codehilite"><span class="err">iterationvars</span></code> column with
+string values like <code class="codehilite"><span class="err">numHosts=10, iaMean=2</span></code>. This is easier than the above: we
+can just select the rows containing the run attribute named <code class="codehilite"><span class="err">iterationvars</span></code>
+(it contains exactly the string we need), take only the <code class="codehilite"><span class="err">run</span></code> and <code class="codehilite"><span class="err">attrvalue</span></code>
+columns, rename the <code class="codehilite"><span class="err">attrvalue</span></code> column to <code class="codehilite"><span class="err">iterationvars</span></code>, and then merge back the
+result into the original data frame in a way we did above.</p>
+<p>The selection and renaming step can be done as follows. (Note: we need
+<code class="codehilite"><span class="na">.astype</span><span class="p">(</span><span class="no">str</span><span class="p">)</span></code> in the condition so that rows where <code class="codehilite"><span class="err">attrname</span></code> is not filled in
+do not cause trouble.)</p>
+<div class="codehilite"><pre><span></span><span class="err">itervarscol_df = aloha.loc[(aloha.type==&#39;runattr&#39;) &amp; (aloha.attrname.astype(str)==&#39;iterationvars&#39;), [&#39;run&#39;, &#39;attrvalue&#39;]]</span>
+<span class="err">itervarscol_df = itervarscol_df.rename(columns={&#39;attrvalue&#39;: &#39;iterationvars&#39;})</span>
+<span class="err">itervarscol_df.head()</span>
+</pre></div>
+
+<p>In the merging step, we join the two tables (I mean, data frames) on the <code class="codehilite"><span class="err">run</span></code>
+column:</p>
+<div class="codehilite"><pre><span></span><span class="err">aloha3 = aloha2.merge(itervarscol_df, left_on=&#39;run&#39;, right_on=&#39;run&#39;, how=&#39;outer&#39;)</span>
+<span class="err">aloha3.head()</span>
+</pre></div>
+
+<p>To see the result of our work, let's try plotting the same histograms again,
+this time with a proper legend:</p>
+<div class="codehilite"><pre><span></span><span class="err">histograms = aloha3[aloha3.type==&#39;histogram&#39;]</span>
+<span class="err">somehistograms = histograms[histograms.name == &#39;collisionLength:histogram&#39;][:5]</span>
+<span class="err">for row in somehistograms.itertuples():</span>
+<span class="err">    plt.plot(row.binedges, np.append(row.binvalues, 0), drawstyle=&#39;steps-post&#39;)</span>
+<span class="err">plt.title(&#39;collisionLength:histogram&#39;)</span>
+<span class="err">plt.legend(somehistograms.iterationvars)</span>
+<span class="err">plt.xlim(0, 0.5)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<h2 id="11-plotting-vectors">11. Plotting vectors<a class="headerlink" href="#11-plotting-vectors" title="Permanent link">&para;</a></h2>
+<p>This section deals with basic plotting of output vectors. Output vectors
+are basically time series data, but values have timestamps instead
+of being evenly spaced. Vectors are in rows that have <code class="codehilite"><span class="err">&quot;vector&quot;</span></code>
+in the <code class="codehilite"><span class="err">type</span></code> column. The values and their timestamps are in the
+<code class="codehilite"><span class="err">vecvalue</span></code> and <code class="codehilite"><span class="err">vectime</span></code> columns as NumPy array objects (<code class="codehilite"><span class="err">ndarray</span></code>).</p>
+<p>We'll use a different data set for exploring output vector plotting, one from
+the <em>routing</em> example simulation. There are pre-recorded result files in the
+<code class="codehilite"><span class="err">samples/resultfiles/routing</span></code> directory; change into it in the terminal, and
+issue the following command to convert them to CSV:</p>
+<div class="codehilite"><pre><span></span><span class="err">scavetool x *.sca *.vec -o routing.csv</span>
+</pre></div>
+
+
+<p>Then we read the the CSV file into a data frame in the same way we saw with the
+<em>aloha</em> dataset:</p>
+<div class="codehilite"><pre><span></span><span class="err">routing = pd.read_csv(&#39;routing.csv&#39;, converters = {</span>
+<span class="err">    &#39;attrvalue&#39;: parse_if_number,</span>
+<span class="err">    &#39;binedges&#39;: parse_ndarray,</span>
+<span class="err">    &#39;binvalues&#39;: parse_ndarray,</span>
+<span class="err">    &#39;vectime&#39;: parse_ndarray,</span>
+<span class="err">    &#39;vecvalue&#39;: parse_ndarray})</span>
+</pre></div>
+
+<p>Let us begin by selecting the vectors into a new data frame for convenience.</p>
+<div class="codehilite"><pre><span></span><span class="err">vectors = routing[routing.type==&#39;vector&#39;]</span>
+<span class="err">len(vectors)</span>
+</pre></div>
+
+<p>Our data frame contains results from one run. To get some idea what vectors
+we have, let's print the list unique vector names and module names:</p>
+<div class="codehilite"><pre><span></span><span class="err">vectors.name.unique(), vectors.module.unique()</span>
+</pre></div>
+
+<p>A vector can be plotted on a line chart by simply passing the <code class="codehilite"><span class="err">vectime</span></code> and
+<code class="codehilite"><span class="err">vecvalue</span></code> arrays to <code class="codehilite"><span class="err">plt.plot()</span></code>:</p>
+<div class="codehilite"><pre><span></span><span class="err">vec = vectors[vectors.name == &#39;qlen:vector&#39;].iloc[4]  # take some vector</span>
+<span class="err">plt.plot(vec.vectime, vec.vecvalue, drawstyle=&#39;steps-post&#39;)</span>
+<span class="err">plt.xlim(0,100)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<p>When several vectors need to be placed on the same plot, one can simply
+use a <code class="codehilite"><span class="err">for</span></code> loop.</p>
+<div class="codehilite"><pre><span></span><span class="err">somevectors = vectors[vectors.name == &#39;qlen:vector&#39;][:5]</span>
+<span class="err">for row in somevectors.itertuples():</span>
+<span class="err">    plt.plot(row.vectime, row.vecvalue, drawstyle=&#39;steps-post&#39;)</span>
+<span class="err">plt.title(somevectors.name.values[0])</span>
+<span class="err">plt.legend(somevectors.module)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<h2 id="12-vector-filtering">12. Vector Filtering<a class="headerlink" href="#12-vector-filtering" title="Permanent link">&para;</a></h2>
+<p>Plotting vectors "as is" is often not practical, as the result will be a crowded
+plot that's difficult to draw conclusions from. To remedy that, one can apply
+some kind of filtering before plotting, or plot a derived quantity such as the
+integral, sum or running average instead of the original. Such things can easily
+be achieved with the help of NumPy.</p>
+<p>Vector time and value are already stored in the data frame as NumPy arrays
+(<code class="codehilite"><span class="err">ndarray</span></code>), so we can apply NumPy functions to them. For example, let's
+try <code class="codehilite"><span class="err">np.cumsum()</span></code> which computes cumulative sum:</p>
+<div class="codehilite"><pre><span></span><span class="err">x = np.array([8, 2, 1, 5, 7])</span>
+<span class="err">np.cumsum(x)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="err">for row in somevectors.itertuples():</span>
+<span class="err">    plt.plot(row.vectime, np.cumsum(row.vecvalue))</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<p>Plotting cumulative sum against time might be useful e.g. for an output
+vector where the simulation emits the packet length for each packet
+that has arrived at its destination. There, the sum would represent
+"total bytes received".</p>
+<p>Plotting the count against time for the same output vector would
+represent "number of packets received". For such a plot, we can utilize
+<code class="codehilite"><span class="err">np.arange(1,n)</span></code> which simply returns the numbers 1, 2, .., n-1
+as an array:</p>
+<div class="codehilite"><pre><span></span><span class="err">for row in somevectors.itertuples():</span>
+<span class="err">    plt.plot(row.vectime, np.arange(1, row.vecvalue.size+1), &#39;.-&#39;, drawstyle=&#39;steps-post&#39;)</span>
+<span class="err">plt.xlim(0,5); plt.ylim(0,20)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<p>Note that we changed the plotting style to "steps-post", so
+that for any <em>t</em> time the plot accurately represents the number
+of values whose timestamp is less than or equal to <em>t</em>.</p>
+<p>As another warm-up exercise, let's plot the time interval
+that elapses between adjacent values; that is, for each element
+we want to plot the time difference between the that element
+and the previous one.
+This can be achieved by computing <code class="codehilite"><span class="s s-Atom">t</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">]</span> <span class="o">-</span> <span class="s s-Atom">t</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span></code>, which is the
+elementwise subtraction of the <code class="codehilite"><span class="err">t</span></code> array and its shifted version.
+Array indexing starts at 0, so <code class="codehilite"><span class="err">t[1:]</span></code> means "drop the first element".
+Negative indices count from the end of the array, so <code class="codehilite"><span class="s s-Atom">t</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span></code> means
+"without the last element". The latter is necessary because the
+sizes of the two arrays must match. or convenience, we encapsulate
+the formula into a Python function:</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">def</span> <span class="nf">diff</span><span class="p">(</span><span class="s s-Atom">t</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">return</span> <span class="s s-Atom">t</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">]</span> <span class="o">-</span> <span class="s s-Atom">t</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="s s-Atom">#</span> <span class="s s-Atom">example</span>
+<span class="s s-Atom">t</span> <span class="o">=</span> <span class="s s-Atom">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">])</span>
+<span class="nf">diff</span><span class="p">(</span><span class="s s-Atom">t</span><span class="p">)</span>
+</pre></div>
+
+<p>We can now plot it. Note that as <code class="codehilite"><span class="err">diff()</span></code> makes the array one element
+shorter, we need to write <code class="codehilite"><span class="err">row.vectime[1:]</span></code> to drop the first element
+(it has no preceding element, so <code class="codehilite"><span class="err">diff()</span></code> cannot be computed for it.)
+Also, we use dots for plotting instead of lines, as it makes more
+sense here.</p>
+<div class="codehilite"><pre><span></span><span class="err">for row in somevectors.itertuples():</span>
+<span class="err">    plt.plot(row.vectime[1:], diff(row.vectime), &#39;o&#39;)</span>
+<span class="err">plt.xlim(0,100)</span>
+<span class="err">plt.show()</span>
+</pre></div>
+
+<p>We now know enough NumPy to be able to write a function that computes
+running average (a.k.a. "mean filter"). Let's try it out in a plot
+immediately.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">running_avg</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="k">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="o">#</span> <span class="n">example</span> <span class="n">plot</span><span class="p">:</span>
+<span class="k">for</span> <span class="k">row</span> <span class="k">in</span> <span class="n">somevectors</span><span class="p">.</span><span class="n">itertuples</span><span class="p">():</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="k">row</span><span class="p">.</span><span class="n">vectime</span><span class="p">,</span> <span class="n">running_avg</span><span class="p">(</span><span class="k">row</span><span class="p">.</span><span class="n">vecvalue</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="k">show</span><span class="p">()</span>
+</pre></div>
+
+<p>For certain quantities such as queue length or on-off status,
+weighted average (with time intervals used as weights) makes
+more sense. Here is a function that computes running time-average:</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">def</span> <span class="nf">running_timeavg</span><span class="p">(</span><span class="s s-Atom">t</span><span class="p">,</span><span class="s s-Atom">x</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">dt</span> <span class="o">=</span> <span class="s s-Atom">t</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">]</span> <span class="o">-</span> <span class="s s-Atom">t</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="s s-Atom">return</span> <span class="s s-Atom">np</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">(</span><span class="s s-Atom">x</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="s s-Atom">dt</span><span class="p">)</span> <span class="o">/</span> <span class="s s-Atom">t</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">]</span>
+
+<span class="s s-Atom">#</span> <span class="s s-Atom">example</span> <span class="nn">plot</span><span class="p">:</span>
+<span class="s s-Atom">for</span> <span class="s s-Atom">row</span> <span class="s s-Atom">in</span> <span class="s s-Atom">somevectors</span><span class="p">.</span><span class="nf">itertuples</span><span class="p">()</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vectime</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">],</span> <span class="nf">running_timeavg</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vectime</span><span class="p">,</span> <span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vecvalue</span><span class="p">))</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+
+<p>Computing the integral of the vector as a step function is very similar
+to the <code class="codehilite"><span class="err">running_timeavg()</span></code> function. (Note: Computing integral in other
+ways is part of NumPy and SciPy, if you ever need it. For example,
+<code class="codehilite"><span class="err">np.trapz(y,x)</span></code> computes integral using the trapezoidal rule.)</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">def</span> <span class="nf">integrate_steps</span><span class="p">(</span><span class="s s-Atom">t</span><span class="p">,</span><span class="s s-Atom">x</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">dt</span> <span class="o">=</span> <span class="s s-Atom">t</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">]</span> <span class="o">-</span> <span class="s s-Atom">t</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="s s-Atom">return</span> <span class="s s-Atom">np</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">(</span><span class="s s-Atom">x</span><span class="p">[:-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="s s-Atom">dt</span><span class="p">)</span>
+
+<span class="s s-Atom">#</span> <span class="s s-Atom">example</span> <span class="nn">plot</span><span class="p">:</span>
+<span class="s s-Atom">for</span> <span class="s s-Atom">row</span> <span class="s s-Atom">in</span> <span class="s s-Atom">somevectors</span><span class="p">.</span><span class="nf">itertuples</span><span class="p">()</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vectime</span><span class="p">[</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">],</span> <span class="nf">integrate_steps</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vectime</span><span class="p">,</span> <span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vecvalue</span><span class="p">))</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+
+<p>As the last example in this section, here is a function that computes
+moving window average. It relies on the clever trick of subtracting
+the cumulative sum of the original vector from its shifted version
+to get the sum of values in every <em>N</em>-sized window.</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">def</span> <span class="nf">winavg</span><span class="p">(</span><span class="s s-Atom">x</span><span class="p">,</span> <span class="nv">N</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">xpad</span> <span class="o">=</span> <span class="s s-Atom">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">((</span><span class="s s-Atom">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="nv">N</span><span class="p">),</span> <span class="s s-Atom">x</span><span class="p">))</span> <span class="s s-Atom">#</span> <span class="s s-Atom">pad</span> <span class="s s-Atom">with</span> <span class="s s-Atom">zeroes</span>
+    <span class="s s-Atom">s</span> <span class="o">=</span> <span class="s s-Atom">np</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">(</span><span class="s s-Atom">xpad</span><span class="p">)</span>
+    <span class="s s-Atom">ss</span> <span class="o">=</span> <span class="s s-Atom">s</span><span class="p">[</span><span class="nv">N</span><span class="s s-Atom">:</span><span class="p">]</span> <span class="o">-</span> <span class="s s-Atom">s</span><span class="p">[:-</span><span class="nv">N</span><span class="p">]</span>
+    <span class="s s-Atom">ss</span><span class="p">[</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="s s-Atom">:</span><span class="p">]</span> <span class="s s-Atom">/=</span> <span class="nv">N</span>
+    <span class="s s-Atom">ss</span><span class="p">[</span><span class="s s-Atom">:</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="s s-Atom">/=</span> <span class="s s-Atom">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">min</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s s-Atom">ss</span><span class="p">.</span><span class="s s-Atom">size</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="s s-Atom">return</span> <span class="s s-Atom">ss</span>
+
+<span class="s s-Atom">#</span> <span class="nn">example</span><span class="p">:</span>
+<span class="s s-Atom">for</span> <span class="s s-Atom">row</span> <span class="s s-Atom">in</span> <span class="s s-Atom">somevectors</span><span class="p">.</span><span class="nf">itertuples</span><span class="p">()</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vectime</span><span class="p">,</span> <span class="nf">winavg</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">.</span><span class="s s-Atom">vecvalue</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="s s-Atom">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+
+<p>You can find further hints for smoothing the plot of an output vector
+in the signal processing chapter of the SciPy Cookbook (see References).</p>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<p>The primary and authentic source of information on Pandas, Matplotlib and other
+libraries is their official documentation. I do not link them here because they
+are trivial to find via Google. Instead, here is a random collection of other
+resources that I found useful while writing this tutorial (not counting all the
+StackOverflow pages I visited.)</p>
+<ul>
+<li>Pandas tutorial from Greg Reda:
+  <a href="http://www.gregreda.com/2013/10/26/working-with-pandas-dataframes/">http://www.gregreda.com/2013/10/26/working-with-pandas-dataframes/</a></li>
+<li>On reshaping data frames:
+  <a href="https://pandas.pydata.org/pandas-docs/stable/reshaping.html#reshaping">https://pandas.pydata.org/pandas-docs/stable/reshaping.html#reshaping</a></li>
+<li>Matplotlib tutorial of Nicolas P. Rougier:
+  <a href="https://www.labri.fr/perso/nrougier/teaching/matplotlib/">https://www.labri.fr/perso/nrougier/teaching/matplotlib/</a></li>
+<li>Creating boxplots with Matplotlib, from Bharat Bhole:
+  <a href="http://blog.bharatbhole.com/creating-boxplots-with-matplotlib/">http://blog.bharatbhole.com/creating-boxplots-with-matplotlib/</a></li>
+<li>SciPy Cookbook on signal smoothing:
+  <a href="http://scipy-cookbook.readthedocs.io/items/SignalSmooth.html">http://scipy-cookbook.readthedocs.io/items/SignalSmooth.html</a></li>
+<li>Visual Guide on Pandas (video):
+  <a href="https://www.youtube.com/watch?v=9d5-Ti6onew">https://www.youtube.com/watch?v=9d5-Ti6onew</a></li>
+<li>Python Pandas Cookbook (videos):
+  <a href="https://www.youtube.com/playlist?list=PLyBBc46Y6aAz54aOUgKXXyTcEmpMisAq3">https://www.youtube.com/playlist?list=PLyBBc46Y6aAz54aOUgKXXyTcEmpMisAq3</a></li>
+</ul>
+<h2 id="acknowledgements">Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permanent link">&para;</a></h2>
+<p>The author, Andras Varga would like to thank the participants of the
+2016 OMNeT++ Summit for the valuable feedback, and especially
+Dr Kyeong Soo (Joseph) Kim for bringing my attention to Pandas and Jupyter.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 OpenSim Ltd.
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
+    
+      <a href="http://omnetpp.org" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/omnetpp/docs.omnetpp.org" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/omnetpp" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/jquery-3.2.1.min.js"></script>
+      
+        <script src="../../../javascripts/quoting.js"></script>
+      
+        <script src="../../../javascripts/rainbow-custom.min.js"></script>
+      
+        <script src="../../../javascripts/rainbow.linenumbers.min.js"></script>
+      
+        <script src="../../../javascripts/rainbow-ini.js"></script>
+      
+        <script src="../../../javascripts/rainbow-ned.js"></script>
+      
+        <script src="../../../javascripts/rainbow-yaml.js"></script>
+      
+        <script src="../../../javascripts/rainbow-dockerfile.js"></script>
+      
+        <script src="../../../javascripts/rainbow-html.js"></script>
+      
+    
+  </body>
+</html>

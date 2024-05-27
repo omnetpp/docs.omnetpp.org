@@ -1,0 +1,1205 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Docmentation for the OMNeT++ Simulator">
+      
+      
+        <link rel="canonical" href="https://docs.omnetpp.org/tutorials/cloud/page2/">
+      
+      
+        <meta name="author" content="OMNeT++ Team">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Implementation - OMNeT++ Technical Articles</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    <script>
+    // handle <a srcfile></a> references to source files
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('a[srcfile]').each(function(i) {
+            var srcref = $(this).attr('srcfile');
+            var name = srcref.replace(/.*\//g, "");
+            $(this).text(name);
+            $(this).attr('href', '/showfile/?url='+srcref);
+            $(this).attr('target', '_blank');
+        });
+    });
+    // function th show a full size image when clicked ona thumbnail
+    imageFullSizeZoom = function(img){
+        img = $(img);
+        let fullSizeSrc = img.attr('src').replace(/.thumb.jpg$/, '.png');
+
+        $(document.body).append(
+        '<div class="fullscreenimgshade" onclick="$(this).remove();">' +
+            '<img src="' + fullSizeSrc + '" class="fullscreenimg"/>' +
+        '</div>'
+        );
+    };
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/omnetpp-docs.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/rainbow.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/rainbow.linenumbers.theme.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/jupyter.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-240922-2", "docs.omnetpp.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#implementation" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.omnetpp.org/" title="OMNeT++ Technical Articles" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              OMNeT++ Technical Articles
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Implementation
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </span>
+    OMNeT++ Technical Articles
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Learn OMNeT++ with TicToc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Learn OMNeT++ with TicToc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part1/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part2/" title="Running the Simulation" class="md-nav__link">
+      Running the Simulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part3/" title="Enhancing the 2-node TicToc" class="md-nav__link">
+      Enhancing the 2-node TicToc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part4/" title="Turning it Into a Real Network" class="md-nav__link">
+      Turning it Into a Real Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part5/" title="Adding Statistics Collection" class="md-nav__link">
+      Adding Statistics Collection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part6/" title="Visualizing the Results" class="md-nav__link">
+      Visualizing the Results
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/part7/" title="Parameter Studies" class="md-nav__link">
+      Parameter Studies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tictoc/conclusion/" title="Closing words" class="md-nav__link">
+      Closing words
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../pandas/" title="Result Analysis with Python" class="md-nav__link">
+      Result Analysis with Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Articles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Articles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1" checked>
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Introduction into Running Simulations in the Cloud
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Introduction into Running Simulations in the Cloud
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../page1/" title="Concepts" class="md-nav__link">
+      Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Implementation
+      </label>
+    
+    <a href="./" title="Implementation" class="md-nav__link md-nav__link--active">
+      Implementation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#solution-architecture" class="md-nav__link">
+    Solution Architecture
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#omnet" class="md-nav__link">
+    OMNeT++
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-3-and-pip3" class="md-nav__link">
+    Python 3 and pip3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq" class="md-nav__link">
+    RQ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-code" class="md-nav__link">
+    Getting the Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-docker-image" class="md-nav__link">
+    Building the Docker Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publishing" class="md-nav__link">
+    Publishing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../page4/" title="Deploying on AWS" class="md-nav__link">
+      Deploying on AWS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../page5/" title="Trying It Out" class="md-nav__link">
+      Trying It Out
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../page6/" title="Examining the Code" class="md-nav__link">
+      Examining the Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../page7/" title="Potential Improvements, Alternatives" class="md-nav__link">
+      Potential Improvements, Alternatives
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Using AWS for Running INET Simulation Campaigns
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Using AWS for Running INET Simulation Campaigns
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/" title="Motivation" class="md-nav__link">
+      Motivation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/page1/" title="Installation and Usage" class="md-nav__link">
+      Installation and Usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/page2/" title="How it Works" class="md-nav__link">
+      How it Works
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/porting-code-into-omnetpp/" title="Porting Real-World Protocol Implementations into OMNeT++" class="md-nav__link">
+      Porting Real-World Protocol Implementations into OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/building-omnetpp-in-docker/" title="Building an OMNeT++ Distro" class="md-nav__link">
+      Building an OMNeT++ Distro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/running-omnetppgui-in-docker/" title="OMNeT++ GUI in Docker" class="md-nav__link">
+      OMNeT++ GUI in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/running-omnetpp-in-docker/" title="Using Docker for Running Simulations on Various Versions of OMNeT++" class="md-nav__link">
+      Using Docker for Running Simulations on Various Versions of OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/wsl2/" title="Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)" class="md-nav__link">
+      Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/omnetpp-debugging-tips/" title="Improving the C++ Debugging Experience on Linux and other OSes" class="md-nav__link">
+      Improving the C++ Debugging Experience on Linux and other OSes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Proposed Research Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Proposed Research Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/neuralnet-errormodels/" title="Better Wireless Error Models Using Neural Networks" class="md-nav__link">
+      Better Wireless Error Models Using Neural Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/zero-conf-parsim/" title="Zero Configuration Automatic Parallel Simulation" class="md-nav__link">
+      Zero Configuration Automatic Parallel Simulation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+    
+      
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#solution-architecture" class="md-nav__link">
+    Solution Architecture
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#omnet" class="md-nav__link">
+    OMNeT++
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-3-and-pip3" class="md-nav__link">
+    Python 3 and pip3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq" class="md-nav__link">
+    RQ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-code" class="md-nav__link">
+    Getting the Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-docker-image" class="md-nav__link">
+    Building the Docker Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publishing" class="md-nav__link">
+    Publishing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/omnetpp/docs.omnetpp.org/edit/master/docs/tutorials/cloud/page2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h1>
+<p>To put all of this together into a working solution, in the rest of this
+tutorial, we're going to:</p>
+<ul>
+<li>Install some necessary software packages on our machine</li>
+<li>Build a Docker image which includes OMNeT++ and the worker code</li>
+<li>Deploy the system on AWS</li>
+<li>Run a simple simulation campaign with it using a custom client</li>
+<li>Take a look at all the code needed to perform the above</li>
+</ul>
+<p>Before you begin, create a new empty folder. Later save all linked source files
+from this tutorial in that.</p>
+<h2 id="solution-architecture">Solution Architecture<a class="headerlink" href="#solution-architecture" title="Permanent link">&para;</a></h2>
+<p>We will create the following architecture for running simulations on AWS:</p>
+<p>We want to use Docker images for easy deployment, so we will use an ECS cluster.
+One container will run a Redis-based job queue, and others will be workers. The
+workers will need to run simulations, so their image will have OMNeT++ installed
+in addition to the RQ worker client. After the worker completes a simulation
+run, the results will be stored in the Redis database.</p>
+<p>We will provide a custom tool that submits jobs to the job queue from the user's
+computer and downloads the results after simulation completion.</p>
+<p>The final architecture will look like this:</p>
+<p><img alt="Architectural Graph" src="../images/architecture.svg" /></p>
+<p>In the following sections, we will show how to implement this architecture.
+We will discuss how to create the Docker images, how to configure the cluster,
+how to implement the worker and the end-user client and so on.</p>
+<h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h2>
+<p>First we need to install a few things on our computer.</p>
+<h3 id="omnet">OMNeT++<a class="headerlink" href="#omnet" title="Permanent link">&para;</a></h3>
+<p>Download the archive from the <a href="https://omnetpp.org/omnetpp">official website</a>.
+Then follow the <a href="https://omnetpp.org/doc/omnetpp/InstallGuide.pdf">Installation
+Guide</a>.</p>
+<p>The <code class="codehilite"><span class="err">core</span></code> version will work fine as well, if you don't need the IDE.</p>
+<h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h3>
+<p>Follow the guides on the official website: <a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/">for
+Ubuntu</a> or
+<a href="https://docs.docker.com/engine/installation/linux/docker-ce/fedora/">for Fedora</a>.</p>
+<p>Note that even if your distribution has Docker in its own native package
+archive, it is most likely an outdated, and you will have to uninstall it first.</p>
+<h3 id="python-3-and-pip3">Python 3 and pip3<a class="headerlink" href="#python-3-and-pip3" title="Permanent link">&para;</a></h3>
+<p>We will use Python version 3; and pip, which is the recommended tool for
+installing packages from the <a href="https://pypi.python.org/pypi">Python Package Index</a>.
+Install these using the native package manager of your distribution.</p>
+<p>On Ubuntu:</p>
+<div class="codehilite"><pre><span></span>$ sudo apt install python3 python3-pip
+</pre></div>
+
+<p>On Fedora:</p>
+<div class="codehilite"><pre><span></span>$ sudo dnf install python3 python3-pip
+</pre></div>
+
+<p>Then, in any case, upgrade <code class="codehilite"><span class="err">pip</span></code>:</p>
+<div class="codehilite"><pre><span></span>$ sudo pip3 install --upgrade pip
+</pre></div>
+
+<p>Feel free to use a <code class="codehilite"><span class="err">virtualenv</span></code> for this instead of <code class="codehilite"><span class="err">sudo</span></code> if you're familiar
+with the concept.</p>
+<h3 id="rq">RQ<a class="headerlink" href="#rq" title="Permanent link">&para;</a></h3>
+<p>Use <code class="codehilite"><span class="err">pip</span></code> to install the RQ library:</p>
+<div class="codehilite"><pre><span></span>$ sudo pip3 install rq
+</pre></div>
+
+<p>This will install the <code class="codehilite"><span class="err">redis</span></code> client module as well, as a dependency.</p>
+<h3 id="getting-the-code">Getting the Code<a class="headerlink" href="#getting-the-code" title="Permanent link">&para;</a></h3>
+<p>Download the following files into the directory you just created:</p>
+<ul>
+<li><a href="../code/utils.py">utils.py</a> - Contains some common utilities used by both <code class="codehilite"><span class="err">worker.py</span></code> and <code class="codehilite"><span class="err">client.py</span></code>.</li>
+<li><a href="../code/worker.py">worker.py</a> -  Contains the code to be executed by the workers as a job.</li>
+<li><a href="code/Dockerfile">Dockerfile</a> - Is a recipe to build the Docker image for the workers.</li>
+<li><a href="../code/client.py">client.py</a> - Is the client-side software to submit the simulations.</li>
+</ul>
+<p>We will take a closer look at their contents in the "Examining the Code" chapter.</p>
+<h3 id="building-the-docker-image">Building the Docker Image<a class="headerlink" href="#building-the-docker-image" title="Permanent link">&para;</a></h3>
+<p>Building the image is done by issuing the following command in the directory
+where the above files can be found:</p>
+<div class="codehilite"><pre><span></span>$ docker build . -t worker
+</pre></div>
+
+<p>The <code class="codehilite"><span class="err">Dockerfile</span></code> is picked up automatically by name, the build context is the 
+current directory (<code class="codehilite"><span class="err">.</span></code>), and the resulting image will be named <code class="codehilite"><span class="err">worker</span></code>. </p>
+<p>This will likely take a few minutes to complete. If you see a couple of warnings
+written in red, but the process continues, don't worry, this is expected.</p>
+<h3 id="publishing">Publishing<a class="headerlink" href="#publishing" title="Permanent link">&para;</a></h3>
+<p>Now that we built our image for the worker nodes, we need to make it available
+for our AWS Instances by uploading it to Docker Hub.</p>
+<p>First authenticate yourself (in case you haven't already) by typing in your
+Docker ID and password after running this command:</p>
+<div class="codehilite"><pre><span></span>$ docker login
+</pre></div>
+
+<p>Now tag the image "into your repo", substituting your user name (Docker ID), so
+Docker knows where to push the image:</p>
+<div class="codehilite"><pre><span></span>$ docker tag worker username/worker
+</pre></div>
+
+<p>And finally issue the actual push:</p>
+<div class="codehilite"><pre><span></span>$ docker push username/worker
+</pre></div>
+
+<p>This will upload about 400-500 MB of data, so it can take a while. Once it's
+done, your image is available worldwide. You can see it appeared on <a href="https://hub.docker.com/">Docker
+Hub</a>. You may even get email notification if it was
+successful.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../page1/" title="Concepts" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Concepts
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../page4/" title="Deploying on AWS" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Deploying on AWS
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 OpenSim Ltd.
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
+    
+      <a href="http://omnetpp.org" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/omnetpp/docs.omnetpp.org" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/omnetpp" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/jquery-3.2.1.min.js"></script>
+      
+        <script src="../../../javascripts/quoting.js"></script>
+      
+        <script src="../../../javascripts/rainbow-custom.min.js"></script>
+      
+        <script src="../../../javascripts/rainbow.linenumbers.min.js"></script>
+      
+        <script src="../../../javascripts/rainbow-ini.js"></script>
+      
+        <script src="../../../javascripts/rainbow-ned.js"></script>
+      
+        <script src="../../../javascripts/rainbow-yaml.js"></script>
+      
+        <script src="../../../javascripts/rainbow-dockerfile.js"></script>
+      
+        <script src="../../../javascripts/rainbow-html.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1476 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Docmentation for the OMNeT++ Simulator">
+      
+      
+        <link rel="canonical" href="https://docs.omnetpp.org/articles/porting-code-into-omnetpp/">
+      
+      
+        <meta name="author" content="A">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Porting Real-World Protocol Implementations into OMNeT++</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    <script>
+    // handle <a srcfile></a> references to source files
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('a[srcfile]').each(function(i) {
+            var srcref = $(this).attr('srcfile');
+            var name = srcref.replace(/.*\//g, "");
+            $(this).text(name);
+            $(this).attr('href', '/showfile/?url='+srcref);
+            $(this).attr('target', '_blank');
+        });
+    });
+    // function th show a full size image when clicked ona thumbnail
+    imageFullSizeZoom = function(img){
+        img = $(img);
+        let fullSizeSrc = img.attr('src').replace(/.thumb.jpg$/, '.png');
+
+        $(document.body).append(
+        '<div class="fullscreenimgshade" onclick="$(this).remove();">' +
+            '<img src="' + fullSizeSrc + '" class="fullscreenimg"/>' +
+        '</div>'
+        );
+    };
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/omnetpp-docs.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/rainbow.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/rainbow.linenumbers.theme.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/jupyter.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-240922-2", "docs.omnetpp.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#setting-out" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.omnetpp.org/" title="OMNeT++ Technical Articles" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              OMNeT++ Technical Articles
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Porting Real-World Protocol Implementations into OMNeT++
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </span>
+    OMNeT++ Technical Articles
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Learn OMNeT++ with TicToc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Learn OMNeT++ with TicToc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part1/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part2/" title="Running the Simulation" class="md-nav__link">
+      Running the Simulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part3/" title="Enhancing the 2-node TicToc" class="md-nav__link">
+      Enhancing the 2-node TicToc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part4/" title="Turning it Into a Real Network" class="md-nav__link">
+      Turning it Into a Real Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part5/" title="Adding Statistics Collection" class="md-nav__link">
+      Adding Statistics Collection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part6/" title="Visualizing the Results" class="md-nav__link">
+      Visualizing the Results
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part7/" title="Parameter Studies" class="md-nav__link">
+      Parameter Studies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/conclusion/" title="Closing words" class="md-nav__link">
+      Closing words
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/pandas/" title="Result Analysis with Python" class="md-nav__link">
+      Result Analysis with Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Articles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Articles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Introduction into Running Simulations in the Cloud
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Introduction into Running Simulations in the Cloud
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page1/" title="Concepts" class="md-nav__link">
+      Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page2/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page4/" title="Deploying on AWS" class="md-nav__link">
+      Deploying on AWS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page5/" title="Trying It Out" class="md-nav__link">
+      Trying It Out
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page6/" title="Examining the Code" class="md-nav__link">
+      Examining the Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page7/" title="Potential Improvements, Alternatives" class="md-nav__link">
+      Potential Improvements, Alternatives
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Using AWS for Running INET Simulation Campaigns
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Using AWS for Running INET Simulation Campaigns
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/swarm/" title="Motivation" class="md-nav__link">
+      Motivation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/swarm/page1/" title="Installation and Usage" class="md-nav__link">
+      Installation and Usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/swarm/page2/" title="How it Works" class="md-nav__link">
+      How it Works
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Porting Real-World Protocol Implementations into OMNeT++
+      </label>
+    
+    <a href="./" title="Porting Real-World Protocol Implementations into OMNeT++" class="md-nav__link md-nav__link--active">
+      Porting Real-World Protocol Implementations into OMNeT++
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-out" class="md-nav__link">
+    Setting out
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-the-library-multiple-times" class="md-nav__link">
+    Loading the library multiple times
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploiting-object-orientation" class="md-nav__link">
+    Exploiting object orientation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#porting-c-libraries" class="md-nav__link">
+    Porting C++ libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrapping-into-c" class="md-nav__link">
+    Wrapping into C++
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-indirection" class="md-nav__link">
+    Introducing indirection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indirection-by-modifying-the-source" class="md-nav__link">
+    Indirection by modifying the source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indirection-by-code-instrumentation" class="md-nav__link">
+    Indirection by code instrumentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indirection-by-hacking-the-dynamic-linker" class="md-nav__link">
+    Indirection by hacking the dynamic linker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying" class="md-nav__link">
+    Copying
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copying-variables-one-by-one" class="md-nav__link">
+    Copying variables one by one
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copying-the-librarys-data-segment" class="md-nav__link">
+    Copying the library's data segment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../building-omnetpp-in-docker/" title="Building an OMNeT++ Distro" class="md-nav__link">
+      Building an OMNeT++ Distro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../running-omnetppgui-in-docker/" title="OMNeT++ GUI in Docker" class="md-nav__link">
+      OMNeT++ GUI in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../running-omnetpp-in-docker/" title="Using Docker for Running Simulations on Various Versions of OMNeT++" class="md-nav__link">
+      Using Docker for Running Simulations on Various Versions of OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wsl2/" title="Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)" class="md-nav__link">
+      Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../omnetpp-debugging-tips/" title="Improving the C++ Debugging Experience on Linux and other OSes" class="md-nav__link">
+      Improving the C++ Debugging Experience on Linux and other OSes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Proposed Research Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Proposed Research Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../neuralnet-errormodels/" title="Better Wireless Error Models Using Neural Networks" class="md-nav__link">
+      Better Wireless Error Models Using Neural Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../zero-conf-parsim/" title="Zero Configuration Automatic Parallel Simulation" class="md-nav__link">
+      Zero Configuration Automatic Parallel Simulation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+    
+      
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-out" class="md-nav__link">
+    Setting out
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-the-library-multiple-times" class="md-nav__link">
+    Loading the library multiple times
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploiting-object-orientation" class="md-nav__link">
+    Exploiting object orientation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#porting-c-libraries" class="md-nav__link">
+    Porting C++ libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrapping-into-c" class="md-nav__link">
+    Wrapping into C++
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-indirection" class="md-nav__link">
+    Introducing indirection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indirection-by-modifying-the-source" class="md-nav__link">
+    Indirection by modifying the source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indirection-by-code-instrumentation" class="md-nav__link">
+    Indirection by code instrumentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indirection-by-hacking-the-dynamic-linker" class="md-nav__link">
+    Indirection by hacking the dynamic linker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying" class="md-nav__link">
+    Copying
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copying-variables-one-by-one" class="md-nav__link">
+    Copying variables one by one
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copying-the-librarys-data-segment" class="md-nav__link">
+    Copying the library's data segment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/omnetpp/docs.omnetpp.org/edit/master/docs/articles/porting-code-into-omnetpp.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Porting Real-World Protocol Implementations into OMNeT++</h1>
+                
+                <p>Network protocols and stacks are becoming increasingly more complex nowadays, to
+the point that writing a simulation model for them is often not a really viable
+option due to resource constraints. An alternative to writing a model from
+scratch is to reuse an existing open source real-world implementation, if one
+exists. Reuse has clear advantages: beyond taking much less effort to implement,
+one can also a spare significant amount of testing and validation effort. The
+drawback of course is less integration with the simulation framework
+(statistics, logging, etc.), difficulties with maintenance (keeping up to date
+with the upstream codebase), and having to live with a Frankenstein piece of
+software.</p>
+<p>An early example of reusing real-life network code is Sam Jensen's <em>Network
+Simulation Cradle</em> (NSC), which wraps various real-life TCP implementations
+(the Linux, FreeBSD, OpenBSD, and lwIP ones) in order to make them accessible in
+simulators such as ns-3 and OMNeT++.</p>
+<p>In this blog post, we explore some of the workable approaches of bringing
+an existing protocol implementation into an OMNeT++ simulation.</p>
+<h2 id="setting-out">Setting out<a class="headerlink" href="#setting-out" title="Permanent link">&para;</a></h2>
+<p>Let's assume we have the external library that we want to use in a simulation.
+Picture lwIP for example, a TCP/IP stack which includes many other protocols. To
+make it usable in an OMNeT++ simulation, we'd wrap the lwIP code into a simple
+module which would serve as "glue" code.</p>
+<p>There are a few issues that obviously need to be solved, in the glue code or by
+modifying the lwIP code, to make it work: input/output, timers, configuring,
+statistics, etc. That is, the packets lwIP sends and receives need to be
+converted to/from OMNeT++ messages; socket API calls made in the simulation need
+to find their way to the appropriate functions of lwIP; timers in the lwIP code
+need to map to OMNeT++ self messages; configuration possibilities of lwIP need
+to be mapped to OMNeT++ module parameters; statistics collected inside lwIP (if
+there are any -- possibly they need to be added) need to be exposed as OMNeT++
+signals. This is all fairly straightforward, but not always easy. It is
+hard to formulate generic advice on those topics, because the solution tends to
+depend very much on the internals of the library to be wrapped.</p>
+<p>Instead, in the rest of this post we deal with a less obvious problem that looks
+easy on the surface but tends to cause the most headache in practice: the issue
+of global variables.</p>
+<p>Most real-life software assumes it runs as a sole instance in its process, and
+therefore uses global variables to access its state such as configuration,
+connection tables, etc. However, in the simulation we typically want to create
+multiple instances: we want to simulate multiple routers, switches, hosts, etc.
+in a network. Each instance should have (sticking to the lwIP example) its own
+routing table, list of open sockets, etc. Thus, we need separate sets of global
+variables for each lwIP instance, and make sure each instance uses its own set.</p>
+<p>There are a few distinct approaches to solve this problem, such as:</p>
+<ol>
+<li>
+<p>Packaging the software as a shared library, and loading it at runtime as many
+   times as the number of instances you need. The dynamic loader of your system
+   would take care that each loaded instance is a self-contained one, having no
+   data common with the other instances.</p>
+</li>
+<li>
+<p>Exploiting object-orientation. If the library is implemented in C++, odds are
+   that creating multiple instances is only as much as instantiating the
+   corresponding classes multiple times. Or, if the library is programmed in C,
+   it could be feasible to wrap the code into C++ classes.</p>
+</li>
+<li>
+<p>Introducing indirection, i.e. collecting all global variables into a struct
+   and modifying the library to access them via a pointer, a single global
+   variable that we always set to point to the appropriate set of variables
+   before calling into the library.</p>
+</li>
+<li>
+<p>Copying, that is, we maintain a "backup" (or "shadow", if you like) set of
+   global variables of each instance, and we copy its contents in/out of the
+   actual global variables before and after each call into the library.</p>
+</li>
+</ol>
+<p>In the following sections we explore these options.</p>
+<h2 id="loading-the-library-multiple-times">Loading the library multiple times<a class="headerlink" href="#loading-the-library-multiple-times" title="Permanent link">&para;</a></h2>
+<p>If the library is (or can be) compiled to a shared library, the first idea is to
+load it multiple times. Then, for example, if you have 10 routers in the
+simulation and each one needs one instance of the protocol the library
+implements, you would load the library 10 times, in such a way that the dynamic
+linker of your system ensures that each loaded instance is a self-contained one,
+with no data common with the other instances.</p>
+<p>Sounds easy. The first hurdle is that simple <code class="codehilite"><span class="err">dlopen()</span></code> won't work: when the
+library is already loaded, further <code class="codehilite"><span class="err">dlopen()</span></code> calls just return the handle of
+the already loaded instance. (This is also true if the first instance of the
+library was loaded as part of the program and not via <code class="codehilite"><span class="err">dlopen()</span></code>.)</p>
+<p>It is possible to fool <code class="codehilite"><span class="err">dlopen()</span></code> by making several copies of the shared library
+on the disk under different names, but this solution is neither elegant nor very
+efficient, even if you try soft or hard links to spare disk space instead of
+copying. (Still, I've seen projects follow this approach; see
+<a href="https://github.com/simgrid/simgrid/issues/137">https://github.com/simgrid/simgrid/issues/137</a>.)</p>
+<p>A better alternative is to use <code class="codehilite"><span class="err">dlmopen()</span></code>. The <code class="codehilite"><span class="err">dlmopen()</span></code> function differs from
+<code class="codehilite"><span class="err">dlopen()</span></code> primarily in that it accepts an additional argument that
+specifies the link-map list (also referred to as a namespace) in which the
+shared object should be loaded. When <code class="codehilite"><span class="err">LM_ID_NEWLM</span></code> is specified in this argument,
+the library will be loaded into a new empty namespace, allowing multiple
+instances of the library to be loaded.</p>
+<div class="codehilite"><pre><span></span>    <span class="kt">void</span> <span class="o">*</span><span class="n">handle</span> <span class="o">=</span> <span class="n">dlmopen</span><span class="p">(</span><span class="n">LM_ID_NEWLM</span><span class="p">,</span> <span class="s">&quot;libfoo.so&quot;</span><span class="p">,</span> <span class="n">RTLD_NOW</span><span class="p">);</span>
+</pre></div>
+
+<p>An inconvenience of using libraries via <code class="codehilite"><span class="err">dlopen()</span></code>/<code class="codehilite"><span class="err">dlmopen()</span></code> is that symbols
+(such as function names) in the library are not directly available in the parent
+program, but <code class="codehilite"><span class="err">dlsym()</span></code> needs to be used to resolve them. A more serious limitation
+is that on the system we tested, <code class="codehilite"><span class="err">dlmopen()</span></code> only allowed 15 instances of
+the library to be loaded. This limit can be raised (up to 256?), but loading
+the library multiple times certainly doesn't scale to hundreds or thousands
+of instances.</p>
+<h2 id="exploiting-object-orientation">Exploiting object orientation<a class="headerlink" href="#exploiting-object-orientation" title="Permanent link">&para;</a></h2>
+<h3 id="porting-c-libraries">Porting C++ libraries<a class="headerlink" href="#porting-c-libraries" title="Permanent link">&para;</a></h3>
+<p>If the library was written in C++ (as opposed to pure C), chances are that
+functionality is nicely encapsulated into a collection of classes. If the
+library is well-designed, one can just create as many instances of the network
+stack (or the component is question) as needed.</p>
+<p>Except of course, if the library makes use of the dreaded Singleton pattern, or
+otherwise uses global variables. However, singletons are usually easy to
+identify in the code, and the source can be modified to allow several instances
+to coexist in memory.</p>
+<p>In the rest of this post, we assume that the library was written in C.</p>
+<h3 id="wrapping-into-c">Wrapping into C++<a class="headerlink" href="#wrapping-into-c" title="Permanent link">&para;</a></h3>
+<p>That fact that library was written in C doesn't necessarily mean in cannot be
+turned into (non-idiomatic) C++ with some effort. After all, most C code
+compiles as C++ just fine. If you manage to wrap the code into a C++ class (so
+that C global variables become data members of the C++ class, and C functions
+become member functions of the same class), it will be easy to instantiate it in
+multiple instances. Notice that function bodies won't need to be modified much:
+since <code class="codehilite"><span class="err">this-&gt;</span></code> is implicit for member access, C variable accesses and function
+calls will transparently compile as member accesses and calls in C++.</p>
+<p>What needs to be changed? Assuming that all important definitions in the library
+are in a single header file, adding <code class="codehilite"><span class="err">class Foo {</span></code> (replace <code class="codehilite"><span class="err">Foo</span></code> with a name of
+your choice) near the top and <code class="codehilite"><span class="err">};</span></code> near the bottom of the file will turn types
+into nested types, and variable declarations and functions into class members.
+(Variable declarations need a little massaging: <code class="codehilite"><span class="err">extern</span></code> needs to be removed,
+and the initial value brought over from the implementation (<code class="codehilite"><span class="na">.c</span></code>) file.) The
+corresponding <code class="codehilite"><span class="na">.c</span></code> file should be renamed to <code class="codehilite"><span class="na">.cc</span></code> so that it is compiled as
+C++, functions definitions (and possibly some more elements) in it need to be
+decorated with <code class="codehilite"><span class="c">Foo::</span></code>, and global variable definitions commented out (ensuring
+they are declared as class members now). Some constructs such as static
+functions and static variables inside functions (= global variables only visible
+inside the function) need extra care. The resulting code should largely compile
+without any further changes, notably without having to change function bodies.
+In practice, subtle incompatibilities between C and C++ often cause compilation
+errors, but they are usually not hard to fix.</p>
+<p>An example of this approach is how lwIP was ported into INET Framework.</p>
+<h2 id="introducing-indirection">Introducing indirection<a class="headerlink" href="#introducing-indirection" title="Permanent link">&para;</a></h2>
+<p>An extra level of indirection solves everything, right? Maybe not, but here it
+really helps. In this solution, we create a separate set of global variables for
+each instance, and modify the library to access the variables via a pointer
+(which we define as a global variable so it doesn't need to be passed around).
+Before each call into the library, we set the pointer to the set of globals of
+the correct instance.</p>
+<p>There are several ways to achieve this effect. Let's see them!</p>
+<h3 id="indirection-by-modifying-the-source">Indirection by modifying the source<a class="headerlink" href="#indirection-by-modifying-the-source" title="Permanent link">&para;</a></h3>
+<p>The most obvious solution is to modify the source code: collect all global
+variables into a struct type as fields, and prefix all accesses of the
+individual global variables with <code class="codehilite"><span class="err">ptr-&gt;</span></code> (better names for the pointer can
+certainly be invented). Now the library will access its "global" variables via
+the <code class="codehilite"><span class="err">ptr</span></code> pointer (it needs to be defined as a global variable of course).
+Now, one can create and use an arbitrary number of instances from the library by
+allocating a globals struct for each, and setting the pointer to point to right
+one before each call.</p>
+<p>Note that private global variables, such as those declared <code class="codehilite"><span class="err">static</span></code> in C files
+and inside function bodies, so they'll also need a place in the struct.</p>
+<p>The difficulty with this solution is of course the need to modify each and every
+global variable access in the code. The task can be pulled off by hand
+(tedious), or with tools like Sam Jensen's <em>globalizer</em> tool. The number of
+textual changes could be reduced by the use of macros (<code class="codehilite"><span class="err">#define foo</span><span class="err">ptr-&gt;m_foo</span></code>), but that often causes more problems than it solves (the name of a
+global variable may also occur as the name of a parameter, local variable or
+even a type, causing weird compile errors).</p>
+<p>Another drawback is that the above code changes are usually quite intrusive,
+in the sense that they are not local, but occur all over the codebase. Chances
+are that when you want to upgrade to the next version of the library,
+the original "globalization" patch won't apply, and you'll end up having
+to do the replacements all over again.</p>
+<h3 id="indirection-by-code-instrumentation">Indirection by code instrumentation<a class="headerlink" href="#indirection-by-code-instrumentation" title="Permanent link">&para;</a></h3>
+<p>A definitely more hardcore solution is to intervene during the compilation of
+the library, and add the indirection then. It may sound like science fiction,
+but quite surprisingly, it is actually feasible.</p>
+<p>They key is to add a plugin to the Clang compiler to perform a new compilation pass.
+The pass will operate on the LLVM intermediate representation (IR) of the compilation
+unit. It can iterate over all global variable accesses in the code, and modify each
+one to introduce the indirection by a pointer global variable. The struct of global
+variables can also be created during the compiler pass. This may sounds straightforward,
+but there are a number of subtle problems to solve along the way. For example,
+since the C++ compiler processes each file in isolation, it is not easy to decide
+in which file to place the new global variables so as not to cause multiple definitions.</p>
+<p>Attila Török in our team has experimented with this approach, and while not solving
+it completely, he has gotten quite far with it. If you are interested in picking
+up where he left off, drop us an email.</p>
+<p>The drawback of this (otherwise very elegant) solution is the deployment. If you
+want your users to be able to compile the library, they'll need the compiler plugin.
+And if you distribute the compiler plugin in source form (it is written in C++),
+they'll need to install the <code class="codehilite"><span class="err">clang-devel</span></code> package to be able to build it.</p>
+<h3 id="indirection-by-hacking-the-dynamic-linker">Indirection by hacking the dynamic linker<a class="headerlink" href="#indirection-by-hacking-the-dynamic-linker" title="Permanent link">&para;</a></h3>
+<p>There might be a third solution as well, involving the dynamic linker. When
+accessing functions and global variables loaded from a shared library, there is
+already an indirection in place: all such accesses go through the <em>Global Offset
+Table</em> (GOT). In theory, it could be possible to update the corresponding
+entries in the GOT to point to the desired set of global variables before each
+call into the library. For that matter, it could also be possible to have
+separate instances of the GOT table for each library instance, and just
+activate the right GOT before calls into the library.</p>
+<p>So far we haven't figured out enough about the GOT data structure and the
+dynamic loader in general to judge whether the above idea is feasible or not. It
+is unclear whether there is enough information available at runtime to identify
+the relevant entries in the GOT, or even, whether GOT is writable at all. One
+thing is certain: such as solution, even if it worked, would be extremely
+platform dependent.</p>
+<h2 id="copying">Copying<a class="headerlink" href="#copying" title="Permanent link">&para;</a></h2>
+<p>The alternative to indirection is copying. In this approach, we maintain a
+"shadow" set of global variables for each library instance. Before before each call
+into the library, we populate the global variables from the instance's "shadow" set,
+and after the call, we update the "shadow" set by copying the global variables
+into it.</p>
+<p>Whenever a new library instance is needed, we populate the new "shadow" set from
+a pristine backup copy that we saved early, before the first call into the
+library. This is possible to do with C libraries because, unlike C++ libraries,
+they normally don't contain initialization code that automatically runs on
+loading the library. (In C++, constructors of global objects are run
+automatically on library load, which makes things tricky. In C, global variables
+are only allowed to have constant initializers. While it is also possible in C
+to create initialization functions run automatically on library load, e.g. via
+<code class="codehilite"><span class="err">__attribute__ ((constructor))</span></code>, that is not very common.)</p>
+<p>The cost of copying before/after calls may or may not be significant, depending
+on how the library was written. If the library mostly uses dynamically allocated
+data structures, the cost is small. Static allocations are the problem. Static
+buffers, for example, can add a lot to the amount of memory that needs to be
+copied. In such cases, modifying the library to allocate the buffers dynamically
+can make a lot of difference in performance.</p>
+<p>While the copying approach is certainly less efficient than the indirection
+approach (where all it takes to switch instance is to change the value of a
+single pointer), it is significantly easier to implement, and requires fewer
+(and less intrusive) modification to the library source code.</p>
+<p>There are several ways this approach can be implemented.</p>
+<h3 id="copying-variables-one-by-one">Copying variables one by one<a class="headerlink" href="#copying-variables-one-by-one" title="Permanent link">&para;</a></h3>
+<p>A straightforward approach is to collect the global variables of the library
+into a struct type that represents the "shadow" set (while leaving the original
+source intact), and write two functions that contain a series of assignments:
+one would copy the global variables into a struct, and the other would copy
+in the reverse direction.</p>
+<p>If library contains global variables that are not accessible to the copying
+functions (because they are marked <code class="codehilite"><span class="err">static</span></code> and are local to a file or are
+inside functions), such places need to be modified in the library source.</p>
+<p>The drawback of this solution is that it requires you to collect the list of
+global variables (which requires attention when you upgrade to a newer version
+of the library), and may also require source code changes to the library. The
+next approach is also not without problems, but it eliminates both these issues.</p>
+<h3 id="copying-the-librarys-data-segment">Copying the library's data segment<a class="headerlink" href="#copying-the-librarys-data-segment" title="Permanent link">&para;</a></h3>
+<p>It is possible to automate the above approach. Global variables of a shared
+library form a contiguous region in the memory, so it we know the range of
+addressses it occupies, we can copy all of them in one go, using a simple
+<code class="codehilite"><span class="err">memcpy()</span></code> call.</p>
+<p>The difficult problem is how to determine the address range. Unfortunately there
+is no "official" solution.</p>
+<p>Our first idea was this: if the compiler preserves the order of variables within
+a compilation unit, we can place guard variables like <code class="codehilite"><span class="err">startVars</span></code> and <code class="codehilite"><span class="err">endVars</span></code> at
+the top and bottom of each source file, and the address range between them will
+include all global variables. Unfortunately, the assumption was wrong: variables
+seemed to appear in the memory in an arbitrary order. Later we learned gcc has a
+<code class="codehilite"><span class="err">-fno-toplevel-reorder</span></code> option for exactly this purpose.</p>
+<p>Similarly, if the linker preserves the order the object files appear on its
+command line, it should be possible to surround the list objects files with a
+<code class="codehilite"><span class="err">startvars.o</span></code> and an <code class="codehilite"><span class="err">endvars.o</span></code> file that contain similarly named guard
+variables. Unfortunately, it also turned out that the actual order of variables
+in the shared library does not necessarily reflect their original order on the
+command line. And, the linker does not appear to have an analogous
+<code class="codehilite"><span class="err">do-not-reorder</span></code> option.</p>
+<p>The next option we explored was to get the address range from the dynamic
+linker. Indeed, there is a <code class="codehilite"><span class="err">dl_iterate_phdr()</span></code> API function that enumerates
+the loaded shared libraries and the segments in each. We figured out that global
+variables are in the segment that has type 1 (PT_LOAD) and flags 6 (R+W).
+However, getting the address range of that segment was not much use to us.
+First, it points to readonly memory within the area where the shared object file
+was loaded by the dynamic linker, and not to the region where the library's
+actual variables are. Second, it includes important internal data structures (a
+few hundred bytes at the start) in addition to the global variables, and
+apparently those data structures should not be messed with. These hurdles,
+especially the second one, could not be overcome.</p>
+<p>The third idea that finally worked was to use a linker script to insert the
+guard variables. The main purpose of the linker script is to describe for the
+linker how the sections in the input files (object files, libraries, etc) should
+be mapped into the output file, and to control the memory layout of the output
+file. Linker scripts are normally considered an internal matter of the linking
+process, but it's possible to export one, modify it, and let the linker use the
+modified version. For example, by editing the <code class="codehilite"><span class="na">.data</span></code>  block, and adding
+<code class="codehilite"><span class="err">startmarker.o(.data);</span></code> at the top and <code class="codehilite"><span class="err">endmarker.o(.data);</span></code> at the bottom, one
+can achieve that the data of the two named object files (<code class="codehilite"><span class="err">startmarker.o</span></code> and
+<code class="codehilite"><span class="err">endmarker.o</span></code>) are placed at the top and bottom of the data segment. If those
+files contain guard variables, their address range at runtime denotes the data
+area of the library. Since we stopped experimenting before reaching a conclusion,
+it is still unclear whether this approach can be made to work.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>With so many options, the question is which approach you should choose in your
+project. Here are a few guidelines.</p>
+<ul>
+<li>Multiple loading is relatively straightforward, and the required effort does
+  not depend of on the size of the codebase (huge libraries are just as easy to
+  load as small ones), but is limited in the number of instances you can create
+  (usually a few dozen). Therefore, it is practical for libraries which have a
+  large codebase or whose source is not available -- provided that it doesn't
+  need to be instantiated on a massive scale.</li>
+<li>Copying is not very efficient (usually there too many variables, static
+  tables, etc). Simulations using that approach may be slow.</li>
+<li>Wrapping into C++ might not be practical with C code that contains a lot of
+  constructs that don't compile as C++ (too much patching required).</li>
+</ul>
+<p>Choose your own weapon.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../tutorials/swarm/page2/" title="How it Works" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                How it Works
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../building-omnetpp-in-docker/" title="Building an OMNeT++ Distro" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Building an OMNeT++ Distro
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 OpenSim Ltd.
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="http://omnetpp.org" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/omnetpp/docs.omnetpp.org" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/omnetpp" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/jquery-3.2.1.min.js"></script>
+      
+        <script src="../../javascripts/quoting.js"></script>
+      
+        <script src="../../javascripts/rainbow-custom.min.js"></script>
+      
+        <script src="../../javascripts/rainbow.linenumbers.min.js"></script>
+      
+        <script src="../../javascripts/rainbow-ini.js"></script>
+      
+        <script src="../../javascripts/rainbow-ned.js"></script>
+      
+        <script src="../../javascripts/rainbow-yaml.js"></script>
+      
+        <script src="../../javascripts/rainbow-dockerfile.js"></script>
+      
+        <script src="../../javascripts/rainbow-html.js"></script>
+      
+    
+  </body>
+</html>

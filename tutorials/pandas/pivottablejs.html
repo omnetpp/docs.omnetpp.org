@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {"rows": ["numHosts"], "cols": ["iaMean"], "vals": ["Aloha.server.channelUtilization:last"], "aggregatorName": "Average", "rendererName": "Line Chart"})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">run,Aloha.server.channelUtilization:last,Aloha.server.collidedFrames:last,Aloha.server.collisionLength:max,Aloha.server.collisionLength:mean,Aloha.server.collisionLength:sum,Aloha.server.duration,Aloha.server.receivedFrames:last,iaMean,numHosts
+PureAlohaExperiment-0-20170627-20:42:16-22739,0.15605692921565,40805.0,0.9018974848870001,0.19827524052723003,2457.0267806135003,5400.0,8496.0,1.0,10.0
+PureAlohaExperiment-1-20170627-20:42:17-22739,0.15617584613753,40692.0,0.9589018103749999,0.19808845926559002,2456.4949833526002,5400.0,8503.0,1.0,10.0
+PureAlohaExperiment-10-20170627-20:42:16-22741,0.10957097797323,1760.0,0.326138065143,0.15515364382063002,126.45021971381,5400.0,5965.0,7.0,10.0
+PureAlohaExperiment-11-20170627-20:42:16-22741,0.10899168088439001,1718.0,0.34009611853699995,0.15452863501567998,125.47725163273998,5400.0,5934.0,7.0,10.0
+PureAlohaExperiment-12-20170627-20:42:16-22741,0.09048477804873,1069.0,0.27201258795899996,0.15214236230929,78.201174226974,5400.0,4926.0,9.0,10.0
+PureAlohaExperiment-13-20170627-20:42:17-22741,0.08883037024005198,993.0,0.340677787871,0.15478976416620002,72.751189158114,5400.0,4837.0,9.0,10.0
+PureAlohaExperiment-14-20170627-20:42:17-22741,0.088714751121526,68952.0,1.467885771665,0.24563240116123003,3617.4283719014,5400.0,4826.0,1.0,15.0
+PureAlohaExperiment-15-20170627-20:42:16-22742,0.090363402149376,68813.0,1.430673615223,0.24462881071486997,3612.9229054478997,5400.0,4919.0,1.0,15.0
+PureAlohaExperiment-16-20170627-20:42:18-22742,0.17784288251240998,28526.0,0.811152114585,0.18513888890001998,1802.8825001083999,5400.0,9684.0,2.0,15.0
+PureAlohaExperiment-17-20170627-20:42:19-22742,0.17847477068929002,29274.0,0.923907646454,0.18540767384898,1839.2441245818,5400.0,9717.0,2.0,15.0
+PureAlohaExperiment-18-20170627-20:42:20-22742,0.19084320056502,16006.0,0.70224466621,0.17184144446907998,1064.214065597,5400.0,10392.0,3.0,15.0
+PureAlohaExperiment-19-20170627-20:42:21-22742,0.19229850238159002,15774.0,0.75086026185,0.1712703414223,1051.2573556501,5400.0,10471.0,3.0,15.0
+PureAlohaExperiment-2-20170627-20:42:19-22739,0.19638121135313,15421.0,0.525555103944,0.16969657126347001,1035.8278709922,5400.0,10692.0,2.0,10.0
+PureAlohaExperiment-20-20170627-20:42:18-22757,0.18279223504533001,9636.0,0.480816570481,0.16504866638595,662.01020087404,5400.0,9952.0,4.0,15.0
+PureAlohaExperiment-21-20170627-20:42:19-22757,0.18185570235759999,9799.0,0.561614419605,0.16403893101507,675.84039578207,5400.0,9901.0,4.0,15.0
+PureAlohaExperiment-22-20170627-20:42:19-22757,0.16857094290719,6628.0,0.431484415975,0.16057821717507,462.62584368138,5400.0,9179.0,5.0,15.0
+PureAlohaExperiment-23-20170627-20:42:20-22757,0.16898999495310002,6704.0,0.424680946407,0.16049486969711,470.08947334283,5400.0,9202.0,5.0,15.0
+PureAlohaExperiment-24-20170627-20:42:20-22757,0.14243776167695002,3656.0,0.382423190593,0.1575786946233,261.10789699081,5400.0,7756.0,7.0,15.0
+PureAlohaExperiment-25-20170627-20:42:19-22761,0.14067393916260001,3638.0,0.36324176633199995,0.1554234576841,255.82701134802997,5400.0,7658.0,7.0,15.0
+PureAlohaExperiment-26-20170627-20:42:19-22761,0.11958304747406,2318.0,0.376899503179,0.15671546083092003,167.37211216742,5400.0,6511.0,9.0,15.0
+PureAlohaExperiment-27-20170627-20:42:20-22761,0.12201648539158,2297.0,0.314731768715,0.15271692251476998,163.10167324578,5400.0,6643.0,9.0,15.0
+PureAlohaExperiment-28-20170627-20:42:20-22761,0.04558233175194,95630.0,2.168153562372,0.31451423034861,4335.8931795859,5400.0,2480.0,1.0,20.0
+PureAlohaExperiment-29-20170627-20:42:22-22761,0.04759032239781,95258.0,2.0473583647440003,0.31095972296047,4313.0113574617,5400.0,2590.0,1.0,20.0
+PureAlohaExperiment-3-20170627-20:42:20-22739,0.19325337525529002,15342.0,0.593947432433,0.16908258528111997,1028.8675314356,5400.0,10522.0,2.0,10.0
+PureAlohaExperiment-30-20170627-20:42:21-22765,0.14866700100044,43198.0,1.151025662986,0.20442178166189998,2553.0236311754,5400.0,8095.0,2.0,20.0
+PureAlohaExperiment-31-20170627-20:42:22-22765,0.14646103011457,43459.0,1.115326361174,0.20660595537682,2558.6081513865,5400.0,7974.0,2.0,20.0
+PureAlohaExperiment-32-20170627-20:42:23-22765,0.18310639444069002,24634.0,0.6926235081350001,0.18149050380447002,1572.9781964733,5400.0,9970.0,3.0,20.0
+PureAlohaExperiment-33-20170627-20:42:24-22765,0.18484500245313,25108.0,0.768558993886,0.18182650197407998,1602.8006149015,5400.0,10064.0,3.0,20.0
+PureAlohaExperiment-34-20170627-20:42:24-22765,0.18936991164024,15990.0,0.5951424909899999,0.17269994925438,1064.1770873055,5400.0,10311.0,4.0,20.0
+PureAlohaExperiment-35-20170627-20:42:21-22769,0.19153344189364999,15770.0,0.6989105361040001,0.17120699673797,1045.2187150853,5400.0,10429.0,4.0,20.0
+PureAlohaExperiment-36-20170627-20:42:22-22769,0.18342274994879998,11164.0,0.497997561487,0.16740874353354002,765.56018417886,5400.0,9987.0,5.0,20.0
+PureAlohaExperiment-37-20170627-20:42:22-22769,0.18406086976921,11225.0,0.49858859531599997,0.16656510010597,762.36846318504,5400.0,10021.0,5.0,20.0
+PureAlohaExperiment-38-20170627-20:42:23-22769,0.16517097134826,6201.0,0.49489327723399995,0.15990455729785,433.02154116259004,5400.0,8993.0,7.0,20.0
+PureAlohaExperiment-39-20170627-20:42:23-22769,0.1629045773812,6226.0,0.427599628579,0.15942794658447,434.12229854952005,5400.0,8870.0,7.0,20.0
+PureAlohaExperiment-4-20170627-20:42:20-22739,0.1765065899558,7696.0,0.44697073744800003,0.16284091356673,537.53785568376,5400.0,9611.0,3.0,10.0
+PureAlohaExperiment-40-20170627-20:42:22-22773,0.14243608363754998,4012.0,0.38935165086499995,0.15763994824066,284.22482667791,5400.0,7755.0,9.0,20.0
+PureAlohaExperiment-41-20170627-20:42:22-22773,0.14270035320333,4108.0,0.413195432597,0.15807627221764997,291.17649342492,5400.0,7770.0,9.0,20.0
+PureAlohaExperiment-5-20170627-20:42:16-22740,0.17613553133231,7816.0,0.5155023699600001,0.16056234643382,544.9486037963901,5400.0,9591.0,3.0,10.0
+PureAlohaExperiment-6-20170627-20:42:16-22740,0.15247087847489002,4728.0,0.404513064185,0.15875030692435,334.64564699653,5400.0,8302.0,4.0,10.0
+PureAlohaExperiment-7-20170627-20:42:17-22740,0.15466709847088,4782.0,0.367236980057,0.15684652218855,337.53371574975,5400.0,8422.0,4.0,10.0
+PureAlohaExperiment-8-20170627-20:42:17-22740,0.13821726277041002,3121.0,0.417037289917,0.15522729587769,221.81980580922001,5400.0,7526.0,5.0,10.0
+PureAlohaExperiment-9-20170627-20:42:18-22740,0.1357771349216,3270.0,0.331081835753,0.1560253214875,232.78977965935002,5400.0,7393.0,5.0,10.0
+</div>
+    </body>
+</html>

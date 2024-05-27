@@ -1,0 +1,1379 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Docmentation for the OMNeT++ Simulator">
+      
+      
+        <link rel="canonical" href="https://docs.omnetpp.org/articles/omnetpp-debugging-tips/">
+      
+      
+        <meta name="author" content="R">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Improving the C++ Debugging Experience on Linux and other OSes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    <script>
+    // handle <a srcfile></a> references to source files
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('a[srcfile]').each(function(i) {
+            var srcref = $(this).attr('srcfile');
+            var name = srcref.replace(/.*\//g, "");
+            $(this).text(name);
+            $(this).attr('href', '/showfile/?url='+srcref);
+            $(this).attr('target', '_blank');
+        });
+    });
+    // function th show a full size image when clicked ona thumbnail
+    imageFullSizeZoom = function(img){
+        img = $(img);
+        let fullSizeSrc = img.attr('src').replace(/.thumb.jpg$/, '.png');
+
+        $(document.body).append(
+        '<div class="fullscreenimgshade" onclick="$(this).remove();">' +
+            '<img src="' + fullSizeSrc + '" class="fullscreenimg"/>' +
+        '</div>'
+        );
+    };
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/omnetpp-docs.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/rainbow.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/rainbow.linenumbers.theme.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/jupyter.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-240922-2", "docs.omnetpp.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#the-issues" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.omnetpp.org/" title="OMNeT++ Technical Articles" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              OMNeT++ Technical Articles
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Improving the C++ Debugging Experience on Linux and other OSes
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </span>
+    OMNeT++ Technical Articles
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/omnetpp/docs.omnetpp.org/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    omnetpp/docs.omnetpp.org
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Learn OMNeT++ with TicToc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Learn OMNeT++ with TicToc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part1/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part2/" title="Running the Simulation" class="md-nav__link">
+      Running the Simulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part3/" title="Enhancing the 2-node TicToc" class="md-nav__link">
+      Enhancing the 2-node TicToc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part4/" title="Turning it Into a Real Network" class="md-nav__link">
+      Turning it Into a Real Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part5/" title="Adding Statistics Collection" class="md-nav__link">
+      Adding Statistics Collection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part6/" title="Visualizing the Results" class="md-nav__link">
+      Visualizing the Results
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/part7/" title="Parameter Studies" class="md-nav__link">
+      Parameter Studies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/tictoc/conclusion/" title="Closing words" class="md-nav__link">
+      Closing words
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/pandas/" title="Result Analysis with Python" class="md-nav__link">
+      Result Analysis with Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Articles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Articles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Introduction into Running Simulations in the Cloud
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Introduction into Running Simulations in the Cloud
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page1/" title="Concepts" class="md-nav__link">
+      Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page2/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page4/" title="Deploying on AWS" class="md-nav__link">
+      Deploying on AWS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page5/" title="Trying It Out" class="md-nav__link">
+      Trying It Out
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page6/" title="Examining the Code" class="md-nav__link">
+      Examining the Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/cloud/page7/" title="Potential Improvements, Alternatives" class="md-nav__link">
+      Potential Improvements, Alternatives
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Using AWS for Running INET Simulation Campaigns
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Using AWS for Running INET Simulation Campaigns
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/swarm/" title="Motivation" class="md-nav__link">
+      Motivation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/swarm/page1/" title="Installation and Usage" class="md-nav__link">
+      Installation and Usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/swarm/page2/" title="How it Works" class="md-nav__link">
+      How it Works
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../porting-code-into-omnetpp/" title="Porting Real-World Protocol Implementations into OMNeT++" class="md-nav__link">
+      Porting Real-World Protocol Implementations into OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../building-omnetpp-in-docker/" title="Building an OMNeT++ Distro" class="md-nav__link">
+      Building an OMNeT++ Distro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../running-omnetppgui-in-docker/" title="OMNeT++ GUI in Docker" class="md-nav__link">
+      OMNeT++ GUI in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../running-omnetpp-in-docker/" title="Using Docker for Running Simulations on Various Versions of OMNeT++" class="md-nav__link">
+      Using Docker for Running Simulations on Various Versions of OMNeT++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wsl2/" title="Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)" class="md-nav__link">
+      Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Improving the C++ Debugging Experience on Linux and other OSes
+      </label>
+    
+    <a href="./" title="Improving the C++ Debugging Experience on Linux and other OSes" class="md-nav__link md-nav__link--active">
+      Improving the C++ Debugging Experience on Linux and other OSes
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-issues" class="md-nav__link">
+    The Issues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-on-various-platforms" class="md-nav__link">
+    Debugging on Various Platforms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugger-backends-pros-and-cons" class="md-nav__link">
+    Debugger Backends - Pros and Cons
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugger-frontends" class="md-nav__link">
+    Debugger Frontends
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-omnet-for-optimal-debugging-experience" class="md-nav__link">
+    Configuring OMNeT++ for Optimal Debugging Experience
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-with-vs-code" class="md-nav__link">
+    Debugging with VS Code
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launching-simulations-with-the-codelldb-debugger" class="md-nav__link">
+    Launching Simulations with the CodeLLDB debugger
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-codelldb-to-the-simulation" class="md-nav__link">
+    Attaching CodeLLDB to the Simulation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pretty-printing-omnet-data-structures" class="md-nav__link">
+    Pretty Printing OMNeT++ Data Structures
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-with-gdbgui" class="md-nav__link">
+    Debugging with gdbgui
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reverse-debugging-tips" class="md-nav__link">
+    Reverse Debugging Tips
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#replaying-with-gdbgui" class="md-nav__link">
+    Replaying with gdbgui
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replaying-with-vs-code" class="md-nav__link">
+    Replaying with VS Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Proposed Research Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Proposed Research Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../neuralnet-errormodels/" title="Better Wireless Error Models Using Neural Networks" class="md-nav__link">
+      Better Wireless Error Models Using Neural Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../zero-conf-parsim/" title="Zero Configuration Automatic Parallel Simulation" class="md-nav__link">
+      Zero Configuration Automatic Parallel Simulation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+      
+    
+      
+    
+      
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-issues" class="md-nav__link">
+    The Issues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-on-various-platforms" class="md-nav__link">
+    Debugging on Various Platforms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugger-backends-pros-and-cons" class="md-nav__link">
+    Debugger Backends - Pros and Cons
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugger-frontends" class="md-nav__link">
+    Debugger Frontends
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-omnet-for-optimal-debugging-experience" class="md-nav__link">
+    Configuring OMNeT++ for Optimal Debugging Experience
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-with-vs-code" class="md-nav__link">
+    Debugging with VS Code
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launching-simulations-with-the-codelldb-debugger" class="md-nav__link">
+    Launching Simulations with the CodeLLDB debugger
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-codelldb-to-the-simulation" class="md-nav__link">
+    Attaching CodeLLDB to the Simulation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pretty-printing-omnet-data-structures" class="md-nav__link">
+    Pretty Printing OMNeT++ Data Structures
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-with-gdbgui" class="md-nav__link">
+    Debugging with gdbgui
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reverse-debugging-tips" class="md-nav__link">
+    Reverse Debugging Tips
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#replaying-with-gdbgui" class="md-nav__link">
+    Replaying with gdbgui
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replaying-with-vs-code" class="md-nav__link">
+    Replaying with VS Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/omnetpp/docs.omnetpp.org/edit/master/docs/articles/omnetpp-debugging-tips.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Improving the C++ Debugging Experience on Linux and other OSes</h1>
+                
+                <p>You would think that in 2020, C++ debugging on Linux is a solved problem. C++ is
+a mature language used by a huge programmer audience and a multitude of large
+projects. It has excellent open-source tool support, and which OS would run
+those tools run better than Linux, right?</p>
+<p>Well, yes and no. Members of our team have gone through considerable pain trying
+to debug during the development of the INET Framework. While eventually we have
+managed to overcome the difficulties (mostly), it was far from being trivial,
+and took us a lot of research to find the combination of tools, compile options
+and other tricks that are able to provide an improved C++ debugging experience.
+In this blog post we share our experiences, in an effort to help our fellow
+developers. (It is important to note that content in this post might have a
+limited "best before" date, as the software landscape is changing over time in
+C++ land, too.)</p>
+<h2 id="the-issues">The Issues<a class="headerlink" href="#the-issues" title="Permanent link">&para;</a></h2>
+<p>Here are a few issues we have experienced at one time or another:</p>
+<ul>
+<li><code class="codehilite"><span class="c">std::string</span></code> (and other standard types) displayed as <code class="codehilite"><span class="err">&lt;incomplete type&gt;</span></code> in the debugger</li>
+<li>seeing the internals of the class (instead of the data you are interested in) when inspecting an <code class="codehilite"><span class="c">std::string</span></code>, <code class="codehilite"><span class="c">std::vector</span></code> or other standard containers</li>
+<li>seeing the <code class="codehilite"><span class="err">&lt;optimised out&gt;</span></code> message when inspecting a variable in your debug build (this happens even with <code class="codehilite"><span class="err">-O0</span></code>, which is supposed to disable all optimizations)</li>
+<li>expression evaluation is incomplete (not all C++ syntax is supported) and unreliable (often reports errors, etc.)</li>
+<li>need for step filtering: as users, we are usually not interested in debugging into the internals of the standard C++ classes</li>
+<li>linking INET with full debug info taking too long</li>
+<li>debugger taking a very long time to start up, due to the amount of debug info it needs to load</li>
+<li>debugger not stopping at breakpoints</li>
+<li>response times being too slow when debugging with <code class="codehilite"><span class="err">gdb</span></code></li>
+<li>not all debugger frontends being able to use <code class="codehilite"><span class="err">lldb</span></code> as backend</li>
+<li>choice of standalone debugger (there are many, all of them with their own issues)</li>
+</ul>
+<p>But before we delve into the details, let's come clear with the basics.</p>
+<h2 id="debugging-on-various-platforms">Debugging on Various Platforms<a class="headerlink" href="#debugging-on-various-platforms" title="Permanent link">&para;</a></h2>
+<p>A debugger usually consists of two parts: a frontend (UI), and a debugger backend. The backend is responsible for the actual low-level debugging tasks like starting a process, setting breakpoints, stepping in the code, querying variables etc. A frontend, on the other hand, is responsible for displaying the debugging information to the user and handling user input.</p>
+<p>The OMNeT++ IDE, which is based on Eclipse, contains a debugger frontend provided by the CDT project. The CDT debugger uses <code class="codehilite"><span class="err">gdb</span></code> as its backend. <code class="codehilite"><span class="err">gdb</span></code> must be installed separately from the IDE. On Linux, <code class="codehilite"><span class="err">gdb</span></code> is normally installed by the system's package manager. On Windows, <code class="codehilite"><span class="err">gdb</span></code> is included in the bundled MinGW tool-chain. Finally on macOS, you must get
+<code class="codehilite"><span class="err">gdb</span></code> from a 3<sup>rd</sup> party package manager (like homebrew), because the <code class="codehilite"><span class="err">gdb</span></code> instance that comes with macOS is no longer maintained
+and is quite outdated. (This is because macOS uses <code class="codehilite"><span class="err">lldb</span></code> as the default debugger, and they no longer need/care about <code class="codehilite"><span class="err">gdb</span></code>.) Installing <code class="codehilite"><span class="err">gdb</span></code> on macOS can be a headache, because the 3<sup>rd</sup> party <code class="codehilite"><span class="err">gdb</span></code> executable must be digitally signed locally to be able to debug other processes. Because of the above limitations, sometimes it makes sense to debug OMNeT++ models outside of the IDE.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On macOS, OMNeT++ 6 uses <code class="codehilite"><span class="err">lldb</span></code> (through the bundled <code class="codehilite"><span class="err">lldb-mi2</span></code> driver) so the above issues are no longer present and debugging is working out of box.</p>
+</div>
+<h2 id="debugger-backends-pros-and-cons">Debugger Backends - Pros and Cons<a class="headerlink" href="#debugger-backends-pros-and-cons" title="Permanent link">&para;</a></h2>
+<p>We recommend three possible debugger backends for OMNeT++. Each of them have their own strengths and weaknesses:</p>
+<ul>
+<li><code class="codehilite"><span class="err">gdb</span></code><ul>
+<li>PRO: very mature debugger, with a few unique features like, reverse debugging, continuous debugging or pretty printing. A lot of debugger frontends support <code class="codehilite"><span class="err">gdb</span></code>.</li>
+<li>CON: it can get quite slow with complicated C++ code, variable evaluation and stepping is not always reliable and sometimes rather slow. On macOS, setting up <code class="codehilite"><span class="err">gdb</span></code> is quite complicated and it still has limited usability.</li>
+</ul>
+</li>
+<li><code class="codehilite"><span class="err">lldb</span></code><ul>
+<li>PRO: a modern debugger with great pretty printing support, fast stepping and evaluation. Works out of the box on macOS.</li>
+<li>CON: There is only a handful of frontends that support LLDB. Notably, Eclipse CDT does not support <code class="codehilite"><span class="err">lldb</span></code> at the moment.</li>
+</ul>
+</li>
+<li><a href="https://rr-project.org/"><code class="codehilite"><span class="err">rr</span></code></a><ul>
+<li>PRO: This is an interesting special-purpose debugger. It supports execution recording and replaying (hence the name) with forward and <strong>reverse</strong> execution of the application. It is a <code class="codehilite"><span class="err">gdb</span></code> drop-in replacement, with a few additional commands for reverse execution.</li>
+<li>CON: Few frontends support it properly, and <code class="codehilite"><span class="err">rr</span></code> itself works only on Intel-made CPUs made after cca. 2010.</li>
+</ul>
+</li>
+</ul>
+<h2 id="debugger-frontends">Debugger Frontends<a class="headerlink" href="#debugger-frontends" title="Permanent link">&para;</a></h2>
+<p>Here are a few debugger frontends we would like to highlight:</p>
+<ul>
+<li>
+<p>Eclipse CDT</p>
+<p>This is the built-in debugger in the OMNeT++ IDE. It integrates only with <code class="codehilite"><span class="err">gdb</span></code> (at the moment), so it inherits all the advantages and disadvantages of the <code class="codehilite"><span class="err">gdb</span></code> backend.</p>
+</li>
+<li>
+<p>Visual Studio Code</p>
+<p>VS Code is an extensible cross platform code editor/IDE that has several debugger extensions on its Marketplace. Some of them supports <code class="codehilite"><span class="err">gdb</span></code>, <code class="codehilite"><span class="err">lldb</span></code>, or both.</p>
+<p>VS Code is practically the only viable cross-platform debugger frontend. The primary mode of launching debugging sessions in VS Code is by creating debug configurations in its own editor. Launching it from the command-line as a standalone debugger is also possible, but it requires crafting some nifty command-line arguments (which could be hidden behind a shell script, for user sanity).</p>
+</li>
+<li>
+<p>Xcode</p>
+<p>This is the official development environment on macOS (and only available on that platform), and uses <code class="codehilite"><span class="err">lldb</span></code> as its backend. Setting up a debugging session for an OMNeT++ model can be quite complicated, as you have to set up a workspace and a project in Xcode before debugging.</p>
+</li>
+<li>
+<p>gdbgui</p>
+<p>This is a Python-based frontend (for <code class="codehilite"><span class="err">gdb</span></code> and <code class="codehilite"><span class="err">rr</span></code>) so it can naturally run on all platforms. While it is somewhat limited, its unique point is that the user interface is rendered in a browser, so you can easily debug a remotely running process. It has also first class integration with the <code class="codehilite"><span class="err">rr</span></code> reverse debugger, so you can easily navigate an execution recording. This is extremely useful to catch rarely occurring crashes and bugs.</p>
+</li>
+<li>
+<p>nemiver</p>
+<p>This is a GTK-based front-end for <code class="codehilite"><span class="err">gdb</span></code>. It provides a reasonably complete and comfortable debugging experience on Linux systems, albeit the user interface has some annoying quirks. As the project has not received much attention from its developers for years, it is unclear when/whether those issues are going to be resolved.</p>
+</li>
+<li>
+<p>KDbg</p>
+<p>KDbg is roughly the KDE equivalent of Nemiver: a Qt-based frontend to <code class="codehilite"><span class="err">gdb</span></code>.</p>
+</li>
+</ul>
+<h2 id="configuring-omnet-for-optimal-debugging-experience">Configuring OMNeT++ for Optimal Debugging Experience<a class="headerlink" href="#configuring-omnet-for-optimal-debugging-experience" title="Permanent link">&para;</a></h2>
+<p>To achieve the best possible experience during debugging, you should fine tune some OMNeT++ compiler and linker flags before building OMNeT++ and your code in debug mode. Compiler flags can be configured in the <code class="codehilite"><span class="err">configure.user</span></code> file by adding the necessary options to the <code class="codehilite"><span class="err">CFLAGS_DEBUG</span></code> variable and then re-running <code class="codehilite"><span class="err">./configure</span></code> and re-building OMNeT++ and your model. You can temporarily add these options also to <code class="codehilite"><span class="err">Makefile.inc</span></code>. In this case it is enough to just clean and re-build OMNeT++ and your model without re-configuration:</p>
+<div class="codehilite"><pre><span></span><span class="err">make cleanall &amp;&amp; make MODE=debug</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>Depending on whether you intend to use <code class="codehilite"><span class="err">gdb</span></code> or <code class="codehilite"><span class="err">lldb</span></code> for debugging, you should add <code class="codehilite"><span class="err">-ggdb3</span></code> or <code class="codehilite"><span class="err">-glldb</span></code> to the <code class="codehilite"><span class="err">CFLAGS_DEBUG</span></code> variable. Note that by default OMNeT++ assumes you intend to use gdb.</p>
+</li>
+<li>
+<p>You may need to configure <code class="codehilite"><span class="err">gdb</span></code> to improve load times if you work with big projects. In <code class="codehilite"><span class="err">~/.gdbinit</span></code> specify <code class="codehilite"><span class="err">main set worker-threads unlimited</span></code> to allow parallel loading of debug information.</p>
+</li>
+<li>
+<p>If you use <code class="codehilite"><span class="err">clang</span></code> as your compiler and use 3<sup>rd</sup>-party libraries in you project that do not have debugging symbols, you may have a hard time inspecting some types defined in those libraries. This is especially painful with the standard C++ library, where you cannot inspect <code class="codehilite"><span class="c">std::string</span></code> or other standard containers. This usually surfaces as a debugger error complaining about 'incomplete types'.</p>
+</li>
+</ul>
+<p>To remedy this situation, you should install the corresponding debug symbols on your operating system (i.e. on Ubuntu: <code class="codehilite"><span class="err">sudo apt-get install libstdc++6-8-dbg</span></code>), however note that the actual name of the debug symbol package varies widely.</p>
+<p>A more generic solution is to force the <code class="codehilite"><span class="err">clang</span></code> compiler to emit debug information for all types it encounters during compilation, but this greatly increases the size of the debug info (and the linking time as a consequence), because debug info for the standard C++ library will be included for <em>each</em> compilation unit. To force the compiler to generate full debug info, add <code class="codehilite"><span class="err">-fstandalone-debug</span></code> to the <code class="codehilite"><span class="err">CFLAGS_DEBUG</span></code> variable. However, this is recommended only if you cannot install the debugging symbols for the given library.</p>
+<p>!!! note
+      This is not a problem with <code class="codehilite"><span class="err">gcc</span></code> and <code class="codehilite"><span class="err">clang</span></code> on macOS, where the default behavior is to generate full debug info anyway.</p>
+<ul>
+<li>
+<p>If you had to apply the above workaround to get the standard C++ types working in the debugger, you may experience increased linking times, especially with big projects. You can specify <code class="codehilite"><span class="err">-gsplit-dwarf</span></code> in the <code class="codehilite"><span class="err">CFLAGS_DEBUG</span></code> variable to force the debug info into a separate (*.dwo) file for each compilation unit. This will speed up the linking process, but it will impact the startup time of the debugger. In turn, debugger startup time can be improved by supplying the <code class="codehilite"><span class="err">-Wl,--gdb-index</span></code> option as well, which enables pre-indexing of the <code class="codehilite"><span class="na">.dwo</span></code> files, thereby allowing faster loading.</p>
+</li>
+<li>
+<p>It is also useful to force some additional runtime-checking to avoid hard to detect bugs like stack overflows. Add <code class="codehilite"><span class="err">-fstack-protector</span></code> (or <code class="codehilite"><span class="err">-fsanitize=safe-stack</span></code> if you use <code class="codehilite"><span class="err">clang</span></code>) to detect these issues.</p>
+</li>
+</ul>
+<h2 id="debugging-with-vs-code">Debugging with VS Code<a class="headerlink" href="#debugging-with-vs-code" title="Permanent link">&para;</a></h2>
+<p>VS Code has several debugger extensions, some of them supporting either <code class="codehilite"><span class="err">gdb</span></code> or <code class="codehilite"><span class="err">lldb</span></code>. We found <code class="codehilite"><span class="err">CodeLLDB</span></code> the most usable for debugging OMNeT++ models. As its name suggest, this extension uses <code class="codehilite"><span class="err">lldb</span></code> as a backend. To install, just open VS Code's extensions view, type <code class="codehilite"><span class="err">CodeLLDB</span></code> in the search field and click the 'install' button.</p>
+<p>As this debugger uses <code class="codehilite"><span class="err">lldb</span></code>, we recommend adding the <code class="codehilite"><span class="err">-glldb</span></code> option to the <code class="codehilite"><span class="err">CFLAGS_DEBUG</span></code> variable in <code class="codehilite"><span class="err">configure.user</span></code>.</p>
+<h3 id="launching-simulations-with-the-codelldb-debugger">Launching Simulations with the CodeLLDB debugger<a class="headerlink" href="#launching-simulations-with-the-codelldb-debugger" title="Permanent link">&para;</a></h3>
+<p>To launch as a standalone debugger, create an executable shell script named <code class="codehilite"><span class="err">codelldb</span></code> in your path, containing:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="nv">PROG</span><span class="o">=</span><span class="k">$(</span>realpath <span class="nv">$1</span><span class="k">)</span>
+<span class="nb">shift</span>
+code --open-url <span class="s2">&quot;vscode://vadimcn.vscode-lldb/launch/command?</span><span class="nv">$PROG</span><span class="s2"> </span><span class="nv">$*</span><span class="s2">&quot;</span>
+</pre></div>
+</td></tr></table>
+
+<p>After that, you can start debugging with:</p>
+<div class="codehilite"><pre><span></span><span class="err">codelldb ./aloha_dbg -u Cmdenv -c PureAloha2</span>
+</pre></div>
+
+
+<h3 id="attaching-codelldb-to-the-simulation">Attaching CodeLLDB to the Simulation<a class="headerlink" href="#attaching-codelldb-to-the-simulation" title="Permanent link">&para;</a></h3>
+<p>It is also possible to configure OMNeT++ to allow invoking the debugger from inside the simulation by choosing the <code class="codehilite"><span class="err">Simulate|Debug Now</span></code> or <code class="codehilite"><span class="err">Simulate|Debug Next Event</span></code> menu items. In this case the simulation will execute a pre-configured command to launch the debugger and attach the current process to it. You have two options to do this:</p>
+<ul>
+<li>
+<p>You can configure it globally by setting the following environment variable in your shell's startup file (i.e. <code class="codehilite"><span class="na">.bashrc</span></code>):
+  <div class="codehilite"><pre><span></span><span class="err">export OMNETPP_DEBUGGER_COMMAND=&quot;code --open-url \&quot;vscode://vadimcn.vscode-lldb/launch/config?{request: &#39;attach&#39;, pid: &#39;%u&#39;}\&quot;&quot;</span>
+</pre></div></p>
+</li>
+<li>
+<p>You can set it only for the current simulation by setting the following configuration key in your <code class="codehilite"><span class="err">omnetpp.ini</span></code>:
+  <div class="codehilite"><pre><span></span><span class="err">debugger-attach-command=&quot;code --open-url \&quot;vscode://vadimcn.vscode-lldb/launch/config?{request: &#39;attach&#39;, pid: &#39;%u&#39;}\&quot;&quot;</span>
+</pre></div></p>
+</li>
+</ul>
+<p>Both approaches will allow you to drop into the debugger interactively from Qtenv.</p>
+<h3 id="pretty-printing-omnet-data-structures">Pretty Printing OMNeT++ Data Structures<a class="headerlink" href="#pretty-printing-omnet-data-structures" title="Permanent link">&para;</a></h3>
+<p>Both <code class="codehilite"><span class="err">gdb</span></code> and <code class="codehilite"><span class="err">lldb</span></code> allows you to define pretty printers in Python that allow you to better display some complicated data structures. OMNeT++ defines such printers for certain data structures (i.e. simtime_t etc.). To activate the pretty printers import them in the VS Code <strong>debug console</strong>.</p>
+<div class="codehilite"><pre><span></span><span class="n">command</span> <span class="n">script</span> <span class="kn">import</span> <span class="o">&lt;</span><span class="n">OMNETPP_ROOT</span><span class="o">&gt;/</span><span class="n">python</span><span class="o">/</span><span class="n">omnetpp</span><span class="o">/</span><span class="n">lldb</span><span class="o">/</span><span class="n">formatters</span><span class="o">/</span><span class="n">omnetpp</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Formatters for <code class="codehilite"><span class="err">gdb</span></code> and <code class="codehilite"><span class="err">lldb</span></code> are not compatible with each other!</p>
+</div>
+<h2 id="debugging-with-gdbgui">Debugging with gdbgui<a class="headerlink" href="#debugging-with-gdbgui" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.gdbgui.com/"><code class="codehilite"><span class="err">Gdbgui</span></code></a> is a browser-based graphical frontend for <code class="codehilite"><span class="err">gdb</span></code> and <code class="codehilite"><span class="err">rr</span></code>, written in Python. To install just type:</p>
+<div class="codehilite"><pre><span></span>$ pip3 install gdbgui
+</pre></div>
+
+
+<p>Start the debugger using:</p>
+<div class="codehilite"><pre><span></span>$ gdbgui --args ./aloha_dbg -u Cmdenv -c PureAloha1
+</pre></div>
+
+
+<p>which will launch also a browser window containing the debugger UI.</p>
+<h2 id="reverse-debugging-tips">Reverse Debugging Tips<a class="headerlink" href="#reverse-debugging-tips" title="Permanent link">&para;</a></h2>
+<p>Reverse debugging allows you to step/run in forward and reverse direction. It is very easy to run until an exception happened, then set a breakpoint and run backwards until that breakpoint is reached. This will stop at the point when last time the execution passed that point before the exception happened. It is very easy to uncover the actual cause of the bug this way. Both <code class="codehilite"><span class="err">gdbgui</span></code> and <code class="codehilite"><span class="err">VS Code</span></code> support reverse debugging using <a href="https://rr-project.org/">mozilla's <code class="codehilite"><span class="err">rr</span></code></a> as a backend.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="codehilite"><span class="err">rr</span></code> works only on recent Intel processors.</p>
+</div>
+<p>To record a simulation, use:</p>
+<div class="codehilite"><pre><span></span>$ rr record ./aloha_dbg -u Cmdenv -c PureAloha1
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Graphical programs cannot be recorded properly so we recommend running your simulation in Cmdenv mode.</p>
+</div>
+<p>If you want to send a recorded simulation to an other machine, you can <em>pack</em> it, so all dependencies of the executable will be copied into the directory, and then that directory can be compressed and sent to a different user.</p>
+<div class="codehilite"><pre><span></span>$ rr pack &lt;RECORD_DIRECTORY&gt;
+</pre></div>
+
+
+<h3 id="replaying-with-gdbgui">Replaying with gdbgui<a class="headerlink" href="#replaying-with-gdbgui" title="Permanent link">&para;</a></h3>
+<p>Start the debugger in replay mode, which will replay the last recording:</p>
+<div class="codehilite"><pre><span></span>$ gdbgui --rr
+</pre></div>
+
+
+<p>or an earlier recording stored in a directory:</p>
+<div class="codehilite"><pre><span></span>$ gdbgui DIRECTORY --rr
+</pre></div>
+
+
+<h3 id="replaying-with-vs-code">Replaying with VS Code<a class="headerlink" href="#replaying-with-vs-code" title="Permanent link">&para;</a></h3>
+<p>First, start a replay</p>
+<div class="codehilite"><pre><span></span>$ rr replay -s <span class="m">50001</span>
+</pre></div>
+
+
+<p>then the VS Code editor using the same port number</p>
+<div class="codehilite"><pre><span></span>$ code --open-url <span class="s2">&quot;vscode://vadimcn.vscode-lldb/launch/config?{targetCreateCommands: [&#39;target create full/path/to/omnetpp/samples/aloha/aloha_dbg&#39;], processCreateCommands: [&#39;gdb-remote 127.0.0.1:50001&#39;], request: &#39;custom&#39;, reverseDebugging: true }&quot;</span>
+</pre></div>
+
+
+<p>You will see some extra buttons on the debugger toolbar allowing reverse stepping and execution.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../wsl2/" title="Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Installing OMNeT++ on Windows Subsystem for Linux (WSL 2)
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../neuralnet-errormodels/" title="Better Wireless Error Models Using Neural Networks" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Better Wireless Error Models Using Neural Networks
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 OpenSim Ltd.
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="http://omnetpp.org" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/omnetpp/docs.omnetpp.org" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/omnetpp" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/jquery-3.2.1.min.js"></script>
+      
+        <script src="../../javascripts/quoting.js"></script>
+      
+        <script src="../../javascripts/rainbow-custom.min.js"></script>
+      
+        <script src="../../javascripts/rainbow.linenumbers.min.js"></script>
+      
+        <script src="../../javascripts/rainbow-ini.js"></script>
+      
+        <script src="../../javascripts/rainbow-ned.js"></script>
+      
+        <script src="../../javascripts/rainbow-yaml.js"></script>
+      
+        <script src="../../javascripts/rainbow-dockerfile.js"></script>
+      
+        <script src="../../javascripts/rainbow-html.js"></script>
+      
+    
+  </body>
+</html>
