@@ -1,6 +1,10 @@
 next_page_disabled: true
 previous_page_disabled: true
 
+!!! tip
+    If you are looking for the full documentation of the OMNeT++ Simulator,
+    please visit: https://omnetpp.org/documentation
+
 # OMNeT++ Tutorials and Technical Articles
 
 This site hosts additional documentation for OMNeT++, including the [TicToc
